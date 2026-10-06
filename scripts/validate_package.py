@@ -3,8 +3,28 @@
 import argparse
 import json
 import math
+import os
 import re
 from pathlib import Path
+
+
+# These are dependency, generated-output, interpreter-cache, and VCS folders,
+# not authored package content. Prune them at any depth rather than ignoring
+# all hidden folders: authored documentation under .github still needs checks.
+EXCLUDED_PACKAGE_DIRS = frozenset({
+    'node_modules', '.git', '.hg', '.svn',
+    'build', 'dist', 'outputs', 'renders', 'coverage', 'htmlcov', '.next',
+    '.cache', '__pycache__', '.pytest_cache', '.mypy_cache', '.ruff_cache',
+    '.venv', 'venv', '.tox', '.nox',
+})
+
+
+def authored_package_files(root):
+    """Walk project files without descending into installed/generated trees."""
+    for directory, subdirs, filenames in os.walk(root, followlinks=False):
+        subdirs[:] = sorted(name for name in subdirs if name not in EXCLUDED_PACKAGE_DIRS)
+        for name in sorted(filenames):
+            yield Path(directory) / name
 
 
 def require(condition, message):
@@ -127,14 +147,15 @@ def validate_package(root):
     front = skill.split('---', 2)[1]
     require(re.search(r'^name: heige-video$', front, re.M), 'Unexpected skill name')
     require(re.search(r'^description: .+', front, re.M), 'Missing description')
-    for path in root.rglob('*.md'):
+    package_files = list(authored_package_files(root))
+    for path in (p for p in package_files if p.suffix == '.md'):
         text = path.read_text()
         require('/Users/' not in text, 'Nonportable private path in ' + str(path))
         for target in re.findall(r'\]\(([^)]+)\)', text):
             if '://' in target or target.startswith('#'):
                 continue
             require((path.parent / target.split('#')[0]).exists(), 'Broken package link: ' + str(path) + ' -> ' + target)
-    for path in root.rglob('*.json'):
+    for path in (p for p in package_files if p.suffix == '.json'):
         json.loads(path.read_text())
     n = validate_manifest(json.loads((root / 'examples/open-shot.json').read_text()), root / 'examples')
     cases = json.loads((root / 'references/research-cases.json').read_text())['cases']
