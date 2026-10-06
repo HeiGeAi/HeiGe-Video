@@ -1,0 +1,123 @@
+{
+  "id": "open-geometry-contract-example",
+  "duration": 6,
+  "fps": 24,
+  "output": {
+    "width": 960,
+    "height": 540
+  },
+  "style": "whiteboard",
+  "seed": 29,
+  "status": "illustrative interface example, not a style-accepted film",
+  "sources": [
+    {
+      "kind": "illustrative",
+      "claim": "Visible spectrum geometry is schematic and not numerically calibrated."
+    }
+  ],
+  "objects": [
+    {
+      "id": "incident-light",
+      "meaning": "One incoming light path",
+      "identity": {
+        "origin": [
+          120,
+          255
+        ],
+        "role": "diagram ray"
+      }
+    },
+    {
+      "id": "prism",
+      "meaning": "The explanatory optical object",
+      "identity": {
+        "vertices": [
+          [
+            410,
+            145
+          ],
+          [
+            335,
+            340
+          ],
+          [
+            520,
+            340
+          ]
+        ]
+      }
+    },
+    {
+      "id": "spectrum",
+      "meaning": "Outgoing spectrum shown as six schematic bands",
+      "identity": {
+        "parent": "incident-light",
+        "count": 6
+      }
+    }
+  ],
+  "shots": [
+    {
+      "id": "split-one-beam",
+      "start": 0,
+      "end": 6,
+      "intention": "Make the outgoing spectrum visibly originate at the same prism",
+      "subjects": [
+        "incident-light",
+        "prism",
+        "spectrum"
+      ],
+      "before": {
+        "spectrum": "absent"
+      },
+      "after": {
+        "spectrum": "six bands extend from the same origin"
+      },
+      "camera": {
+        "space": "world",
+        "transform": "identity",
+        "reason": "Keep the causal relationship simultaneously visible"
+      },
+      "action": {
+        "custom_operation": "extend_six_geometric_rays",
+        "start": 1,
+        "end": 4,
+        "progress": "clamped linear, no claim of hand-written strokes"
+      },
+      "draw_code": {
+        "language": "python",
+        "entrypoint": "render(t)",
+        "inline": "def render(t):\n    # Geometry-only illustrative test, not a scientifically calibrated prism.\n    u = max(0.0, min(1.0, (t - 1.0) / 3.0))\n    parts = ['<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"960\" height=\"540\" viewBox=\"0 0 960 540\">', '<rect width=\"960\" height=\"540\" fill=\"#f5f4ed\"/>', '<path d=\"M410 145 L335 340 L520 340 Z\" fill=\"none\" stroke=\"#28312f\" stroke-width=\"5\"/>', '<path d=\"M120 255 L380 255\" stroke=\"#827d6e\" stroke-width=\"7\"/>']\n    for i, color in enumerate(['#bf4438', '#bd8239', '#a1a043', '#56876c', '#4f77a6', '#785c9e']):\n        x = 455 + 340 * u\n        y = 255 + (i - 2.5) * 31 * u\n        parts.append(f'<path d=\"M455 255 L{x:.3f} {y:.3f}\" fill=\"none\" stroke=\"{color}\" stroke-width=\"5\"/>')\n    return ''.join(parts) + '</svg>'\n"
+      },
+      "reading_windows": [],
+      "audio": [
+        {
+          "start": 0,
+          "end": 6,
+          "bus": "all",
+          "mode": "intentional silence"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "spectrum-complete",
+      "time": 4
+    }
+  ],
+  "qa_targets": [
+    {
+      "time": 0,
+      "reason": "initial geometry"
+    },
+    {
+      "time": 2.5,
+      "reason": "actual intermediate extension"
+    },
+    {
+      "time": 4.5,
+      "reason": "final state and common source"
+    }
+  ]
+}
