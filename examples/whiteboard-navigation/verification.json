@@ -1,0 +1,224 @@
+{
+  "title": "38 微秒：GPS 为什么需要相对论",
+  "revision": "caption-safe final",
+  "source_sha256": "c8c8e8f1ca3188a635eb1b22be7c0dc592b8ad678b410f58bd9c6a9b752a8455",
+  "media_sha256": "d7f5288f661150723e03809f18313b431453136fd55e268b6d49627d7d05f92c",
+  "duration_seconds": 42,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 24,
+  "frames": 1008,
+  "audio": "silent",
+  "complete_decode": "passed",
+  "temporal_shutter": {
+    "samples": 2,
+    "angle": 144.0,
+    "enabled": true,
+    "compositing": "equal-weight box average in linear-light sRGB using 16-bit lookup tables; opaque alpha",
+    "cut_policy": "each sample clamped to the half-open hard-cut interval containing the frame center"
+  },
+  "checks": {
+    "one_video_stream": true,
+    "dimensions": true,
+    "codec_h264": true,
+    "pixel_format_yuv420p": true,
+    "frame_count": true,
+    "frame_rate": true,
+    "duration": true,
+    "silent_output": true,
+    "declared_text_font_coverage": true
+  },
+  "source_checks": {
+    "status": "pass",
+    "duration": 42,
+    "randomAccessFramesTested": 17,
+    "checks": [
+      "random-access pixel determinism",
+      "persistent phone and clock identity",
+      "signed contribution arithmetic",
+      "distance-equivalent dimensional calculation",
+      "explicit factual qualification",
+      "changing stroke-construction frames"
+    ],
+    "hashes": [
+      {
+        "time": 0,
+        "sha256": "95d276ed28ab32208827df4c67de8db26bd81260ce65585046d0c26f85f94656"
+      },
+      {
+        "time": 1.2,
+        "sha256": "53e811ca24c7a1d1a9b3f94c3dc34875da0afd73e869acea16e1b4af8282a147"
+      },
+      {
+        "time": 3.6,
+        "sha256": "9cfeca1717203f3bc6109470112cb0d7abbe3209be561fc3a86c8e1648d1e0a3"
+      },
+      {
+        "time": 7.8,
+        "sha256": "068e3c36d5d1c4a6e202291755e7447502a6c9f6d285a593f3a0021eb09cf209"
+      },
+      {
+        "time": 13.8,
+        "sha256": "4f794a1d629ec5fbd0ed79532e11f98ae83cbb627a10af79edda3e40d1c37991"
+      },
+      {
+        "time": 18.8,
+        "sha256": "2cf59ea7bace0843897de3682727ea791c7be53ffef49b2ee33284b133b49754"
+      },
+      {
+        "time": 21.4,
+        "sha256": "c8171f02b3319c5f2497a6e99117cefdba869306819991eb9da11b0342a22501"
+      },
+      {
+        "time": 22.3,
+        "sha256": "5a5872864c786cc916ed2c354cd83022163980fa0855d6373138523cc2eeadbf"
+      },
+      {
+        "time": 23.4,
+        "sha256": "3ff8d2620b55737953727ec62d745129df066b4e2a3c248dd02dd0927522cde4"
+      },
+      {
+        "time": 24.8,
+        "sha256": "e73e3aae0257f429af275a4d1d6d8d3ca978fcc924adc060bf3abd0f6d219cc3"
+      },
+      {
+        "time": 26.7,
+        "sha256": "f74936b167b096eb6065c61aef4afac2e341d7eee53ebb83b73798a8f74b9a3c"
+      },
+      {
+        "time": 29.8,
+        "sha256": "d882c1e181036e2c7512efaa7233919f9cb2efbe2010c7d38308185cf9db2f29"
+      },
+      {
+        "time": 33.4,
+        "sha256": "4cd42cd206a4df423cdec5f5ab6f27f9e6bbda84b7b6e4b4b7c097f9435cbf70"
+      },
+      {
+        "time": 36.2,
+        "sha256": "ee077dee9ff43916389fc991d8cd4afebb534344ff7d460c2a76799793b89709"
+      },
+      {
+        "time": 39.3,
+        "sha256": "3a89586c213ad0fbc1d615f0af9b5552343bbae79b40dfeb6bc94dd1aee19cc6"
+      },
+      {
+        "time": 41.9,
+        "sha256": "c921486bee9cf5bd10e5283fa4835c9ae5937b347418b0b4c5df3137817700db"
+      },
+      {
+        "time": 42,
+        "sha256": "36319655359ec9a7e29edaf9d9e94e15d7f8caa77cfa821b8eee7394631b42d0"
+      }
+    ]
+  },
+  "package_import_checks": {
+    "status": "pass",
+    "source_sha256": "c8c8e8f1ca3188a635eb1b22be7c0dc592b8ad678b410f58bd9c6a9b752a8455",
+    "checks": [
+      "experiment-relative import",
+      "package-relative import",
+      "pixel identity between both import locations"
+    ],
+    "frames": [
+      {
+        "time": 0,
+        "sha256": "95d276ed28ab32208827df4c67de8db26bd81260ce65585046d0c26f85f94656"
+      },
+      {
+        "time": 1.2,
+        "sha256": "53e811ca24c7a1d1a9b3f94c3dc34875da0afd73e869acea16e1b4af8282a147"
+      },
+      {
+        "time": 3.6,
+        "sha256": "9cfeca1717203f3bc6109470112cb0d7abbe3209be561fc3a86c8e1648d1e0a3"
+      },
+      {
+        "time": 7.8,
+        "sha256": "068e3c36d5d1c4a6e202291755e7447502a6c9f6d285a593f3a0021eb09cf209"
+      },
+      {
+        "time": 13.8,
+        "sha256": "4f794a1d629ec5fbd0ed79532e11f98ae83cbb627a10af79edda3e40d1c37991"
+      },
+      {
+        "time": 18.8,
+        "sha256": "2cf59ea7bace0843897de3682727ea791c7be53ffef49b2ee33284b133b49754"
+      },
+      {
+        "time": 21.4,
+        "sha256": "c8171f02b3319c5f2497a6e99117cefdba869306819991eb9da11b0342a22501"
+      },
+      {
+        "time": 22.3,
+        "sha256": "5a5872864c786cc916ed2c354cd83022163980fa0855d6373138523cc2eeadbf"
+      },
+      {
+        "time": 23.4,
+        "sha256": "3ff8d2620b55737953727ec62d745129df066b4e2a3c248dd02dd0927522cde4"
+      },
+      {
+        "time": 24.8,
+        "sha256": "e73e3aae0257f429af275a4d1d6d8d3ca978fcc924adc060bf3abd0f6d219cc3"
+      },
+      {
+        "time": 26.7,
+        "sha256": "f74936b167b096eb6065c61aef4afac2e341d7eee53ebb83b73798a8f74b9a3c"
+      },
+      {
+        "time": 29.8,
+        "sha256": "d882c1e181036e2c7512efaa7233919f9cb2efbe2010c7d38308185cf9db2f29"
+      },
+      {
+        "time": 32.5,
+        "sha256": "67db5bf9bdc1e5c122712bae9bbcc90809e6645508a56c2194b7d67fe84426c9"
+      },
+      {
+        "time": 33.4,
+        "sha256": "4cd42cd206a4df423cdec5f5ab6f27f9e6bbda84b7b6e4b4b7c097f9435cbf70"
+      },
+      {
+        "time": 36.2,
+        "sha256": "ee077dee9ff43916389fc991d8cd4afebb534344ff7d460c2a76799793b89709"
+      },
+      {
+        "time": 39,
+        "sha256": "3d7b09e60e779d7b0ec1795f06631404ad1710bf7d5601a8342330da8f0281ac"
+      },
+      {
+        "time": 41.9,
+        "sha256": "c921486bee9cf5bd10e5283fa4835c9ae5937b347418b0b4c5df3137817700db"
+      },
+      {
+        "time": 42,
+        "sha256": "36319655359ec9a7e29edaf9d9e94e15d7f8caa77cfa821b8eee7394631b42d0"
+      }
+    ]
+  },
+  "factual_scope": {
+    "motion_microseconds_per_day": -7,
+    "gravity_microseconds_per_day": 45,
+    "net_microseconds_per_day": 38,
+    "signal_distance_equivalent_km": 11.392113404,
+    "qualification": "Approximate satellite-versus-ground clock contributions. Signal-distance equivalent is not actual daily phone drift. Clocks and planar signal constraints are schematic; actual GPS applies relativistic and other corrections."
+  },
+  "independent_review": {
+    "status": "accepted at sampled/targeted scope",
+    "decoded_intervals_seconds": [
+      "32.2–33.3",
+      "38.6–40.3",
+      "settled clock budget",
+      "41–41.83"
+    ],
+    "findings": "Both caption-band intervals and ending accepted; no remaining concrete visual blocker."
+  },
+  "realtime_playback": false,
+  "listening": false,
+  "reference_parity_claimed": false,
+  "source_urls": [
+    "https://www.nist.gov/atomic-clocks/a-powerful-tool-for-science/putting-einstein-test",
+    "https://www.nist.gov/blogs/taking-measure/putting-einstein-test-worlds-most-accurate-clocks",
+    "https://www.nist.gov/atomic-clocks/a-technology-powerhouse/knowing-where-we-are"
+  ]
+}
