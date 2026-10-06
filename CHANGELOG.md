@@ -17,6 +17,10 @@ Pre-release candidate; verification scope is documented rather than treated as s
 - Creative workflow starts from a visual promise, persistent objects, the final composition and a short motion proof.
 - Bilingual README, installation guide and upgrade report now distinguish implemented mechanisms, research ideas and experimental adapters.
 
+### Fixed
+
+- External CommonJS scene files now resolve runtime-local Canvas dependencies without requiring a global `NODE_PATH`; isolated regression coverage reproduces repository-local CI installs.
+
 ### Preserved
 
 - Five v2 demos and SVG compatibility presets; original copyright, MIT licensing and third-party notices.
