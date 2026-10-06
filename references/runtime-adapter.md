@@ -1,53 +1,92 @@
-# Packaged runtime adapter
+# Runtime contract · v3
 
-This package includes a snapshot of the project's original cloud SVG/Canvas runner under `runtime/`, and three revised original SVG examples under `examples/prototypes/`. Dataviz and dark-keynote custom-source examples use the same runner. Each example has its own recorded review level; a functioning runner alone does not establish quality. The only packaging change to the runner is its package-relative default prototype path.
+The default runner supports trusted Python/SVG and Canvas source. It does not execute a shot manifest directly, sandbox arbitrary source, install dependencies, call models or approve aesthetics. Use the scene's authored code and explicit fact/asset provenance.
 
-## Dependencies and capabilities
+## Dependencies and first check
 
-Required: Python 3.10+, Pillow, fontTools, installed librsvg with `rsvg_handle_render_document`, Cairo, GLib/GObject, Fontconfig, a legally available CJK font, FFmpeg/ffprobe with libx264. Optional Canvas: Node.js and `@napi-rs/canvas`.
-
-The source cloud environment reported Python 3.12.14, Pillow 12.3.0, fontTools 4.61.1, librsvg 2.60.0, Cairo 1.18.4, FFmpeg 7.1.5, Noto Sans/Serif CJK SC, Node 24.19.0 and optional Canvas 0.1.100. No new installation, API call, credential or desktop access was needed. System libraries, fonts and optional npm modules are NOT bundled. Run doctor in the actual target environment; no unsupported platform is claimed.
-
-From the Skill directory:
+Python 3.10+, Pillow, fontTools, librsvg/Cairo/GLib, Fontconfig, a legally available font, FFmpeg/ffprobe with libx264. Canvas additionally needs Node.js and `@napi-rs/canvas`. Dependencies and fonts are not bundled. Run in the chosen authorized environment:
 
 ```sh
 python3 runtime/render_video.py doctor
-python3 runtime/render_video.py audit --style tech
-python3 runtime/render_video.py frame --style whiteboard --time 13.5 --width 960 --height 540 --out /tmp/video-whiteboard-frame-new
-python3 runtime/render_video.py render --style tech --fps 24 --duration 30 --width 960 --height 540 --out /tmp/video-tech-render-new
-python3 -m unittest discover -s runtime/tests -v
-python3 scripts/validate_package.py
+python3 runtime/render_video.py frame --backend canvas --source runtime/examples/canvas_smoke.cjs --time 1 --width 640 --height 360 --out /tmp/heige-frame-new
 ```
 
-Every output directory must be new or empty. Substitute a writable project directory if `/tmp` is unsuitable. No command installs anything. Fontconfig cache defaults to `runtime/.cache`; set `VIDEO_RUNTIME_CACHE` to another writable location when necessary.
+Outputs must be new or empty directories. `VIDEO_RUNTIME_CACHE` can redirect the Fontconfig cache to a writable location. No universal Windows/macOS/browser support is implied by a Linux test.
 
-`--style` selects one of three bundled example presets (`tech`, `whiteboard`, `ink`), not the set of scenes the renderer is allowed to draw. Open scenes use `--source trusted-scene.py` or `--backend canvas --source trusted-scene.cjs`. Custom sources write `video.mp4`; `--label dataviz` sets display metadata and sheet titles without changing source selection or becoming a filesystem path. Without a label, a custom source uses its filename stem. Built-in presets retain their original filenames. The report separates `source_preset` from the `review_preset` used for default sampling. Supply that scene's actual `--cuts` boundaries rather than relying on the unrelated bundled style's default checkpoints. The runner does NOT directly ingest `shot.schema.json`; adapt the manifest into scene code while preserving its timing and IDs.
+## Source contracts
 
-## Source interfaces
+Python defines `render(t)` returning complete SVG, plus positive finite `DURATION` or `SECONDS`; optional `CUTS`/`cuts` supplies hard cuts. `FONT` is overridden in memory by `--font-family`. Resolve assets relative to `__file__`, not the working directory. Adjacent helper modules are not automatically added to the Python search path.
 
-Python: define `render(t)` returning a complete SVG string and `DURATION` (or `SECONDS`). `FONT` is overridden in memory by `--font-family`, defaulting to `Noto Sans CJK SC`. The source's legacy export CLI is not called. Custom Python scenes must be self-contained or import installed/package-qualified helpers: this snapshot does not add the scene directory to Python's module search path, so an adjacent `colors.py` is not automatically importable. Resolve any allowed assets from `Path(__file__).parent`, not the process working directory. Inspect any new source before importing it: Python code is not sandboxed by the AST audit.
+Canvas `.cjs`/`.mjs` exports:
 
-Canvas: export `render(ctx, t, {width, height, random, fontFamily})` from a trusted `.cjs` or `.mjs` file. Each frame has a fresh canvas and reset deterministic random generator. Code must avoid wall-clock state, Math.random and mutable cross-frame dependencies. Canvas source duration is fixed at 30 seconds in this snapshot; an exported custom duration is not read. For a 20-second Canvas story, author at the intended absolute timestamps and render `--duration 20` without `--fit-time`. Use Canvas `--fit-time` only when the authored source timeline really is 30 seconds. The fixture at `runtime/examples/canvas_smoke.cjs` is a mechanism test, not a fourth style.
+```js
+const {createCues, easeInOutCubic} = require('../../runtime/motion.cjs');
+const cues = createCues({reveal: {start: 1, end: 3, ease: easeInOutCubic}});
+module.exports = {
+  DURATION: 6,
+  CUTS: [4],
+  TEXT_STRINGS: ['A visible consequence'],
+  async ready({width, height, fontFamily}) {
+    // Decode authorized assets and build immutable offscreen textures once.
+  },
+  stateAt(t) { return {reveal: cues.at('reveal', t).eased}; },
+  render(ctx, t, {width, height, fontFamily, state}) {
+    ctx.fillStyle = '#f5f1e8'; ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = '#151515';
+    ctx.fillRect(width * 0.1, height * 0.4, width * 0.8 * state.reveal, height * 0.2);
+  }
+};
+```
 
-The SVG runner rejects external links/scripts and various unsafe or unsupported SVG features. This does not make arbitrary Python/JavaScript safe. SVG text is checked against the selected font's codepoints; full shaping and appearance still require pixel review. Canvas text is not introspected and needs manual glyph checks.
+The example illustrates the API, not a finished film. A real object must have designed content and a meaningful resulting state.
 
-## Timing, ratio and audio limits
+- `DURATION`, `duration`, then `SECONDS` are checked in that order; declared values must be positive finite numbers. If all are absent, the source is explicitly marked `legacy_default_30s`. Declare duration in new work
+- `ready` can be a function or Promise; it is awaited once before metadata. `stateAt(t,options)` and `render` may be async; state is passed as `options.state` only when provided
+- Render options include `width`, `height`, `fontFamily`, seeded `random()`, `sampleIndex`, `sampleCount`. Source time is absolute. Avoid wall clocks, `Math.random`, evolving simulation state and dependencies on frame order
+- `TEXT_STRINGS`/`textStrings` must be an array of strings. Only declared codepoints are checked against the chosen font. Completeness, shaping, weight, clipping and actual glyph appearance still need pixel inspection
+- `CUTS`/`cuts` are strictly increasing, unique, finite source times inside the authored duration. `--cuts` overrides them. Custom sources do not inherit unrelated preset cuts
+- `--canvas-startup-timeout` defaults to 15 seconds; `--canvas-frame-timeout` defaults to 30 seconds per output frame. Readiness and rendering failures fail the run; they are not silently replaced with blank frames
+- The target canvas resets between samples. Immutable authored offscreen caches may persist. Cached values must not make frame B depend on whether frame A was rendered
 
-- `--duration` trims the original timeline by default; it does not redesign a 30-second story into 20 seconds
-- `--fit-time` maps the remaining complete source interval to the chosen duration; review pacing and reading time afterward
-- `--start` is a source-time offset; fps may be a rational value such as `30000/1001`
-- Duration rounds up to a whole frame and the report records requested versus actual duration
-- H.264 output needs even dimensions; alternate dimensions resize the SVG viewport and do NOT independently recompose portrait scenes
-- `--cuts` can supply custom review boundary times; default cut sheets have only three frames per boundary and are insufficient for the full dense temporal review prescribed by this Skill
-- The video runner outputs silence. Optional separately authored synthesis/mux instructions are in [sound-sketch.md](sound-sketch.md); silence may also be a deliberate choice
-- Ink's filter-heavy SVG can be much slower than the other examples; test representative frame cost before a full job
+Python/JS imports are trusted code execution. SVG resource checks and font audits do not create a source-code sandbox.
 
-## Outputs and verification evidence
+## Shared motion helpers
 
-A successful render includes MP4, `manifest.json`, `ffprobe.json`, `frame-metrics.json`, decoded contact sheet, cut strip, decoded review frames, request and encoder log. Current source-specific continuous-render and sampled-review results are in [example-status.json](example-status.json). Historical 960×540 baseline runs validated the initial runner; the packaged revised art now has its own 1280×720 results. Do not transfer a historical source's artistic approval to its replacement.
+`runtime/motion.cjs` is original package code with no animation clock:
 
-The runtime owner's eleven tests passed in the source location: SVG resource restrictions, raster channels, invalid inputs, existing-output protection, shuffled-time/repeated-raster checks for all three examples, Canvas identity, complete/repeated byte-identical smoke encoding under that pinned environment, dynamic-module registration/cleanup for ordinary dataclass scenes with future annotations and simultaneous instances, and safe custom labels/output naming. All eleven tests passed after this source integration from the relocated package in the cloud environment. The evidence and code hashes are recorded in the package validation report. Rerun them in another environment rather than inferring support from copying.
+- `createCues({id:[start,end]})`, or `{start,end,ease}`; `at(id,t)` returns progress, eased, elapsed, active, started and finished. Spans are `[start,end)`
+- `clamp`, `lerp`, `linear`, `smoothstep`, `easeOutCubic`, `easeInOutCubic`
+- `spring(elapsed,{from,to,frequencyHz,dampingRatio,velocity})`: analytic oscillator. Use only when the style calls for it; Swiss remains monotone
+- `cameraMatrix`, `worldToScreen`, `applyCamera`: camera `x,y` is the world point at viewport center; `rotation` is radians, with `zoom`. Bracket world drawing with caller `save/restore`; screen UI stays outside
+- `seededRandom(seed)` and `noiseAt(seed,key)`: pin local material noise to object/stroke IDs
+- `trimPolyline(points,progress)`: arc-length geometry reveal, with optional interpolated pressure. It advances the stroke front rather than fading the full path
 
-MP4 byte equality is only meaningful with the same source, font, rasterizer, libraries, platform and encoding options. Decode/metadata/metrics do not approve composition, science, phone readability, real-time pacing or audio. Use the separate three-layer quality gate.
+These are building blocks, not an automatic scene graph, physics engine, layout solver, material simulator or source-fact validator.
 
-Current package-level verification is recorded in [validation.json](validation.json). Treat its per-version limits as part of the result, not as a blanket quality certificate.
+## Time, output and shutter
+
+```sh
+python3 runtime/render_video.py render --backend canvas --source runtime/examples/canvas_smoke.cjs --duration 2 --fps 24 --width 640 --height 360 --out /tmp/heige-smoke-new
+```
+
+`--duration` trims by default; it does not rewrite a story. `--start` is a source offset; `--fit-time` maps the remaining authored source interval to the requested output duration. Review pacing after retiming. Rational fps is supported. Durations round up to a whole frame; H.264 dimensions must be even. A changed viewport does not author a portrait layout.
+
+Optional Canvas shutter sampling: `--shutter-samples 2` through `16`, with `--shutter-angle 0` through `360` (default 180). Default sample count 1 is off. Samples use a midpoint box shutter, source-time-correct mapping and linear-light sRGB averaging. They clamp inside the frame center's half-open hard-cut interval, avoiding cross-cut blur. This is global opaque sampling, not HDR, per-object or physical motion blur. Measure cost and inspect text before enabling it.
+
+Custom sources output `video.mp4`; presets retain their preset names. `--label` only names display metadata. The runner outputs silent video; original optional sound synthesis is separate in [sound-sketch.md](sound-sketch.md).
+
+## Decoded QA, not automatic acceptance
+
+A render produces MP4, manifest, ffprobe/metrics, decoded overview/review frames and cut strips. Automatic cut strips sample −2/−1/0/+1/+2 frames. Their manifest records exact indices and pending review, not a visual pass.
+
+For dense evidence from the actual encoded MP4:
+
+```sh
+python3 runtime/review_video.py --video /tmp/heige-smoke-new/video.mp4 --manifest /tmp/heige-smoke-new/manifest.json --actions 0.5:1.5 --out /tmp/heige-smoke-review-new
+```
+
+Use `--cuts 6,12` and `--actions 7.6:9.2,19:21` for the actual film. Actions are source-time `[start,end)` intervals, every encoded frame by default. `--action-stride N` explicitly subsamples. A manifest preserves source/output time mapping; without one the tool labels source time equal to output time as an assumption.
+
+The tool emits five-slot cut sheets, paginated 16-frame action sheets, image/video hashes, exact rational source/output/PTS times and `review.json`. It rejects stale supplied manifests, VFR, invalid ranges and nonempty output folders. Missing edge neighbors are explicitly unavailable. Inspect every generated page needed for the decision; generated images alone establish no review.
+
+Read [quality-gates.md](quality-gates.md) for phone crops, independent defect-first review, playback and listening. Test commands and current evidence are in [status.md](status.md).

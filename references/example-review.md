@@ -1,3 +1,7 @@
+# Historical v2 sampled review
+
+This record applies only to the v2 source revisions named below. It is not v3 acceptance. See [current status](status.md).
+
 # 五组示例：独立画面评审结论
 
 评审对象是实际完成视频解码出的画面、密集转场样本与原尺寸帧。没有用作者自评分替代看图，也没有宣称完整实时播放或试听。源码与成片哈希绑定见 [example-status.json](example-status.json)。

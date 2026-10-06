@@ -59,16 +59,8 @@ For each material defect record: severity, time/frame, what is visible, why it v
 
 Fix root causes, render affected intervals, inspect actual results and rerun relevant regressions. A later font, camera, ink or audio edit invalidates the corresponding earlier approval. Stop when the agreed delivery gates are satisfied or a specific capability/authorization blocker remains. If a deadline forces a preview, label the unfinished checks plainly.
 
-## Evidence implementation warning
+## Evidence implementation
 
-The shared runtime's default three-frame cut strip is a quick diagnostic, not the dense review above. Explicitly extract 12 frames before and 12 frames at/after each meaningful boundary, full-domain samples and the decisive action at an appropriate interval. Store source frame indices/timestamps with every extracted image. If using a long FFmpeg select expression, merge consecutive frame indices into ranges or batch the extraction; a filter-parser failure is not successful evidence generation. Generated contact sheets count as evidence only after someone actually opens them.
+The shared runtime's five-frame cut strip is a quick boundary diagnostic, not the dense review above. Use `runtime/review_video.py` with the encoded MP4 and its matching manifest. Supply action intervals around significant boundaries when more than five frames are needed. The tool defaults to every encoded frame within each action span, preserving source/output mapping and hashes; open every relevant paginated sheet. See [runtime-adapter.md](runtime-adapter.md) for commands.
 
-
-For a 24 fps encoded video, this tested recipe extracts the 12 frames before and 12 frames at/after the 6-second boundary. Use a new output folder and replace the input filename:
-
-```sh
-mkdir /tmp/video-dense-new
-ffmpeg -v error -n -i movie.mp4 -vf 'select=between(n\,132\,155)' -fps_mode vfr /tmp/video-dense-new/frame-%03d.png
-```
-
-The first image is source frame 132 at 5.500 seconds; the thirteenth is frame 144 at 6.000 seconds; the last is frame 155 at 6.458 seconds. Store that mapping with the images. This uses the encoded timeline; apply the manifest's source offset/time scale separately if the output was trimmed or retimed. Change the indices for the actual frame rate and event. Extraction success is not evidence that the images were viewed.
+A source-to-output mapping matters after trimming or retiming. Do not manually label encoded time as source time. The tool rejects stale supplied manifests and explicitly records the assumption when none is supplied. Generated `pending` samples become reviewed only after actual viewing; an image hash does not establish that someone saw it.

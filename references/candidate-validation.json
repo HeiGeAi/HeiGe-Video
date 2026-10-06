@@ -1,0 +1,103 @@
+{
+  "schema_version": "heige-candidate-validation/1",
+  "recorded_at_utc": "2026-10-06T05:13:09.187683+00:00",
+  "scope": "Final five-film candidate, tested after ZIP creation and fresh extraction. All tests below ran from the extracted package. Final archive is repacked only to include this receipt; executable/source/media bytes remain those tested.",
+  "tests": {
+    "runtime": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s runtime/tests -v",
+      "passed": 40,
+      "failed": 0,
+      "elapsed_seconds": 30.612
+    },
+    "scripts": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts -p 'test_*.py' -v",
+      "passed": 27,
+      "failed": 0,
+      "elapsed_seconds": 0.612
+    },
+    "package": {
+      "status": "pass",
+      "video_records": 100,
+      "project_records": 100,
+      "v3_examples_hash_checked": 5,
+      "local_links": "pass",
+      "private_path_scan": "pass",
+      "json": "pass"
+    },
+    "all_demo_checksums": {
+      "passed": 10,
+      "failed": 0
+    },
+    "structural_manifests": {
+      "dataviz_forward_shots": 6,
+      "cinematic_product_shots": 8
+    },
+    "fresh_extraction_smoke": {
+      "five_relocated_canvas_sources": "rendered and actual preview PNGs opened",
+      "preview_dimensions": [
+        640,
+        360
+      ],
+      "dataviz_short_motion_render": {
+        "source_start": 10,
+        "duration": 0.5,
+        "fps": 24,
+        "frames": 12,
+        "full_decode": "pass"
+      },
+      "decoded_QA": {
+        "samples": 12,
+        "source_time_mapping": "10 + output seconds",
+        "matching_manifest_hash_verified": true,
+        "action_sheet_opened": true,
+        "scope": "Small integration proof only; not whole-film review"
+      },
+      "dataviz_authored_checkers": {
+        "shuffled_raster_state_times": 38,
+        "all558_frame_identity_value_geometry_checks": "pass",
+        "text_instances": 379,
+        "unique_strings": 54,
+        "inside_frame": true,
+        "collision_scope": "48x40 bag-body proxy only"
+      }
+    }
+  },
+  "review_limits": {
+    "full_speed_playback": false,
+    "audio_listening": false,
+    "all_frame_artistic_review": false,
+    "external_publication": false,
+    "model_benchmark": false,
+    "exact_scope": "Per-film source/media hashes and independent sampled/targeted acceptance are recorded in v3-example-status.json"
+  },
+  "sha256": {
+    "SKILL.md": "44fa12e5fa7c8538ab6afafba5f762b2cf61f7048937beb39f60feea84b5d0c8",
+    "USAGE.md": "dc9f4c5e4fb751aa6d34ad719de2cca07ee02dc34abb5c158b472092f2f09d92",
+    "README.md": "d07d24456c074b6229ff4f0cb24ed22fa5d77c9089b647b306d69facfd772835",
+    "README_EN.md": "3b52240aaecf940af0fc83b0e6dcfe51e10d9660bfa22a8cb72181d607b9cd97",
+    "UPGRADE_REPORT_ZH.md": "c1a9544ca497495700eb91dcc194e8dadd9b404d202271021a7addd4c8a3c3cf",
+    "DELIVERY.md": "c4581ddef520a4caf371ed94a256527eaf0b48533814a1456fd46119443cbff1",
+    "references/runtime-adapter.md": "fc933c07d2aed04b97bec91839caef388971ac4d13f6fe833627f73b8eb4b6d1",
+    "references/upgrade-mechanisms.md": "110696e40fbe8feb30a64ec638f7434ee98b08d754224246d441381d3bad1c2c",
+    "references/research-cases.json": "b37c1a5b32700a4b64de8d1830dd4e597717cfa79dbc9c79ac9a1644f6f03d1b",
+    "references/research-projects.json": "b508745d657386c6dfb2a735ae21a0cbded858bd2895bb56731a5c0f5734647e",
+    "references/v3-example-status.json": "fbae060c939cf9e6e35c51b8a5a3a78ba34fd68250fda827d9cf3f40fa93e740",
+    "scripts/select_references.py": "fb983c1e3e46fced48021fee0569e2a81e5c2080459ee32354850337e6fda2fc",
+    "scripts/export_prompt.py": "1c6c34e7176aa027d1eec4fdd62698575fc9cc46890e2683c972aa9b553cb69a",
+    "scripts/validate_package.py": "ed85e1775ee275e8fc52c7c7562d7b866086d35e788c02a616832144b332c1b8",
+    "scripts/test_research_v3.py": "593937238a73431382695697b0588820867642723fd6bf143592b812140a6d71",
+    "runtime/render_video.py": "6fe5fc5a292e948d3a9c99b0a4fc73bef6ca4cbd7afcd36ce5642779f172be49",
+    "runtime/canvas_worker.cjs": "5613b069432a09cf1d6530fede9cff61296c9e78f53cc8e5dad0862d488c6cf2",
+    "runtime/motion.cjs": "e882a00fe6529a53c95ce486c62d899c5e79fc247ada73f371c2c3517efadd2c",
+    "runtime/review_video.py": "cb4866355b0a938577c3edfab20bac27b68d0ae6b456e8748838c01a20dc7746",
+    "examples/swiss-editorial/film.cjs": "49395040d88af4b33338b158ccf06d82504d4b3e689102fe2490fa4107eea9e4",
+    "examples/cinematic-product/film.cjs": "4f723a08c5db4eae33c7b546e5bee66eabf22c70a3f35ee1f160ede3417d2c95",
+    "examples/ink-narrative/film.cjs": "976dc3a69da8c2acf73fac4468a6e5347237be00c3406d3bd298b851a02b4d19",
+    "examples/whiteboard-navigation/film.cjs": "c8c8e8f1ca3188a635eb1b22be7c0dc592b8ad678b410f58bd9c6a9b752a8455",
+    "examples/dataviz-forward/source/scene.cjs": "2c83d9c0cbc44485d5f28559f9a985e2bd3266fb5de82443734af027df39c727",
+    "examples/dataviz-forward/source/motion.cjs": "e882a00fe6529a53c95ce486c62d899c5e79fc247ada73f371c2c3517efadd2c",
+    "examples/dataviz-forward/data.json": "1182d2d6f73645f075b391123bc2dd91aff471eaf10ef6bf4988bc181e7759c8",
+    "examples/swiss-editorial/score.py": "3f54e580d6f045363addc83460ae3412b00e0a8d10abbbb83c2ecdab03cb09bf",
+    "examples/cinematic-product/soundtrack.py": "a8d487baafd958a13f4f446d169fb7f72160f6e1990a025c17f4836be85b93ee"
+  }
+}
