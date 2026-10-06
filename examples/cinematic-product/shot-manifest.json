@@ -1,0 +1,380 @@
+{
+  "id": "spectra-original-concept-v3",
+  "duration": 36,
+  "fps": 24,
+  "output": {
+    "width": 1280,
+    "height": 720,
+    "ratio": "16:9",
+    "video": "../../demos/spectra-product-v3.mp4"
+  },
+  "style": "dark cinematic product-concept workflow",
+  "seed": 20261006,
+  "sources": [
+    {
+      "asset": "film.cjs",
+      "source": "original authored Canvas artwork and workflow",
+      "external_media": false
+    },
+    {
+      "asset": "soundtrack.py",
+      "source": "original deterministic synthesized sound design",
+      "external_samples": false
+    },
+    {
+      "asset": "Noto Sans CJK SC / Noto Sans",
+      "source": "installed system fonts",
+      "redistributed": false
+    },
+    {
+      "type": "scientific-background-only",
+      "url": "https://science.nasa.gov/ems/09_visiblelight/",
+      "used_for": "visible spectrum and prism dispersion; no media copied"
+    },
+    {
+      "type": "scientific-background-only",
+      "url": "https://science.nasa.gov/ems/03_behaviors/",
+      "used_for": "refraction and wavelength-dependent bending; no media copied"
+    }
+  ],
+  "objects": [
+    {
+      "id": "source-01",
+      "meaning": "Prism study",
+      "identity": {
+        "visual_identity": "faceted glass prism and white/spectrum rays"
+      }
+    },
+    {
+      "id": "source-02",
+      "meaning": "Observation note",
+      "identity": {
+        "visual_identity": "cream paper, highlighted sentence, ID02"
+      }
+    },
+    {
+      "id": "source-03",
+      "meaning": "Lens study",
+      "identity": {
+        "visual_identity": "machined silver rings and blue/green glass"
+      }
+    },
+    {
+      "id": "source-04",
+      "meaning": "Spectrum reference",
+      "identity": {
+        "visual_identity": "diagonal pastel continuous color on ridged paper"
+      }
+    },
+    {
+      "id": "source-05",
+      "meaning": "Motion sketch",
+      "identity": {
+        "visual_identity": "thin blue waves and white focus point"
+      }
+    },
+    {
+      "id": "source-06",
+      "meaning": "Creative question",
+      "identity": {
+        "visual_identity": "two-line question on dark note"
+      }
+    },
+    {
+      "id": "brief",
+      "meaning": "Cited creative brief",
+      "identity": {
+        "visual_identity": "source02 claim and three story steps"
+      }
+    },
+    {
+      "id": "shots",
+      "meaning": "Three-shot storyboard",
+      "identity": {
+        "visual_identity": "question/process/reveal with sourceIDs"
+      }
+    },
+    {
+      "id": "timeline",
+      "meaning": "Editing timeline",
+      "identity": {
+        "visual_identity": "three matching shot groups and moving playhead"
+      }
+    },
+    {
+      "id": "visual",
+      "meaning": "Original optical explanation",
+      "identity": {
+        "visual_identity": "emitter, same prism, continuous path, receiving screen"
+      }
+    },
+    {
+      "id": "finished",
+      "meaning": "Completed fictional concept film artifact",
+      "identity": {
+        "visual_identity": "one optical scene, original6-source/3-shot inventory and completion label"
+      }
+    },
+    {
+      "id": "identity",
+      "meaning": "SPECTRA identity and disclosure",
+      "identity": {
+        "visual_identity": "wordmark, Chinese tagline, original-fictional-concept disclosure"
+      }
+    }
+  ],
+  "shots": [
+    {
+      "id": "source-field",
+      "start": 0,
+      "end": 4.6,
+      "intention": "Make the scattered research problem tangible",
+      "subjects": [
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06"
+      ],
+      "before": {
+        "state": "macro source"
+      },
+      "after": {
+        "state": "six-source spatial field"
+      },
+      "camera": {
+        "description": "pullback with projected planes"
+      },
+      "action": {
+        "description": "Macro source image pulls back; narration is absent until2.8seconds and then occupies a protected opaque lower strip"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    },
+    {
+      "id": "library",
+      "start": 4.6,
+      "end": 8.3,
+      "intention": "Make ordering visibly useful",
+      "subjects": [
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06"
+      ],
+      "before": {
+        "state": "scattered sources"
+      },
+      "after": {
+        "state": "reviewable source grid"
+      },
+      "camera": {
+        "description": "perspective settles front-facing"
+      },
+      "action": {
+        "description": "The same source cards rotate and move into library positions"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    },
+    {
+      "id": "brief",
+      "start": 8.3,
+      "end": 12.3,
+      "intention": "Turn an observed detail into a sourced story claim",
+      "subjects": [
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06",
+        "brief"
+      ],
+      "before": {
+        "state": "source grid"
+      },
+      "after": {
+        "state": "selected source and cited brief"
+      },
+      "camera": {
+        "description": "brief panel expands while library compresses"
+      },
+      "action": {
+        "description": "Highlight source02 and carry its claim/ID into brief"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    },
+    {
+      "id": "storyboard",
+      "start": 12.3,
+      "end": 17,
+      "intention": "Translate the claim into an explainable sequence",
+      "subjects": [
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-06",
+        "shots"
+      ],
+      "before": {
+        "state": "three brief steps"
+      },
+      "after": {
+        "state": "three large storyboard cards"
+      },
+      "camera": {
+        "description": "close frontal story board"
+      },
+      "action": {
+        "description": "Three complete original source cards physically travel out of the brief and become three composited storyboard objects; prism body and rays share opacity"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    },
+    {
+      "id": "timeline",
+      "start": 17,
+      "end": 22.2,
+      "intention": "Show construction of a visual story",
+      "subjects": [
+        "shots",
+        "timeline",
+        "visual"
+      ],
+      "before": {
+        "state": "storyboard cards"
+      },
+      "after": {
+        "state": "editing timeline with preview"
+      },
+      "camera": {
+        "description": "cards move downward into timeline"
+      },
+      "action": {
+        "description": "Shared editorial timebase controls clip widths, preview shot, timer and playhead; shot boundary20.5seconds aligns with start of the prism clip"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    },
+    {
+      "id": "light-process",
+      "start": 22.2,
+      "end": 30,
+      "intention": "Prove an actual result through visible causal motion",
+      "subjects": [
+        "visual"
+      ],
+      "before": {
+        "state": "editor preview"
+      },
+      "after": {
+        "state": "spectrum on a receiving screen"
+      },
+      "camera": {
+        "description": "preview expands; final motivated push"
+      },
+      "action": {
+        "description": "Traverse white beam; continuous internal ray; extend color rays; introduce screen and resolve spectrum"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    },
+    {
+      "id": "finished",
+      "start": 30,
+      "end": 33,
+      "intention": "Show the completed whole from earlier objects",
+      "subjects": [
+        "visual",
+        "finished"
+      ],
+      "before": {
+        "state": "full optical scene"
+      },
+      "after": {
+        "state": "completed film artifact"
+      },
+      "camera": {
+        "description": "pullback into output card"
+      },
+      "action": {
+        "description": "One optical experiment continuously scales/translates into the finished artifact; no replacement experiment overlaps it"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    },
+    {
+      "id": "identity",
+      "start": 33,
+      "end": 36,
+      "intention": "Close the original concept honestly",
+      "subjects": [
+        "finished",
+        "identity"
+      ],
+      "before": {
+        "state": "finished concept card"
+      },
+      "after": {
+        "state": "SPECTRA title and fictional-concept disclosure"
+      },
+      "camera": {
+        "description": "settled end card"
+      },
+      "action": {
+        "description": "Result artifact fades fully by33.50 seconds; incoming brand starts33.55 and settles34.25, without text overlap; final1.75second hold"
+      },
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render",
+        "artifact": "film.cjs"
+      }
+    }
+  ],
+  "limits": [
+    "Fictional workflow, not real product capability or performance evidence",
+    "Optical scene is a stylized broadband white-light schematic, not a physically measured/simulated experiment",
+    "Seven rays schematize a continuous spectrum; no claim that all white light sources have identical continuous spectra"
+  ],
+  "review_artifacts": [
+    "STORYBOARD.md",
+    "REPAIR-02.md",
+    "final/contact-sheet.png",
+    "final/qa.json",
+    "repair-02-proofs/opening-repair.mp4",
+    "repair-02-proofs/storyboard-repair.mp4",
+    "repair-02-proofs/timeline-repair.mp4",
+    "repair-02-proofs/result-repair.mp4",
+    "REPAIR-03.md",
+    "ending-proof/ending-polish.mp4",
+    "validation/history-independence.json",
+    "validation/prefix-preservation.json"
+  ]
+}
