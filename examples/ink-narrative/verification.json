@@ -1,0 +1,87 @@
+{
+  "title": "归岸 / Homeward",
+  "revision": "visible-docking-repair",
+  "source_sha256": "976dc3a69da8c2acf73fac4468a6e5347237be00c3406d3bd298b851a02b4d19",
+  "media_sha256": "9a90c40cf6fed9606028f70927147d9466c91ee90840edae8aefb2b5884e75f5",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "duration_seconds": 36,
+  "fps": 24,
+  "frames": 864,
+  "media_bytes": 4078515,
+  "audio": "silent",
+  "complete_decode": "pass",
+  "hard_cuts": [
+    6,
+    11,
+    15.5,
+    21.5,
+    26.5,
+    28.5,
+    33
+  ],
+  "determinism": {
+    "sample_count": 26,
+    "sample_raster_dimensions": [
+      640,
+      360
+    ],
+    "method": "shuffled source-time frames compared using PNG SHA256",
+    "result": "all exact",
+    "frame_hashes": {
+      "0": "686f1ed948c78da2dd08a09da6a60315b0d5eb4ccdbfe4df3d7b900d2da27cea",
+      "3": "d1b01481c1136177d22c3fae957d59598396e9536862588a04a4ff2a3a50d62d",
+      "6": "ec8feaba2baed08ed52b93ad51386d5db2862bab85784033fb7e819b0e628a78",
+      "11": "96bfc37570c9046b8b8426b036e00803e97c5a275135385a893dc79eae645f4c",
+      "30": "c02d15b9e01a0b031a3a185ca4d480a82000092f12ef1066e775f00592cb88eb",
+      "31": "dde12b013b999a0ade5f6748d89b23c4eedfa249fe83205817e619c96128c64b",
+      "33": "30cd4c31e020621795d40a6a89b119bee4b0adf43a1d6a36b9ec370291cdfdea",
+      "5.9583333": "c9f3035b5a96216244d5c89119f8406cca2c22f9f58792ba285b74f2f849fe7a",
+      "8.2": "92778ab02d7a52e2da822a324bcd50f9cfbf38994365a1ea6f7b874b9429cac9",
+      "10.9583333": "e0414c7ea95b010fac663cf1b066e09558aa3feeec511adbd8db13eb44518469",
+      "14.2": "813bbf546acffcd98fd5298b4d65efb971e66b80c957f0de27adef11f1ded591",
+      "15.4583333": "45a1a7775297ab777ae475ff6c93d53a6bcaec130c9bb334b1b5e94f060695e9",
+      "15.5": "c6c61ab40b0164874fae0cbe8289203abc0e900491225bb7bf54f4c39af11193",
+      "17.2": "33f1f4a66143945a70b9fd7c422c2ffb666011fab0694a5585f31342d35cedea",
+      "17.6": "855fb400a055a40afce587b0335bb16a5fb8db8e8f9eef4a23fd4ca1104bea27",
+      "18.7": "cee3f51b8564cf53be0df1fef6488e018704b643849688b6d555dd056a32d0ec",
+      "21.4583333": "dceecde7f366d06070e7c6902116238bb515b500cb653a530fc6a5148b2b8dc4",
+      "21.5": "e9f8e38ea4ec7c2a91ec0dfbd73a3d46e910dd7a7bdfac664b45a01acf997e49",
+      "26.4583333": "a043f7148df93b1c3903cc203e9920cd163f47388a890150677c7c6a0ecf9e2d",
+      "26.5": "b211a3ef4f689cf5233157c251853c0e81238926de96980770e8cc9b81f5d239",
+      "28.4583333": "4a54b5df9bd6e54d62e993f1dabb560922012b36106ff8d785445f775c13130d",
+      "28.5": "6fccf9d8e3196a50f8744b1507ebe053c641ae9db948339b14501b58d7e8e32f",
+      "32.25": "deecc8f7fbb1691283c6425a909439edd1c6eb819e54536c8b7612505cb063e9",
+      "32.9583333": "c8ab4018ed8ec5178f699596750846c7087453e47ac6df827ff5da09ae6cd436",
+      "34.5": "39dfff4bea6e2cf2e86be2cb5924c49681e927dd0318096cf9fadb7b651344cd",
+      "35.9583333": "261dfadf802c6ff7a0dcd9a9ed0f5a5cfd408006174585b841bfbc70acec6ca3"
+    }
+  },
+  "native_canvas_integration": {
+    "sample_time_seconds": 18.7,
+    "pixel_identical": true,
+    "authored_duration": 36,
+    "hard_cut_count": 7,
+    "missing_declared_glyphs": []
+  },
+  "visible_docking": {
+    "oar_horizontal_at": 30.75,
+    "bow_contact_at": 31,
+    "hand_to_post_at": 32.15,
+    "body_settled_at": 32.65,
+    "resting_hold": [
+      33,
+      36
+    ],
+    "dark_pose_mask_changed_pixels": 0
+  },
+  "independent_review": "Targeted decoded docking and obstacle-cut recheck accepted visible approach, contact, oar stow, post grip and resting final hold.",
+  "limits": [
+    "Procedural 2D/vector-like ink material and limited bodily weight, not physical ink simulation",
+    "Sampled/targeted decoded-frame review, not complete realtime playback or every-frame approval",
+    "Silent film; no listening or soundtrack claim",
+    "No cross-platform, portrait or reference-parity claim"
+  ]
+}
