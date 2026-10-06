@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse
 import ast
+from bisect import bisect_right
 from collections import Counter
 from fractions import Fraction
 import hashlib
@@ -12,8 +13,11 @@ import math
 import os
 from pathlib import Path
 import shutil
+import select
+import signal
 import subprocess
 import sys
+import tempfile
 import time
 import xml.etree.ElementTree as ET
 
@@ -27,6 +31,24 @@ DEFAULT_SOURCE_DIR = HERE.parent / 'examples' / 'prototypes'
 STYLES = ('tech', 'whiteboard', 'ink')
 PREVIEW_TIMES = {'tech': [4, 11.8, 21.8, 28.4], 'whiteboard': [3.8, 13.5, 21.5, 29.5], 'ink': [2.75, 10.5, 18, 29.25]}
 CUTS = {'tech': [6.8, 13.8, 24.7], 'whiteboard': [4.6, 9.8, 15.3, 20.4, 23, 27.8], 'ink': [4.8, 9.5, 12.2, 14.5, 24]}
+CANVAS_PROTOCOL = 'heige-canvas-v1'
+LEGACY_SOURCE_DURATION = 30.0  # Undeclared legacy fixtures retain their original timeline.
+
+
+def positive_duration(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+        raise ValueError('Authored source duration must be a finite positive number')
+    return float(value)
+
+
+def validate_cuts(values, duration):
+    if not isinstance(values, (list, tuple)):
+        raise ValueError('CUTS/cuts must be an array of source-time boundaries')
+    if any(isinstance(t, bool) or not isinstance(t, (int, float)) or not math.isfinite(t) or not 0 < t < duration for t in values):
+        raise ValueError('Cut boundaries must be finite and strictly inside the source duration')
+    if list(values) != sorted(set(values)):
+        raise ValueError('Cut boundaries must be unique and in ascending order')
+    return [float(t) for t in values]
 
 def sha(data): return hashlib.sha256(data).hexdigest()
 def write_json(path, data): path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
@@ -83,7 +105,11 @@ class SvgSource:
             if not callable(getattr(self.module, 'render', None)):
                 raise ValueError('Python source must define render(time_seconds) -> complete SVG string')
             self.module.FONT = family
-            self.duration = float(getattr(self.module, 'DURATION', getattr(self.module, 'SECONDS', 30)))
+            key = next((name for name in ('DURATION', 'duration', 'SECONDS') if hasattr(self.module, name)), None)
+            self.duration = positive_duration(getattr(self.module, key) if key else LEGACY_SOURCE_DURATION)
+            self.metadata = {'duration': self.duration, 'duration_source': key or 'legacy_default_30s'}
+            self.cuts = validate_cuts(getattr(self.module, 'CUTS', getattr(self.module, 'cuts', [])), self.duration)
+            self.metadata['cuts'] = self.cuts
             self.raster = SvgRasterizer(width, height)
             self.chars = set()
         except BaseException:
@@ -104,23 +130,125 @@ class SvgSource:
 
 
 class CanvasSource:
-    def __init__(self, path, family, width, height, font, duration=30):
-        self.path, self.duration, self.chars = path, duration, set()
+    """Trusted Canvas module with a bounded JSON handshake and bounded raw frames.
+
+    DURATION/duration/SECONDS is required for new films. For compatibility only,
+    modules without any duration export use 30 seconds; metadata labels this
+    legacy default. No source code is rewritten. POSIX pipes/process groups are
+    used so a stuck import, ready(), render(), or descendant cannot hang cleanup.
+    """
+    def __init__(self, path, family, width, height, font, *, startup_timeout=15, frame_timeout=30):
+        self.path, self.chars = path, set()
         self.frame_bytes = width * height * 4
-        self.process = subprocess.Popen(['node', str(HERE / 'canvas_worker.cjs'), str(path.resolve()), str(width), str(height), font['path'], family], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        self.startup_timeout, self.frame_timeout = float(startup_timeout), float(frame_timeout)
+        if not all(math.isfinite(t) and t > 0 for t in (self.startup_timeout, self.frame_timeout)):
+            raise ValueError('Canvas timeouts must be finite and positive')
+        self.process = None
+        self._stderr = tempfile.TemporaryFile()
+        self._buffer = bytearray()
+        try:
+            self.process = subprocess.Popen(
+                ['node', '--expose-gc', str(HERE / 'canvas_worker.cjs'), str(path.resolve()), str(width), str(height), font['path'], family],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self._stderr,
+                bufsize=0, start_new_session=True)
+            os.set_blocking(self.process.stdin.fileno(), False)
+            os.set_blocking(self.process.stdout.fileno(), False)
+            deadline = time.monotonic() + self.startup_timeout
+            header = bytearray()
+            # One bounded line, followed by raw RGBA responses. Source logging is
+            # redirected to stderr by the worker before it imports authored code.
+            while not header.endswith(b'\n'):
+                header.extend(self._read_exact(1, deadline, 'metadata handshake'))
+                if len(header) > 65536:
+                    raise RuntimeError('Canvas metadata handshake exceeded 64 KiB')
+            try:
+                metadata = json.loads(header)
+            except (ValueError, UnicodeDecodeError) as error:
+                raise RuntimeError('Canvas metadata handshake was not valid JSON') from error
+            if not isinstance(metadata, dict) or metadata.get('protocol') != CANVAS_PROTOCOL:
+                raise RuntimeError('Canvas metadata handshake has an unsupported protocol')
+            self.duration = positive_duration(metadata.get('duration'))
+            self.cuts = validate_cuts(metadata.get('cuts', []), self.duration)
+            strings = metadata.get('text_strings', [])
+            if not isinstance(strings, list) or any(not isinstance(s, str) for s in strings):
+                raise RuntimeError('Canvas declared text strings must be an array of strings')
+            self.chars.update(''.join(strings))
+            self.metadata = metadata
+        except BaseException:
+            self.close()
+            raise
+
+    def _error(self, message):
+        self._stderr.flush()
+        self._stderr.seek(0, 2)
+        self._stderr.seek(max(0, self._stderr.tell() - 8192))
+        detail = self._stderr.read().decode('utf-8', errors='replace').strip()
+        return RuntimeError(message + (f'; worker stderr: {detail}' if detail else ''))
+
+    def _read_exact(self, size, deadline, operation):
+        while len(self._buffer) < size:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise self._error(f'Canvas {operation} timed out')
+            readable, _, _ = select.select([self.process.stdout], [], [], remaining)
+            if not readable:
+                raise self._error(f'Canvas {operation} timed out')
+            chunk = os.read(self.process.stdout.fileno(), min(262144, max(size - len(self._buffer), 4096)))
+            if not chunk:
+                raise self._error(f'Canvas worker ended during {operation} ({len(self._buffer)} of {size} bytes)')
+            self._buffer.extend(chunk)
+        result = bytes(self._buffer[:size])
+        del self._buffer[:size]
+        return result
+
+    def frame_samples(self, times):
+        if self.process is None:
+            raise RuntimeError('Canvas source is closed')
+        if not 1 <= len(times) <= 16 or any(not math.isfinite(t) or t < 0 or t > self.duration for t in times):
+            raise ValueError('Canvas sample times must be 1–16 finite timestamps within the source duration')
+        request = (json.dumps({'times': [float(t) for t in times], 'seed': 20261005}) + '\n').encode()
+        deadline = time.monotonic() + self.frame_timeout
+        try:
+            while request:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0 or not select.select([], [self.process.stdin], [], remaining)[1]:
+                    raise self._error('Canvas frame request timed out')
+                written = os.write(self.process.stdin.fileno(), request)
+                request = request[written:]
+            return self._read_exact(self.frame_bytes, deadline, 'frame rendering'), None
+        except RuntimeError:
+            self.close()
+            raise
+        except OSError as cause:
+            error = self._error('Canvas frame protocol failed')
+            self.close()
+            raise error from cause
+
     def frame(self, t):
-        self.process.stdin.write((json.dumps({'time': float(t), 'seed': 20261005})+'\n').encode())
-        self.process.stdin.flush()
-        data = self.process.stdout.read(self.frame_bytes)
-        if len(data) != self.frame_bytes:
-            raise RuntimeError(f'Canvas worker produced {len(data)} bytes, expected {self.frame_bytes}; inspect stderr')
-        return data, None
+        return self.frame_samples([float(t)])
+
     def close(self):
-        if self.process.stdin: self.process.stdin.close()
-        try: self.process.wait(timeout=10)
-        except subprocess.TimeoutExpired:
-            self.process.terminate(); self.process.wait(timeout=10)
-        if self.process.stdout: self.process.stdout.close()
+        process = self.process
+        if process is not None:
+            if process.stdin and not process.stdin.closed:
+                process.stdin.close()
+            # Terminate the isolated process group, including stuck descendants.
+            # Never rely on EOF alone: authored modules can keep timers alive.
+            try: os.killpg(process.pid, signal.SIGTERM)
+            except ProcessLookupError: pass
+            try: process.wait(timeout=1)
+            except subprocess.TimeoutExpired:
+                try: os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError: pass
+                process.wait(timeout=1)
+            # The main worker may have exited before a descendant ignored TERM.
+            try: os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError: pass
+            if process.stdout and not process.stdout.closed:
+                process.stdout.close()
+            self.process = None
+        if not self._stderr.closed:
+            self._stderr.close()
 
 
 def create_source(args, font):
@@ -129,7 +257,8 @@ def create_source(args, font):
     audit = source_audit(source)
     cls = CanvasSource if args.backend == 'canvas' else SvgSource
     extra = [font] if cls is CanvasSource else []
-    return cls(source, args.font_family, args.width, args.height, *extra), audit
+    kwargs = {'startup_timeout': args.canvas_startup_timeout, 'frame_timeout': args.canvas_frame_timeout} if cls is CanvasSource else {}
+    return cls(source, args.font_family, args.width, args.height, *extra, **kwargs), audit
 
 
 def arguments():
@@ -151,7 +280,11 @@ def arguments():
     p.add_argument('--font-family', default='Noto Sans CJK SC')
     p.add_argument('--crf', type=int, default=18)
     p.add_argument('--preset', choices=('ultrafast','superfast','veryfast','faster','fast','medium','slow'), default='medium')
-    p.add_argument('--cuts', help='Comma-separated source-time cut/transition boundaries; default authored style boundaries')
+    p.add_argument('--cuts', help='Comma-separated hard-cut source times; defaults to source CUTS/cuts or built-in preset boundaries')
+    p.add_argument('--canvas-startup-timeout', type=float, default=15, help='Maximum Canvas import/ready/metadata seconds')
+    p.add_argument('--canvas-frame-timeout', type=float, default=30, help='Maximum seconds per Canvas output frame, including shutter samples')
+    p.add_argument('--shutter-samples', type=int, default=1, help='Canvas only: 1 disables temporal sampling; 2–16 enable cut-clamped global motion blur')
+    p.add_argument('--shutter-angle', type=float, default=180, help='Shutter width in degrees of one output frame, 0–360; only used with multiple samples')
     p.add_argument('--no-qa-images', action='store_true', help='Skip contact sheets and cut strips; frame metrics/ffprobe still run')
     return p.parse_args()
 
@@ -172,6 +305,16 @@ def validate_args(args):
     if not 0 < fps <= 120: raise ValueError('fps must be > 0 and <= 120')
     if args.duration is not None and (not math.isfinite(args.duration) or args.duration <= 0): raise ValueError('duration must be finite and positive')
     if not 0 <= args.crf <= 51: raise ValueError('crf must be between 0 and 51')
+    samples = getattr(args, 'shutter_samples', 1)
+    angle = getattr(args, 'shutter_angle', 180)
+    if not 1 <= samples <= 16 or not math.isfinite(angle) or not 0 <= angle <= 360:
+        raise ValueError('shutter samples must be 1–16 and angle must be finite in 0–360 degrees')
+    for key in ('canvas_startup_timeout', 'canvas_frame_timeout'):
+        value = getattr(args, key, 1)
+        if not math.isfinite(value) or value <= 0:
+            raise ValueError('Canvas timeouts must be finite and positive')
+    if samples > 1 and getattr(args, 'backend', 'canvas') != 'canvas':
+        raise ValueError('Temporal shutter sampling is currently supported only by the Canvas backend')
     return fps
 
 
@@ -249,7 +392,55 @@ def encoded_images(path, indices, directory):
     return {i: Image.open(file).copy() for i,file in zip(sorted(indices),images)}
 
 
+def source_cuts(args, source):
+    """Custom modules never inherit unrelated preset cut times by accident."""
+    if args.cuts is not None:
+        values = [float(x) for x in args.cuts.split(',') if x.strip()]
+    elif source.cuts:
+        values = source.cuts
+    else:
+        values = [] if args.source else CUTS.get(args.style, [])
+    return validate_cuts(values, source.duration)
+
+
+def shutter_times(t, fps, duration, cuts=(), samples=1, angle=180, time_scale=1):
+    """Midpoint box shutter, constrained to the half-open shot containing t.
+
+    Cuts are hard cuts, not overlapping dissolves. Left-edge samples cannot
+    reach the next shot; a center exactly on a cut belongs to the new shot.
+    Duplicate clamped times intentionally preserve all equal sample weights.
+    """
+    duration = positive_duration(duration)
+    validate_cuts(cuts, duration)
+    if isinstance(samples, bool) or not isinstance(samples, int) or not 1 <= samples <= 16:
+        raise ValueError('Shutter samples must be an integer in 1–16')
+    if not math.isfinite(float(fps)) or fps <= 0 or not math.isfinite(time_scale) or time_scale <= 0:
+        raise ValueError('Shutter fps and source time scale must be finite and positive')
+    if not math.isfinite(angle) or not 0 <= angle <= 360:
+        raise ValueError('Shutter angle must be finite and in 0–360 degrees')
+    if not math.isfinite(t) or not 0 <= t <= duration:
+        raise ValueError('Frame time must be inside the authored source duration')
+    if samples == 1 or angle == 0:
+        return [float(t)]
+    bounds = [0.0, *cuts, float(duration)]
+    position = min(bisect_right(bounds, t) - 1, len(bounds) - 2)
+    low, high = bounds[position:position + 2]
+    high = math.nextafter(high, -math.inf)
+    span = float(time_scale) / float(fps) * angle / 360
+    return [max(low, min(high, t + ((i + 0.5) / samples - 0.5) * span)) for i in range(samples)]
+
+
+def sampled_frame(source, t, fps, args, cuts, time_scale=1):
+    times = shutter_times(t, fps, source.duration, cuts, args.shutter_samples, args.shutter_angle, time_scale)
+    if len(times) == 1:
+        raw, svg = source.frame(times[0])
+    else:
+        raw, svg = source.frame_samples(times)
+    return raw, svg, times
+
+
 def render(args, fps, source, audit, font, cmap, out):
+    cuts = source_cuts(args, source)
     duration = args.duration if args.duration is not None else source.duration - args.start
     if duration <= 0 or args.start >= source.duration: raise ValueError('Start must be before source duration')
     if not args.fit_time and args.start + duration > source.duration + 1e-9:
@@ -263,14 +454,14 @@ def render(args, fps, source, audit, font, cmap, out):
     output = out/f'{output_stem}.mp4'
     part = out/f'{output_stem}.partial.mp4'
     cmd = ['ffmpeg','-hide_banner','-loglevel','warning','-f','rawvideo','-pixel_format','rgba','-video_size',f'{args.width}x{args.height}','-framerate',str(fps),'-i','pipe:0','-an','-c:v','libx264','-preset',args.preset,'-crf',str(args.crf),'-pix_fmt','yuv420p','-threads','1','-map_metadata','-1','-fflags','+bitexact','-flags:v','+bitexact','-movflags','+faststart','-n',str(part)]
-    write_json(out/'render-request.json', {'status':'initial_request', 'source':audit, 'command':cmd, 'frames':count})
+    write_json(out/'render-request.json', {'status':'initial_request', 'source':audit, 'command':cmd, 'frames':count, 'source_duration':source.duration, 'source_metadata':source.metadata})
     metrics, previous, begin = [], None, time.monotonic()
     with (out/'ffmpeg.log').open('w') as log:
         encoder = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=log)
         try:
             for i in range(count):
                 t = min(source.duration, args.start + float(i/fps) * time_scale)
-                raw, svg = source.frame(t)
+                raw, svg, sample_times = sampled_frame(source, t, fps, args, cuts, time_scale)
                 encoder.stdin.write(raw)
                 image = Image.frombytes('RGBA',(args.width,args.height),raw)
                 small = image.convert('RGB').resize((64,36),Image.Resampling.BOX)
@@ -278,6 +469,7 @@ def render(args, fps, source, audit, font, cmap, out):
                 stat = ImageStat.Stat(small.convert('L'))
                 delta = sum(abs(a-b) for a,b in zip(pixels,previous))/len(pixels) if previous is not None else 0.0
                 metrics.append({'frame':i,'source_time':round(t,9),'raw_sha256':sha(raw),'svg_sha256':sha(svg.encode()) if svg else None,'mean_luma':round(stat.mean[0],4),'luma_stddev':round(stat.stddev[0],4),'mean_delta_64x36':round(delta,4)})
+                if args.shutter_samples > 1: metrics[-1]['shutter_source_times'] = sample_times
                 previous = pixels
                 if i == 0 or (i+1) % max(1,round(float(fps)*5)) == 0:
                     print(json.dumps({'rendered':i+1,'total':count,'elapsed_seconds':round(time.monotonic()-begin,1)}),flush=True)
@@ -295,34 +487,34 @@ def render(args, fps, source, audit, font, cmap, out):
     stream=video[0]
     checks={'one_video_stream':len(video)==1,'dimensions':(stream['width'],stream['height'])==(args.width,args.height),'codec_h264':stream['codec_name']=='h264','pixel_format_yuv420p':stream['pix_fmt']=='yuv420p','frame_count':int(stream['nb_read_frames'])==count,'frame_rate':Fraction(stream['avg_frame_rate'])==fps,'duration':abs(float(stream['duration'])-actual_duration)<max(.001,1/float(fps)),'silent_output':not audio}
     if args.backend == 'svg': checks['font_coverage'] = not missing
+    elif source.metadata.get('declared_text_source'): checks['declared_text_font_coverage'] = not missing
     if not all(checks.values()):
         write_json(out/'ffprobe.json',result); raise RuntimeError(f'Encoded checks failed: {checks}')
     part.rename(output)
     write_json(out/'ffprobe.json',result)
-    cuts=[float(x) for x in args.cuts.split(',')] if args.cuts else CUTS.get(args.style,[])
     cut_groups=[]
     for t in cuts:
         index=math.ceil((t-args.start)/time_scale*float(fps)-1e-9)
-        if 1 <= index < count-1:
-            cut_groups.append((t,[index-1,index,index+1]))
+        if 0 <= index < count:
+            cut_groups.append((t,index,[i for i in range(index-2,index+3) if 0 <= i < count]))
     samples={0,count-1}|{min(count-1,round(i*(count-1)/11)) for i in range(12)}
-    for t in PREVIEW_TIMES.get(args.style,[]):
+    for t in ([] if args.source else PREVIEW_TIMES.get(args.style, [])):
         index=round((t-args.start)/time_scale*float(fps))
         if 0<=index<count: samples.add(index)
-    review_indices=samples|{i for _,group in cut_groups for i in group}
+    review_indices=samples|{i for _,_,group in cut_groups for i in group}
     if not args.no_qa_images:
         sheet_font=ImageFont.truetype(font['path'],16,index=font['face_index'])
         decoded=encoded_images(output,review_indices,out/'review-frames')
         contact_sheet([(f'frame {i} | {metrics[i]["source_time"]:.3f}s source',decoded[i]) for i in sorted(samples)],out/'contact-sheet.jpg',title=f'{label} | decoded MP4 samples | mechanical evidence, not aesthetic approval',font=sheet_font)
         if cut_groups:
-            contact_sheet([(f'boundary {t:g}s | frame {i} ({j-1:+d})',decoded[i]) for t,group in cut_groups for j,i in enumerate(group)],out/'cut-strip.jpg',columns=3,title=f'{label} | before / first on-or-after / next frame at authored boundary',font=sheet_font)
+            contact_sheet([(f'boundary {t:g}s | frame {i} ({i-center:+d})',decoded[i]) for t,center,group in cut_groups for i in group],out/'cut-strip.jpg',columns=5,title=f'{label} | cut -2/-1/0/+1/+2 decoded frames; review pending',font=sheet_font)
     write_json(out/'frame-metrics.json',metrics)
     warnings=[]
     flat=[m['frame'] for m in metrics if m['luma_stddev']<1]
     if flat: warnings.append({'kind':'nearly_flat_frames','frames':flat,'interpretation':'May be an intentional opening/hold. Requires visual review.'})
     largest=sorted(metrics[1:],key=lambda m:m['mean_delta_64x36'],reverse=True)[:10]
     identical=sum(a['raw_sha256']==b['raw_sha256'] for a,b in zip(metrics,metrics[1:]))
-    report={'status':'encoded_and_mechanically_verified','video':output.name,'style':label,'label':label,'source_preset':None if args.source else args.style,'review_preset':args.style,'backend':args.backend,'source':audit,'font':font,'glyphs_checked':len(source.chars),'missing_glyphs':missing,'dimensions':[args.width,args.height],'fps':str(fps),'requested_duration':duration,'encoded_duration':actual_duration,'frame_count':count,'source_start':args.start,'font_coverage_scope':'all SVG text/tspan codepoints against selected font face' if args.backend=='svg' else 'Canvas text cannot be introspected; visual glyph review required','source_time_scale':time_scale,'source_dimensions_policy':'SVG preserveAspectRatio contain; changing aspect does not author a new composition','checks':checks,'render_seconds':round(time.monotonic()-begin,2),'mp4_sha256':sha(output.read_bytes()),'consecutive_identical_frame_pairs':identical,'largest_frame_deltas':largest,'warnings':warnings,'audio':'none; no voice, music or sound effects produced','visual_review':'pending human/agent pixel and temporal review; passing checks is not aesthetic approval','determinism_scope':'source-time functions and frame hashes; same installed libraries/font/platform required for matching pixels','dependencies':dependency_versions(),'qa_images_generated':not args.no_qa_images}
+    report={'status':'encoded_and_mechanically_verified','video':output.name,'style':label,'label':label,'source_preset':None if args.source else args.style,'review_preset':args.style,'backend':args.backend,'source':audit,'font':font,'glyphs_checked':len(source.chars),'missing_glyphs':missing,'dimensions':[args.width,args.height],'fps':str(fps),'requested_duration':duration,'encoded_duration':actual_duration,'frame_count':count,'source_start':args.start,'source_duration':source.duration,'source_metadata':source.metadata,'cuts':cuts,'temporal_shutter':{'samples':args.shutter_samples,'angle':args.shutter_angle,'enabled':args.shutter_samples>1 and args.shutter_angle>0,'compositing':'equal-weight box average in linear-light sRGB using 16-bit lookup tables; opaque alpha','cut_policy':'each sample clamped to the half-open hard-cut interval containing the frame center'},'font_coverage_scope':'all SVG text/tspan codepoints against selected font face' if args.backend=='svg' else 'author-declared TEXT_STRINGS/textStrings only; completeness, shaping and rendered text still require visual review','source_time_scale':time_scale,'source_dimensions_policy':('SVG preserveAspectRatio contain' if args.backend=='svg' else 'Canvas receives the requested dimensions; authored geometry controls layout')+'; changing aspect does not itself author a new composition','checks':checks,'render_seconds':round(time.monotonic()-begin,2),'mp4_sha256':sha(output.read_bytes()),'consecutive_identical_frame_pairs':identical,'largest_frame_deltas':largest,'warnings':warnings,'audio':'none; no voice, music or sound effects produced','visual_review':'pending human/agent pixel and temporal review; passing checks is not aesthetic approval','determinism_scope':'source-time functions and frame hashes; same installed libraries/font/platform required for matching pixels','dependencies':dependency_versions(),'qa_images_generated':not args.no_qa_images,'sampled_frame_review':{'status':'pending' if not args.no_qa_images else 'not_generated','video_sha256':sha(output.read_bytes()),'frame_indices':sorted(review_indices) if not args.no_qa_images else [],'full_speed_playback':'not_performed','aesthetic_approval':False}}
     write_json(out/'manifest.json',report)
     print(json.dumps({'video':str(output),'manifest':str(out/'manifest.json'),'checks':checks,'seconds':report['render_seconds']},ensure_ascii=False),flush=True)
 
@@ -337,11 +529,11 @@ def main():
     source,audit=create_source(args,font)
     try:
         if args.command=='frame':
-            raw,svg=source.frame(args.time)
+            raw,svg,sample_times=sampled_frame(source,args.time,fps,args,source_cuts(args,source))
             Image.frombytes('RGBA',(args.width,args.height),raw).convert('RGB').save(out/'frame.png')
             if svg: (out/'frame.svg').write_text(svg,encoding='utf-8')
             missing=sorted(c for c in source.chars if not c.isspace() and ord(c) not in cmap)
-            write_json(out/'frame.json',{'source':audit,'label':label,'source_preset':None if args.source else args.style,'time':args.time,'dimensions':[args.width,args.height],'font':font,'raw_sha256':sha(raw),'missing_glyphs':missing})
+            write_json(out/'frame.json',{'source':audit,'label':label,'source_preset':None if args.source else args.style,'time':args.time,'dimensions':[args.width,args.height],'font':font,'raw_sha256':sha(raw),'missing_glyphs':missing,'source_duration':source.duration,'source_metadata':source.metadata,'shutter_source_times':sample_times})
             if missing: raise RuntimeError('Missing glyphs: '+''.join(missing))
             print(out/'frame.png')
         else: render(args,fps,source,audit,font,cmap,out)
