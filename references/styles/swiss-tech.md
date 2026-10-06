@@ -1,6 +1,8 @@
 # Swiss-tech director pack
 
-Status: revised original example has a continuous technical pass and targeted actual-frame acceptance. Its formerly generic path now uses a concrete two-note relation, while remaining a conceptual knowledge demonstration rather than verified real-product behavior. Method references: [Swiss style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/swiss-motion/STYLE.md), [motion implementation](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/swiss-motion/demo/ease.js), [reference film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/swiss-motion.mp4).
+V3 direction: design an original complete artifact, preserve meaningful object identity, and prove the signature action before expanding the film. The new [Night Signal example](../../examples/swiss-editorial/README.md) demonstrates one poster becoming a rhythm instrument. Current integration and exact review scope are in [status](../status.md). The legacy status below is comparison evidence, not v3 acceptance.
+
+Legacy v2 example status: revised original example has a continuous technical pass and targeted actual-frame acceptance. Its formerly generic path now uses a concrete two-note relation, while remaining a conceptual knowledge demonstration rather than verified real-product behavior. Method references: [Swiss style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/swiss-motion/STYLE.md), [motion implementation](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/swiss-motion/demo/ease.js), [reference film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/swiss-motion.mp4).
 
 ## World and media
 

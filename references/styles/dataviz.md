@@ -1,6 +1,8 @@
 # Dataviz director pack
 
-Status: one original [worked dataviz example](../../examples/dataviz/facts-and-status.md) is implemented and has technical plus sampled-image acceptance at 1280×720. Playback is untested; phone-width supporting text needs revision. This does not establish a general-purpose chart engine or broad model parity. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dataviz/STYLE.md), [coordinate/morph engine](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dataviz/demo/engine.js), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/dataviz.mp4).
+V3 direction: design an original complete artifact, preserve meaningful object identity, and prove the signature action before expanding the film. The [new-brief R6 example](../../examples/dataviz-forward/README.md) moves twelve stable bag records from receipts onto one shared time axis, preserving duplicate values. Exact acceptance scope is in [status](../status.md). The legacy status below is comparison evidence, not v3 acceptance.
+
+Legacy v2 example status: one original [worked dataviz example](../../examples/dataviz/facts-and-status.md) is implemented and has technical plus sampled-image acceptance at 1280×720. Playback is untested; phone-width supporting text needs revision. This does not establish a general-purpose chart engine or broad model parity. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dataviz/STYLE.md), [coordinate/morph engine](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dataviz/demo/engine.js), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/dataviz.mp4).
 
 ## World and media
 

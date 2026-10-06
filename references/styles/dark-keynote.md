@@ -1,6 +1,8 @@
 # Dark-keynote director pack
 
-Status: research-backed pack with an [implemented R4 concept example](../../examples/dark-keynote/facts-and-status.md), continuous technical pass and targeted actual-frame acceptance. Playback/audio quality is unreviewed, and no complete generic style engine or reference parity is claimed. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dark-keynote/STYLE.md), [implementation notes](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dark-keynote/DEMO.md), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/dark-keynote.mp4).
+V3 direction: design an original complete artifact, preserve meaningful object identity, and prove the signature action before expanding the film. The new [SPECTRA example](../../examples/cinematic-product/README.md) is integrated with explicit source/media hashes and scoped independent review in [status](../status.md). The legacy status below is comparison evidence, not v3 acceptance.
+
+Legacy v2 example status: research-backed pack with an [implemented R4 concept example](../../examples/dark-keynote/facts-and-status.md), continuous technical pass and targeted actual-frame acceptance. Playback/audio quality is unreviewed, and no complete generic style engine or reference parity is claimed. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dark-keynote/STYLE.md), [implementation notes](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/dark-keynote/DEMO.md), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/dark-keynote.mp4).
 
 ## World and media
 

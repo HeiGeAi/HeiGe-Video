@@ -1,6 +1,8 @@
 # Whiteboard director pack
 
-Status: revised original optical explainer has a continuous technical pass and targeted actual-frame acceptance. Actual path drawing is implemented; the style remains simplified vector/marker rather than a fully tactile marker engine. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/whiteboard/STYLE.md), [stroke/pen/timeline engine](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/whiteboard/demo/engine/wb.js), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/whiteboard.mp4).
+V3 direction: design an original complete artifact, preserve meaningful object identity, and prove the signature action before expanding the film. The new [38微秒 example](../../examples/whiteboard-navigation/README.md) is integrated with explicit source/media hashes and scoped independent review in [status](../status.md). The legacy status below is comparison evidence, not v3 acceptance.
+
+Legacy v2 example status: revised original optical explainer has a continuous technical pass and targeted actual-frame acceptance. Actual path drawing is implemented; the style remains simplified vector/marker rather than a fully tactile marker engine. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/whiteboard/STYLE.md), [stroke/pen/timeline engine](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/whiteboard/demo/engine/wb.js), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/whiteboard.mp4).
 
 ## World and media
 

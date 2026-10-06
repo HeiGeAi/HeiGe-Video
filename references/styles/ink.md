@@ -1,6 +1,8 @@
 # Ink director pack
 
-Status: the original seed-journey R3 example has a continuous technical pass and independent sampled-image/ending acceptance. It now has stronger forms, landing/growth and a settled closing wide; its material remains a grainy vector/brush approximation. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/ink-wash/STYLE.md), [brush construction](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/ink-wash/demo/ink.js), [wet/dry composition](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/ink-wash/demo/comp.js), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/ink-wash.mp4).
+V3 direction: design an original complete artifact, preserve meaningful object identity, and prove the signature action before expanding the film. The new [Homeward example](../../examples/ink-narrative/README.md) demonstrates a river crossing with a visible stroke consequence and completed docking. Current integration and exact review scope are in [status](../status.md). The legacy status below is comparison evidence, not v3 acceptance.
+
+Legacy v2 example status: the original seed-journey R3 example has a continuous technical pass and independent sampled-image/ending acceptance. It now has stronger forms, landing/growth and a settled closing wide; its material remains a grainy vector/brush approximation. Method references: [style](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/ink-wash/STYLE.md), [brush construction](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/ink-wash/demo/ink.js), [wet/dry composition](https://github.com/lemomo-ai/lemo-opuscar/blob/main/styles/ink-wash/demo/comp.js), [film](https://github.com/lemomo-ai/lemo-opuscar/releases/download/films/ink-wash.mp4).
 
 ## World and media
 
