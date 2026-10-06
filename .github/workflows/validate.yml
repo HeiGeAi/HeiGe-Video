@@ -1,0 +1,48 @@
+name: Validate source and runtime
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # Pin the OS image so native-library package names stay reproducible.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      VIDEO_RUNTIME_CACHE: /tmp/heige-video-ci-cache
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install native rendering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ffmpeg fontconfig fonts-noto-cjk librsvg2-2 libcairo2 libglib2.0-0t64
+      - name: Install Python and optional Canvas dependencies
+        run: |
+          python -m pip install Pillow==12.3.0 fonttools==4.61.1
+          npm install --no-save --package-lock=false @napi-rs/canvas@0.1.100
+      - name: Verify local capabilities
+        run: python runtime/render_video.py doctor
+      - name: Validate package and example manifests
+        run: |
+          python scripts/validate_package.py
+          python scripts/validate_package.py --manifest examples/dataviz/shot-manifest.json
+      - name: Test runtime and scripts
+        run: |
+          python -m unittest discover -s runtime/tests -v
+          python -m unittest discover -s scripts -p 'test_*.py' -v
+      - name: Check original demo files
+        working-directory: demos
+        run: sha256sum -c checksums.sha256
