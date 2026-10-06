@@ -1,0 +1,6074 @@
+{
+  "status": "inside-frame pass in nine settled windows; not an automated collision or perception pass",
+  "items": [
+    {
+      "time": 0.75,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "都写“平均 10 分钟”",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 440.11000061035156,
+          "y": 82.45
+        },
+        {
+          "x": 839.8899993896484,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "为什么等起来，差这么多？",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 478,
+          "y": 151.45
+        },
+        {
+          "x": 802,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 247.18000030517578,
+          "y": 589.35
+        },
+        {
+          "x": 432.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 115.28499984741211,
+          "y": 540.95
+        },
+        {
+          "x": 124.71500015258789,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 217.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 227.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 315.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 334.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 418.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 436.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 520.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 539.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 847.1800003051758,
+          "y": 589.35
+        },
+        {
+          "x": 1032.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 715.2849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 724.7150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 817.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 827.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 915.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 934.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1018.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1036.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1120.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1139.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "服务 A",
+      "font": "400 28px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 300.3499984741211,
+          "y": 237.8
+        },
+        {
+          "x": 379.6500015258789,
+          "y": 274.2
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "平均送达",
+      "font": "400 31px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 278,
+          "y": 300.85
+        },
+        {
+          "x": 402,
+          "y": 341.15
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "10",
+      "font": "400 134px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 255.62999725341797,
+          "y": 325.9
+        },
+        {
+          "x": 404.37000274658203,
+          "y": 500.1
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "分钟",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 408,
+          "y": 430.45
+        },
+        {
+          "x": 462,
+          "y": 465.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "6 单",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 319.54000091552734,
+          "y": 508.05
+        },
+        {
+          "x": 360.45999908447266,
+          "y": 537.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "服务 B",
+      "font": "400 28px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 899.6650009155273,
+          "y": 237.8
+        },
+        {
+          "x": 980.3349990844727,
+          "y": 274.2
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "平均送达",
+      "font": "400 31px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 878,
+          "y": 300.85
+        },
+        {
+          "x": 1002,
+          "y": 341.15
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "10",
+      "font": "400 134px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 855.629997253418,
+          "y": 325.9
+        },
+        {
+          "x": 1004.370002746582,
+          "y": 500.1
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "分钟",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1008,
+          "y": 430.45
+        },
+        {
+          "x": 1062,
+          "y": 465.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "6 单",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 919.5400009155273,
+          "y": 508.05
+        },
+        {
+          "x": 960.4599990844727,
+          "y": 537.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 0.75,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "都写“平均 10 分钟”",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 440.11000061035156,
+          "y": 82.45
+        },
+        {
+          "x": 839.8899993896484,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "为什么等起来，差这么多？",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 478,
+          "y": 151.45
+        },
+        {
+          "x": 802,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 247.18000030517578,
+          "y": 589.35
+        },
+        {
+          "x": 432.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 115.28499984741211,
+          "y": 540.95
+        },
+        {
+          "x": 124.71500015258789,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 217.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 227.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 315.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 334.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 418.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 436.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 520.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 539.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 847.1800003051758,
+          "y": 589.35
+        },
+        {
+          "x": 1032.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 715.2849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 724.7150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 817.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 827.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 915.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 934.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1018.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1036.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1120.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1139.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "服务 A",
+      "font": "400 28px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 300.3499984741211,
+          "y": 237.8
+        },
+        {
+          "x": 379.6500015258789,
+          "y": 274.2
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "平均送达",
+      "font": "400 31px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 278,
+          "y": 300.85
+        },
+        {
+          "x": 402,
+          "y": 341.15
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "10",
+      "font": "400 134px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 255.62999725341797,
+          "y": 325.9
+        },
+        {
+          "x": 404.37000274658203,
+          "y": 500.1
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "分钟",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 408,
+          "y": 430.45
+        },
+        {
+          "x": 462,
+          "y": 465.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "6 单",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 319.54000091552734,
+          "y": 508.05
+        },
+        {
+          "x": 360.45999908447266,
+          "y": 537.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "服务 B",
+      "font": "400 28px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 899.6650009155273,
+          "y": 237.8
+        },
+        {
+          "x": 980.3349990844727,
+          "y": 274.2
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "平均送达",
+      "font": "400 31px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 878,
+          "y": 300.85
+        },
+        {
+          "x": 1002,
+          "y": 341.15
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "10",
+      "font": "400 134px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 855.629997253418,
+          "y": 325.9
+        },
+        {
+          "x": 1004.370002746582,
+          "y": 500.1
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "分钟",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1008,
+          "y": 430.45
+        },
+        {
+          "x": 1062,
+          "y": 465.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "6 单",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 919.5400009155273,
+          "y": 508.05
+        },
+        {
+          "x": 960.4599990844727,
+          "y": 537.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 2,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "看看藏在平均数里的每一单",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 358,
+          "y": 82.45
+        },
+        {
+          "x": 922,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "每一单用时 →",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 555.9749984741211,
+          "y": 151.45
+        },
+        {
+          "x": 724.0250015258789,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 247.18000030517578,
+          "y": 589.35
+        },
+        {
+          "x": 432.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 115.28499984741211,
+          "y": 540.95
+        },
+        {
+          "x": 124.71500015258789,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 217.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 227.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 315.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 334.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 418.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 436.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 520.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 539.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 847.1800003051758,
+          "y": 589.35
+        },
+        {
+          "x": 1032.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 715.2849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 724.7150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 817.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 827.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 915.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 934.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1018.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1036.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1120.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1139.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "服务 A",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 102.18500137329102,
+          "y": 193.1
+        },
+        {
+          "x": 175.81499862670898,
+          "y": 226.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "服务 B",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 701.5449981689453,
+          "y": 193.1
+        },
+        {
+          "x": 776.4550018310547,
+          "y": 226.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A1",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 258.6
+        },
+        {
+          "x": 107,
+          "y": 279.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "8",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 276.7849998474121,
+          "y": 245.1
+        },
+        {
+          "x": 291.2150001525879,
+          "y": 278.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 278.7649998664856,
+          "y": 271.15
+        },
+        {
+          "x": 289.2350001335144,
+          "y": 282.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A2",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 307.6
+        },
+        {
+          "x": 107,
+          "y": 328.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "9",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 297.2849998474121,
+          "y": 294.1
+        },
+        {
+          "x": 311.7150001525879,
+          "y": 327.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 299.2649998664856,
+          "y": 320.15
+        },
+        {
+          "x": 309.7350001335144,
+          "y": 331.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A3",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 356.6
+        },
+        {
+          "x": 107,
+          "y": 377.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 310.5699996948242,
+          "y": 343.1
+        },
+        {
+          "x": 339.4300003051758,
+          "y": 376.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 319.7649998664856,
+          "y": 369.15
+        },
+        {
+          "x": 330.2350001335144,
+          "y": 380.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A4",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 405.6
+        },
+        {
+          "x": 107,
+          "y": 426.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 310.5699996948242,
+          "y": 392.1
+        },
+        {
+          "x": 339.4300003051758,
+          "y": 425.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 319.7649998664856,
+          "y": 418.15
+        },
+        {
+          "x": 330.2350001335144,
+          "y": 429.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A5",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 454.6
+        },
+        {
+          "x": 107,
+          "y": 475.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "11",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 331.0699996948242,
+          "y": 441.1
+        },
+        {
+          "x": 359.9300003051758,
+          "y": 474.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 340.2649998664856,
+          "y": 467.15
+        },
+        {
+          "x": 350.7350001335144,
+          "y": 478.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A6",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 503.6
+        },
+        {
+          "x": 107,
+          "y": 524.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "12",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 351.5699996948242,
+          "y": 490.1
+        },
+        {
+          "x": 380.4300003051758,
+          "y": 523.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "A6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 360.7649998664856,
+          "y": 516.15
+        },
+        {
+          "x": 371.2350001335144,
+          "y": 527.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B1",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 258.6
+        },
+        {
+          "x": 707,
+          "y": 279.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "1",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 733.2849998474121,
+          "y": 245.1
+        },
+        {
+          "x": 747.7150001525879,
+          "y": 278.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 735.045000076294,
+          "y": 271.15
+        },
+        {
+          "x": 745.954999923706,
+          "y": 282.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B2",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 307.6
+        },
+        {
+          "x": 707,
+          "y": 328.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "2",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 753.7849998474121,
+          "y": 294.1
+        },
+        {
+          "x": 768.2150001525879,
+          "y": 327.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 755.545000076294,
+          "y": 320.15
+        },
+        {
+          "x": 766.454999923706,
+          "y": 331.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B3",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 356.6
+        },
+        {
+          "x": 707,
+          "y": 377.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "3",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 774.2849998474121,
+          "y": 343.1
+        },
+        {
+          "x": 788.7150001525879,
+          "y": 376.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 776.045000076294,
+          "y": 369.15
+        },
+        {
+          "x": 786.954999923706,
+          "y": 380.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B4",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 405.6
+        },
+        {
+          "x": 707,
+          "y": 426.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "17",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1054.0699996948242,
+          "y": 392.1
+        },
+        {
+          "x": 1082.9300003051758,
+          "y": 425.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1063.045000076294,
+          "y": 418.15
+        },
+        {
+          "x": 1073.954999923706,
+          "y": 429.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B5",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 454.6
+        },
+        {
+          "x": 707,
+          "y": 475.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "18",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1074.5699996948242,
+          "y": 441.1
+        },
+        {
+          "x": 1103.4300003051758,
+          "y": 474.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1083.545000076294,
+          "y": 467.15
+        },
+        {
+          "x": 1094.454999923706,
+          "y": 478.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B6",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 503.6
+        },
+        {
+          "x": 707,
+          "y": 524.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "19",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1095.0699996948242,
+          "y": 490.1
+        },
+        {
+          "x": 1123.9300003051758,
+          "y": 523.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "B6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1104.045000076294,
+          "y": 516.15
+        },
+        {
+          "x": 1114.954999923706,
+          "y": 527.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 6,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "看看藏在平均数里的每一单",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 358,
+          "y": 82.45
+        },
+        {
+          "x": 922,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "每一单用时 →",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 555.9749984741211,
+          "y": 151.45
+        },
+        {
+          "x": 724.0250015258789,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 247.18000030517578,
+          "y": 589.35
+        },
+        {
+          "x": 432.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 115.28499984741211,
+          "y": 540.95
+        },
+        {
+          "x": 124.71500015258789,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 217.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 227.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 315.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 334.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 418.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 436.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 520.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 539.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 21px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 847.1800003051758,
+          "y": 589.35
+        },
+        {
+          "x": 1032.8199996948242,
+          "y": 616.65
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "0",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 715.2849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 724.7150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "5",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 817.7849998474121,
+          "y": 540.95
+        },
+        {
+          "x": 827.2150001525879,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "10",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 915.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 934.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "15",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1018.0649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1036.9350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "20",
+      "font": "400 17px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1120.5649995803833,
+          "y": 540.95
+        },
+        {
+          "x": 1139.4350004196167,
+          "y": 563.05
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "服务 A",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 102.18500137329102,
+          "y": 193.1
+        },
+        {
+          "x": 175.81499862670898,
+          "y": 226.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "服务 B",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 701.5449981689453,
+          "y": 193.1
+        },
+        {
+          "x": 776.4550018310547,
+          "y": 226.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A1",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 258.6
+        },
+        {
+          "x": 107,
+          "y": 279.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "8",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 276.7849998474121,
+          "y": 245.1
+        },
+        {
+          "x": 291.2150001525879,
+          "y": 278.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 278.7649998664856,
+          "y": 271.15
+        },
+        {
+          "x": 289.2350001335144,
+          "y": 282.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A2",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 307.6
+        },
+        {
+          "x": 107,
+          "y": 328.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "9",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 297.2849998474121,
+          "y": 294.1
+        },
+        {
+          "x": 311.7150001525879,
+          "y": 327.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 299.2649998664856,
+          "y": 320.15
+        },
+        {
+          "x": 309.7350001335144,
+          "y": 331.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A3",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 356.6
+        },
+        {
+          "x": 107,
+          "y": 377.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 310.5699996948242,
+          "y": 343.1
+        },
+        {
+          "x": 339.4300003051758,
+          "y": 376.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 319.7649998664856,
+          "y": 369.15
+        },
+        {
+          "x": 330.2350001335144,
+          "y": 380.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A4",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 405.6
+        },
+        {
+          "x": 107,
+          "y": 426.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 310.5699996948242,
+          "y": 392.1
+        },
+        {
+          "x": 339.4300003051758,
+          "y": 425.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 319.7649998664856,
+          "y": 418.15
+        },
+        {
+          "x": 330.2350001335144,
+          "y": 429.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A5",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 454.6
+        },
+        {
+          "x": 107,
+          "y": 475.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "11",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 331.0699996948242,
+          "y": 441.1
+        },
+        {
+          "x": 359.9300003051758,
+          "y": 474.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 340.2649998664856,
+          "y": 467.15
+        },
+        {
+          "x": 350.7350001335144,
+          "y": 478.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A6",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 88.38999938964844,
+          "y": 503.6
+        },
+        {
+          "x": 107,
+          "y": 524.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "12",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 351.5699996948242,
+          "y": 490.1
+        },
+        {
+          "x": 380.4300003051758,
+          "y": 523.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "A6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 360.7649998664856,
+          "y": 516.15
+        },
+        {
+          "x": 371.2350001335144,
+          "y": 527.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B1",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 258.6
+        },
+        {
+          "x": 707,
+          "y": 279.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "1",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 733.2849998474121,
+          "y": 245.1
+        },
+        {
+          "x": 747.7150001525879,
+          "y": 278.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 735.045000076294,
+          "y": 271.15
+        },
+        {
+          "x": 745.954999923706,
+          "y": 282.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B2",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 307.6
+        },
+        {
+          "x": 707,
+          "y": 328.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "2",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 753.7849998474121,
+          "y": 294.1
+        },
+        {
+          "x": 768.2150001525879,
+          "y": 327.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 755.545000076294,
+          "y": 320.15
+        },
+        {
+          "x": 766.454999923706,
+          "y": 331.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B3",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 356.6
+        },
+        {
+          "x": 707,
+          "y": 377.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "3",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 774.2849998474121,
+          "y": 343.1
+        },
+        {
+          "x": 788.7150001525879,
+          "y": 376.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 776.045000076294,
+          "y": 369.15
+        },
+        {
+          "x": 786.954999923706,
+          "y": 380.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B4",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 405.6
+        },
+        {
+          "x": 707,
+          "y": 426.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "17",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1054.0699996948242,
+          "y": 392.1
+        },
+        {
+          "x": 1082.9300003051758,
+          "y": 425.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1063.045000076294,
+          "y": 418.15
+        },
+        {
+          "x": 1073.954999923706,
+          "y": 429.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B5",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 454.6
+        },
+        {
+          "x": 707,
+          "y": 475.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "18",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1074.5699996948242,
+          "y": 441.1
+        },
+        {
+          "x": 1103.4300003051758,
+          "y": 474.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1083.545000076294,
+          "y": 467.15
+        },
+        {
+          "x": 1094.454999923706,
+          "y": 478.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B6",
+      "font": "400 16px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 687.6100006103516,
+          "y": 503.6
+        },
+        {
+          "x": 707,
+          "y": 524.4
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "19",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1095.0699996948242,
+          "y": 490.1
+        },
+        {
+          "x": 1123.9300003051758,
+          "y": 523.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "B6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1104.045000076294,
+          "y": 516.15
+        },
+        {
+          "x": 1114.954999923706,
+          "y": 527.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 9,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "同样 10 分钟，分布却不同",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 368.385009765625,
+          "y": 82.45
+        },
+        {
+          "x": 911.614990234375,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "每个纸袋 = 1 单",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 548.4449996948242,
+          "y": 151.45
+        },
+        {
+          "x": 731.5550003051758,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "0",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 157.7849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 172.2150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "5",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 395.2849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 409.7150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "15",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 863.0699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 891.9300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "20",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1100.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 1129.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 22px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 920.5200042724609,
+          "y": 613.7
+        },
+        {
+          "x": 1115,
+          "y": 642.3
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 80.09499979019165,
+          "y": 304.1
+        },
+        {
+          "x": 95.90500020980835,
+          "y": 337.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "B",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 79.46000003814697,
+          "y": 480.1
+        },
+        {
+          "x": 96.53999996185303,
+          "y": 513.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "8",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 537.7849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 552.2150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 539.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 550.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "9",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 585.2849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 599.7150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 587.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 597.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 251.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 284.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 277.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 288.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "11",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 673.0699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 701.9300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 682.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 692.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "12",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 720.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 749.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 729.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 740.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "1",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 205.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 219.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "B1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 207.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 217.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "2",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 252.7849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 267.2150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "B2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 254.54500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 265.45499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "3",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 300.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 314.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "B3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 302.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 312.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "17",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 958.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 986.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "B4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 967.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 977.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "18",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1005.5699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1034.4300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "B5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1014.545000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1025.454999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "19",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1053.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1081.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "B6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1062.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1072.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "8–12 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 586.9000015258789,
+          "y": 395.4
+        },
+        {
+          "x": 693.0999984741211,
+          "y": 426.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "1–3 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 213.56000137329102,
+          "y": 570.4
+        },
+        {
+          "x": 306.439998626709,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "17–19 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 960.2400016784668,
+          "y": 570.4
+        },
+        {
+          "x": 1079.7599983215332,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "A 集中",
+      "font": "400 29px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 987.870002746582,
+          "y": 320.15
+        },
+        {
+          "x": 1070,
+          "y": 357.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "3 单很快",
+      "font": "400 25px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 232.7599983215332,
+          "y": 421.75
+        },
+        {
+          "x": 327.2400016784668,
+          "y": 454.25
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "3 单较慢",
+      "font": "400 25px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 972.7599983215332,
+          "y": 421.75
+        },
+        {
+          "x": 1067.2400016784668,
+          "y": 454.25
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 15,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "同样 10 分钟，分布却不同",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 368.385009765625,
+          "y": 82.45
+        },
+        {
+          "x": 911.614990234375,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "每个纸袋 = 1 单",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 548.4449996948242,
+          "y": 151.45
+        },
+        {
+          "x": 731.5550003051758,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "0",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 157.7849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 172.2150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "5",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 395.2849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 409.7150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "15",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 863.0699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 891.9300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "20",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1100.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 1129.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 22px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 920.5200042724609,
+          "y": 613.7
+        },
+        {
+          "x": 1115,
+          "y": 642.3
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 80.09499979019165,
+          "y": 304.1
+        },
+        {
+          "x": 95.90500020980835,
+          "y": 337.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "B",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 79.46000003814697,
+          "y": 480.1
+        },
+        {
+          "x": 96.53999996185303,
+          "y": 513.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "8",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 537.7849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 552.2150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 539.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 550.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "9",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 585.2849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 599.7150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 587.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 597.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 251.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 284.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 277.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 288.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "11",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 673.0699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 701.9300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 682.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 692.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "12",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 720.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 749.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 729.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 740.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "1",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 205.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 219.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "B1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 207.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 217.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "2",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 252.7849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 267.2150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "B2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 254.54500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 265.45499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "3",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 300.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 314.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "B3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 302.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 312.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "17",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 958.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 986.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "B4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 967.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 977.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "18",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1005.5699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1034.4300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "B5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1014.545000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1025.454999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "19",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1053.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1081.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "B6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1062.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1072.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "8–12 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 586.9000015258789,
+          "y": 395.4
+        },
+        {
+          "x": 693.0999984741211,
+          "y": 426.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "1–3 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 213.56000137329102,
+          "y": 570.4
+        },
+        {
+          "x": 306.439998626709,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "17–19 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 960.2400016784668,
+          "y": 570.4
+        },
+        {
+          "x": 1079.7599983215332,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "A 集中",
+      "font": "400 29px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 987.870002746582,
+          "y": 320.15
+        },
+        {
+          "x": 1070,
+          "y": 357.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "3 单很快",
+      "font": "400 25px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 232.7599983215332,
+          "y": 421.75
+        },
+        {
+          "x": 327.2400016784668,
+          "y": 454.25
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "3 单较慢",
+      "font": "400 25px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 972.7599983215332,
+          "y": 421.75
+        },
+        {
+          "x": 1067.2400016784668,
+          "y": 454.25
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 17,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "同样 10 分钟，分布却不同",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 368.385009765625,
+          "y": 82.45
+        },
+        {
+          "x": 911.614990234375,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "每个纸袋 = 1 单",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 548.4449996948242,
+          "y": 151.45
+        },
+        {
+          "x": 731.5550003051758,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "0",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 157.7849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 172.2150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "5",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 395.2849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 409.7150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "15",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 863.0699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 891.9300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "20",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1100.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 1129.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 22px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 920.5200042724609,
+          "y": 613.7
+        },
+        {
+          "x": 1115,
+          "y": 642.3
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 80.09499979019165,
+          "y": 304.1
+        },
+        {
+          "x": 95.90500020980835,
+          "y": 337.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "B",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 79.46000003814697,
+          "y": 480.1
+        },
+        {
+          "x": 96.53999996185303,
+          "y": 513.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "8",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 537.7849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 552.2150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 539.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 550.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "9",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 585.2849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 599.7150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 587.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 597.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 251.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 284.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 277.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 288.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "11",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 673.0699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 701.9300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 682.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 692.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "12",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 720.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 749.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 729.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 740.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "1",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 205.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 219.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "B1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 207.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 217.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "2",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 252.7849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 267.2150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "B2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 254.54500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 265.45499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "3",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 300.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 314.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "B3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 302.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 312.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "17",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 958.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 986.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "B4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 967.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 977.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "18",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1005.5699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1034.4300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "B5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1014.545000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1025.454999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "19",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1053.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1081.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "B6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1062.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1072.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "8–12 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 586.9000015258789,
+          "y": 395.4
+        },
+        {
+          "x": 693.0999984741211,
+          "y": 426.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "1–3 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 213.56000137329102,
+          "y": 570.4
+        },
+        {
+          "x": 306.439998626709,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "17–19 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 960.2400016784668,
+          "y": 570.4
+        },
+        {
+          "x": 1079.7599983215332,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "A 集中",
+      "font": "400 29px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 987.870002746582,
+          "y": 320.15
+        },
+        {
+          "x": 1070,
+          "y": 357.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "平均 10 分钟",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 567.745002746582,
+          "y": 201.1
+        },
+        {
+          "x": 712.254997253418,
+          "y": 234.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "60 ÷ 6 = 10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 572.0599975585938,
+          "y": 455.1
+        },
+        {
+          "x": 707.9400024414062,
+          "y": 488.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 19.5,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "平均数相同，等待波动不同",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 358,
+          "y": 82.45
+        },
+        {
+          "x": 922,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "这 6 单里，A 更稳定；B 有快有慢",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 441.3350067138672,
+          "y": 151.45
+        },
+        {
+          "x": 838.6649932861328,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "0",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 157.7849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 172.2150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "5",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 395.2849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 409.7150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "15",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 863.0699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 891.9300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "20",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1100.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 1129.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 22px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 920.5200042724609,
+          "y": 613.7
+        },
+        {
+          "x": 1115,
+          "y": 642.3
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 80.09499979019165,
+          "y": 304.1
+        },
+        {
+          "x": 95.90500020980835,
+          "y": 337.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "B",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 79.46000003814697,
+          "y": 480.1
+        },
+        {
+          "x": 96.53999996185303,
+          "y": 513.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "8",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 537.7849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 552.2150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 539.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 550.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "9",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 585.2849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 599.7150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 587.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 597.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 251.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 284.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 277.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 288.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "11",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 673.0699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 701.9300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 682.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 692.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "12",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 720.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 749.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 729.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 740.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "1",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 205.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 219.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "B1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 207.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 217.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "2",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 252.7849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 267.2150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "B2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 254.54500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 265.45499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "3",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 300.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 314.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "B3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 302.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 312.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "17",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 958.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 986.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "B4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 967.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 977.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "18",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1005.5699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1034.4300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "B5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1014.545000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1025.454999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "19",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1053.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1081.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "B6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1062.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1072.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "8–12 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 586.9000015258789,
+          "y": 395.4
+        },
+        {
+          "x": 693.0999984741211,
+          "y": 426.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "1–3 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 213.56000137329102,
+          "y": 570.4
+        },
+        {
+          "x": 306.439998626709,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "17–19 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 960.2400016784668,
+          "y": 570.4
+        },
+        {
+          "x": 1079.7599983215332,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "A 集中",
+      "font": "400 29px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 987.870002746582,
+          "y": 320.15
+        },
+        {
+          "x": 1070,
+          "y": 357.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "平均 10 分钟",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 567.745002746582,
+          "y": 201.1
+        },
+        {
+          "x": 712.254997253418,
+          "y": 234.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "60 ÷ 6 = 10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 572.0599975585938,
+          "y": 455.1
+        },
+        {
+          "x": 707.9400024414062,
+          "y": 488.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 22,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "拆开平均数",
+      "font": "400 20px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 64,
+          "y": 30
+        },
+        {
+          "x": 164,
+          "y": 56
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "FICTIONAL DATA / 06 + 06",
+      "font": "400 15px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1041.3399963378906,
+          "y": 33.25
+        },
+        {
+          "x": 1216,
+          "y": 52.75
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "平均数相同，等待波动不同",
+      "font": "400 47px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 358,
+          "y": 82.45
+        },
+        {
+          "x": 922,
+          "y": 143.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "这 6 单里，A 更稳定；B 有快有慢",
+      "font": "400 27px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 441.3350067138672,
+          "y": 151.45
+        },
+        {
+          "x": 838.6649932861328,
+          "y": 186.55
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "0",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 157.7849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 172.2150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "5",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 395.2849998474121,
+          "y": 571.1
+        },
+        {
+          "x": 409.7150001525879,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "15",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 863.0699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 891.9300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "20",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1100.5699996948242,
+          "y": 571.1
+        },
+        {
+          "x": 1129.4300003051758,
+          "y": 604.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "实际送达用时 / 分钟",
+      "font": "400 22px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 920.5200042724609,
+          "y": 613.7
+        },
+        {
+          "x": 1115,
+          "y": 642.3
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 80.09499979019165,
+          "y": 304.1
+        },
+        {
+          "x": 95.90500020980835,
+          "y": 337.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "B",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 79.46000003814697,
+          "y": 480.1
+        },
+        {
+          "x": 96.53999996185303,
+          "y": 513.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "8",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 537.7849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 552.2150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 539.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 550.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "9",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 585.2849998474121,
+          "y": 313.1
+        },
+        {
+          "x": 599.7150001525879,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 587.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 597.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 625.5699996948242,
+          "y": 251.1
+        },
+        {
+          "x": 654.4300003051758,
+          "y": 284.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 634.7649998664856,
+          "y": 277.15
+        },
+        {
+          "x": 645.2350001335144,
+          "y": 288.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "11",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 673.0699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 701.9300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 682.2649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 692.7350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "12",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 720.5699996948242,
+          "y": 313.1
+        },
+        {
+          "x": 749.4300003051758,
+          "y": 346.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 729.7649998664856,
+          "y": 339.15
+        },
+        {
+          "x": 740.2350001335144,
+          "y": 350.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "1",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 205.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 219.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "B1",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 207.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 217.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "2",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 252.7849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 267.2150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "B2",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 254.54500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 265.45499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "3",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 300.2849998474121,
+          "y": 489.1
+        },
+        {
+          "x": 314.7150001525879,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "B3",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 302.04500007629395,
+          "y": 515.15
+        },
+        {
+          "x": 312.95499992370605,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "17",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 958.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 986.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "B4",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 967.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 977.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "18",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1005.5699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1034.4300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "B5",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1014.545000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1025.454999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "19",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1053.0699996948242,
+          "y": 489.1
+        },
+        {
+          "x": 1081.9300003051758,
+          "y": 522.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "B6",
+      "font": "400 9px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 1062.045000076294,
+          "y": 515.15
+        },
+        {
+          "x": 1072.954999923706,
+          "y": 526.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "8–12 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 586.9000015258789,
+          "y": 395.4
+        },
+        {
+          "x": 693.0999984741211,
+          "y": 426.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "1–3 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 213.56000137329102,
+          "y": 570.4
+        },
+        {
+          "x": 306.439998626709,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "17–19 分钟",
+      "font": "400 24px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 960.2400016784668,
+          "y": 570.4
+        },
+        {
+          "x": 1079.7599983215332,
+          "y": 601.6
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "A 集中",
+      "font": "400 29px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 987.870002746582,
+          "y": 320.15
+        },
+        {
+          "x": 1070,
+          "y": 357.85
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "平均 10 分钟",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 567.745002746582,
+          "y": 201.1
+        },
+        {
+          "x": 712.254997253418,
+          "y": 234.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "60 ÷ 6 = 10",
+      "font": "400 26px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 572.0599975585938,
+          "y": 455.1
+        },
+        {
+          "x": 707.9400024414062,
+          "y": 488.9
+        }
+      ],
+      "inside_frame": true
+    },
+    {
+      "time": 23.958333333333332,
+      "text": "虚构教学数据 · 每组 6 单 · 不代表真实业务",
+      "font": "400 23px \"Noto Sans CJK SC\"",
+      "conservative_bounds": [
+        {
+          "x": 421.25999450683594,
+          "y": 672.05
+        },
+        {
+          "x": 858.7400054931641,
+          "y": 701.95
+        }
+      ],
+      "inside_frame": true
+    }
+  ],
+  "actual_rendered_strings_glyph_coverage": {
+    "characters_checked": 99,
+    "missing": [],
+    "font_face_index": 2
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "source_sha256": "2c83d9c0cbc44485d5f28559f9a985e2bd3266fb5de82443734af027df39c727",
+  "data_sha256": "1182d2d6f73645f075b391123bc2dd91aff471eaf10ef6bf4988bc181e7759c8",
+  "font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "font_path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+  "font_weight": "400 only",
+  "font_family": "Noto Sans CJK SC",
+  "renderer": "0.1.100",
+  "width": 1280,
+  "height": 720,
+  "seed": 20261006,
+  "randomness": "object-keyed noiseAt only",
+  "frame_contract": "Output [0,23.25), 24fps, 558 frames; source_time=output_time+0.75; authored source duration26",
+  "checks": {
+    "raster_shuffled_order_repeat": true,
+    "state_shuffled_order_repeat": true,
+    "all_558_output_frames_finite_coordinates": true,
+    "all_558_output_frames_conserve_12_ids_and_exact_values": true,
+    "receipt_projection_exact": true,
+    "final_projection_exact": true,
+    "axis_domain": [
+      0,
+      20
+    ],
+    "final_duplicate_A10_count": 2
+  },
+  "maximum_cross_group_bag_body_overlap_px2": 0,
+  "maximum_cross_group_overlap_time": null,
+  "determinism_samples": [
+    {
+      "time": 0.75,
+      "pixel_sha256": "4f01ae632d7d3440b54dfe1e6ebffdf82e37ffdc2c9226428db0789db0b2c226"
+    },
+    {
+      "time": 1.5,
+      "pixel_sha256": "4f01ae632d7d3440b54dfe1e6ebffdf82e37ffdc2c9226428db0789db0b2c226"
+    },
+    {
+      "time": 3.3583333333333334,
+      "pixel_sha256": "4f01ae632d7d3440b54dfe1e6ebffdf82e37ffdc2c9226428db0789db0b2c226"
+    },
+    {
+      "time": 3.4,
+      "pixel_sha256": "bba66b3f3e879450f882ba7ff981d70eb5339b02bc26c9dc187fb25cb52ffea1"
+    },
+    {
+      "time": 3.4416666666666664,
+      "pixel_sha256": "345f6c50bb415a32b315293e6e4d01422d252c992d69addd40570f61cbb79e03"
+    },
+    {
+      "time": 4.2,
+      "pixel_sha256": "b155f41e6fa9c0004f08b04faf9fb0f0e549f2fb945cdcd81f4c6a6c190bf9db"
+    },
+    {
+      "time": 4.958333333333333,
+      "pixel_sha256": "7789102a9a7dd7987eb2210c1c45c462311fae632628cc32906af01d278243be"
+    },
+    {
+      "time": 5,
+      "pixel_sha256": "cf182c0db116abe2a731231d50ed8daf0df721f413ebfb1f10169a32f583faea"
+    },
+    {
+      "time": 5.041666666666667,
+      "pixel_sha256": "cf182c0db116abe2a731231d50ed8daf0df721f413ebfb1f10169a32f583faea"
+    },
+    {
+      "time": 6,
+      "pixel_sha256": "cf182c0db116abe2a731231d50ed8daf0df721f413ebfb1f10169a32f583faea"
+    },
+    {
+      "time": 9.958333333333334,
+      "pixel_sha256": "cf182c0db116abe2a731231d50ed8daf0df721f413ebfb1f10169a32f583faea"
+    },
+    {
+      "time": 10,
+      "pixel_sha256": "981abae0fe7191e180f99960b55498f2e37006abff20a8f6846a396f5d7b0414"
+    },
+    {
+      "time": 10.041666666666666,
+      "pixel_sha256": "d5d5cd4b1e72e198693b40f764190b492f5bbab1cab886aaa23cd77b697d9cdc"
+    },
+    {
+      "time": 11.05,
+      "pixel_sha256": "33a7c04fb6d5b1024583b0260ac681ecba87c3df86a2afa8407712457e791465"
+    },
+    {
+      "time": 11.5,
+      "pixel_sha256": "50c7b7bc84d6136f3b0742e7019ff8f87acc0a24b30ab14d3362be4bb56c5151"
+    },
+    {
+      "time": 12,
+      "pixel_sha256": "5bf6feb5ce69180fd28fe12c1cddce62182e2911e269df397b7c9b58f023ce8c"
+    },
+    {
+      "time": 13,
+      "pixel_sha256": "c7cd84309a641f072f1377d8c8554e374aa3eea5c2fa0367196d9e02bcb11df0"
+    },
+    {
+      "time": 13.258333333333335,
+      "pixel_sha256": "d7b5e40d7e17e5775adb7c4fbf02e404daed1cac27d93922d394b3c63be961fb"
+    },
+    {
+      "time": 13.3,
+      "pixel_sha256": "0a05e8c131c5baf3cd4f6c13b12244feeaad17397fddacd28e8cb5c6a3cbfd48"
+    },
+    {
+      "time": 13.341666666666667,
+      "pixel_sha256": "0a05e8c131c5baf3cd4f6c13b12244feeaad17397fddacd28e8cb5c6a3cbfd48"
+    },
+    {
+      "time": 13.958333333333334,
+      "pixel_sha256": "0a05e8c131c5baf3cd4f6c13b12244feeaad17397fddacd28e8cb5c6a3cbfd48"
+    },
+    {
+      "time": 14,
+      "pixel_sha256": "0a05e8c131c5baf3cd4f6c13b12244feeaad17397fddacd28e8cb5c6a3cbfd48"
+    },
+    {
+      "time": 14.041666666666666,
+      "pixel_sha256": "7baef0f0c808f0e576d8f08ee4209adf9a0b2dd9b5464ee127643a056c511276"
+    },
+    {
+      "time": 14.758333333333335,
+      "pixel_sha256": "f9add883b97d331ba02069b283130cc4ed9f61fe79caabf19f27b71024fdb4a4"
+    },
+    {
+      "time": 14.8,
+      "pixel_sha256": "dca91cc12f9f46fd50fc6e4eaf5b99edec80eb94fbf8263b0c4261eb1369907a"
+    },
+    {
+      "time": 14.841666666666667,
+      "pixel_sha256": "dca91cc12f9f46fd50fc6e4eaf5b99edec80eb94fbf8263b0c4261eb1369907a"
+    },
+    {
+      "time": 16,
+      "pixel_sha256": "dca91cc12f9f46fd50fc6e4eaf5b99edec80eb94fbf8263b0c4261eb1369907a"
+    },
+    {
+      "time": 17.958333333333332,
+      "pixel_sha256": "dca91cc12f9f46fd50fc6e4eaf5b99edec80eb94fbf8263b0c4261eb1369907a"
+    },
+    {
+      "time": 18,
+      "pixel_sha256": "f27da0faf5558c377323e379d913db68e2e0925fd0cad4ea7078707acf77302a"
+    },
+    {
+      "time": 18.041666666666668,
+      "pixel_sha256": "f27da0faf5558c377323e379d913db68e2e0925fd0cad4ea7078707acf77302a"
+    },
+    {
+      "time": 19.15833333333333,
+      "pixel_sha256": "a237810746dddbd2ec70cc75771797f127bd5996e3618583632dda120b636cd7"
+    },
+    {
+      "time": 19.2,
+      "pixel_sha256": "cd65dca1b06e7ef574ef92955db8bf5a1b45762430198dfeaa14aa3d613a9579"
+    },
+    {
+      "time": 19.241666666666667,
+      "pixel_sha256": "cd65dca1b06e7ef574ef92955db8bf5a1b45762430198dfeaa14aa3d613a9579"
+    },
+    {
+      "time": 19.958333333333332,
+      "pixel_sha256": "cd65dca1b06e7ef574ef92955db8bf5a1b45762430198dfeaa14aa3d613a9579"
+    },
+    {
+      "time": 20,
+      "pixel_sha256": "d4f0efce7f9e4ff04e43393d10be2e1a6a92fa10f474946253b919504edc85cb"
+    },
+    {
+      "time": 20.041666666666668,
+      "pixel_sha256": "d4f0efce7f9e4ff04e43393d10be2e1a6a92fa10f474946253b919504edc85cb"
+    },
+    {
+      "time": 22,
+      "pixel_sha256": "d4f0efce7f9e4ff04e43393d10be2e1a6a92fa10f474946253b919504edc85cb"
+    },
+    {
+      "time": 23.958333333333332,
+      "pixel_sha256": "d4f0efce7f9e4ff04e43393d10be2e1a6a92fa10f474946253b919504edc85cb"
+    }
+  ]
+}
