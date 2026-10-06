@@ -18,7 +18,9 @@ class PromptExportTests(unittest.TestCase):
             text=payload['messages'][0]['content']
             for name in ('runtime-adapter.md','shot.schema.json','model-harness.md'):
                 self.assertIn('SOURCE FILE: references/'+name,text)
-            self.assertIn('render(t) returning a complete SVG',text)
+            self.assertIn('render(ctx,t,options)',text)
+            self.assertEqual(json.loads(result.stdout)['backend'],'canvas')
+            self.assertEqual(json.loads(result.stdout)['selected_reference_count'],3)
             self.assertEqual(json.loads(result.stdout)['network_requests'],0)
     def test_refuses_existing_output(self):
         with tempfile.TemporaryDirectory() as d:

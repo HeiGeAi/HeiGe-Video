@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Stdlib package/manifest checks. Does not execute draw code or approve aesthetics."""
 import argparse
+import hashlib
 import json
 import math
 import os
 import re
+from collections import Counter
+from urllib.parse import urlparse
 from pathlib import Path
 
 
@@ -141,6 +144,90 @@ def validate_manifest(data, project_dir=None):
     return len(data['shots'])
 
 
+def contains_private_path(text):
+    # Search text assets only; dependency/generated trees remain excluded.
+    return bool(re.search(r"/(?:Users|home|workspace|root)/|[A-Za-z]:\\+Users\\+", text))
+
+
+def validate_research(data):
+    require(data.get('schema_version') == 'heige-video-research/3', 'Unexpected research schema')
+    kind = data.get('kind')
+    require(kind in ('videos', 'projects'), 'Unexpected research kind')
+    records = data.get('cases' if kind == 'videos' else 'projects')
+    require(isinstance(records, list) and records, 'Missing research records')
+    metadata = data.get('metadata', {})
+    require(type(metadata.get('record_count')) is int and metadata['record_count'] == len(records), 'Research record count mismatch')
+    require(len({r['id'].casefold() for r in records}) == len(records), 'Duplicate research IDs')
+    require(metadata.get('categories') == dict(Counter(r['category'] for r in records)), 'Research category counts mismatch')
+    require(metadata.get('groups') == dict(Counter(r['research_group'] for r in records)), 'Research group counts mismatch')
+    require(not contains_private_path(json.dumps(data)), 'Private source path in portable ledger')
+    for r in records:
+        for key in ('id', 'title', 'source_url', 'inspection_level'):
+            require(isinstance(r.get(key), str) and r[key].strip(), 'Missing research ' + key)
+        require(urlparse(r['source_url']).scheme in ('https','http') and urlparse(r['source_url']).netloc, 'Invalid public source URL')
+        require(isinstance(r.get('mechanisms'), list) and r['mechanisms'] and all(isinstance(m,str) and m.strip() for m in r['mechanisms']), 'Missing concrete mechanism')
+        require(isinstance(r.get('limits'), list) and r['limits'], 'Missing research limits')
+        require(isinstance(r.get('tags'), list), 'Missing routing tags')
+    if kind == 'videos':
+        allowed = {'mechanism-reference','case-study/tutorial-reference','mixed-reference','control-or-negative'}
+        require(set(metadata['categories']).issubset(allowed), 'Unknown video category')
+        hashes = [r.get('source_sha256','') for r in records]
+        require(all(re.fullmatch(r'[a-f0-9]{64}', h) for h in hashes), 'Invalid source media hash')
+        require(len(set(hashes)) == len(records) == metadata.get('distinct_media_hashes'), 'Duplicate source media hash or count mismatch')
+        urls = [r.get('media_url') for r in records]
+        require(all(isinstance(u,str) and urlparse(u).scheme in ('http','https') for u in urls), 'Invalid media URL')
+        require(len(set(urls)) == len(records) == metadata.get('distinct_media_urls'), 'Duplicate media URL or count mismatch')
+        require(all(type(r.get('baseline_reinspected')) is bool for r in records), 'Missing baseline lineage')
+        baseline=sum(r['baseline_reinspected'] for r in records)
+        require(metadata.get('baseline_reinspected') == baseline and metadata.get('new_to_baseline') == len(records)-baseline, 'Research lineage count mismatch')
+        for r in records:
+            c=r.get('coverage',{})
+            require(type(c.get('duration_seconds')) in (int,float) and math.isfinite(c['duration_seconds']) and c['duration_seconds'] > 0, 'Invalid source duration')
+            overview=c.get('overview_timestamps',c.get('reviewed_timeline_timestamps_nominal_seconds',[]))
+            dense=c.get('dense_timestamps',c.get('dense_sample_timestamps_seconds',[]))
+            for samples in (overview,dense):
+                require(isinstance(samples,list) and samples, 'Missing sampled-frame coverage')
+                require(all(type(t) in (int,float) and math.isfinite(t) and 0 <= t <= c['duration_seconds'] for t in samples), 'Invalid sample timestamp')
+                require(samples == sorted(samples), 'Unordered sample timestamps')
+            for field in ('realtime_playback_completed','audio_listening_completed','all_source_frames_individually_viewed'):
+                require(c.get(field) is False, 'Unsupported playback/listening/exhaustive review claim')
+            require(isinstance(r.get('rights'),str) and r['rights'], 'Missing media rights note')
+        require(metadata.get('reference_media_bundled') is False, 'Unexpected bundled media claim')
+    else:
+        repos=[r.get('canonical_repo','').casefold() for r in records]
+        require(all(re.fullmatch(r'[^/ ]+/[^/ ]+',r) for r in repos), 'Invalid canonical repository')
+        require(len(set(repos)) == len(records) == metadata.get('distinct_canonical_repositories'), 'Duplicate canonical repository or count mismatch')
+        for r in records:
+            require(r.get('execution_verified') is False, 'Unsupported third-party execution claim')
+            require(isinstance(r.get('license'),dict) and r['license'], 'Missing project license qualification')
+            require(isinstance(r.get('source_evidence'),list) and r['source_evidence'], 'Missing inspected code paths')
+            for evidence in r['source_evidence']:
+                require(evidence.get('path') and urlparse(evidence.get('url','')).scheme in ('https','http'), 'Invalid source inspection evidence')
+        require(metadata.get('third_party_project_execution_verified') is False, 'Unsupported corpus execution claim')
+    require(metadata.get('model_benchmark_performed') is False, 'Unsupported model benchmark claim')
+    return len(records)
+
+def validate_example_inventory(data, root):
+    require(data.get('schema_version') == 'heige-example-status/3', 'Unexpected example status schema')
+    examples=data.get('examples')
+    require(isinstance(examples,list), 'Missing example inventory')
+    require(len({e['id'] for e in examples}) == len(examples), 'Duplicate example IDs')
+    for example in examples:
+        for field in ('source','media'):
+            relative=Path(example.get(field,''))
+            require(str(relative) not in ('','.','..') and not relative.is_absolute() and '..' not in relative.parts, 'Example artifact must be package-relative')
+            artifact=(root/relative).resolve()
+            require(artifact.is_relative_to(root.resolve()) and artifact.is_file(), 'Missing or escaping example artifact')
+            hasher=hashlib.sha256()
+            with artifact.open('rb') as stream:
+                for block in iter(lambda:stream.read(1024*1024),b''):hasher.update(block)
+            digest=hasher.hexdigest()
+            require(digest == example.get(field+'_sha256'), 'Example '+field+' hash mismatch: '+example['id'])
+        require(isinstance(example.get('review_scope'),str) and example['review_scope'], 'Missing example review scope')
+        verification=Path(example.get('verification',''))
+        require(not verification.is_absolute() and '..' not in verification.parts and (root/verification).resolve().is_relative_to(root.resolve()) and (root/verification).is_file(), 'Missing or escaping example verification receipt')
+    return len(examples)
+
 def validate_package(root):
     skill = (root / 'SKILL.md').read_text()
     require(skill.startswith('---\n'), 'Missing frontmatter')
@@ -150,21 +237,22 @@ def validate_package(root):
     package_files = list(authored_package_files(root))
     for path in (p for p in package_files if p.suffix == '.md'):
         text = path.read_text()
-        require('/Users/' not in text, 'Nonportable private path in ' + str(path))
+        require(not contains_private_path(text), 'Nonportable private path in ' + str(path))
         for target in re.findall(r'\]\(([^)]+)\)', text):
             if '://' in target or target.startswith('#'):
                 continue
             require((path.parent / target.split('#')[0]).exists(), 'Broken package link: ' + str(path) + ' -> ' + target)
     for path in (p for p in package_files if p.suffix == '.json'):
-        json.loads(path.read_text())
+        json_text = path.read_text()
+        json.loads(json_text)
+        require(not contains_private_path(json_text), 'Private source path in authored JSON: ' + str(path))
     n = validate_manifest(json.loads((root / 'examples/open-shot.json').read_text()), root / 'examples')
-    cases = json.loads((root / 'references/research-cases.json').read_text())['cases']
-    require(len(cases) == 58, 'Expected supplied baseline of 58 cases')
-    require(len({c['id'] for c in cases}) == 58, 'Duplicate research IDs')
-    require(sum(c['audit_category'] == 'mechanism-reference' for c in cases) == 51, 'Reference count mismatch')
-    require(sum(c['audit_category'] == 'control-or-negative' for c in cases) == 7, 'Control count mismatch')
-    require('/Users/' not in json.dumps(cases), 'Private source path in portable ledger')
-    return {'package_structure': 'pass', 'local_links': 'pass', 'json_parse': 'pass', 'example_manifest_shots': n, 'research_cases': len(cases), 'scope': 'Bundled-schema subset plus ID/path/timeline checks; no execution-safety, render, visual or audio approval'}
+    video_count = validate_research(json.loads((root / 'references/research-cases.json').read_text()))
+    project_count = validate_research(json.loads((root / 'references/research-projects.json').read_text()))
+    inventory=root / 'references/v3-example-status.json'
+    examples=validate_example_inventory(json.loads(inventory.read_text()),root) if inventory.exists() else 0
+    return {'v3_examples_hash_checked': examples, 'package_structure': 'pass', 'local_links': 'pass', 'json_parse': 'pass', 'example_manifest_shots': n, 'research_cases': video_count, 'research_projects': project_count, 'scope': 'Declared metadata, uniqueness, coverage, rights, paths and timeline checks; no execution-safety, render, visual or audio approval'}
+
 
 
 def main():

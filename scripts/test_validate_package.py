@@ -55,7 +55,7 @@ class PackageScopeTests(unittest.TestCase):
         # Keep the real frontmatter but omit its links to non-fixture documents.
         frontmatter = (ROOT / 'SKILL.md').read_text().split('---', 2)[1].strip()
         self.add_file('SKILL.md', '---\n' + frontmatter + '\n---\n')
-        for relative in ('examples/open-shot.json', 'references/research-cases.json'):
+        for relative in ('examples/open-shot.json', 'references/research-cases.json', 'references/research-projects.json'):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / relative, target)
