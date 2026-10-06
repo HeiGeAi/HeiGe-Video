@@ -1,0 +1,59 @@
+{
+  "kind": "synthetic_counterfactual",
+  "disclosure": "自建虚构示例；非真实业务数据",
+  "unit": "minutes",
+  "population": "the same five hypothetical orders",
+  "records": [
+    {
+      "id": "A",
+      "initial": 8,
+      "final": 8
+    },
+    {
+      "id": "B",
+      "initial": 9,
+      "final": 9
+    },
+    {
+      "id": "C",
+      "initial": 10,
+      "final": 10
+    },
+    {
+      "id": "D",
+      "initial": 11,
+      "final": 11
+    },
+    {
+      "id": "E",
+      "initial": 12,
+      "final": 62
+    }
+  ],
+  "operation": {
+    "target": "E",
+    "initial": 12,
+    "final": 62,
+    "unchanged": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ]
+  },
+  "domain": [
+    0,
+    65
+  ],
+  "source": "Original synthetic dataset authored for this film; no empirical claim",
+  "verified_results": {
+    "initial_sum": 50,
+    "final_sum": 100,
+    "n": 5,
+    "initial_mean": 10,
+    "final_mean": 20,
+    "initial_median": 10,
+    "final_median": 10,
+    "final_count_below_mean": 4
+  }
+}

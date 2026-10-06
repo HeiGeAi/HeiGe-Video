@@ -1,0 +1,527 @@
+{
+  "id": "mean-median-forward-test",
+  "duration": 20,
+  "fps": 24,
+  "output": {
+    "width": 1280,
+    "height": 720,
+    "ratio": "16:9",
+    "color": "sRGB-like RGB raster → yuv420p H.264"
+  },
+  "style": "dataviz",
+  "seed": 20261005,
+  "sources": [
+    {
+      "artifact": "data.json",
+      "type": "synthetic",
+      "sha256": "cb65addbfdc76407263d8398f4ce88407a49ec91fb2361b719a06c63942aad20",
+      "disclosure": "Persistent top badge and footer; hypothetical-change subheading"
+    },
+    {
+      "asset": "Noto Sans CJK SC",
+      "source": "installed system font",
+      "license": "SIL Open Font License 1.1; system installation, not redistributed"
+    },
+    {
+      "asset": "all shapes and source",
+      "source": "original authored code",
+      "external_media": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "A",
+      "meaning": "Hypothetical order A",
+      "identity": {
+        "row_key": "A",
+        "unit": "minutes",
+        "initial": 8,
+        "final": 8
+      },
+      "allowed_changes": "Only E changes value; others are constant. Color C may change for rank selection."
+    },
+    {
+      "id": "B",
+      "meaning": "Hypothetical order B",
+      "identity": {
+        "row_key": "B",
+        "unit": "minutes",
+        "initial": 9,
+        "final": 9
+      },
+      "allowed_changes": "Only E changes value; others are constant. Color C may change for rank selection."
+    },
+    {
+      "id": "C",
+      "meaning": "Hypothetical order C",
+      "identity": {
+        "row_key": "C",
+        "unit": "minutes",
+        "initial": 10,
+        "final": 10
+      },
+      "allowed_changes": "Only E changes value; others are constant. Color C may change for rank selection."
+    },
+    {
+      "id": "D",
+      "meaning": "Hypothetical order D",
+      "identity": {
+        "row_key": "D",
+        "unit": "minutes",
+        "initial": 11,
+        "final": 11
+      },
+      "allowed_changes": "Only E changes value; others are constant. Color C may change for rank selection."
+    },
+    {
+      "id": "E",
+      "meaning": "Hypothetical order E",
+      "identity": {
+        "row_key": "E",
+        "unit": "minutes",
+        "initial": 12,
+        "final": 62
+      },
+      "allowed_changes": "Only E changes value; others are constant. Color C may change for rank selection."
+    },
+    {
+      "id": "mean",
+      "meaning": "Arithmetic mean of all five orders",
+      "identity": {
+        "parents": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "operation": "sum / 5"
+      }
+    },
+    {
+      "id": "median",
+      "meaning": "Value of third observation in ascending order",
+      "identity": {
+        "parents": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "selected_row": "C"
+      }
+    }
+  ],
+  "shots": [
+    {
+      "id": "establish",
+      "start": 0,
+      "end": 4,
+      "intention": "Establish five persistent orders and their average",
+      "subjects": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "mean",
+        "median"
+      ],
+      "before": {
+        "values": [
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "after": {
+        "mean_line_at": 10
+      },
+      "camera": {
+        "space": "world=data; screen=labels",
+        "transform": "identity",
+        "reason": "Keep quantitative domain fixed at0–65 and preserve row identities",
+        "data_mapping": {
+          "x": "200 + value * 14",
+          "y": "244 + index * 56"
+        }
+      },
+      "action": {
+        "operation": "reveal derived mean line"
+      },
+      "draw_code": {
+        "language": "python/svg",
+        "entrypoint": "render",
+        "artifact": "film.py"
+      },
+      "reading_windows": [
+        {
+          "start": 1.8,
+          "end": 4,
+          "text_anchor": "screen; numeric labels track record endpoints"
+        }
+      ],
+      "audio": [
+        {
+          "bus": "all",
+          "start": 0,
+          "end": 4,
+          "mode": "intentional silence",
+          "reason": "Silent-first educational clip; no narration/audio requested; full text carries explanation"
+        }
+      ]
+    },
+    {
+      "id": "choose",
+      "start": 4,
+      "end": 6,
+      "intention": "Single out E as the only changed observation",
+      "subjects": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "mean",
+        "median"
+      ],
+      "before": {
+        "E": 12
+      },
+      "after": {
+        "E": 12,
+        "selected": "E"
+      },
+      "camera": {
+        "space": "world=data; screen=labels",
+        "transform": "identity",
+        "reason": "Keep quantitative domain fixed at0–65 and preserve row identities",
+        "data_mapping": {
+          "x": "200 + value * 14",
+          "y": "244 + index * 56"
+        }
+      },
+      "action": {
+        "operation": "select E; retain population and all values"
+      },
+      "draw_code": {
+        "language": "python/svg",
+        "entrypoint": "render",
+        "artifact": "film.py"
+      },
+      "reading_windows": [
+        {
+          "start": 4.6,
+          "end": 6,
+          "text_anchor": "screen; numeric labels track record endpoints"
+        }
+      ],
+      "audio": [
+        {
+          "bus": "all",
+          "start": 4,
+          "end": 6,
+          "mode": "intentional silence",
+          "reason": "Silent-first educational clip; no narration/audio requested; full text carries explanation"
+        }
+      ]
+    },
+    {
+      "id": "change",
+      "start": 6,
+      "end": 9,
+      "intention": "Observe outlier and mean move together",
+      "subjects": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "mean",
+        "median"
+      ],
+      "before": {
+        "E": 12,
+        "mean": 10
+      },
+      "after": {
+        "E": 62,
+        "mean": 20
+      },
+      "camera": {
+        "space": "world=data; screen=labels",
+        "transform": "identity",
+        "reason": "Keep quantitative domain fixed at0–65 and preserve row identities",
+        "data_mapping": {
+          "x": "200 + value * 14",
+          "y": "244 + index * 56"
+        }
+      },
+      "action": {
+        "operation": "change one value by +50; recalculate mean analytically"
+      },
+      "draw_code": {
+        "language": "python/svg",
+        "entrypoint": "render",
+        "artifact": "film.py"
+      },
+      "reading_windows": [],
+      "audio": [
+        {
+          "bus": "all",
+          "start": 6,
+          "end": 9,
+          "mode": "intentional silence",
+          "reason": "Silent-first educational clip; no narration/audio requested; full text carries explanation"
+        }
+      ]
+    },
+    {
+      "id": "consequence",
+      "start": 9,
+      "end": 11.7,
+      "intention": "Explain the arithmetic consequence",
+      "subjects": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "mean",
+        "median"
+      ],
+      "before": {
+        "E": 62,
+        "mean": 20
+      },
+      "after": {
+        "E": 62,
+        "mean": 20,
+        "delta_mean": 10
+      },
+      "camera": {
+        "space": "world=data; screen=labels",
+        "transform": "identity",
+        "reason": "Keep quantitative domain fixed at0–65 and preserve row identities",
+        "data_mapping": {
+          "x": "200 + value * 14",
+          "y": "244 + index * 56"
+        }
+      },
+      "action": {
+        "operation": "hold settled exact values"
+      },
+      "draw_code": {
+        "language": "python/svg",
+        "entrypoint": "render",
+        "artifact": "film.py"
+      },
+      "reading_windows": [
+        {
+          "start": 9,
+          "end": 11.7,
+          "text_anchor": "screen; numeric labels track record endpoints"
+        }
+      ],
+      "audio": [
+        {
+          "bus": "all",
+          "start": 9,
+          "end": 11.7,
+          "mode": "intentional silence",
+          "reason": "Silent-first educational clip; no narration/audio requested; full text carries explanation"
+        }
+      ]
+    },
+    {
+      "id": "middle",
+      "start": 11.7,
+      "end": 15.5,
+      "intention": "Select the middle rank without replacing data",
+      "subjects": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "mean",
+        "median"
+      ],
+      "before": {
+        "values": [
+          8,
+          9,
+          10,
+          11,
+          62
+        ]
+      },
+      "after": {
+        "selected": "C",
+        "median": 10
+      },
+      "camera": {
+        "space": "world=data; screen=labels",
+        "transform": "identity",
+        "reason": "Keep quantitative domain fixed at0–65 and preserve row identities",
+        "data_mapping": {
+          "x": "200 + value * 14",
+          "y": "244 + index * 56"
+        }
+      },
+      "action": {
+        "operation": "highlight rank3 and show neighboring rank counts"
+      },
+      "draw_code": {
+        "language": "python/svg",
+        "entrypoint": "render",
+        "artifact": "film.py"
+      },
+      "reading_windows": [
+        {
+          "start": 12.5,
+          "end": 15.5,
+          "text_anchor": "screen; numeric labels track record endpoints"
+        }
+      ],
+      "audio": [
+        {
+          "bus": "all",
+          "start": 11.7,
+          "end": 15.5,
+          "mode": "intentional silence",
+          "reason": "Silent-first educational clip; no narration/audio requested; full text carries explanation"
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "start": 15.5,
+      "end": 20,
+      "intention": "Read mean alongside median and distribution",
+      "subjects": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "mean",
+        "median"
+      ],
+      "before": {
+        "mean": 20,
+        "median": 10
+      },
+      "after": {
+        "count_below_mean": 4
+      },
+      "camera": {
+        "space": "world=data; screen=labels",
+        "transform": "identity",
+        "reason": "Keep quantitative domain fixed at0–65 and preserve row identities",
+        "data_mapping": {
+          "x": "200 + value * 14",
+          "y": "244 + index * 56"
+        }
+      },
+      "action": {
+        "operation": "emphasize unchanged four; retain all five including E"
+      },
+      "draw_code": {
+        "language": "python/svg",
+        "entrypoint": "render",
+        "artifact": "film.py"
+      },
+      "reading_windows": [
+        {
+          "start": 16.2,
+          "end": 20,
+          "text_anchor": "screen; numeric labels track record endpoints"
+        }
+      ],
+      "audio": [
+        {
+          "bus": "all",
+          "start": 15.5,
+          "end": 20,
+          "mode": "intentional silence",
+          "reason": "Silent-first educational clip; no narration/audio requested; full text carries explanation"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "mean-reveal",
+      "time": 1,
+      "end": 1.8
+    },
+    {
+      "name": "select-E",
+      "time": 4,
+      "end": 4.6
+    },
+    {
+      "name": "change-E",
+      "time": 6,
+      "end": 9
+    },
+    {
+      "name": "exact-result",
+      "time": 9
+    },
+    {
+      "name": "select-middle",
+      "time": 11.7,
+      "end": 12.5
+    },
+    {
+      "name": "compare-final",
+      "time": 15.5,
+      "end": 16.2
+    }
+  ],
+  "qa_targets": [
+    {
+      "name": "mean crosses small value labels",
+      "times": [
+        1.8,
+        2,
+        6.2,
+        6.5,
+        7
+      ]
+    },
+    {
+      "name": "signature transformation",
+      "interval": [
+        6,
+        9
+      ],
+      "max_sample_step": 0.2
+    },
+    {
+      "name": "median identity",
+      "times": [
+        11.7,
+        12.5,
+        15
+      ]
+    },
+    {
+      "name": "opening and conclusion",
+      "times": [
+        0,
+        18,
+        19.958333
+      ]
+    }
+  ],
+  "adapter": {
+    "implementation": "film.py implements manifest manually as pure render(t)",
+    "unsupported": "Runtime does not consume the manifest or generate audio. Silence is deliberate. Use custom --label dataviz for display metadata; custom output is video.mp4. The mapping to film.py is explicitly verified by check_example.py."
+  }
+}

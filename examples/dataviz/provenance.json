@@ -1,0 +1,166 @@
+{
+  "example": "mean-median",
+  "revision": "forward-test-v3",
+  "model_identifier": "unknown",
+  "experiment": "one exploratory application, not a low-cost model benchmark",
+  "authorship": "Original code and synthetic data authored for this project",
+  "source_film_sha256": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+  "data_sha256": "cb65addbfdc76407263d8398f4ce88407a49ec91fb2361b719a06c63942aad20",
+  "scope": "authored source/data/manifest and fact checker; shared runtime; original demo MP4 included in the public release; no duplicate video ZIP or font files bundled",
+  "forward_test": {
+    "status": "pass",
+    "source_sha256": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+    "data_sha256": "cb65addbfdc76407263d8398f4ce88407a49ec91fb2361b719a06c63942aad20",
+    "mp4_sha256": "66cc4707543bdae9dee039d81154f7cc6f50e538532b24d795da1d698aa5a9a4",
+    "independent_calculation": {
+      "initial": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "final": [
+        8,
+        9,
+        10,
+        11,
+        62
+      ],
+      "initial_mean": 10,
+      "final_mean": 20,
+      "initial_median": 10,
+      "final_median": 10
+    },
+    "all_frame_data_and_row_id_checks": 480,
+    "text_bounds_checked_frames": 480,
+    "out_of_bounds": [],
+    "font_codepoints": 148,
+    "missing_codepoints": [],
+    "font_file_hashes": {
+      "NotoSansCJK-Regular.ttc": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+      "NotoSansCJK-Bold.ttc": "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb"
+    },
+    "seek_test": {
+      "times": [
+        0,
+        1,
+        1.8,
+        2,
+        4,
+        6,
+        6.2,
+        6.5,
+        7.5,
+        8.8,
+        9,
+        11.69,
+        11.7,
+        12.5,
+        15.5,
+        16.2,
+        19.958333333333332
+      ],
+      "passes": 2,
+      "order": "interleaved then reverse",
+      "svg_and_raster_hash_equal": true
+    },
+    "full_decode": "pass",
+    "encoded_frames": 480,
+    "duration": 20,
+    "dimensions": [
+      1280,
+      720
+    ],
+    "fps": 24,
+    "tracks": "video only; intentional silence",
+    "evidence_count": 221,
+    "limits": [
+      "Font bounds measured using installed Noto SC via Pillow; actual appearance separately inspected",
+      "No real-time playback or audio listening performed",
+      "Phone-width image is readability evidence, not an authored portrait deliverable"
+    ]
+  },
+  "extracted_source_reproduction": {
+    "status": "pass",
+    "test": "Extracted source ZIP, ran its bundled unmodified SVG runtime doctor and actual18-second frame render; raw pixels match original final render frame432",
+    "actual_raw_sha256": "c20b20c922f017677cc0a60e6da3264ec8313a502bc6a14dd9fd52766662b3ed",
+    "expected_raw_sha256": "c20b20c922f017677cc0a60e6da3264ec8313a502bc6a14dd9fd52766662b3ed",
+    "limits": "Same environment and installed dependencies; not cross-platform evidence"
+  },
+  "packaged_source_recheck": {
+    "status": "pass",
+    "source_sha256": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+    "data_sha256": "cb65addbfdc76407263d8398f4ce88407a49ec91fb2361b719a06c63942aad20",
+    "manifest_shots": 6,
+    "settled_initial_final_states_checked": true,
+    "actual_bar_width_mean_rule_and_value_label_checks": 480,
+    "font_coverage_checked_per_used_face": true,
+    "all_frame_data_identity_and_text_bounds": 480,
+    "determinism_timestamps": [
+      0,
+      1,
+      1.8,
+      2,
+      4,
+      6,
+      6.2,
+      6.5,
+      7.5,
+      8.8,
+      9,
+      11.69,
+      11.7,
+      12.5,
+      15.5,
+      16.2,
+      19.958333333333332
+    ],
+    "svg_and_raster_repeat_equal": true,
+    "frame18_raw_sha256": "c20b20c922f017677cc0a60e6da3264ec8313a502bc6a14dd9fd52766662b3ed",
+    "font_faces": {
+      "Regular": {
+        "family": "Noto Sans CJK SC",
+        "filename": "NotoSansCJK-Regular.ttc",
+        "index": 2,
+        "sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a"
+      },
+      "Bold": {
+        "family": "Noto Sans CJK SC",
+        "filename": "NotoSansCJK-Bold.ttc",
+        "index": 2,
+        "sha256": "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb"
+      }
+    },
+    "missing_codepoints": [],
+    "out_of_bounds": [],
+    "visual_review": "not performed by this script",
+    "playback": "not tested",
+    "audio_listening": "not tested",
+    "encoded_video": {
+      "sha256": "66cc4707543bdae9dee039d81154f7cc6f50e538532b24d795da1d698aa5a9a4",
+      "full_decode": "pass",
+      "frames": 480,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": 20,
+      "fps": 24,
+      "audio_tracks": 0
+    }
+  },
+  "visual_review": {
+    "result": "pass for actual inspected1280x720 frames after repairs",
+    "playback": "not tested",
+    "audio_listening": "not tested",
+    "phone390px": "supporting text needs revision"
+  },
+  "manifest_packaging_change": "Only adapter metadata updated for custom --label; renderer and data unchanged",
+  "checker_negative_regressions": {
+    "incorrect_final_E12": "rejected",
+    "incorrect_final_E37": "rejected",
+    "correct_initial_and_final": "passed",
+    "independent_targeted_recheck": "confirmed; no blocking regression"
+  }
+}
