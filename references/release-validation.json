@@ -2,7 +2,7 @@
   "project": "HeiGe Video",
   "skill_name": "heige-video",
   "release": "v2-RC",
-  "checked_at_utc": "2026-10-06T00:51:56.846775+00:00",
+  "checked_at_utc": "2026-10-06T02:10:43.807744+00:00",
   "scope": "Public-release local checks of the original source package plus final demo MP4s; no new model calls, full movie rerenders, real-time playback or listening review.",
   "delivered_source_unchanged": true,
   "release_changes": [
@@ -10,23 +10,24 @@
     "Stale research-only implementation wording corrected to the existing bounded review evidence",
     "Original five hash-matched MP4 files added without recompression; demo documentation and checksums added",
     "Source-package-only wording updated; original copyright and third-party notices retained",
-    "Local caches/credentials/output ignore rules added; bounded GitHub Actions test workflow added"
+    "Local caches/credentials/output ignore rules added; bounded GitHub Actions test workflow added",
+    "After the first public CI run, package scans now exclude installed dependency/generated/cache/VCS directories while retaining authored link, JSON and private-path checks; five focused regressions added"
   ],
   "runtime_tests": {
     "command": "python3 -m unittest discover -s runtime/tests -v",
     "passed": 11,
     "failed": 0,
     "skipped": 0,
-    "seconds": 5.858,
+    "seconds": 4.937,
     "scope": "SVG validation/rasterization, all three presets deterministic seek, optional Canvas deterministic seek, trusted-source import lifetime, argument/output protection, repeated short actual MP4 encoding"
   },
   "script_tests": {
     "command": "python3 -m unittest discover -s scripts -p 'test_*.py' -v",
-    "passed": 10,
+    "passed": 15,
     "failed": 0,
     "skipped": 0,
-    "seconds": 0.124,
-    "scope": "8 manifest checks and 2 offline prompt-export checks"
+    "seconds": 0.553,
+    "scope": "8 manifest checks, 2 offline prompt-export checks and 5 package-scope regressions"
   },
   "manifest_check": {
     "command": "python3 scripts/validate_package.py --manifest examples/dataviz/shot-manifest.json",
@@ -36,7 +37,7 @@
   "package_structure_check": {
     "command": "python3 scripts/validate_package.py",
     "status": "pass",
-    "scope": "All staged Markdown links, JSON and package structure passed before the root README files were added; rerun after README integration"
+    "scope": "Authored Markdown links, JSON and package structure pass, including root README files; installed dependency/generated/cache/VCS trees are excluded"
   },
   "doctor": {
     "svg_ready": true,
@@ -304,8 +305,8 @@
   "ci": {
     "workflow": ".github/workflows/validate.yml",
     "runner": "ubuntu-24.04",
-    "status": "authored; not yet executed on GitHub",
-    "scope": "Dependency doctor, package/manifest validators, 11 runtime tests, 10 script tests, demo hashes; no full-length rendering or model API calls",
+    "status": "First remote run failed on third-party Canvas README link; local fix and regressions pass; remote rerun pending",
+    "scope": "Dependency doctor, package/manifest validators, 11 runtime tests, 15 script tests, demo hashes; no full-length rendering or model API calls",
     "workflow_yaml": "parsed successfully",
     "registry_verification": {
       "checked_date": "2026-10-06",
@@ -324,6 +325,15 @@
         "upstream_release": "https://github.com/Brooooooklyn/canvas/releases/tag/v0.1.100"
       },
       "limits": "Metadata and public listings checked; clean registry install and remote GitHub Actions execution are not claimed."
+    },
+    "first_run_failure": {
+      "commit": "346b1956374411d75b72d3b42a76dc33d4238392",
+      "run": "https://github.com/HeiGeAi/HeiGe-Video/actions/runs/37402458055",
+      "cause": "Package-wide recursive scanning included installed node_modules/@napi-rs/canvas/README.md, whose ./README-zh.md link is absent in the npm package",
+      "local_reproduction": "Previous validator failed on the same Canvas README link in an isolated fixture; fixed validator passes",
+      "repair": "Prune exact dependency, generated, cache and VCS directory names at any depth; continue validating authored root, nested and .github documentation and JSON",
+      "regressions": 5,
+      "remote_rerun": "pending; no CI pass claimed"
     }
   },
   "code_hashes": {
@@ -341,8 +351,8 @@
     "scripts/export_prompt.py": "28459c79e1c3db62089536533dace60ff3a6131920ac86fba54b5b6830fdb79e",
     "scripts/sound_sketch.py": "2f8d643f2e2b528d77186d1dd748c05b575f2c2648cbce0e4b95da1f3156862d",
     "scripts/test_export_prompt.py": "e73a6ef71d33f2087c5ecb9bb4ff59dff1d406ddfcf9bd5d94e71287bf43037d",
-    "scripts/test_validate_package.py": "4ef140f5bb388f5a5196565505f4b2a0dae1266214c2a8f286f68475a3cfc806",
-    "scripts/validate_package.py": "6b79b8e8c22971f02878d35c887e404623e96f04288a31c734a8afda7e944cb1"
+    "scripts/test_validate_package.py": "1de514b59228f54372fe072a1017b1d6cef9c0488fc64191a607d5fa02257dbd",
+    "scripts/validate_package.py": "6263c767f33da0e0b373abe64795692ec11bb159b10bb8e44d8fc674616d4af1"
   },
   "known_limits": [
     "Real-time playback and actual audio listening not performed",
