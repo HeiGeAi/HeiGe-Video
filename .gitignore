@@ -1,0 +1,20 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Interpreter/package caches
+__pycache__/
+*.py[cod]
+.cache/
+.venv/
+venv/
+node_modules/
+
+# Local render outputs (the curated demos/ directory is intentionally tracked)
+outputs/
+renders/
+*.log
+.DS_Store
