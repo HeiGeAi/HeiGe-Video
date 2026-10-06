@@ -1,0 +1,287 @@
+{
+  "duration": 30,
+  "sample_rate": 48000,
+  "peak": 0.14906948257836683,
+  "rms": 0.019073845074472434,
+  "shared_visual_cues": [
+    {
+      "id": "strike-0",
+      "time": 18.24,
+      "band": 0
+    },
+    {
+      "id": "strike-1",
+      "time": 18.639999999999997,
+      "band": 1
+    },
+    {
+      "id": "strike-2",
+      "time": 19.04,
+      "band": 2
+    },
+    {
+      "id": "strike-3",
+      "time": 19.439999999999998,
+      "band": 3
+    },
+    {
+      "id": "strike-4",
+      "time": 19.84,
+      "band": 4
+    },
+    {
+      "id": "strike-5",
+      "time": 20.24,
+      "band": 5
+    },
+    {
+      "id": "strike-6",
+      "time": 20.639999999999997,
+      "band": 6
+    },
+    {
+      "id": "strike-7",
+      "time": 21.04,
+      "band": 7
+    },
+    {
+      "id": "strike-8",
+      "time": 21.439999999999998,
+      "band": 8
+    },
+    {
+      "id": "strike-9",
+      "time": 21.84,
+      "band": 9
+    },
+    {
+      "id": "strike-10",
+      "time": 22.24,
+      "band": 10
+    },
+    {
+      "id": "strike-11",
+      "time": 22.639999999999997,
+      "band": 11
+    }
+  ],
+  "events": [
+    {
+      "time": 0.55,
+      "length": 2.2,
+      "frequency": 130.8128,
+      "gain": 0.07,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 2.7,
+      "length": 2.2,
+      "frequency": 196,
+      "gain": 0.07,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 4.5,
+      "length": 2.2,
+      "frequency": 261.6256,
+      "gain": 0.07,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 8.15,
+      "length": 2.2,
+      "frequency": 329.6276,
+      "gain": 0.07,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 11.7,
+      "length": 2.2,
+      "frequency": 220,
+      "gain": 0.07,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 14.9,
+      "length": 2.2,
+      "frequency": 146.8324,
+      "gain": 0.07,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 3.6,
+      "length": 0.55,
+      "frequency": 0,
+      "gain": 0.09,
+      "kind": "paper",
+      "pan": 0
+    },
+    {
+      "time": 6.2,
+      "length": 0.7,
+      "frequency": 0,
+      "gain": 0.07,
+      "kind": "paper",
+      "pan": 0
+    },
+    {
+      "time": 11.45,
+      "length": 0.7,
+      "frequency": 0,
+      "gain": 0.055,
+      "kind": "paper",
+      "pan": 0
+    },
+    {
+      "time": 15.1,
+      "length": 1.9,
+      "frequency": 0,
+      "gain": 0.12,
+      "kind": "paper",
+      "pan": 0
+    },
+    {
+      "time": 22.8,
+      "length": 1.1,
+      "frequency": 0,
+      "gain": 0.085,
+      "kind": "paper",
+      "pan": 0
+    },
+    {
+      "time": 18.24,
+      "length": 1.25,
+      "frequency": 261.6255653005986,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 18.639999999999997,
+      "length": 1.25,
+      "frequency": 329.6275569128699,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 19.04,
+      "length": 1.25,
+      "frequency": 391.99543598174927,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 19.439999999999998,
+      "length": 1.25,
+      "frequency": 440.0,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 19.84,
+      "length": 1.25,
+      "frequency": 391.99543598174927,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 20.24,
+      "length": 1.25,
+      "frequency": 329.6275569128699,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 20.639999999999997,
+      "length": 1.25,
+      "frequency": 293.6647679174076,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 21.04,
+      "length": 1.25,
+      "frequency": 349.2282314330039,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 21.439999999999998,
+      "length": 1.25,
+      "frequency": 440.0,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 21.84,
+      "length": 1.25,
+      "frequency": 493.8833012561241,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 22.24,
+      "length": 1.25,
+      "frequency": 440.0,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 22.639999999999997,
+      "length": 1.25,
+      "frequency": 391.99543598174927,
+      "gain": 0.15,
+      "kind": "strike",
+      "pan": 0.25
+    },
+    {
+      "time": 25.5,
+      "length": 3.7,
+      "frequency": 130.8127826502993,
+      "gain": 0.045,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 25.5,
+      "length": 3.7,
+      "frequency": 195.99771799087463,
+      "gain": 0.045,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 25.5,
+      "length": 3.7,
+      "frequency": 261.6255653005986,
+      "gain": 0.045,
+      "kind": "tone",
+      "pan": 0
+    },
+    {
+      "time": 25.5,
+      "length": 3.7,
+      "frequency": 329.6275569128699,
+      "gain": 0.045,
+      "kind": "tone",
+      "pan": 0
+    }
+  ],
+  "perceptual_listening_review": false
+}
