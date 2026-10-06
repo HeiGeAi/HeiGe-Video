@@ -22,15 +22,48 @@ HeiGe-Video 给 coding agent 一套视频创作方法：从内容、主体和镜
 
 ## 五种风格，五支样片
 
-点击预览图打开对应 MP4。全部样片为 **1280 × 720、24 fps**；数据片 20 秒，其余 30 秒。文件说明与校验值见 [demos](demos/README.md)。
+下方可直接播放；若播放器未加载，可打开对应 MP4 原文件。全部样片为 **1280 × 720、24 fps**；数据片 20 秒，其余 30 秒。文件说明与校验值见 [demos](demos/README.md)。
 
-| 风格 | 样片 | 这支片子怎么讲 |
-|---|---|---|
-| **Swiss-tech / 科技排版** | [![Swiss-tech：用两则笔记展示信息之间的关系](demos/swiss-tech.png)](demos/swiss-tech.mp4) | 同一组文字与模块精确重排，两则具体笔记逐步形成关系。适合知识解释、概念拆解、动态排版 |
-| **Whiteboard / 白板推演** | [![Whiteboard：白光进入棱镜并分解为不同颜色](demos/whiteboard.png)](demos/whiteboard.mp4) | 在同一块板上画出白光、棱镜与分色，沿着一条因果链讲清原理。光路为示意 |
-| **Ink / 水墨叙事** | [![Ink：种子随风落地，长出新芽](demos/ink.png)](demos/ink.mp4) | 种子随风、落地、出现新芽，用笔触、浓淡、留白和停顿组织动作。生长采用诗性时间压缩 |
-| **Dark-keynote / 深色概念片** | [![Dark-keynote：一束光学创作概念片](demos/dark-keynote.png)](demos/dark-keynote.mp4) | 《一束》从创作题目进入科普画面，再回到同一作品的完成状态。属于概念演示 |
-| **Dataviz / 数据叙事** | [![Dataviz：五个虚构订单解释平均数与中位数](demos/dataviz.png)](demos/dataviz.mp4) | 同五个虚构订单只改变一个极端值，比较平均数与中位数，保持数据对象可追踪 |
+### Swiss-tech / 科技排版
+
+同一组文字与模块精确重排，两则具体笔记逐步形成关系。适合知识解释、概念拆解、动态排版
+
+https://github.com/user-attachments/assets/cd671b63-9576-40da-9edd-6a41d4c7cd38
+
+[下载 MP4 · 查看原文件](demos/swiss-tech.mp4)
+
+### Whiteboard / 白板推演
+
+在同一块板上画出白光、棱镜与分色，沿着一条因果链讲清原理。光路为示意
+
+https://github.com/user-attachments/assets/f69737c3-d811-4351-8a3f-39d561d923c4
+
+[下载 MP4 · 查看原文件](demos/whiteboard.mp4)
+
+### Ink / 水墨叙事
+
+种子随风、落地、出现新芽，用笔触、浓淡、留白和停顿组织动作。生长采用诗性时间压缩
+
+https://github.com/user-attachments/assets/d26c0a77-4d46-4dfb-a062-64638b5432d2
+
+[下载 MP4 · 查看原文件](demos/ink.mp4)
+
+### Dark-keynote / 深色概念片
+
+《一束》从创作题目进入科普画面，再回到同一作品的完成状态。属于概念演示
+
+https://github.com/user-attachments/assets/bf8510a6-bbab-43be-befb-e1028831a036
+
+[下载 MP4 · 查看原文件](demos/dark-keynote.mp4)
+
+### Dataviz / 数据叙事
+
+同五个虚构订单只改变一个极端值，比较平均数与中位数，保持数据对象可追踪
+
+https://github.com/user-attachments/assets/c64d2254-4565-4f74-8f59-2af1b1497122
+
+[下载 MP4 · 查看原文件](demos/dataviz.mp4)
+
 
 样片声音说明：四支 30 秒视频附原创程序合成声音草图，数据片保持静音。声音只做过数值检查，尚未完成听音验收。共享运行器默认输出静音视频。
 
@@ -194,7 +227,7 @@ python scripts/export_prompt.py \
 ### 已有证据
 
 - 五组样例已完成 1280 × 720、24 fps 连续渲染；验收粒度、源码哈希见 [逐例状态](references/example-status.json)
-- 本次发布准备中，**11 项运行时测试、10 项脚本测试通过**；当前发布检查见 [release-validation.json](references/release-validation.json)，原始环境记录见 [validation.json](references/validation.json)
+- 本次发布准备中，**11 项运行时测试、15 项脚本测试通过**；当前发布检查见 [release-validation.json](references/release-validation.json)，原始环境记录见 [validation.json](references/validation.json)
 - 数据样例有逐帧数值、身份与投影检查，以及重复时刻像素一致性记录，见 [数据片证据](examples/dataviz/provenance.json)
 - 真实抽帧审阅与代码测试分别记录，见 [实施状态](references/status.md) 与 [三层验收](references/quality-gates.md)
 

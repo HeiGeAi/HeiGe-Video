@@ -22,15 +22,48 @@ The current version is **v2-RC**. All five examples have continuous-render evide
 
 ## Five styles, five demos
 
-Click a thumbnail to open its MP4. All demos are **1280 × 720 at 24 fps**. Dataviz runs for 20 seconds; the other four run for 30 seconds. See [demos](demos/README.md) for file details and checksums.
+Play the videos below, or open the original MP4 if the player does not load. All demos are **1280 × 720 at 24 fps**. Dataviz runs for 20 seconds; the other four run for 30 seconds. See [demos](demos/README.md) for file details and checksums.
 
-| Style | Demo | How the story works |
-|---|---|---|
-| **Swiss-tech** | [![Swiss-tech: two notes reveal a relationship](demos/swiss-tech.png)](demos/swiss-tech.mp4) | Precise rearrangement of persistent text and modules, grounded in two concrete notes. For knowledge explanations and kinetic typography |
-| **Whiteboard** | [![Whiteboard: white light enters a prism and separates into colors](demos/whiteboard.png)](demos/whiteboard.mp4) | A causal explanation drawn on one persistent board. The optical geometry is schematic |
-| **Ink** | [![Ink: a seed travels, lands, and sprouts](demos/ink.png)](demos/ink.mp4) | A seed journey told through brush-like forms, density, negative space, and pauses. Growth uses poetic time compression |
-| **Dark-keynote** | [![Dark-keynote: the One Beam optical creation concept](demos/dark-keynote.png)](demos/dark-keynote.mp4) | “一束” moves from a readable creative brief into an optical scene and the completed work. A concept demonstration |
-| **Dataviz** | [![Dataviz: five fictional orders explain mean and median](demos/dataviz.png)](demos/dataviz.mp4) | Five synthetic orders retain their identities while one extreme value changes, making the mean/median comparison visible |
+### Swiss-tech
+
+Precise rearrangement of persistent text and modules, grounded in two concrete notes. For knowledge explanations and kinetic typography
+
+https://github.com/user-attachments/assets/cd671b63-9576-40da-9edd-6a41d4c7cd38
+
+[Download MP4 / view original](demos/swiss-tech.mp4)
+
+### Whiteboard
+
+A causal explanation drawn on one persistent board. The optical geometry is schematic
+
+https://github.com/user-attachments/assets/f69737c3-d811-4351-8a3f-39d561d923c4
+
+[Download MP4 / view original](demos/whiteboard.mp4)
+
+### Ink
+
+A seed journey told through brush-like forms, density, negative space, and pauses. Growth uses poetic time compression
+
+https://github.com/user-attachments/assets/d26c0a77-4d46-4dfb-a062-64638b5432d2
+
+[Download MP4 / view original](demos/ink.mp4)
+
+### Dark-keynote
+
+“一束” moves from a readable creative brief into an optical scene and the completed work. A concept demonstration
+
+https://github.com/user-attachments/assets/bf8510a6-bbab-43be-befb-e1028831a036
+
+[Download MP4 / view original](demos/dark-keynote.mp4)
+
+### Dataviz
+
+Five synthetic orders retain their identities while one extreme value changes, making the mean/median comparison visible
+
+https://github.com/user-attachments/assets/c64d2254-4565-4f74-8f59-2af1b1497122
+
+[Download MP4 / view original](demos/dataviz.mp4)
+
 
 Audio: the four 30-second demos include original procedural sound sketches; dataviz is silent. The sound sketches have numerical checks but have not received listening approval. The shared video runner itself produces silent output.
 
@@ -199,7 +232,7 @@ The exporter creates local `messages` data without making a network request. Rev
 ### Available evidence
 
 - All five examples have continuous 1280 × 720, 24 fps renders; source hashes and exact review scopes are in [per-example status](references/example-status.json)
-- **11 runtime tests and 10 script tests passed** during this publication preparation; see [release-validation.json](references/release-validation.json) and the earlier environment record in [validation.json](references/validation.json)
+- **11 runtime tests and 15 script tests passed** during this publication preparation; see [release-validation.json](references/release-validation.json) and the earlier environment record in [validation.json](references/validation.json)
 - Dataviz has frame-by-frame numerical, identity, and projection checks, plus repeat-time pixel evidence in its [provenance record](examples/dataviz/provenance.json)
 - Actual-frame review and code tests are recorded separately; see [implementation status](references/status.md) and the [three-layer quality gates](references/quality-gates.md)
 
