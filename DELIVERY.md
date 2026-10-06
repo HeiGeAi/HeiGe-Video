@@ -1,38 +1,9 @@
-# HeiGe Video v2-RC 发布说明
+# HeiGe-Video v3.0.0-rc.1 package guide
 
-这版把视频研究整理成了可运行的代码 Skill：五套各自独立的导演规则、一个共享渲染器、五组原创源码，以及可复查的事实、来源与测试记录。
+Start with [README](README.md), [installation and commands](USAGE.md), [upgrade report](UPGRADE_REPORT_ZH.md) and [verification status](references/status.md).
 
-## 怎么用
+The repository includes five original v3 films and their accepted source revisions, the upgraded Skill and Canvas/SVG runtime, a 100-video / 100-project research corpus, and five explicitly labelled v2 regression films. Download or clone the complete repository, preserving the directory structure.
 
-让有文件和代码执行能力的 coding agent 读 `SKILL.md`，按 `USAGE.md` 先运行 doctor 和关键帧预览，再渲染整片。渲染本身不需要模型 SDK、API key 或付费模型调用。
+The films have technical export evidence and bounded decoded-image review. Full realtime playback, audio listening, cross-platform reproduction and model-cost comparisons remain unverified. The first two new films contain measured original synthesized sound; the other three are silent.
 
-只有文本 API 时，可以用离线提示词导出工具配合自己的执行环境。文件写入、运行、取得真实帧与审图仍需要工具；无视觉模型要配独立视觉评审或人工。
-
-## 五组原创示例
-
-- Swiss 科技排版：同一组信息重排，并用两则具体笔记展示关系；30 秒
-- 白板：同一块板上完成白光、棱镜与分色的因果图；30 秒
-- 水墨：种子随风、落地并出现新芽；30 秒，生长是诗性时间压缩
-- 数据叙事：同五个虚构订单，只改变一个极端值，比较平均数和中位数；20 秒
-- 深色概念片《一束》：从可读创作题目进入科普画面，再呈现同一作品的完成状态；30 秒
-
-五组均已有 1280×720、24 fps 连续渲染记录。水墨最后四秒的文字、留边和收尾停留也已完成针对性复核；各片最终源码哈希与验收范围记录在 `references/example-status.json`。
-
-## 已验证什么
-
-- 11 项运行时测试通过，包括乱序渲染、重复像素、实际编码、导入生命周期和自定义标签
-- 当前公开版本的 15 项脚本测试通过，包括镜头清单、时间边界、离线提示词接口，以及依赖／构建／缓存目录排除和原创文档校验的 5 项回归测试。历史源码快照的 10 项结果保留在原验证记录中
-- 数据片逐一检查 480 帧的数值、身份、投影、文本边界和分字重缺字；17 个时刻重复像素一致，重新解包后的第 18 秒也复现了相同像素
-- 已独立查看真实成片抽帧并针对问题修订；技术检查与画面评审分开记录
-
-实际渲染耗时也有记录：水墨最终版在这台云端环境用 991.92 秒生成 30 秒画面，约 16 分 32 秒；科技、白板、深色和数据示例分别约 51、146、95 和 20 秒。该耗时受渲染器与并行负载影响，不构成模型成本或“便宜”的证明。
-
-研究阅读版见 [58 部作品的机制与局限](references/research-cases.md)：51 部机制参考、7 部对照，覆盖 11 个作者／发布方。研究覆盖方式和未审内容已写明。
-
-## 仍有什么边界
-
-这是可复现源码和经抽帧审阅的 v2-RC。没有完成整片实时播放或实际听音；四组原创声音草图仅做过数值检查，数据片选择静音。数据片缩到 390 像素宽时，辅助文字还需要重排；棱镜画面是示意图。
-
-本次没有真实低价模型对照试验，数据片前向测试的模型 ID 也未公开。现有证据支持这套代码和流程能在已测试环境运行，尚不能证明任意 agent 都达到 Opus 或参考作品的水平。
-
-公开发布包包含五组原创 MP4 样片，见 [样片说明](demos/README.md)。不含第三方参考艺术素材、系统字体、重复运行器或凭据。依赖、源码哈希、许可和每片验收范围均随包记录。
+[Release verification](references/v3-release-validation.json) records checks on this public package. [Candidate verification](references/candidate-validation.json) retains historical checks and hashes from before public documentation edits. [Source notices](references/source-notices.md) preserve licensing and attribution; third-party research media and source snapshots are not bundled.
