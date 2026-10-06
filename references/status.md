@@ -8,7 +8,7 @@ Public-package regression evidence is recorded in [v3 release validation](v3-rel
 
 - Canvas/SVG runner, authored Canvas duration/readiness/state metadata, declared glyph checks, hard-cut metadata and shared motion helpers are implemented
 - Optional cut-aware linear-light Canvas shutter sampling and decoded MP4 action/cut strips are implemented
-- After core document/research integration, 40 runtime tests and 27 script tests passed. Package validation passed with 100 video and 100 project records. The [candidate core validation receipt](candidate-validation.json) records the tested revision scope; later source edits need fresh checks
+- After the public CI dependency-resolution repair, 41 runtime tests and 27 script tests passed. Package validation passed with 100 video and 100 project records. The [candidate core validation receipt](candidate-validation.json) records the tested revision scope; later source edits need fresh checks
 - The portable research corpus contains 100 distinct media hashes/URLs and 100 distinct canonical repositories. Metadata, categories, rights/coverage fields and uniqueness are structurally validated
 - A small offline selector returns relevant mechanisms and caveats, with controls excluded by default
 

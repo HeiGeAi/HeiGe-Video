@@ -1,14 +1,15 @@
 {
   "schema_version": "heige-public-release-validation/1",
   "version": "v3.0.0-rc.1",
-  "recorded_at_utc": "2026-10-06T12:24:51.956054+00:00",
-  "scope": "Public release staging; no remote publication or GitHub CI result is asserted by this receipt. Runtime/source/media bytes match the accepted candidate; release documentation and CI are updated.",
+  "recorded_at_utc": "2026-10-06T12:39:36.156437+00:00",
+  "scope": "Public release staging after the CommonJS dependency-resolution CI repair. Accepted film scene sources and media remain unchanged; runtime, regression tests, release documentation and CI have updated verification. No remote publication or passing GitHub CI result is asserted by this receipt.",
   "base_public_commit": "891cf0140c552815372d1e4aa0692cf3f79b52a3",
   "tests": {
     "runtime": {
-      "passed": 40,
+      "passed": 41,
       "failed": 0,
-      "elapsed_seconds": 42.177
+      "elapsed_seconds": 51.226,
+      "inherited_NODE_PATH": "unset"
     },
     "scripts": {
       "passed": 27,
@@ -69,5 +70,12 @@
     "no_symlinks": true,
     "no_actual_private_paths_or_credentials_detected": true,
     "original_license_and_notices_retained": true
+  },
+  "ci_repair": {
+    "failed_commit": "a877ce1a57b8737485333cd351bac1e1d6848ebc",
+    "failed_run": "https://github.com/HeiGeAi/HeiGe-Video/actions/runs/37464247859",
+    "cause": "External CommonJS scene imports did not resolve repository-local Canvas dependency; global NODE_PATH in the cloud had concealed the CI installation-layout difference.",
+    "fix": "Canvas worker receives runtime-local node_modules fallback through child-only NODE_PATH; native ESM retains standard source-local resolution.",
+    "verification_environment": "Full runtime suite with inherited NODE_PATH removed and repository-local dependency link; isolated copied-runtime/external-scene regression clears NODE_PATH and checks actual RGBA output."
   }
 }

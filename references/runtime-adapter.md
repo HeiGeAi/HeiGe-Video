@@ -48,6 +48,8 @@ The example illustrates the API, not a finished film. A real object must have de
 - `--canvas-startup-timeout` defaults to 15 seconds; `--canvas-frame-timeout` defaults to 30 seconds per output frame. Readiness and rendering failures fail the run; they are not silently replaced with blank frames
 - The target canvas resets between samples. Immutable authored offscreen caches may persist. Cached values must not make frame B depend on whether frame A was rendered
 
+CommonJS sources outside this repository can resolve the runtime installation’s `node_modules` through a child-process-only `NODE_PATH` fallback; inherited `NODE_PATH` entries are preserved. Source-local dependencies retain normal Node precedence. Native ESM bare imports do not use `NODE_PATH`: install those dependencies next to the authored ESM project.
+
 Python/JS imports are trusted code execution. SVG resource checks and font audits do not create a source-code sandbox.
 
 ## Shared motion helpers
