@@ -146,11 +146,19 @@ class CanvasSource:
         self.process = None
         self._stderr = tempfile.TemporaryFile()
         self._buffer = bytearray()
+        # External CommonJS scenes need the same package installation as the
+        # worker. Scope this fallback to the child; retain caller search paths.
+        # Native ESM imports still use Node's normal source-local resolution.
+        worker_env = os.environ.copy()
+        module_paths = [str(HERE.parent / "node_modules")]
+        if worker_env.get("NODE_PATH"):
+            module_paths.append(worker_env["NODE_PATH"])
+        worker_env["NODE_PATH"] = os.pathsep.join(module_paths)
         try:
             self.process = subprocess.Popen(
                 ['node', '--expose-gc', str(HERE / 'canvas_worker.cjs'), str(path.resolve()), str(width), str(height), font['path'], family],
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self._stderr,
-                bufsize=0, start_new_session=True)
+                bufsize=0, start_new_session=True, env=worker_env)
             os.set_blocking(self.process.stdin.fileno(), False)
             os.set_blocking(self.process.stdout.fileno(), False)
             deadline = time.monotonic() + self.startup_timeout
