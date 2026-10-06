@@ -1,0 +1,71 @@
+{
+  "title": "拆开平均数 / Unpacking an Average",
+  "revision": "R6 compact cut",
+  "source_sha256": "2c83d9c0cbc44485d5f28559f9a985e2bd3266fb5de82443734af027df39c727",
+  "media_sha256": "16de9d1296babef624c367f61dac41bfc956114ed1df1f870813920e94e38a6f",
+  "data_sha256": "1182d2d6f73645f075b391123bc2dd91aff471eaf10ef6bf4988bc181e7759c8",
+  "duration_seconds": 23.25,
+  "dimensions": [
+    1280,
+    720
+  ],
+  "fps": 24,
+  "frames": 558,
+  "audio": "silent",
+  "complete_decode": "passed",
+  "source_time_mapping": {
+    "authored_duration_seconds": 26,
+    "source_start_seconds": 0.75,
+    "source_end_exclusive_seconds": 24,
+    "output_duration_seconds": 23.25,
+    "speed": 1,
+    "equation": "source_seconds = output_seconds + 0.75"
+  },
+  "determinism": {
+    "sample_count": 38,
+    "raster_dimensions": [
+      1280,
+      720
+    ],
+    "shuffled_actual_RGBA_hashes_equal": true,
+    "analytic_states_equal": true
+  },
+  "data_geometry_checks": {
+    "raster_shuffled_order_repeat": true,
+    "state_shuffled_order_repeat": true,
+    "all_558_output_frames_finite_coordinates": true,
+    "all_558_output_frames_conserve_12_ids_and_exact_values": true,
+    "receipt_projection_exact": true,
+    "final_projection_exact": true,
+    "axis_domain": [
+      0,
+      20
+    ],
+    "final_duplicate_A10_count": 2
+  },
+  "body_proxy_overlap": {
+    "result_px2": 0,
+    "scope": "48x40 cross-group body proxy during decisive remap, not a general collision detector"
+  },
+  "independent_review": {
+    "status": "accepted at sampled/targeted scope",
+    "R6_opened_overview_samples": 34,
+    "R6_independently_decoded_output_frames": [
+      0,
+      54,
+      105,
+      282,
+      462,
+      510,
+      557
+    ],
+    "conclusion": "The retained sequence preserves repaired cover reveal, identity-preserving remap and full sample-bound conclusion. Last frame remains readable; no new trim blocker found."
+  },
+  "limits": [
+    "One fresh-brief, review-assisted iterative application; not one-shot, broad generalization or a controlled model benchmark",
+    "Straightforward classroom geometry and pacing; not reference-level material/rendering parity",
+    "Horizontal720p; small minute labels, IDs and footnote in390px stress preview",
+    "No realtime playback or listening performed; no soundtrack",
+    "No paid API or model-cost comparison"
+  ]
+}

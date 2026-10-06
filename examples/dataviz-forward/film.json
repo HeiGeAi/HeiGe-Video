@@ -1,0 +1,628 @@
+{
+  "id": "unpacking-an-average",
+  "duration": 23.25,
+  "fps": 24,
+  "output": {
+    "width": 1280,
+    "height": 720
+  },
+  "style": "dataviz",
+  "seed": 20261006,
+  "sources": [
+    {
+      "artifact": "data.json",
+      "kind": "user supplied fictional teaching data",
+      "visible_disclosure": "虚构教学数据，不代表真实业务"
+    },
+    {
+      "artifact": "source/scene.cjs",
+      "kind": "original procedural graphics"
+    },
+    {
+      "kind": "installed font",
+      "name": "Noto Sans CJK SC Regular",
+      "license": "SIL OFL 1.1",
+      "embedded": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "A1",
+      "meaning": "One fictional A delivery",
+      "identity": {
+        "group": "A",
+        "value_minutes": 8,
+        "row_index": 0
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "A2",
+      "meaning": "One fictional A delivery",
+      "identity": {
+        "group": "A",
+        "value_minutes": 9,
+        "row_index": 1
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "A3",
+      "meaning": "One fictional A delivery",
+      "identity": {
+        "group": "A",
+        "value_minutes": 10,
+        "row_index": 2
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "A4",
+      "meaning": "One fictional A delivery",
+      "identity": {
+        "group": "A",
+        "value_minutes": 10,
+        "row_index": 3
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "A5",
+      "meaning": "One fictional A delivery",
+      "identity": {
+        "group": "A",
+        "value_minutes": 11,
+        "row_index": 4
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "A6",
+      "meaning": "One fictional A delivery",
+      "identity": {
+        "group": "A",
+        "value_minutes": 12,
+        "row_index": 5
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "B1",
+      "meaning": "One fictional B delivery",
+      "identity": {
+        "group": "B",
+        "value_minutes": 1,
+        "row_index": 0
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "B2",
+      "meaning": "One fictional B delivery",
+      "identity": {
+        "group": "B",
+        "value_minutes": 2,
+        "row_index": 1
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "B3",
+      "meaning": "One fictional B delivery",
+      "identity": {
+        "group": "B",
+        "value_minutes": 3,
+        "row_index": 2
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "B4",
+      "meaning": "One fictional B delivery",
+      "identity": {
+        "group": "B",
+        "value_minutes": 17,
+        "row_index": 3
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "B5",
+      "meaning": "One fictional B delivery",
+      "identity": {
+        "group": "B",
+        "value_minutes": 18,
+        "row_index": 4
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    },
+    {
+      "id": "B6",
+      "meaning": "One fictional B delivery",
+      "identity": {
+        "group": "B",
+        "value_minutes": 19,
+        "row_index": 5
+      },
+      "allowed_state_changes": [
+        "position",
+        "receipt length representation",
+        "visibility under cover"
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "id": "advertised-average",
+      "start": 0,
+      "end": 2.65,
+      "intention": "Establish identical advertised means",
+      "subjects": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "before": {
+        "covers": "closed"
+      },
+      "after": {
+        "covers": "closed"
+      },
+      "camera": {
+        "space": "screen",
+        "type": "locked",
+        "reason": "Keep common numerical scale legible"
+      },
+      "action": {
+        "description": "Hold two average labels"
+      },
+      "reading_windows": [
+        {
+          "start": 0,
+          "end": 2.65,
+          "text": "平均送达 10 分钟; 为什么等起来，差这么多？"
+        }
+      ],
+      "audio": [
+        {
+          "start": 0,
+          "end": 2.65,
+          "bus": "all",
+          "type": "intentional silence"
+        }
+      ],
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render / stateAt",
+        "artifact": "source/scene.cjs"
+      },
+      "source_start": 0,
+      "source_end": 3.4
+    },
+    {
+      "id": "unpack-orders",
+      "start": 2.65,
+      "end": 9.25,
+      "intention": "Reveal the underlying orders",
+      "subjects": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "before": {
+        "covers": "closed",
+        "receipts": "occluded"
+      },
+      "after": {
+        "covers": "removed",
+        "receipts": "actual lengths visible"
+      },
+      "camera": {
+        "space": "screen",
+        "type": "locked",
+        "reason": "Keep common numerical scale legible"
+      },
+      "action": {
+        "description": "Lift both covers to expose all six receipts per group"
+      },
+      "reading_windows": [
+        {
+          "start": 4.25,
+          "end": 9.25,
+          "text": "看看藏在平均数里的每一单"
+        }
+      ],
+      "audio": [
+        {
+          "start": 2.65,
+          "end": 9.25,
+          "bus": "all",
+          "type": "intentional silence"
+        }
+      ],
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render / stateAt",
+        "artifact": "source/scene.cjs"
+      },
+      "source_start": 3.4,
+      "source_end": 10
+    },
+    {
+      "id": "same-bags-new-map",
+      "start": 9.25,
+      "end": 12.55,
+      "intention": "Conserve every observation while showing distribution",
+      "subjects": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "before": {
+        "layout": "two six-row receipt ledgers"
+      },
+      "after": {
+        "layout": "one shared time domain, separate group bands"
+      },
+      "camera": {
+        "space": "screen",
+        "type": "locked",
+        "reason": "Keep common numerical scale legible"
+      },
+      "action": {
+        "description": "Shorten each receipt onto its bag endpoint; slide same bag to common minute axis"
+      },
+      "reading_windows": [],
+      "audio": [
+        {
+          "start": 9.25,
+          "end": 12.55,
+          "bus": "all",
+          "type": "intentional silence"
+        }
+      ],
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render / stateAt",
+        "artifact": "source/scene.cjs"
+      },
+      "source_start": 10,
+      "source_end": 13.3
+    },
+    {
+      "id": "range-consequence",
+      "start": 12.55,
+      "end": 17.25,
+      "intention": "Read concentration versus two extremes",
+      "subjects": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "before": {
+        "layout": "settled common domain"
+      },
+      "after": {
+        "ranges": "A 8–12, B 1–3 and 17–19"
+      },
+      "camera": {
+        "space": "screen",
+        "type": "locked",
+        "reason": "Keep common numerical scale legible"
+      },
+      "action": {
+        "description": "Draw data-derived range brackets"
+      },
+      "reading_windows": [
+        {
+          "start": 14.05,
+          "end": 17.25,
+          "text": "同样 10 分钟，分布却不同"
+        }
+      ],
+      "audio": [
+        {
+          "start": 12.55,
+          "end": 17.25,
+          "bus": "all",
+          "type": "intentional silence"
+        }
+      ],
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render / stateAt",
+        "artifact": "source/scene.cjs"
+      },
+      "source_start": 13.3,
+      "source_end": 18
+    },
+    {
+      "id": "same-mean",
+      "start": 17.25,
+      "end": 19.25,
+      "intention": "Reconcile the distribution with both reported means",
+      "subjects": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "before": {
+        "mean": "unmarked"
+      },
+      "after": {
+        "mean": "both 10; total60/count6"
+      },
+      "camera": {
+        "space": "screen",
+        "type": "locked",
+        "reason": "Keep common numerical scale legible"
+      },
+      "action": {
+        "description": "Reveal shared mean line and exact arithmetic"
+      },
+      "reading_windows": [
+        {
+          "start": 18.45,
+          "end": 19.25,
+          "text": "平均 10 分钟; 60 ÷ 6 = 10"
+        }
+      ],
+      "audio": [
+        {
+          "start": 17.25,
+          "end": 19.25,
+          "bus": "all",
+          "type": "intentional silence"
+        }
+      ],
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render / stateAt",
+        "artifact": "source/scene.cjs"
+      },
+      "source_start": 18,
+      "source_end": 20
+    },
+    {
+      "id": "different-wait",
+      "start": 19.25,
+      "end": 23.25,
+      "intention": "Connect numerical spread to waiting experience",
+      "subjects": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "before": {
+        "data": "unchanged"
+      },
+      "after": {
+        "claim": "restricted to six fictional orders in each service"
+      },
+      "camera": {
+        "space": "screen",
+        "type": "locked",
+        "reason": "Keep common numerical scale legible"
+      },
+      "action": {
+        "description": "Settle final conclusion without deleting any records"
+      },
+      "reading_windows": [
+        {
+          "start": 20.05,
+          "end": 23.25,
+          "text": "平均数相同，等待波动不同; 这 6 单里，A 更稳定；B 有快有慢"
+        }
+      ],
+      "audio": [
+        {
+          "start": 19.25,
+          "end": 23.25,
+          "bus": "all",
+          "type": "intentional silence"
+        }
+      ],
+      "draw_code": {
+        "language": "javascript",
+        "entrypoint": "render / stateAt",
+        "artifact": "source/scene.cjs"
+      },
+      "source_start": 20,
+      "source_end": 24
+    }
+  ],
+  "events": [
+    {
+      "id": "cover-lift",
+      "time": 2.65,
+      "source_time": 3.4
+    },
+    {
+      "id": "receipts-revealed",
+      "time": 4.25,
+      "source_time": 5
+    },
+    {
+      "id": "reencode-start",
+      "time": 9.25,
+      "source_time": 10
+    },
+    {
+      "id": "reencode-settled",
+      "time": 12.55,
+      "source_time": 13.3
+    },
+    {
+      "id": "range-brackets",
+      "time": 13.25,
+      "source_time": 14
+    },
+    {
+      "id": "mean-revealed",
+      "time": 17.25,
+      "source_time": 18
+    },
+    {
+      "id": "conclusion",
+      "time": 19.25,
+      "source_time": 20
+    }
+  ],
+  "qa_targets": [
+    {
+      "time": 0,
+      "reason": "opening",
+      "source_time": 0.75
+    },
+    {
+      "time": 3.45,
+      "reason": "cover midpoint",
+      "source_time": 4.2
+    },
+    {
+      "time": 5.25,
+      "reason": "receipt geometry",
+      "source_time": 6
+    },
+    {
+      "time": 9.25,
+      "reason": "morph start",
+      "source_time": 10
+    },
+    {
+      "time": 10.75,
+      "reason": "morph intermediate",
+      "source_time": 11.5
+    },
+    {
+      "time": 12.55,
+      "reason": "bag mapping",
+      "source_time": 13.3
+    },
+    {
+      "time": 15.25,
+      "reason": "ranges",
+      "source_time": 16
+    },
+    {
+      "time": 18.75,
+      "reason": "mean",
+      "source_time": 19.5
+    },
+    {
+      "time": 23.2083333333,
+      "reason": "last encoded frame",
+      "source_time": 23.9583333333
+    }
+  ],
+  "implementation_map": {
+    "uncover": "cues3.4–5; moving covers clipped to physical ledger aperture y195–635",
+    "morph": "global cues10–13.3; A pose10–11.55; B pose10.4–13.3, bounded vertical route for B1–B3; group labels fade before moving anchor",
+    "ranges": "cues14–14.8",
+    "mean": "cues18–19.2",
+    "ending": "Authored title at source20; authored hold20–26; delivered hold source20–24 (output19.25–23.25)"
+  },
+  "compositor": "Single absolute-time render, continuous canvas, no hard cuts; ordered drawing with save/restore.",
+  "authored_duration": 26,
+  "source_time_mapping": "source seconds = output seconds + 0.75; trim ends at source24; no speed change",
+  "delivery_frames": 558,
+  "review_assisted_iteration": "After independent review of r4/r5, opening hold shortened by0.75s and ending hold by2s. This is not a one-shot or controlled model benchmark."
+}
