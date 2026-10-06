@@ -3,6 +3,7 @@ import argparse
 from contextlib import contextmanager
 import json
 import math
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -36,6 +37,36 @@ class CanvasV3Tests(unittest.TestCase):
                 yield source
             finally:
                 source.close()
+
+    def test_external_commonjs_scene_uses_runtime_local_dependencies_without_node_path(self):
+        # Separate runtime installation and scene trees; no global NODE_PATH.
+        # Symlinking the installed package avoids a network install in a test.
+        package = Path(subprocess.check_output(
+            ['node', '-p', "require.resolve('@napi-rs/canvas/package.json')"], text=True).strip()).parent
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            runtime = base / 'installation' / 'runtime'
+            runtime.mkdir(parents=True)
+            for name in ('canvas_worker.cjs', 'motion.cjs'):
+                shutil.copy2(ROOT / name, runtime / name)
+            scope = runtime.parent / 'node_modules' / '@napi-rs'
+            scope.mkdir(parents=True)
+            (scope / 'canvas').symlink_to(package, target_is_directory=True)
+            scene = base / 'separate-project' / 'scene.cjs'
+            scene.parent.mkdir()
+            scene.write_text("const {createCanvas}=require('@napi-rs/canvas'); "
+                             "const layer=createCanvas(20,20); const c=layer.getContext('2d'); "
+                             "c.fillStyle='#00ff00'; c.fillRect(0,0,20,20); "
+                             "exports.DURATION=2; exports.render=ctx=>ctx.drawImage(layer,0,0);")
+            with mock.patch.dict(os.environ):
+                os.environ.pop('NODE_PATH', None)
+                with mock.patch.object(rv, 'HERE', runtime):
+                    source = rv.CanvasSource(scene, 'Noto Sans CJK SC', 20, 20, self.font)
+                    try:
+                        self.assertEqual(source.frame(.5)[0], bytes([0,255,0,255])*400)
+                    finally:
+                        source.close()
+                self.assertNotIn('NODE_PATH', os.environ)
 
     def test_duration_aliases_declared_text_and_cut_metadata(self):
         for key in ('DURATION', 'duration', 'SECONDS'):
