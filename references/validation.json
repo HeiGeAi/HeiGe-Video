@@ -1,0 +1,131 @@
+{
+  "checked_at_utc": "2026-10-05T16:20:32.286461+00:00",
+  "stage": "v2-RC frozen source package; five technical continuous passes with bounded independent actual-image acceptance",
+  "skill_creator_validation": "passed",
+  "package_links_and_json": "passed",
+  "manifest_tests": {
+    "test_methods": 8,
+    "passed": 8,
+    "scope": "schema keyword subset, type rejection, nested required fields, identity, code path, coverage, event/audio time bounds; not rendering or code safety",
+    "failed": 0,
+    "duration_seconds": 0.006
+  },
+  "runtime_packaged_relocation_tests": {
+    "test_methods": 11,
+    "passed": 11,
+    "failed": 0,
+    "duration_seconds": 5.877,
+    "log": "package-runtime-tests.txt",
+    "scope": "Final synchronized runtime and final five-source snapshot, with actual repeated smoke encode, dataclass/import lifecycle, labels and deterministic raster tests"
+  },
+  "independent_skill_review": {
+    "completed": true,
+    "brief": "20-second Chinese whiteboard or ink explainer; assess cheap-agent/Opus claims",
+    "documentation_result": "No unsupported model-parity promise; duration adaptation, ordinary Chinese text and silent-output limitations clear",
+    "found_issues": [
+      {
+        "issue": "Manifest validator accepted invalid nested types and timing",
+        "resolution": "fixed with negative tests"
+      },
+      {
+        "issue": "Dynamic Python module registration missing; dataclass sources crash",
+        "resolution": "fixed in canonical runtime, synchronized here, and covered by passing dataclass/annotation/lifetime/failure-cleanup regressions"
+      },
+      {
+        "issue": "Sibling Python helper imports not automatically found",
+        "resolution": "documented self-contained/package-qualified source requirement"
+      },
+      {
+        "issue": "Canvas source duration fixed at30 seconds",
+        "resolution": "documented; avoid --fit-time for a custom20-second timeline"
+      }
+    ]
+  },
+  "artistic_acceptance": "not established by code tests",
+  "third_party_reference_media_included": false,
+  "cross_platform_compatibility": "unverified outside the tested cloud dependency environment",
+  "dependencies": {
+    "python": "3.12.14",
+    "Pillow": "12.3.0",
+    "fontTools": "4.61.1",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "librsvg": "2.60.0",
+    "cairo": "1.18.4",
+    "node": "v24.19.0",
+    "@napi-rs/canvas": "0.1.100"
+  },
+  "runtime_packaging_change": "Only DEFAULT_SOURCE_DIR changed from sibling research directory to package-local examples/prototypes.",
+  "code_hashes": {
+    "examples/dark-keynote/film.py": "45817ba538bfe20a4237e662373e412533e76f264938e8b82645ad6044922aa3",
+    "examples/dataviz/check_example.py": "580cfaf130740bc94d63bd7b43e1eacd0a52039fb45efd11172b4e571755165f",
+    "examples/dataviz/film.py": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+    "examples/prototypes/ink.py": "584fa3ad008417d7bb753768af059a7fbf58dff8d2311200b94d2534924a315e",
+    "examples/prototypes/tech.py": "0b79cbed7cbc69e510ba143938a54d894feb98c52bcaefacb42280bafd3866e4",
+    "examples/prototypes/whiteboard.py": "dfaf53a9fdf307ca645a74aa85a5ce5d03990ca545f72f7e766a7e2b6f924e8d",
+    "runtime/canvas_worker.cjs": "f4b0e69cbae9ffc654a0a3b1eafa6a4fd8e5abfa35b2a16cf908e991f0ba3ef1",
+    "runtime/examples/canvas_smoke.cjs": "a52814f73c7e5b5ac6748723b82e16bdd5148773cae62dac19dc4991dd528fab",
+    "runtime/raster.py": "fb9bca2165af00d4d29cbfa8135e84ae8c22c5e25c692cdab39b407cf6366d64",
+    "runtime/render_video.py": "e840d0aac91ee882e9060e8240d75fd36f743771ce32e1d06b4f5c051f394404",
+    "runtime/tests/test_runtime.py": "b823614393200ac5b8a0ae0aab3490652a64270ef092c354636205261032e9cf",
+    "scripts/export_prompt.py": "28459c79e1c3db62089536533dace60ff3a6131920ac86fba54b5b6830fdb79e",
+    "scripts/sound_sketch.py": "2f8d643f2e2b528d77186d1dd748c05b575f2c2648cbce0e4b95da1f3156862d",
+    "scripts/test_export_prompt.py": "e73a6ef71d33f2087c5ecb9bb4ff59dff1d406ddfcf9bd5d94e71287bf43037d",
+    "scripts/test_validate_package.py": "4ef140f5bb388f5a5196565505f4b2a0dae1266214c2a8f286f68475a3cfc806",
+    "scripts/validate_package.py": "60a3a29bf4586bc43925bac8e101a5eba62f41b13f647ab3a619b2cf6e13031f"
+  },
+  "dataviz_packaged_recheck": "examples/dataviz/provenance.json",
+  "offline_prompt_export": {
+    "status": "pass",
+    "messages": 2,
+    "network_requests": 0,
+    "scope": "offline payload export, no SDK/client calls",
+    "concrete_runtime_adapter_included": true,
+    "exact_shot_schema_included": true,
+    "default_output_contract": "self-contained Python DURATION/FONT/render(t) -> complete SVG",
+    "token_budget": "caller must verify provider budget; helper reports characters"
+  },
+  "optional_audio_test": {
+    "styles": [
+      "tech",
+      "whiteboard",
+      "ink",
+      "keynote"
+    ],
+    "duration_seconds_each": 30,
+    "stereo_samples_each": 1440000,
+    "numpy": "2.3.5",
+    "deterministic": true,
+    "finite": true,
+    "peak_below_clipping": true,
+    "listening": "not performed"
+  },
+  "example_status": "example-status.json",
+  "script_tests": {
+    "manifest_methods": 8,
+    "prompt_export_methods": 2,
+    "passed": 10,
+    "failed": 0,
+    "duration_seconds": 0.089
+  },
+  "dense_extraction_recipe": {
+    "fps": 24,
+    "boundary_seconds": 6,
+    "indices": [
+      132,
+      155
+    ],
+    "expected_frames": 24,
+    "actual_frames": 24,
+    "status": "passed",
+    "visual_review": "not claimed by extraction"
+  },
+  "independent_followup_review": {
+    "status": "targeted fixes confirmed; no blocking regression",
+    "fixed": [
+      "prompt export missing concrete adapter/schema",
+      "dataviz settled-state false pass",
+      "per-face glyph coverage",
+      "time/end ordering and start/duration overflow"
+    ]
+  }
+}

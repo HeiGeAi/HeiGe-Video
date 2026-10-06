@@ -1,0 +1,16 @@
+test_canvas_out_of_order_repeat (test_runtime.RuntimeTests.test_canvas_out_of_order_repeat) ... ok
+test_color_channels_and_viewport (test_runtime.RuntimeTests.test_color_channels_and_viewport) ... ok
+test_custom_dataclass_annotations_and_module_lifetime (test_runtime.RuntimeTests.test_custom_dataclass_annotations_and_module_lifetime) ... ok
+test_custom_label_is_display_only_and_filename_is_fixed (test_runtime.RuntimeTests.test_custom_label_is_display_only_and_filename_is_fixed) ... ok
+test_dimensions_and_fps_rejection (test_runtime.RuntimeTests.test_dimensions_and_fps_rejection) ... ok
+test_encoded_smoke (test_runtime.RuntimeTests.test_encoded_smoke) ... ok
+test_failed_custom_import_cleans_module_registration (test_runtime.RuntimeTests.test_failed_custom_import_cleans_module_registration) ... ok
+test_label_rejects_control_characters_and_excessive_length (test_runtime.RuntimeTests.test_label_rejects_control_characters_and_excessive_length) ... ok
+test_refuse_nonempty_output (test_runtime.RuntimeTests.test_refuse_nonempty_output) ... ok
+test_safety_external_resources (test_runtime.RuntimeTests.test_safety_external_resources) ... ok
+test_three_sources_out_of_order_and_raster_repeat (test_runtime.RuntimeTests.test_three_sources_out_of_order_and_raster_repeat) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 5.877s
+
+OK

@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Open motion film manifest",
+  "description": "Open creative contract; no fixed shot-type enum. Structural validity does not validate code execution, style, factual accuracy or visual quality.",
+  "type": "object",
+  "required": [
+    "id",
+    "duration",
+    "fps",
+    "output",
+    "style",
+    "seed",
+    "sources",
+    "objects",
+    "shots"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "duration": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "fps": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "style": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "meaning",
+          "identity"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "identity": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "start",
+          "end",
+          "intention",
+          "subjects",
+          "before",
+          "after",
+          "camera",
+          "action",
+          "draw_code"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "intention": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subjects": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "before": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "after": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "camera": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "action": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "draw_code": {
+            "type": "object",
+            "required": [
+              "language",
+              "entrypoint"
+            ],
+            "properties": {
+              "language": {
+                "type": "string",
+                "minLength": 1
+              },
+              "entrypoint": {
+                "type": "string",
+                "minLength": 1
+              },
+              "inline": {
+                "type": "string",
+                "minLength": 1
+              },
+              "artifact": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "oneOf": [
+              {
+                "required": [
+                  "inline"
+                ],
+                "not": {
+                  "required": [
+                    "artifact"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "artifact"
+                ],
+                "not": {
+                  "required": [
+                    "inline"
+                  ]
+                }
+              }
+            ],
+            "additionalProperties": true
+          },
+          "reading_windows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "audio": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "transitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "qa_targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

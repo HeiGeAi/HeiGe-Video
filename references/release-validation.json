@@ -1,0 +1,353 @@
+{
+  "project": "HeiGe Video",
+  "skill_name": "heige-video",
+  "release": "v2-RC",
+  "checked_at_utc": "2026-10-06T00:51:56.846775+00:00",
+  "scope": "Public-release local checks of the original source package plus final demo MP4s; no new model calls, full movie rerenders, real-time playback or listening review.",
+  "delivered_source_unchanged": true,
+  "release_changes": [
+    "Public branding and skill identifier updated; matching package-validator check updated",
+    "Stale research-only implementation wording corrected to the existing bounded review evidence",
+    "Original five hash-matched MP4 files added without recompression; demo documentation and checksums added",
+    "Source-package-only wording updated; original copyright and third-party notices retained",
+    "Local caches/credentials/output ignore rules added; bounded GitHub Actions test workflow added"
+  ],
+  "runtime_tests": {
+    "command": "python3 -m unittest discover -s runtime/tests -v",
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 5.858,
+    "scope": "SVG validation/rasterization, all three presets deterministic seek, optional Canvas deterministic seek, trusted-source import lifetime, argument/output protection, repeated short actual MP4 encoding"
+  },
+  "script_tests": {
+    "command": "python3 -m unittest discover -s scripts -p 'test_*.py' -v",
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.124,
+    "scope": "8 manifest checks and 2 offline prompt-export checks"
+  },
+  "manifest_check": {
+    "command": "python3 scripts/validate_package.py --manifest examples/dataviz/shot-manifest.json",
+    "status": "pass",
+    "shots": 6
+  },
+  "package_structure_check": {
+    "command": "python3 scripts/validate_package.py",
+    "status": "pass",
+    "scope": "All staged Markdown links, JSON and package structure passed before the root README files were added; rerun after README integration"
+  },
+  "doctor": {
+    "svg_ready": true,
+    "optional_canvas_available": true,
+    "dependencies": {
+      "python": "3.12.14",
+      "Pillow": "12.3.0",
+      "fontTools": "4.61.1",
+      "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+      "librsvg": "2.60.0",
+      "cairo": "1.18.4",
+      "node": "v24.19.0",
+      "@napi-rs/canvas": "0.1.100"
+    }
+  },
+  "dataviz_check": {
+    "status": "pass",
+    "source_sha256": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+    "data_sha256": "cb65addbfdc76407263d8398f4ce88407a49ec91fb2361b719a06c63942aad20",
+    "manifest_shots": 6,
+    "settled_initial_final_states_checked": true,
+    "actual_bar_width_mean_rule_and_value_label_checks": 480,
+    "font_coverage_checked_per_used_face": true,
+    "all_frame_data_identity_and_text_bounds": 480,
+    "determinism_timestamps": [
+      0,
+      1,
+      1.8,
+      2,
+      4,
+      6,
+      6.2,
+      6.5,
+      7.5,
+      8.8,
+      9,
+      11.69,
+      11.7,
+      12.5,
+      15.5,
+      16.2,
+      19.958333333333332
+    ],
+    "svg_and_raster_repeat_equal": true,
+    "frame18_raw_sha256": "c20b20c922f017677cc0a60e6da3264ec8313a502bc6a14dd9fd52766662b3ed",
+    "font_faces": {
+      "Regular": {
+        "family": "Noto Sans CJK SC",
+        "filename": "NotoSansCJK-Regular.ttc",
+        "index": 2,
+        "sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a"
+      },
+      "Bold": {
+        "family": "Noto Sans CJK SC",
+        "filename": "NotoSansCJK-Bold.ttc",
+        "index": 2,
+        "sha256": "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb"
+      }
+    },
+    "missing_codepoints": [],
+    "out_of_bounds": [],
+    "visual_review": "not performed by this script",
+    "playback": "not tested",
+    "audio_listening": "not tested",
+    "encoded_video": {
+      "sha256": "66cc4707543bdae9dee039d81154f7cc6f50e538532b24d795da1d698aa5a9a4",
+      "full_decode": "pass",
+      "frames": 480,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "duration": 20,
+      "fps": 24,
+      "audio_tracks": 0
+    }
+  },
+  "demo_verification": [
+    {
+      "style": "swiss-tech",
+      "file": "demos/swiss-tech.mp4",
+      "sha256": "813cac3dc17b4551c9911e97aa4c2907cf9ae04d48394c212c2303414d4fb8d6",
+      "bytes": 996137,
+      "source": "examples/prototypes/tech.py",
+      "source_sha256": "0b79cbed7cbc69e510ba143938a54d894feb98c52bcaefacb42280bafd3866e4",
+      "source_hash_matches_record": true,
+      "media_hash_matches_record": true,
+      "full_decode": "pass",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "24/1",
+          "duration": "30.000000",
+          "nb_read_frames": "720"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "avg_frame_rate": "0/0",
+          "duration": "30.000000",
+          "nb_read_frames": "1407",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "container_metadata": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    },
+    {
+      "style": "whiteboard",
+      "file": "demos/whiteboard.mp4",
+      "sha256": "2a2e6f3e7930205b0b196049ab58e1abc7d229209780c9afee399bb8128da631",
+      "bytes": 1706900,
+      "source": "examples/prototypes/whiteboard.py",
+      "source_sha256": "dfaf53a9fdf307ca645a74aa85a5ce5d03990ca545f72f7e766a7e2b6f924e8d",
+      "source_hash_matches_record": true,
+      "media_hash_matches_record": true,
+      "full_decode": "pass",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "24/1",
+          "duration": "30.000000",
+          "nb_read_frames": "720"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "avg_frame_rate": "0/0",
+          "duration": "30.000000",
+          "nb_read_frames": "1407",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "container_metadata": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    },
+    {
+      "style": "ink",
+      "file": "demos/ink.mp4",
+      "sha256": "a07b07c72354ef9df3c359948818eee92a6d8c971afb84ef77148c7b9b544044",
+      "bytes": 4462872,
+      "source": "examples/prototypes/ink.py",
+      "source_sha256": "584fa3ad008417d7bb753768af059a7fbf58dff8d2311200b94d2534924a315e",
+      "source_hash_matches_record": true,
+      "media_hash_matches_record": true,
+      "full_decode": "pass",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "24/1",
+          "duration": "30.000000",
+          "nb_read_frames": "720"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "avg_frame_rate": "0/0",
+          "duration": "30.000000",
+          "nb_read_frames": "1407",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "container_metadata": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    },
+    {
+      "style": "dark-keynote",
+      "file": "demos/dark-keynote.mp4",
+      "sha256": "9efbb5f4e43d3cee4beac740ae9aa724d0c23e5c926cf9f8662bd9a2e1ffefc8",
+      "bytes": 1472715,
+      "source": "examples/dark-keynote/film.py",
+      "source_sha256": "45817ba538bfe20a4237e662373e412533e76f264938e8b82645ad6044922aa3",
+      "source_hash_matches_record": true,
+      "media_hash_matches_record": true,
+      "full_decode": "pass",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "24/1",
+          "duration": "30.000000",
+          "nb_read_frames": "720"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "avg_frame_rate": "0/0",
+          "duration": "30.000000",
+          "nb_read_frames": "1407",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ],
+      "container_metadata": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf61.7.103"
+      }
+    },
+    {
+      "style": "dataviz",
+      "file": "demos/dataviz.mp4",
+      "sha256": "66cc4707543bdae9dee039d81154f7cc6f50e538532b24d795da1d698aa5a9a4",
+      "bytes": 292254,
+      "source": "examples/dataviz/film.py",
+      "source_sha256": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+      "source_hash_matches_record": true,
+      "media_hash_matches_record": true,
+      "full_decode": "pass",
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "24/1",
+          "duration": "20.000000",
+          "nb_read_frames": "480"
+        }
+      ],
+      "container_metadata": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41"
+      }
+    }
+  ],
+  "distribution_audit": {
+    "credential_or_private_path_matches": 0,
+    "symlinks": 0,
+    "third_party_reference_media_included": false,
+    "fonts_or_native_libraries_included": false,
+    "original_code_and_demos_license": "MIT; existing heige-motion-kit contributors copyright retained",
+    "third_party_notices_retained": true,
+    "reference_media_rights": "Not granted by repository references; no such reference media distributed",
+    "limits": "Local source and metadata review, not a forensic guarantee of absence or independent legal clearance; public reference URL availability was not rechecked."
+  },
+  "ci": {
+    "workflow": ".github/workflows/validate.yml",
+    "runner": "ubuntu-24.04",
+    "status": "authored; not yet executed on GitHub",
+    "scope": "Dependency doctor, package/manifest validators, 11 runtime tests, 10 script tests, demo hashes; no full-length rendering or model API calls",
+    "workflow_yaml": "parsed successfully",
+    "registry_verification": {
+      "checked_date": "2026-10-06",
+      "Pillow==12.3.0": {
+        "status": "public release verified; CPython 3.12 manylinux x86_64 wheel listed",
+        "source": "https://pypi.org/project/pillow/12.3.0/"
+      },
+      "fonttools==4.61.1": {
+        "status": "public release verified; CPython 3.12 Linux and pure Python wheels listed",
+        "source": "https://pypi.org/project/fonttools/4.61.1/"
+      },
+      "@napi-rs/canvas@0.1.100": {
+        "status": "public npm version history and upstream release verified; Linux x86_64 GNU binary listed",
+        "source": "https://www.npmjs.com/package/%40napi-rs/canvas?activeTab=versions",
+        "linux_binary": "https://www.npmjs.com/package/%40napi-rs/canvas-linux-x64-gnu?activeTab=versions",
+        "upstream_release": "https://github.com/Brooooooklyn/canvas/releases/tag/v0.1.100"
+      },
+      "limits": "Metadata and public listings checked; clean registry install and remote GitHub Actions execution are not claimed."
+    }
+  },
+  "code_hashes": {
+    "examples/dark-keynote/film.py": "45817ba538bfe20a4237e662373e412533e76f264938e8b82645ad6044922aa3",
+    "examples/dataviz/check_example.py": "580cfaf130740bc94d63bd7b43e1eacd0a52039fb45efd11172b4e571755165f",
+    "examples/dataviz/film.py": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+    "examples/prototypes/ink.py": "584fa3ad008417d7bb753768af059a7fbf58dff8d2311200b94d2534924a315e",
+    "examples/prototypes/tech.py": "0b79cbed7cbc69e510ba143938a54d894feb98c52bcaefacb42280bafd3866e4",
+    "examples/prototypes/whiteboard.py": "dfaf53a9fdf307ca645a74aa85a5ce5d03990ca545f72f7e766a7e2b6f924e8d",
+    "runtime/canvas_worker.cjs": "f4b0e69cbae9ffc654a0a3b1eafa6a4fd8e5abfa35b2a16cf908e991f0ba3ef1",
+    "runtime/examples/canvas_smoke.cjs": "a52814f73c7e5b5ac6748723b82e16bdd5148773cae62dac19dc4991dd528fab",
+    "runtime/raster.py": "fb9bca2165af00d4d29cbfa8135e84ae8c22c5e25c692cdab39b407cf6366d64",
+    "runtime/render_video.py": "e840d0aac91ee882e9060e8240d75fd36f743771ce32e1d06b4f5c051f394404",
+    "runtime/tests/test_runtime.py": "b823614393200ac5b8a0ae0aab3490652a64270ef092c354636205261032e9cf",
+    "scripts/export_prompt.py": "28459c79e1c3db62089536533dace60ff3a6131920ac86fba54b5b6830fdb79e",
+    "scripts/sound_sketch.py": "2f8d643f2e2b528d77186d1dd748c05b575f2c2648cbce0e4b95da1f3156862d",
+    "scripts/test_export_prompt.py": "e73a6ef71d33f2087c5ecb9bb4ff59dff1d406ddfcf9bd5d94e71287bf43037d",
+    "scripts/test_validate_package.py": "4ef140f5bb388f5a5196565505f4b2a0dae1266214c2a8f286f68475a3cfc806",
+    "scripts/validate_package.py": "6b79b8e8c22971f02878d35c887e404623e96f04288a31c734a8afda7e944cb1"
+  },
+  "known_limits": [
+    "Real-time playback and actual audio listening not performed",
+    "Dataviz supporting text needs redesign for 390-pixel-wide display",
+    "Cross-platform support not established beyond recorded cloud runtime; the GitHub workflow needs its first run",
+    "No controlled model-cost or visual-quality parity benchmark"
+  ]
+}

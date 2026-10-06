@@ -1,0 +1,263 @@
+{
+  "release": "v2-RC",
+  "updated_at_utc": "2026-10-05T16:20:32.284600+00:00",
+  "scope": "Five authored source examples with technical continuous passes and independent sampled-image/targeted acceptance at recorded scope. No full playback/listening or named-model parity claim.",
+  "examples": [
+    {
+      "id": "swiss-tech-notes",
+      "style": "swiss-tech",
+      "source": "examples/prototypes/tech.py",
+      "source_sha256": "0b79cbed7cbc69e510ba143938a54d894feb98c52bcaefacb42280bafd3866e4",
+      "duration_seconds": 30,
+      "font_family": "Noto Sans CJK SC",
+      "source_included": true,
+      "reference_media_included": false,
+      "output_media_bundled": true,
+      "technical_continuous": {
+        "status": "pass",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "fps": "24",
+        "frames": 720,
+        "duration": 30.0,
+        "source_hash_matched": true
+      },
+      "director_review": "Targeted actual-frame repairs accepted: clear glyph handoff, staged focus, concrete two-note relationship, parked-graph ending; no reference-parity claim",
+      "real_time_playback": "not tested",
+      "audio_listening": "not tested",
+      "model_identifier": "not exposed; no model-quality claim",
+      "reference_output": {
+        "filename": "tech-sound.mp4",
+        "sha256": "813cac3dc17b4551c9911e97aa4c2907cf9ae04d48394c212c2303414d4fb8d6",
+        "streams": [
+          {
+            "type": "video",
+            "duration_seconds": 30.0,
+            "codec": "h264"
+          },
+          {
+            "type": "audio",
+            "duration_seconds": 30.0,
+            "codec": "aac"
+          }
+        ]
+      },
+      "render_performance": {
+        "reported_wall_seconds": 51.17,
+        "scope": "Actual recorded render in the tested cloud environment; includes that run's workload and is not a controlled cross-style speed or monetary-cost benchmark",
+        "revision": "matching source shown in this record"
+      },
+      "bundled_demo": "demos/swiss-tech.mp4"
+    },
+    {
+      "id": "white-light-board",
+      "style": "whiteboard",
+      "source": "examples/prototypes/whiteboard.py",
+      "source_sha256": "dfaf53a9fdf307ca645a74aa85a5ce5d03990ca545f72f7e766a7e2b6f924e8d",
+      "duration_seconds": 30,
+      "font_family": "Noto Sans CJK SC",
+      "source_included": true,
+      "reference_media_included": false,
+      "output_media_bundled": true,
+      "technical_continuous": {
+        "status": "pass",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "fps": "24",
+        "frames": 720,
+        "duration": 30.0,
+        "source_hash_matched": true
+      },
+      "director_review": "Targeted actual-frame repairs accepted: serial construction, no stray prism tail, readable final takeaway; simplified vector-marker material",
+      "real_time_playback": "not tested",
+      "audio_listening": "not tested",
+      "model_identifier": "not exposed; no model-quality claim",
+      "reference_output": {
+        "filename": "whiteboard-sound.mp4",
+        "sha256": "2a2e6f3e7930205b0b196049ab58e1abc7d229209780c9afee399bb8128da631",
+        "streams": [
+          {
+            "type": "video",
+            "duration_seconds": 30.0,
+            "codec": "h264"
+          },
+          {
+            "type": "audio",
+            "duration_seconds": 30.0,
+            "codec": "aac"
+          }
+        ]
+      },
+      "render_performance": {
+        "reported_wall_seconds": 145.62,
+        "scope": "Actual recorded render in the tested cloud environment; includes that run's workload and is not a controlled cross-style speed or monetary-cost benchmark",
+        "revision": "matching source shown in this record"
+      },
+      "bundled_demo": "demos/whiteboard.mp4"
+    },
+    {
+      "id": "seed-journey",
+      "style": "ink",
+      "source": "examples/prototypes/ink.py",
+      "source_sha256": "584fa3ad008417d7bb753768af059a7fbf58dff8d2311200b94d2534924a315e",
+      "duration_seconds": 30,
+      "font_family": "Noto Serif CJK SC",
+      "source_included": true,
+      "reference_media_included": false,
+      "output_media_bundled": true,
+      "technical_continuous": {
+        "status": "pass",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "fps": "24",
+        "frames": 720,
+        "duration": 30.0,
+        "source_hash_matched": true,
+        "render_seconds": 991.92
+      },
+      "director_review": "Pass: R2 quarter-second growth/identity review plus bounded R3 final-tail spotcheck; caption clear at28.25/28.5s, full wide settled at29.0/29.5/29.958s, no new blocking defect. Coherent coded brush-style narrative; grainy vector/brush approximation, not true wet-ink diffusion.",
+      "real_time_playback": "not tested",
+      "audio_listening": "not tested",
+      "model_identifier": "not exposed; no model-quality claim",
+      "reference_output": {
+        "filename": "ink-sound.mp4",
+        "sha256": "a07b07c72354ef9df3c359948818eee92a6d8c971afb84ef77148c7b9b544044",
+        "streams": [
+          {
+            "type": "video",
+            "duration_seconds": 30.0,
+            "codec": "h264"
+          },
+          {
+            "type": "audio",
+            "duration_seconds": 30.0,
+            "codec": "aac"
+          }
+        ]
+      },
+      "render_performance": {
+        "reported_wall_seconds": 991.92,
+        "scope": "Actual final R3 render wall time in tested cloud environment; workload-dependent, not cost evidence",
+        "revision": "polished final full rerender"
+      },
+      "bundled_demo": "demos/ink.mp4"
+    },
+    {
+      "id": "one-beam-concept",
+      "style": "dark-keynote",
+      "source": "examples/dark-keynote/film.py",
+      "source_sha256": "45817ba538bfe20a4237e662373e412533e76f264938e8b82645ad6044922aa3",
+      "duration_seconds": 30,
+      "font_family": "Noto Sans CJK SC",
+      "source_included": true,
+      "reference_media_included": false,
+      "output_media_bundled": true,
+      "technical_continuous": {
+        "status": "pass",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "fps": "24",
+        "frames": 720,
+        "duration": 30.0,
+        "source_hash_matched": true
+      },
+      "director_review": "R4 targeted actual-frame repairs accepted; readable optical brief, full-stage causal scene, honest completed-preview timeline; credible concept/explainer",
+      "real_time_playback": "not tested",
+      "audio_listening": "not tested",
+      "model_identifier": "not exposed; no model-quality claim",
+      "reference_output": {
+        "filename": "keynote-sound.mp4",
+        "sha256": "9efbb5f4e43d3cee4beac740ae9aa724d0c23e5c926cf9f8662bd9a2e1ffefc8",
+        "streams": [
+          {
+            "type": "video",
+            "duration_seconds": 30.0,
+            "codec": "h264"
+          },
+          {
+            "type": "audio",
+            "duration_seconds": 30.0,
+            "codec": "aac"
+          }
+        ]
+      },
+      "render_performance": {
+        "reported_wall_seconds": 95.33,
+        "scope": "Actual recorded render in the tested cloud environment; includes that run's workload and is not a controlled cross-style speed or monetary-cost benchmark",
+        "revision": "matching source shown in this record"
+      },
+      "bundled_demo": "demos/dark-keynote.mp4"
+    },
+    {
+      "id": "mean-median",
+      "style": "dataviz",
+      "source": "examples/dataviz/film.py",
+      "source_sha256": "828a13f6d15d9a9bf6a9d5b8d125af2d2a4b2dda55e0d69f73e086c1b2493645",
+      "duration_seconds": 20,
+      "font_family": "Noto Sans CJK SC",
+      "source_included": true,
+      "reference_media_included": false,
+      "output_media_bundled": true,
+      "technical_continuous": {
+        "status": "pass",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "fps": 24,
+        "frames": 480,
+        "duration": 20,
+        "source_hash_matched": true,
+        "data_text_identity_checked_frames": 480,
+        "determinism_timestamps": 17,
+        "packaged_frame18_matches_forward_test": true
+      },
+      "director_review": "Independent actual-frame review passed at1280x720 after repairs;390px support text needs revision",
+      "real_time_playback": "not tested",
+      "audio_listening": "not tested",
+      "model_identifier": "not exposed; no model-quality claim",
+      "reference_output": {
+        "filename": "mean-median-20s.mp4",
+        "sha256": "66cc4707543bdae9dee039d81154f7cc6f50e538532b24d795da1d698aa5a9a4",
+        "streams": [
+          {
+            "type": "video",
+            "duration_seconds": 20,
+            "codec": "h264"
+          }
+        ]
+      },
+      "audio": "intentional silence, no audio track",
+      "provenance": "examples/dataviz/provenance.json",
+      "render_performance": {
+        "reported_wall_seconds": 20.42,
+        "scope": "Actual recorded render in the tested cloud environment; includes that run's workload and is not a controlled cross-style speed or monetary-cost benchmark",
+        "revision": "matching source shown in this record"
+      },
+      "bundled_demo": "demos/dataviz.mp4"
+    }
+  ],
+  "optional_audio": {
+    "script": "scripts/sound_sketch.py",
+    "sha256": "2f8d643f2e2b528d77186d1dd748c05b575f2c2648cbce0e4b95da1f3156862d",
+    "dependency": "NumPy2.3.5 tested; optional",
+    "status": "four30s stereo sketches deterministic/finite/below clipping in numeric tests; not listened to"
+  },
+  "distribution": "One shared runtime. No duplicate runtime ZIP, system libraries, fonts or third-party reference media.",
+  "performance_note": "Final ink R3 required991.92 seconds (about16 minutes32 seconds) to render30 seconds at720p. Other recorded examples were lighter; run timing is workload-dependent and not model cost evidence.",
+  "public_release": {
+    "name": "HeiGe Video",
+    "skill_name": "heige-video",
+    "date": "2026-10-06",
+    "demos": "../demos/README.md",
+    "scope": "Original sources and five exact hash-matched MP4 renders; publication adds no new aesthetic, playback, audio-listening or model-quality approval."
+  }
+}
