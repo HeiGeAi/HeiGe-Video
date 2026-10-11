@@ -1,17 +1,18 @@
 ---
 name: heige-video
-description: Turn a brief, final recording, captions and local assets into original motion films. Use the controlled Remotion production route for explainers, product videos, brand stories and lessons, with factual citations, recording-driven timing, portrait layout and decoded quality checks. Use authored Canvas for bespoke ink, whiteboard and cinematic actions.
+description: Turn a brief, final recording, captions and local assets into original motion films. Use native continuous Remotion worlds for persistent objects, camera handoffs and event sounds, or controlled scenes for explainers and lessons. Keep factual citations, recording-driven timing, independent layouts and decoded checks. Use authored Canvas for bespoke ink, whiteboard and cinematic actions.
 ---
 
-# HeiGe Video · v4 alpha
+# HeiGe Video · v4.0.0-alpha.2
 
-把题材做成可见的变化：先设计值得拍的物体和决定性动作，再用镜头、材质、文字和声音让它成立。默认用受控 Remotion 生产线制作结构化讲解、产品、品牌和课程视频。安装、示例与命令见 [Studio 指南](studio/README.md)；旧版能力见 [status.md](references/status.md)。
+把题材做成可见的变化：先设计值得拍的物体和决定性动作，再用镜头、材质、文字和声音让它成立。v4 alpha 2（2026-10-12）默认采用原创 Remotion 生产线。需要同一对象贯穿全片时用原生连续世界，结构化讲解可以继续使用八类普通镜头。安装见 [使用指南](USAGE.md)，连续对象见 [CONTINUITY.md](studio/CONTINUITY.md)，旧版能力见 [status.md](references/status.md)。
 
 ## 先选择生产路线
 
 | 目标 | 路线 | 输入与输出 |
 | :--- | :--- | :--- |
-| 讲解、产品流程、品牌、录音课程、多画幅 | v4 controlled Remotion | 版本化 JSON、最终录音／SRT、登记素材 → MP4、抽帧、布局与完整解码报告 |
+| 同一主体、产品流程、连续 UI 操作、跨 beat 的视觉变化 | v4 native continuous Remotion | 持久对象、完整轨迹、相机、承接、事件声音 → MP4、逐帧连续结构报告与编码检查 |
+| 结构化讲解、独立图表、录音课程、本地素材、多画幅 | v4 controlled scenes | 八类合法镜头 JSON、最终录音／SRT、登记素材 → MP4、抽帧、布局与完整解码报告 |
 | 独特主体、笔墨、复杂白板、作者式镜头 | v3 authored Canvas | treatment、持久对象与可信源码 → MP4、decoded action/cut strips |
 
 已有获批作品沿用原路线。不要把需要精细定制的复杂动作硬塞进受控镜头。也不要让简单讲解每次重写渲染引擎。两条路线都先证明关键变化，再交付整片。
@@ -21,18 +22,29 @@ description: Turn a brief, final recording, captions and local assets into origi
 1. 锁定目的、受众、事实来源、品牌、画幅与结尾。只把会改变制作方案的缺失信息交给用户；其他采用可逆默认。模式选择 `explainer`（讲解）、`promo`（产品／品牌）、`lesson`（课程）或 `talk`（口播）
 2. 建证据表。逐条保留原文与来源。把主张绑定到同一条原文，数字、主体、单位同时匹配。用 `--brief` 把原始材料带入校验。教学模拟数据显式使用 `demoData: true`，不把生成素材当成纪实证据
 3. 有录音时先定稿录音与 SRT，以真实音频时长设连续 `start`／`end`。时长服从最终录音，不能拉伸录音迁就镜头。SRT 保留原始 cue，只去展示句读。没有真实录音时可以用 `kind: mock` 验机制，但成片始终是 preview
-4. 选择具体主题：`ledger` 适合精确数据与讲解，`nocturne` 适合产品与品牌。选用八类受控镜头：`hook`、`statement`、`steps`、`compare`、`bars`、`transform`、`media`、`end`。每镜承担一个清楚的认知任务；保留对象 ID，使动作前后对应。各镜头字段只能来自 [CONTRACT.md](studio/CONTRACT.md)
+4. 选择具体主题：`ledger` 适合精确数据与讲解，`nocturne` 适合产品与品牌。连续世界使用 `beat` 与统一 `continuity`；普通镜头使用 `hook`、`statement`、`steps`、`compare`、`bars`、`transform`、`media`、`end`，两种结构不能混用。每段承担一个清楚的认知任务。字段只能来自 [CONTRACT.md](studio/CONTRACT.md) 与 [连续指南](studio/CONTINUITY.md)
 5. 为 `16:9`、`9:16`、`1:1` 选合适结构。竖版减少并列信息，正文留出字幕区。图片、视频、录音与音乐先登记本地路径和权利。禁止在镜头源码中临时请求远程素材
-6. 写项目 JSON。此路线只调整内容参数与合法镜头组合，通常不用修改 `studio/src`。先 validate，再用新的目录 build。执行器、字体、资产或媒体检测失败必须阻断，不准把失败降为成功
+6. 用 `init` 从原创横版、竖版或方版模板创建独立 JSON，重新设计内容和动作。已有项目也可直接校验。此路线调整合法契约参数，通常不用修改 `studio/src`。先 validate，再用新的目录 build。执行器、字体、资产或媒体检测失败必须阻断，不准把失败降为成功
 7. 看实际编码输出的 overview、动作条带和首尾帧。修布局、动作与信息层级后重新渲染。verify 核对源码、输入、依赖、字体、浏览器与全部产物哈希。分别记录技术通过、抽帧审阅、完整播放、听音，不自动批准发布
 
 ```sh
-node studio/make.mjs validate examples/studio/median.json
-node studio/make.mjs build examples/studio/median.json --out /tmp/heige-median-new
-node studio/make.mjs verify examples/studio/median.json --out /tmp/heige-median-new
+node studio/make.mjs init /tmp/heige-project-new.json --ratio 9:16
+node studio/make.mjs validate /tmp/heige-project-new.json
+node studio/make.mjs build /tmp/heige-project-new.json --out /tmp/heige-project-new
+node studio/make.mjs verify /tmp/heige-project-new.json --out /tmp/heige-project-new
 ```
 
-本地引擎无需模型 API key。创作 JSON 由当前 coding agent 完成，尚未内置自动 LLM 调用、TTS、ASR、在线素材供应器或课程批处理。不要把人工／agent 编排描述成已实现的全自动服务。方法蒸馏与原创实现见 [BrewReel 分析](references/brewreel-distillation.md)。
+本地引擎无需模型 API key。创作 JSON 由当前 coding agent 完成，尚未内置自动 LLM 调用、TTS、ASR、在线素材供应器、B-roll 缓存或课程批处理。不要把人工／agent 编排描述成已实现的全自动服务。方法蒸馏见 [BrewReel 分析](references/brewreel-distillation.md) 与 [OneTake 固定提交研究](references/onetake-architecture.md)。
+
+## 原生连续世界的创作约束
+
+1. 先确定一个能持续辨认的主对象，声明稳定 `id` 与 `semanticIdentity`。用 `objects` 表达形状、文字或受控 UI，所有轨迹从零覆盖到最终帧量化时长。不得用同一时刻的双状态偷换对象，不使用未知字段臆造语义动作
+2. 为全片安排同一条 `camera` 轨迹。每个相邻 beat 边界恰有一条 `boundaries` 声明：从哪段到哪段、谁承接、什么原因、出现什么结果。相机和几何连续不能证明叙事成立，必须实际看承接窗口中的编码画面
+3. 连续对象的数值 `text` 与 UI `rows` 必须由本对象自己的合法 `claims` 逐字支持。不能借用 beat 或其他对象的引文。示例数据声明 `demoData: true`，真实产品资料与概念演示清楚区分
+4. `soundEvents` 使用存在对象的 ID 与同一影片时钟，允许原创 `tick`、`whoosh`、`impact`。它们是程序合成事件声，不是自动作曲、TTS 或环境录音。录音和字幕仍遵守最终人声时钟
+5. 需要快动作时间积分时声明 `blur: {samples: 3, shutterAngle: 180}`，真实采三个时刻并在线性光空间合成；`samples: 1` 关闭模糊。先证明未模糊动作的身份与可读性，再检查重影和计算成本
+
+本版限 60 秒、2 至 20 个 beat，每段量化后为 0.25 至 20 秒。连续结构检查包括每帧实际 DOM 观测、对象可见性与最终编码像素变化；点阵遮挡检查有近似边界，`cause`／`outcome` 不经过语义证明。不得把结构通过包装为因果、创意或真实产品行为认证。实际样片见 [横版](demos/continuous/horizontal.mp4)、[竖版](demos/continuous/portrait.mp4)、[方版](demos/continuous/square.mp4)，审阅范围与哈希分别以 [连续目录](demos/continuous/README.md) 和 [本版清单](references/v4-continuity-status.json) 为准。未验证的完整播放或听音保持原状态，不从技术检测推断。
 
 ## 先确定一件值得看的事
 
@@ -44,7 +56,7 @@ node studio/make.mjs verify examples/studio/median.json --out /tmp/heige-median-
 
 ## 按需选参考，不把资料库塞满上下文
 
-运行小型 [参考选择器](scripts/select_references.py)，一次取 3–5 条与当前困难相关的机制：构图、动作或材质。阅读返回的用途和缺陷，必要时再查完整台账。默认排除负面对照；只有分析失败方式时显式选 controls。资料库含 100 部作品和 100 个项目，数量不是质量证明，参考资产也不获复用授权。
+运行小型 [参考选择器](scripts/select_references.py)，一次取 3 至 5 条与当前困难相关的机制：构图、动作或材质。阅读返回的用途和缺陷，必要时再查完整台账。默认排除负面对照；只有分析失败方式时显式选 controls。资料库含 100 部作品和 100 个项目，数量不是质量证明，参考资产也不获复用授权。
 
 ```sh
 python3 scripts/select_references.py --style ink --query 'brush identity consequence' --limit 4
@@ -62,7 +74,7 @@ python3 scripts/select_references.py --style ink --query 'brush identity consequ
 ## 先做动作证据，再做整片
 
 1. 写短 treatment：视觉承诺、事实依据、主物体 ID、结束构图、镜头尺度、材质、动作规则、文字阅读窗。用 [镜头清单](references/shot-manifest.md) 记录状态前后和实现入口，避免只有 shot title 的空分镜
-2. 做开场、动作、结果的真实帧，以及最难动作的 2–4 秒连续 proof。检查中间态：谁在动，为什么动，什么被改变？证明不成立就改物体、构图或动作，不靠增加粒子和发光补救
+2. 做开场、动作、结果的真实帧，以及最难动作的 2 至 4 秒连续 proof。检查中间态：谁在动，为什么动，什么被改变？证明不成立就改物体、构图或动作，不靠增加粒子和发光补救
 3. 创建真实内容资产和持久对象，再扩展全片。用同一 cue 时钟驱动姿态、相机、字幕与声音事件；让每次运动有准备、变化、反应和落定，具体节奏由风格决定
 4. 按 [运行契约](references/runtime-adapter.md) 实现纯时间 render。Canvas 可声明 DURATION、ready、stateAt、TEXT_STRINGS、CUTS，使用共享 motion helpers；纹理噪声固定在对象空间。手机竖版要重新构图，不能仅改分辨率
 5. 先通过技术检测，再由实际像素检查对象身份、因果、文字和材质。用 decoded cut/action strips 检查转场与决定性动作；打开图片才算看过。需要更密采样时逐帧提取，不把五帧 cut strip 当成穷尽检查
@@ -71,6 +83,6 @@ python3 scripts/select_references.py --style ink --query 'brush identity consequ
 
 ## 能力和结论边界
 
-v4 增加了 Remotion + FFmpeg 的受控生产线。旧 `runtime/adapters/browser_source.mjs` 仍是另一条实验路线，不能混同。Canvas/SVG 保留给作者式作品；Blender CPU 探针不等于已完成三维全片管线。当前实现与研究建议的差别见 [v4 架构](references/super-video-architecture.md) 与 [v3 升级机制](references/upgrade-mechanisms.md)。
+v4 增加了 Remotion + FFmpeg 的受控生产线与原生连续世界。旧 `runtime/adapters/browser_source.mjs` 仍是另一条实验路线，不能混同。Canvas/SVG 保留给作者式作品；Blender CPU 探针不等于已完成三维全片管线。v4 alpha 1 的五条样片按固定历史 Git 提交验证，不能证明 alpha 2 引擎已通过。哈希只证明完整性。当前实现与研究建议的差别见 [v4 架构历史](references/super-video-architecture.md)、[连续指南](studio/CONTINUITY.md) 与 [v3 升级机制](references/upgrade-mechanisms.md)。
 
 主观评级不能包装成测量分数。没有真实授权模型调用、同条件样本与盲审，就不宣称低成本优势、模型复现或 Opus 水平。需要比较时使用 [benchmark protocol](references/benchmark.md)。第三方电影、字体、音乐、人物和品牌权利独立于仓库代码许可；保留 [许可与来源](references/source-notices.md)。

@@ -1,10 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {validateContinuity} from './continuity-contract.mjs';
 
-const ROOT_FIELDS = new Set(['schemaVersion', 'title', 'mode', 'ratio', 'theme', 'shots', 'fps', 'seed', 'draft', 'demoData', 'brand', 'facts', 'assets', 'audio', 'music']);
+const ROOT_FIELDS = new Set(['schemaVersion', 'title', 'mode', 'ratio', 'theme', 'shots', 'fps', 'seed', 'draft', 'demoData', 'brand', 'facts', 'assets', 'audio', 'music', 'continuity']);
 const COMMON_FIELDS = ['id', 'type', 'title', 'duration', 'start', 'end', 'body', 'claims', 'intentionalHold'];
 const SHOT_FIELDS = {
-  hook: [], statement: [], end: [], steps: ['items'], compare: ['left', 'right'],
+  hook: [], statement: [], end: [], beat: [], steps: ['items'], compare: ['left', 'right'],
   bars: ['data', 'unit'], transform: ['items', 'operation'], media: ['assetId', 'caption'],
 };
 const RATIOS = {'16:9': [1280, 720], '9:16': [720, 1280], '1:1': [1080, 1080]};
@@ -330,6 +331,7 @@ export function compileProject(project, {baseDir, briefText, audioDuration} = {}
     if (!plainObject(shot)) { addError(issues, at, '镜头必须是对象'); return; }
     const specific = ownValue(SHOT_FIELDS, shot.type);
     if (!specific) addError(issues, `${at}.type`, '未知镜头类型');
+    if (shot.type === 'beat' && project.continuity === undefined) addError(issues, `${at}.type`, 'beat 必须使用连续世界，避免生成空镜头');
     fieldsOf(shot, new Set([...COMMON_FIELDS, ...(specific ?? [])]), at, issues);
     if (!uniqueId(shot.id) || ids.has(shot.id)) addError(issues, `${at}.id`, '镜头 ID 必须有效且唯一');
     ids.add(shot.id);
@@ -379,7 +381,8 @@ export function compileProject(project, {baseDir, briefText, audioDuration} = {}
       if (!finite(shot.duration) || shot.duration <= 0) { addError(issues, `${at}.duration`, '必须是正数秒数'); return; }
       frames = Math.round(shot.duration * fps);
     }
-    if (frames < 2 * fps || frames > 20 * fps) addError(issues, `${at}.duration`, '每镜量化后的时长必须为 2 至 20 秒');
+    const minimumFrames = shot.type === 'beat' ? Math.ceil(.25 * fps) : 2 * fps;
+    if (frames < minimumFrames || frames > 20 * fps) addError(issues, `${at}.duration`, shot.type === 'beat' ? '每个 beat 量化后的时长必须为 0.25 至 20 秒' : '每镜量化后的时长必须为 2 至 20 秒');
     if (frames > 0) {
       timeline.push({...shot, from, frames, start: from / fps, end: (from + frames) / fps});
       cursor = from + frames;
@@ -395,5 +398,15 @@ export function compileProject(project, {baseDir, briefText, audioDuration} = {}
     for (const warning of parsed.issues.warnings) addWarning(issues, `project.audio.subtitles.${warning.path}`, warning.message);
   } catch (error) { addError(issues, 'project.audio.subtitles', `字幕不可用：${error.message}`); }
   else if (hasAudio && project.audio?.subtitles !== undefined) addError(issues, 'project.audio.subtitles', '字幕路径必须是非空字符串');
+  if (project.continuity !== undefined) {
+    validateContinuity(project.continuity, result(), issues);
+    if (Array.isArray(project.continuity?.objects)) project.continuity.objects.forEach((item, index) => {
+      if (!plainObject(item)) return;
+      const at = `project.continuity.objects[${index}]`;
+      const claims = validateClaims(item, at, facts, briefText, issues);
+      const copy = [item.text, ...(Array.isArray(item.rows) ? item.rows : [])].filter(value => typeof value === 'string');
+      if (project.demoData !== true) for (const text of copy) if (hasNumericalContent(text) && !claims.some(claim => claim.quote.includes(text))) addError(issues, at, `连续对象含数值文案「${text.slice(0,80)}」需要该对象自己的合法 claim.quote`);
+    });
+  }
   return result();
 }

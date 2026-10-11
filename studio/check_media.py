@@ -98,18 +98,19 @@ def check(args):
                 holds.append({'start':start/plan['fps'],'end':index/plan['fps']})
             start = None
     audio_streams = [s for s in probe['streams'] if s['codec_type']=='audio']
-    expected_audio = bool(plan['project'].get('audio') or plan['project'].get('music'))
+    expected_audio = bool(plan['project'].get('audio') or plan['project'].get('music') or plan['project'].get('continuity', {}).get('soundEvents'))
     if bool(audio_streams) != expected_audio:
         errors.append('Expected audio track presence mismatch')
     audio_result = {'present':bool(audio_streams),'listening':'not-tested'}
     if audio_streams:
-        samples = array.array('f', run(['ffmpeg','-v','error','-i',str(video),'-vn','-ac','1','-ar','16000','-f','f32le','-']).stdout)
+        channels = int(audio_streams[0]['channels'])
+        samples = array.array('f', run(['ffmpeg','-v','error','-i',str(video),'-vn','-ar','16000','-f','f32le','-']).stdout)
         if sys.byteorder != 'little': samples.byteswap()
         finite = all(math.isfinite(value) for value in samples)
         peak = max((abs(value) for value in samples), default=0)
         rms = math.sqrt(sum(value*value for value in samples)/max(1,len(samples)))
-        audio_duration = len(samples)/16000
-        audio_result.update({'finite':finite,'peak':peak,'rms':rms,'duration':audio_duration})
+        audio_duration = len(samples)/(16000*channels)
+        audio_result.update({'finite':finite,'peak':peak,'rms':rms,'duration':audio_duration,'channels':channels,'scope':'Every decoded channel; peak is not measured from a downmix'})
         if not finite or not samples: errors.append('Invalid or empty decoded audio')
         if rms < 1e-6: errors.append('Declared audio track is silent')
         if peak > 1.001: errors.append('Decoded audio exceeds full scale')
@@ -134,9 +135,18 @@ def check(args):
             name = f'action-{shot["id"]}.png'
             sheet(video,sequence,out/name,font)
             strips.append({'shot':shot['id'],'artifact':name,'times':sequence})
+    for index, boundary in enumerate(plan['project'].get('continuity', {}).get('boundaries', [])):
+        shot = next(s for s in plan['timeline'] if s['id'] == boundary['toShot'])
+        center = shot['from'] / plan['fps']
+        t0, t1 = max(0, center - .6), min(plan['duration'] - 1 / plan['fps'], center + .6)
+        sequence = [t0 + i * (t1 - t0) / 15 for i in range(16)]
+        name = f'carry-{index+1}.png'
+        sheet(video, sequence, out / name, font)
+        strips.append({'boundary': boundary, 'artifact': name, 'times': sequence})
     report = {'status':'pass' if not errors else 'rejected','errors':errors,
+              'videoSha256':hashlib.sha256(video.read_bytes()).hexdigest(), 'frameCount': actual['frames'],
               'actual':actual, 'audio':audio_result,
-              'pixel_scan':{'decoded_frames':len(pixels)//size,'uniform_frames':blank_frames,
+              'pixel_scan':{'decoded_frames':len(pixels)//size,'uniform_frames':blank_frames,'deltas':[0]+changes,
                             'long_hold_candidates':holds,'scope':'Long holds are candidates for human reading-window review, not automatic motion failures.'},
               'sampling':{'overview_times':times,'sheets':sheets,'action_strips':strips},
               'visual_review':'pending','realtime_playback':'not-tested'}

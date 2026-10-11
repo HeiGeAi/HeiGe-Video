@@ -6,6 +6,7 @@ import {Block, Text} from './primitives';
 import {assertLocalAssetUrl, Scene} from './scenes';
 import {fitFont, layoutFor, themeStyle} from './theme';
 import type {FilmProps} from './types';
+import {ContinuousStage, probeContinuousStage} from './ContinuousStage';
 import './styles.css';
 
 function useLocalFont(fontFamily: string, fontUrl?: string) {
@@ -48,12 +49,15 @@ function useLocalFont(fontFamily: string, fontUrl?: string) {
   return {fontReady: loadedKey === key, pendingHandle};
 }
 
-export const HeigeFilm: React.FC<FilmProps> = ({plan, assetUrls, captions, fontFamily, inspect = false}) => {
-  const frame = useCurrentFrame();
+export const HeigeFilm: React.FC<FilmProps> = ({plan, assetUrls, captions, fontFamily, inspect = false, renderSampling}) => {
+  const rawFrame = useCurrentFrame();
+  const samples = renderSampling?.samples ?? 1;
+  const frame = Math.floor(rawFrame / samples);
   const rootRef = useRef<HTMLDivElement>(null);
   const {fontReady, pendingHandle} = useLocalFont(fontFamily, assetUrls.__font);
   const layout = layoutFor(plan.project.ratio);
   const time = frame / plan.fps;
+  const sampleTime = Math.max(0, Math.min(plan.duration, (frame + ((rawFrame % samples + .5) / samples - .5) * ((renderSampling?.shutterAngle ?? 180) / 360)) / plan.fps));
   const cue = captions.find(caption => caption.start <= time && time < caption.end);
   const subtitle = cue ? captionText(cue.text) : '';
   useLayoutEffect(() => {
@@ -61,6 +65,7 @@ export const HeigeFilm: React.FC<FilmProps> = ({plan, assetUrls, captions, fontF
     try {
       if (!rootRef.current) throw new Error('The committed film root is unavailable for geometry inspection');
       if (inspect) console.debug('HEIGE_LAYOUT:' + JSON.stringify(inspectLayout(rootRef.current, frame, plan.width, plan.height)));
+      if (plan.project.continuity && rawFrame % samples === Math.floor(samples / 2)) console.debug('HEIGE_CONTINUITY:' + JSON.stringify(probeContinuousStage(rootRef.current, {frame, fps:plan.fps, time, width:plan.width, height:plan.height})));
       const handle = pendingHandle.current;
       if (handle !== null) {
         pendingHandle.current = null;
@@ -69,9 +74,9 @@ export const HeigeFilm: React.FC<FilmProps> = ({plan, assetUrls, captions, fontF
     } catch (error) {
       cancelRender(error);
     }
-  }, [inspect, fontReady, pendingHandle, frame, plan.width, plan.height, subtitle]);
+  }, [inspect, fontReady, pendingHandle, rawFrame, frame, samples, time, plan.fps, plan.project.continuity, plan.width, plan.height, subtitle]);
   return <AbsoluteFill ref={rootRef} className="heige-film" data-heige-engine="controlled-remotion-v4" data-heige-global-frame={frame} style={themeStyle(plan.project.theme, fontFamily)}>
-    {plan.timeline.map((shot, index) => <Sequence key={shot.id} from={shot.from} durationInFrames={shot.frames} layout="none">
+    {plan.project.continuity ? <ContinuousStage plan={plan} time={sampleTime} fontFamily={fontFamily} /> : plan.timeline.map((shot, index) => <Sequence key={shot.id} from={shot.from} durationInFrames={shot.frames} layout="none">
       <Scene plan={plan} assetUrls={assetUrls} shot={shot} index={index} />
     </Sequence>)}
     {subtitle ? <Block id="timed-subtitle" className="heige-caption-wrap" style={{left: layout.pad, right: layout.pad, bottom: 22, minHeight: layout.bottom - 38, padding: '14px 0'}}>

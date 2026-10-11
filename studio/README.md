@@ -2,7 +2,9 @@
 
 本路线把内容、版式与执行分开。Agent 填 `heige-video/4` JSON，8 类原创组件负责排版和真实动作，Remotion 渲染，FFmpeg 检查最终编码的每一帧。复杂独创镜头继续使用原有 Canvas／SVG 导演路线，渲染成媒体后也可进入受控片。
 
-当前版本是 `4.0.0-alpha.1`。可生成视频，尚未做真实付费模型调用、低成本模型盲测或商业量产验证。当前验收范围见 [五条实际样片](../demos/super/README.md) 与 [最终清单](../references/v4-example-status.json)。受控路线的技术通过状态叫 `validated`；审美、完整播放和实际听音各自保留状态。使用 mock 或 draft 的项目固定为 `preview`。
+当前版本是 `4.0.0-alpha.2`。可生成视频，尚未做真实付费模型调用、低成本模型盲测或商业量产验证。当前验收范围见 [五条实际样片](../demos/super/README.md) 与 [最终清单](../references/v4-example-status.json)。受控路线的技术通过状态叫 `validated`；审美、完整播放和实际听音各自保留状态。使用 mock 或 draft 的项目固定为 `preview`。
+
+连续世界提供持久对象、全局镜头、动作音效和真实三次曝光。快速开始：`node studio/make.mjs init ./my-film.json --ratio 16:9`。字段与实际检查范围见 [CONTINUITY.md](CONTINUITY.md)。
 
 ## 本地安装
 

@@ -1,0 +1,718 @@
+{
+  "schemaVersion": "heige-video/4",
+  "title": "黑哥视频 连续世界原创演示",
+  "mode": "promo",
+  "ratio": "16:9",
+  "theme": "nocturne",
+  "fps": 30,
+  "seed": 20261012,
+  "brand": "HeiGe Video",
+  "shots": [
+    {
+      "id": "idea",
+      "type": "beat",
+      "title": "输入想法",
+      "duration": 2
+    },
+    {
+      "id": "work",
+      "type": "beat",
+      "title": "展开工作界面",
+      "duration": 8,
+      "intentionalHold": true
+    },
+    {
+      "id": "mobile",
+      "type": "beat",
+      "title": "收拢成移动画幅",
+      "duration": 2
+    },
+    {
+      "id": "delivery",
+      "type": "beat",
+      "title": "交付品牌画面",
+      "duration": 4,
+      "intentionalHold": true
+    }
+  ],
+  "continuity": {
+    "objects": [
+      {
+        "id": "story-shell",
+        "semanticIdentity": "The same idea container becomes the working panel and delivery surface",
+        "kind": "surface",
+        "color": "accent",
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 320,
+            "y": 360,
+            "w": 640,
+            "h": 160,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 1.4,
+            "x": 320,
+            "y": 360,
+            "w": 640,
+            "h": 160,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 2.6,
+            "x": 610,
+            "y": 240,
+            "w": 860,
+            "h": 400,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 9.4,
+            "x": 610,
+            "y": 240,
+            "w": 860,
+            "h": 400,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 10.6,
+            "x": 1380,
+            "y": 240,
+            "w": 280,
+            "h": 400,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 11.4,
+            "x": 1380,
+            "y": 240,
+            "w": 280,
+            "h": 400,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 12.6,
+            "x": 1220,
+            "y": 290,
+            "w": 600,
+            "h": 300,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 16,
+            "x": 1220,
+            "y": 290,
+            "w": 600,
+            "h": 300,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          }
+        ]
+      },
+      {
+        "id": "heading",
+        "semanticIdentity": "Film heading follows the world camera",
+        "kind": "text",
+        "color": "ink",
+        "text": "从想法到成片",
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 300,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 1.4,
+            "x": 300,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 2.6,
+            "x": 700,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 9.4,
+            "x": 700,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 10.6,
+            "x": 1180,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 11.4,
+            "x": 1180,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 12.6,
+            "x": 1180,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 16,
+            "x": 1180,
+            "y": 100,
+            "w": 680,
+            "h": 100,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          }
+        ]
+      },
+      {
+        "id": "idea-copy",
+        "semanticIdentity": "Original workflow label idea-copy",
+        "kind": "text",
+        "color": "ink",
+        "text": "输入想法",
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 440,
+            "y": 390,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 1.3666666666666667,
+            "x": 440,
+            "y": 390,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 1.5666666666666667,
+            "x": 440,
+            "y": 390,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 16,
+            "x": 440,
+            "y": 390,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          }
+        ]
+      },
+      {
+        "id": "working-ui",
+        "semanticIdentity": "Original workflow label working-ui",
+        "kind": "ui",
+        "color": "ink",
+        "rows": [
+          "脚本就绪",
+          "画面连贯",
+          "声音随动"
+        ],
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 890,
+            "y": 305,
+            "w": 300,
+            "h": 270,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 2.8,
+            "x": 890,
+            "y": 305,
+            "w": 300,
+            "h": 270,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 3.2,
+            "x": 890,
+            "y": 305,
+            "w": 300,
+            "h": 270,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 8.8,
+            "x": 890,
+            "y": 305,
+            "w": 300,
+            "h": 270,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 9.3,
+            "x": 890,
+            "y": 305,
+            "w": 300,
+            "h": 270,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 16,
+            "x": 890,
+            "y": 305,
+            "w": 300,
+            "h": 270,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          }
+        ]
+      },
+      {
+        "id": "phone-copy",
+        "semanticIdentity": "Original workflow label phone-copy",
+        "kind": "text",
+        "color": "ink",
+        "text": "随处可看",
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 1405,
+            "y": 310,
+            "w": 230,
+            "h": 190,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 10.766666666666667,
+            "x": 1405,
+            "y": 310,
+            "w": 230,
+            "h": 190,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 11,
+            "x": 1405,
+            "y": 310,
+            "w": 230,
+            "h": 190,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 11.366666666666667,
+            "x": 1405,
+            "y": 310,
+            "w": 230,
+            "h": 190,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 11.666666666666666,
+            "x": 1405,
+            "y": 310,
+            "w": 230,
+            "h": 190,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 16,
+            "x": 1405,
+            "y": 310,
+            "w": 230,
+            "h": 190,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          }
+        ]
+      },
+      {
+        "id": "delivery-copy",
+        "semanticIdentity": "Original workflow label delivery-copy",
+        "kind": "text",
+        "color": "accent",
+        "text": "黑哥视频",
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 1320,
+            "y": 350,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 12.7,
+            "x": 1320,
+            "y": 350,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 13.1,
+            "x": 1320,
+            "y": 350,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 16,
+            "x": 1320,
+            "y": 350,
+            "w": 400,
+            "h": 100,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          }
+        ]
+      },
+      {
+        "id": "delivery-promise",
+        "semanticIdentity": "Original workflow label delivery-promise",
+        "kind": "text",
+        "color": "muted",
+        "text": "看得清 连得上",
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 1280,
+            "y": 457,
+            "w": 480,
+            "h": 160,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 13.1,
+            "x": 1280,
+            "y": 457,
+            "w": 480,
+            "h": 160,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 0
+          },
+          {
+            "at": 13.5,
+            "x": 1280,
+            "y": 457,
+            "w": 480,
+            "h": 160,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          },
+          {
+            "at": 16,
+            "x": 1280,
+            "y": 457,
+            "w": 480,
+            "h": 160,
+            "rotation": 0,
+            "radius": 16,
+            "opacity": 1
+          }
+        ]
+      },
+      {
+        "id": "action-dot",
+        "semanticIdentity": "The action point that triggers original event sounds",
+        "kind": "dot",
+        "color": "accent",
+        "keyframes": [
+          {
+            "at": 0,
+            "x": 926,
+            "y": 376,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 1.4,
+            "x": 926,
+            "y": 376,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 2.6,
+            "x": 1436,
+            "y": 256,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 9.4,
+            "x": 1416,
+            "y": 256,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 10.6,
+            "x": 1626,
+            "y": 256,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 11.4,
+            "x": 1626,
+            "y": 256,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 12.6,
+            "x": 1786,
+            "y": 306,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          },
+          {
+            "at": 16,
+            "x": 1786,
+            "y": 306,
+            "w": 14,
+            "h": 14,
+            "opacity": 1,
+            "rotation": 0,
+            "radius": 18
+          }
+        ]
+      }
+    ],
+    "camera": [
+      {
+        "at": 0,
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 1.4,
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 2.6,
+        "x": 1040,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 9.4,
+        "x": 1040,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 10.6,
+        "x": 1520,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 11.4,
+        "x": 1520,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 12.6,
+        "x": 1520,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 16,
+        "x": 1520,
+        "y": 360,
+        "zoom": 1,
+        "rotation": 0
+      }
+    ],
+    "boundaries": [
+      {
+        "fromShot": "idea",
+        "toShot": "work",
+        "carrier": "story-shell",
+        "cause": "输入框沿镜头移动并展开",
+        "outcome": "同一容器承接工作界面"
+      },
+      {
+        "fromShot": "work",
+        "toShot": "mobile",
+        "carrier": "story-shell",
+        "cause": "工作面板沿镜头移动并收拢",
+        "outcome": "同一容器变成移动画幅"
+      },
+      {
+        "fromShot": "mobile",
+        "toShot": "delivery",
+        "carrier": "story-shell",
+        "cause": "移动画幅展开为交付面板",
+        "outcome": "同一容器承接品牌收尾"
+      }
+    ],
+    "soundEvents": [
+      {
+        "id": "input-tick",
+        "at": 1.3,
+        "objectId": "action-dot",
+        "type": "tick",
+        "volume": 0.22
+      },
+      {
+        "id": "open-panel",
+        "at": 2.5,
+        "objectId": "action-dot",
+        "type": "impact",
+        "volume": 0.24
+      },
+      {
+        "id": "follow-camera",
+        "at": 9.6,
+        "objectId": "action-dot",
+        "type": "whoosh",
+        "volume": 0.26
+      },
+      {
+        "id": "mobile-settle",
+        "at": 10.5,
+        "objectId": "action-dot",
+        "type": "tick",
+        "volume": 0.2
+      },
+      {
+        "id": "delivery-settle",
+        "at": 12.5,
+        "objectId": "action-dot",
+        "type": "impact",
+        "volume": 0.24
+      }
+    ],
+    "blur": {
+      "samples": 3,
+      "shutterAngle": 180
+    }
+  }
+}

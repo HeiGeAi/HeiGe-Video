@@ -7,6 +7,11 @@ import {spawnSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {sha256, fileHash, inside, engineFingerprint, inputFingerprint, verifyArtifacts} from './lib/integrity.mjs';
 import {readProject, compileProject, parseSrt, collectText} from './lib/project.mjs';
+import {collectContinuityText} from './lib/continuity-contract.mjs';
+import {evaluateContinuity} from './lib/continuity-oracle.mjs';
+import {synthesizeEventAudio} from './lib/event-audio.mjs';
+import {createContinuousProject} from './lib/continuous-template.mjs';
+import {verifyContinuousEvidence} from './lib/continuity-evidence.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const require=createRequire(import.meta.url);
@@ -25,7 +30,7 @@ function argsFrom(argv) {
   for(let i=0;i<remaining.length;i++) {
     const key=remaining[i];
     if(key.startsWith('--')) {
-      if(!['--out','--brief','--browser'].includes(key) || !remaining[i+1] || remaining[i+1].startsWith('--')) throw new Error(`Unknown or incomplete argument: ${key}`);
+      if(!['--out','--brief','--browser','--ratio'].includes(key) || !remaining[i+1] || remaining[i+1].startsWith('--')) throw new Error(`Unknown or incomplete argument: ${key}`);
       if(options[key.slice(2)]!==undefined) throw new Error(`Duplicate argument: ${key}`);
       options[key.slice(2)]=remaining[++i];
     } else positional.push(key);
@@ -85,7 +90,9 @@ function checkedRead(file,brief) {
     audioDuration=Number(info.format.duration);
     if(!Number.isFinite(audioDuration) || audioDuration<=0) throw new Error('Cannot measure final audio duration');
     // A music bed must never hide a missing or silent declared recording.
-    const decoded=spawnSync(ffmpeg,['-v','error','-i',path.join(read.baseDir,asset.path),'-vn','-ac','1','-ar','16000','-f','f32le','-'],{maxBuffer:48*1024*1024,timeout:120000});
+    const channels=info.streams.find(s=>s.codec_type==='audio').channels;
+    if(!Number.isInteger(channels) || channels<1 || channels>8) throw new Error('Narration channel count is unsupported');
+    const decoded=spawnSync(ffmpeg,['-v','error','-i',path.join(read.baseDir,asset.path),'-vn','-ar','16000','-f','f32le','-'],{maxBuffer:320*1024*1024,timeout:120000});
     if(decoded.error || decoded.status!==0 || decoded.stdout.length===0 || decoded.stdout.length%4) throw new Error('Cannot fully decode narration source');
     let squared=0,peak=0;
     for(let i=0;i<decoded.stdout.length;i+=4) {
@@ -96,7 +103,7 @@ function checkedRead(file,brief) {
     const samples=decoded.stdout.length/4,rms=Math.sqrt(squared/samples);
     if(rms<1e-6) throw new Error('Narration source is silent; background music cannot substitute for recording');
     if(peak>1.001) throw new Error('Narration source exceeds full scale');
-    read.sourceAudio={samples,sampleRate:16000,duration:samples/16000,rms,peak,scope:'source recording independently decoded; listening not tested'};
+    read.sourceAudio={samples,channels,sampleRate:16000,duration:samples/(16000*channels),rms,peak,scope:'source recording independently decoded across every channel; listening not tested'};
     if(Math.abs(read.sourceAudio.duration-audioDuration)>.15) throw new Error('Narration container and decoded duration disagree');
   }
   const plan=compileProject(read.project,{baseDir:read.baseDir,briefText:read.briefText,audioDuration});
@@ -121,20 +128,25 @@ function artifactsAt(out) {
   }
   walk(out);return entries;
 }
-function mux(plan,staged,video,out) {
+function mux(plan,staged,video,out,effects) {
   const narration=plan.project.audio ? staged[plan.project.audio.assetId] : null;
   const music=plan.project.music ? staged[plan.project.music.assetId] : null;
-  if(!narration && !music) {fs.renameSync(video,path.join(out,'video.mp4'));return;}
+  if(!narration && !music && !effects) {fs.renameSync(video,path.join(out,'video.mp4'));return;}
   const args=['-v','error','-i',video];
-  if(narration) args.push('-i',narration);
-  if(music) args.push('-stream_loop','-1','-i',music);
+  const indexes={};let next=1;
+  if(narration) {indexes.voice=next++;args.push('-i',narration);}
+  if(music) {indexes.bed=next++;args.push('-stream_loop','-1','-i',music);}
+  if(effects) {indexes.events=next++;args.push('-i',effects);}
   const duration=plan.duration;
-  const musicIndex=narration ? 2 : 1;
   const filters=[];
-  if(narration) filters.push(`[1:a]aresample=48000,apad,atrim=duration=${duration}[voice]`);
-  if(music) filters.push(`[${musicIndex}:a]aresample=48000,volume=${plan.project.music.volume ?? .15},atrim=duration=${duration}[bed]`);
-  if(narration && music) filters.push('[voice]asplit=2[narration][side]','[bed][side]sidechaincompress=threshold=0.025:ratio=8:attack=20:release=250[duck]','[narration][duck]amix=inputs=2:normalize=0[audio]');
-  else filters.push(`[${narration ? 'voice' : 'bed'}]anull[audio]`);
+  if(narration) filters.push(`[${indexes.voice}:a]aresample=48000,apad,atrim=duration=${duration}[voice]`);
+  if(effects) filters.push(`[${indexes.events}:a]aresample=48000,atrim=duration=${duration}[events]`);
+  if(music) filters.push(`[${indexes.bed}:a]aresample=48000,volume=${plan.project.music.volume ?? .15},atrim=duration=${duration}[bed]`);
+  const foreground=[...(narration ? ['[voice]'] : []),...(effects ? ['[events]'] : [])];
+  if(foreground.length) filters.push(`${foreground.join('')}${foreground.length>1 ? `amix=inputs=${foreground.length}:normalize=0` : 'anull'}[foreground]`);
+  if(foreground.length && music) filters.push('[foreground]asplit=2[main][side]','[bed][side]sidechaincompress=threshold=0.025:ratio=8:attack=20:release=250[duck]','[main][duck]amix=inputs=2:normalize=0[mix]');
+  else filters.push(`[${foreground.length ? 'foreground' : 'bed'}]anull[mix]`);
+  filters.push('[mix]alimiter=limit=0.95:level=0:latency=1[audio]');
   args.push('-filter_complex',filters.join(';'),'-map','0:v','-map','[audio]','-c:v','copy','-c:a','aac','-b:a','192k','-t',String(duration),'-movflags','+faststart',path.join(out,'video.mp4'));
   run(ffmpeg,args);fs.unlinkSync(video);
 }
@@ -176,20 +188,29 @@ async function build(options) {
       assetUrls[asset.id]=`/${name}`;
     }
     const captions=project.audio?.subtitles ? parseSrt(fs.readFileSync(path.join(baseDir,project.audio.subtitles),'utf8'),plan.duration).captions : [];
-    const requiredText=[project.title,project.brand ?? '',...plan.timeline.flatMap(collectText),...captions.map(c=>c.text),
-      '教学示例数据　不代表真实业务 生成素材 界面截图 授权素材 原创素材 来源 〔〕 录音 预览 单位 零基线',...plan.timeline.map(s=>s.unit ?? '')].join('\n');
+    const requiredText=[project.title,project.brand ?? '',...plan.timeline.flatMap(collectText),...collectContinuityText(project.continuity),...captions.map(c=>c.text),
+      '教学示例数据　不代表真实业务 生成素材 界面截图 授权素材 原创素材 来源 · 〔〕 录音 预览 单位 零基线',...plan.timeline.map(s=>s.unit ?? '')].join('\n');
     const textFile=path.join(temporary,'font-text.txt');fs.writeFileSync(textFile,requiredText);
     const font=chooseFont();
     const fontInfo=JSON.parse(run(python,[path.join(root,'studio/check_media.py'),'font','--font',font.path,'--index',String(font.index),'--text',textFile,'--out',path.join(publicDir,'font.ttf')]));
     assetUrls.__font='/font.ttf';manifest.font=fontInfo;
     const {bundle}=await import('@remotion/bundler');
-    const {selectComposition,renderMedia,renderStill}=await import('@remotion/renderer');
+    const {selectComposition,renderMedia,renderStill,renderFrames}=await import('@remotion/renderer');
     console.log('Bundling controlled scenes');
     const serveUrl=await bundle({entryPoint:path.join(root,'studio/src/index.tsx'),publicDir,outDir:path.join(temporary,'bundle')});
     const inputProps={plan,assetUrls,captions,fontFamily:'HeiGeLocal'};
     const browserExecutable=browser.path;
     const browserErrors=[];
-    const observeLog=log=>{if(log.type==='error') browserErrors.push(log.text);};
+    let captureProbes=false;
+    const observed=new Map(),probeConflicts=[];
+    const observeLog=log=>{
+      if(log.type==='error') browserErrors.push(log.text);
+      if(captureProbes && log.text?.startsWith('HEIGE_CONTINUITY:')) {
+        const sample=JSON.parse(log.text.slice('HEIGE_CONTINUITY:'.length));
+        if(observed.has(sample.frame) && JSON.stringify(observed.get(sample.frame))!==JSON.stringify(sample)) probeConflicts.push(sample.frame);
+        observed.set(sample.frame,sample);
+      }
+    };
     const composition=await selectComposition({serveUrl,id:'HeigeFilm',inputProps,browserExecutable,logLevel:'error',onBrowserLog:observeLog});
     const checks=[];
     const proofs=path.join(out,'proofs');fs.mkdirSync(proofs);
@@ -211,11 +232,33 @@ async function build(options) {
     if(browserErrors.length) throw new Error(`Browser errors: ${browserErrors.join('; ').slice(0,1500)}`);
     let last=-1;
     console.log(`Rendering ${plan.duration}s at ${plan.width}x${plan.height}; concurrency 1`);
-    await renderMedia({serveUrl,composition,inputProps,browserExecutable,concurrency:1,codec:'h264',crf:18,
-      outputLocation:path.join(out,'silent.mp4'),overwrite:false,logLevel:'error',onBrowserLog:observeLog,
-      onProgress:p=>{const percent=Math.floor(p.progress*10)*10;if(percent!==last){last=percent;console.log(`Render ${percent}%`);}}});
+    captureProbes=true;
+    const samples=project.continuity?.blur?.samples ?? 1;
+    if(project.continuity && samples===3) {
+      const rawFrames=path.join(temporary,'shutter-frames');
+      const samplingProps={...inputProps,renderSampling:{samples:3,shutterAngle:180}};
+      const samplingComposition={...composition,props:{...composition.props,...samplingProps},fps:plan.fps*3,durationInFrames:plan.durationInFrames*3};
+      await renderFrames({serveUrl,composition:samplingComposition,inputProps:samplingProps,browserExecutable,concurrency:1,imageFormat:'png',outputDir:rawFrames,muted:true,logLevel:'error',onBrowserLog:observeLog,
+        onStart:()=>{},onFrameUpdate:count=>{const percent=Math.floor(count/(plan.durationInFrames*3)*10)*10;if(percent!==last){last=percent;console.log(`Shutter capture ${percent}%`);}}});
+      const mixed=path.join(temporary,'linear-frames');
+      run(process.execPath,['--expose-gc',path.join(root,'studio/blur_frames.mjs'),'--input',rawFrames,'--output',mixed,'--samples','3'],{timeout:600000});
+      const blurReport=JSON.parse(fs.readFileSync(path.join(mixed,'composite.json'),'utf8'));
+      writeJson(path.join(out,'shutter.json'),blurReport);
+      run(ffmpeg,['-v','error','-framerate',String(plan.fps),'-i',path.join(mixed,'element-%06d.png'),'-c:v','libx264','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',path.join(out,'silent.mp4')],{timeout:600000});
+      manifest.temporalShutter={samples:3,angle:180,compositing:'opaque PNG captures averaged in linear-light sRGB, 16-bit lookup tables',captures:plan.durationInFrames*3};
+    } else {
+      await renderMedia({serveUrl,composition,inputProps,browserExecutable,concurrency:1,codec:'h264',crf:18,
+        outputLocation:path.join(out,'silent.mp4'),overwrite:false,logLevel:'error',onBrowserLog:observeLog,
+        onProgress:p=>{const percent=Math.floor(p.progress*10)*10;if(percent!==last){last=percent;console.log(`Render ${percent}%`);}}});
+      manifest.temporalShutter={samples:1,angle:0,compositing:'disabled'};
+    }
+    captureProbes=false;
     if(browserErrors.length) throw new Error(`Browser errors during video: ${browserErrors.join('; ').slice(0,1500)}`);
-    mux(plan,staged,path.join(out,'silent.mp4'),out);
+    if(probeConflicts.length) throw new Error(`Repeated committed DOM probes disagree: ${probeConflicts.slice(0,10).join(',')}`);
+    const soundPath=path.join(out,'events.wav');
+    const sound=synthesizeEventAudio(plan,soundPath);
+    if(sound) {writeJson(path.join(out,'sound-events.json'),sound);manifest.eventAudio=sound;}
+    mux(plan,staged,path.join(out,'silent.mp4'),out,sound ? soundPath : null);
     writeJson(path.join(out,'plan.json'),plan);
     writeJson(path.join(out,'asset-map.json'),Object.fromEntries(Object.entries(assetUrls).filter(([id])=>id!=='__font').map(([id,url])=>[id,`assets${url}`])));
     fs.copyFileSync(file,path.join(out,'project.json'));
@@ -223,6 +266,15 @@ async function build(options) {
     console.log('Checking complete decoded video and audio');
     const check=run(python,[path.join(root,'studio/check_media.py'),'check','--video',path.join(out,'video.mp4'),'--plan',path.join(out,'plan.json'),'--out',out],{timeout:600000});
     console.log(check);
+    if(project.continuity) {
+      const samples=[...observed.values()].sort((a,b)=>a.frame-b.frame);
+      const pixels=JSON.parse(fs.readFileSync(path.join(out,'media-check.json'),'utf8'));
+      const continuity=evaluateContinuity(plan,samples,{videoSha256:fileHash(path.join(out,'video.mp4')),pixelReport:pixels});
+      writeJson(path.join(out,'continuity-probe.json'),{engine,input:initial,frames:samples});
+      writeJson(path.join(out,'continuity-check.json'),continuity);
+      manifest.continuity={status:continuity.status,coverage:continuity.coverage,boundaries:continuity.boundaries,scope:continuity.scope};
+      if(!continuity.passed) throw new Error(`Continuity rejected: ${JSON.stringify(continuity.errors).slice(0,1800)}`);
+    }
     if(JSON.stringify(inputFingerprint(file,project,options.brief))!==JSON.stringify(initial)) throw new Error('Inputs changed during render; output cannot inherit validation');
     if(engineFingerprint(root)!==engine) throw new Error('Engine changed during render; retry after edits finish');
     manifest.status=manifest.previewReasons.length ? 'preview' : 'validated';
@@ -245,7 +297,7 @@ async function build(options) {
 async function verify(options) {
   const manifest=JSON.parse(fs.readFileSync(path.join(options.out,'manifest.json'),'utf8'));
   if(!['validated','preview'].includes(manifest.status) || manifest.review?.technical!=='pass') throw new Error('Output has no successful technical validation');
-  const {project}=checkedRead(options.file,options.brief);
+  const {project,plan}=checkedRead(options.file,options.brief);
   if((project.draft || project.audio?.kind==='mock') && manifest.status!=='preview') throw new Error('Mock or draft output incorrectly marked validated');
   if(JSON.stringify(inputFingerprint(options.file,project,options.brief))!==JSON.stringify(manifest.input)) throw new Error('Project, assets, captions or brief changed');
   if(engineFingerprint(root)!==manifest.engine) throw new Error('Engine changed');
@@ -254,10 +306,22 @@ async function verify(options) {
   if(JSON.stringify(env)!==JSON.stringify(manifest.environment)) throw new Error('Dependencies, tools, browser or font changed');
   verifyArtifacts(options.out,manifest.artifacts);
   if(fileHash(path.join(options.out,'video.mp4'))!==manifest.mp4_sha256) throw new Error('Video changed');
+  verifyContinuousEvidence(plan,options.out,manifest);
   console.log(JSON.stringify({status:manifest.status,integrity:'pass',review:manifest.review}));
 }
 export async function main(argv=process.argv.slice(2)) {
   const options=argsFrom(argv);
+  if(options.command==='init') {
+    if(!options.file || options.out || options.brief || options.browser) throw new Error('Usage: node studio/make.mjs init <new-project.json> [--ratio 16:9|9:16|1:1]');
+    const project=createContinuousProject(options.ratio ?? '16:9');
+    const plan=compileProject(project);
+    if(plan.issues.errors.length) throw new Error(JSON.stringify(plan.issues.errors));
+    const destination=path.resolve(options.file);
+    fs.mkdirSync(path.dirname(destination),{recursive:true});
+    fs.writeFileSync(destination,JSON.stringify(project,null,2)+'\n',{flag:'wx'});
+    console.log(JSON.stringify({status:'created',project:destination,ratio:project.ratio,engine:'native-continuous-world',next:'validate, build, then verify'}));return;
+  }
+  if(options.ratio) throw new Error('--ratio is only accepted by init; edit the authored project for independent composition');
   if(options.command==='doctor') {
     const env=environment();const browser=await checkedBrowser(options);env.browser={sha256:browser.sha256,version:browser.version};
     console.log(JSON.stringify({status:'pass',environment:env,concurrency:1,implicitExternalDownloads:false,onlineGeneration:false},null,2));return;

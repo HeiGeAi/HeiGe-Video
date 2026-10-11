@@ -198,6 +198,7 @@ export const Scene: React.FC<SceneProps> = (props) => {
   const {plan, shot, index} = props;
   const frame = useCurrentFrame();
   const layout = layoutFor(plan.project.ratio);
+  if (shot.type === 'beat') throw new Error('beat requires the persistent continuous world');
   const Component = COMPONENTS[shot.type];
   const isHero = ['hook', 'statement', 'end'].includes(shot.type);
   if (!Component) throw new Error(`Unsupported shot type: ${shot.type}`);

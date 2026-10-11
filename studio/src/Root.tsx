@@ -20,8 +20,8 @@ export const RemotionRoot: React.FC = () => <Composition
   width={defaultPlan.width}
   height={defaultPlan.height}
   calculateMetadata={({props}: {props: FilmProps}) => ({
-    durationInFrames: props.plan.durationInFrames,
-    fps: props.plan.fps,
+    durationInFrames: props.plan.durationInFrames * (props.renderSampling?.samples ?? 1),
+    fps: props.plan.fps * (props.renderSampling?.samples ?? 1),
     width: props.plan.width,
     height: props.plan.height,
   })}

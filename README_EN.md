@@ -1,21 +1,62 @@
-# HeiGe-Video v4.0.0-alpha.1
+# HeiGe-Video v4.0.0-alpha.2
 
-**Turn a brief, final recording and storyboard into verifiable films.**
+**Let the same object carry the film from opening to outcome.**
 
-Design the visual promise, complete objects and final composition first. v4 adds an original controlled Remotion production route informed by a source-level study of BrewReel, while retaining the authored Canvas route for bespoke motion films.
+Design the visual promise, complete objects and final composition first. v4 alpha 2 adds a native continuous world to our original Remotion route: persistent objects, an authored camera, visible handoffs between beats and object-bound sound events share one clock. BrewReel informed the controlled-production workflow; OneTake informed the method study. Our code and templates are original, and the authored Canvas route remains available for bespoke films.
+
+## Create a project
+
+After installing the environment, use one runner to create, validate, build and verify. `init` copies an original ratio-specific template into a self-contained JSON project with no external assets and refuses to overwrite an existing file. Edit its content, composition and actions for the real brief.
+
+```sh
+npm ci
+python3 -m venv .venv
+.venv/bin/python -m pip install -r studio/requirements.txt
+# Install local FFmpeg, Noto Sans CJK SC and Chromium as described in the Studio guide.
+npx remotion browser ensure
+node studio/make.mjs doctor
+node studio/make.mjs init /tmp/heige-launch-new.json --ratio 16:9
+node studio/make.mjs validate /tmp/heige-launch-new.json
+node studio/make.mjs build /tmp/heige-launch-new.json --out /tmp/heige-launch-new
+node studio/make.mjs verify /tmp/heige-launch-new.json --out /tmp/heige-launch-new
+```
+
+Original compositions: [landscape](examples/studio/continuous-launch.json), [portrait](examples/studio/continuous-portrait.json) and [square](examples/studio/continuous-square.json). Read the [continuity guide](studio/CONTINUITY.md) for the shared object, camera and event clock, with independent composition for each ratio.
+
+## Three native continuous-world films
+
+| Film | Ratio | Original project |
+| :--- | :--- | :--- |
+| [Landscape MP4](demos/continuous/horizontal.mp4) | 16:9 | [continuous-launch.json](examples/studio/continuous-launch.json) |
+| [Portrait MP4](demos/continuous/portrait.mp4) | 9:16 | [continuous-portrait.json](examples/studio/continuous-portrait.json) |
+| [Square MP4](demos/continuous/square.mp4) | 1:1 | [continuous-square.json](examples/studio/continuous-square.json) |
+
+The [continuous gallery](demos/continuous/README.md) records actual encoded-image and playback scope. The [current inventory](references/v4-continuity-status.json) binds inputs, the current engine, MP4 hashes and declared checks. Technical, structural, sampled visual, complete playback and listening states remain separate. Inventory verification does not rerender or listen, and historical results do not establish acceptance of a new engine.
 
 ## Controlled production in v4
 
-- Four authoring modes, eight bounded scene types, two independent themes and three aspect-ratio layouts
-- A strict versioned project contract, exact factual quote attribution and labelled synthetic teaching data
+- Four authoring modes (`promo`, `explainer`, `lesson`, `talk`), two themes and three aspect-ratio layouts
+- Native continuous objects with persistent IDs, semantic identity declarations, full keyframe trajectories and a global camera; adjacent `beat` segments have explicit carrier/cause/outcome handoffs
+- Object-bound original `tick`, `whoosh` and `impact` sounds with authored timestamps
+- Optional three actual temporal samples at a 180-degree global shutter, averaged in linear-light sRGB before encoding; one sample disables it
+- Eight preserved ordinary scene types: `hook`, `statement`, `steps`, `compare`, `bars`, `transform`, `media`, `end`
+- A strict versioned project contract, exact factual quote attribution and labelled synthetic teaching data; numeric continuous object text and UI rows require that object's own valid claims
 - Final-recording timing without voice stretching, original SRT cue times and preview-only mock/draft output
 - Registered local image, video, voice and music assets; no implicit online generation or asset downloads
-- Real browser text geometry, font glyph coverage, complete encoded-frame decoding and independent source-narration plus final-mix measurements
+- Real browser text geometry, font glyph coverage, complete encoded-frame decoding and independent source-narration plus final-mix measurements; continuous worlds also collect actual DOM observations per frame and bind encoded pixel deltas to the final MP4
 - Hashes of input, assets, captions, brief, engine, dependencies, font, browser and every output artifact
 
-See the [Studio guide](studio/README.md), [project contract](studio/CONTRACT.md), [distillation study](references/brewreel-distillation.md) and [architecture](references/super-video-architecture.md). A coding agent authors JSON; no native LLM/TTS/ASR provider is integrated. Technical validation never implies artistic acceptance, complete realtime playback, listening or automatic publishing. Remotion has its own license terms.
+Continuous worlds are limited to 60 seconds and 2 to 20 beats; each quantized beat lasts 0.25 to 20 seconds. Ordinary scenes cannot be mixed into a continuous project. Cause/outcome are author declarations, not machine-proven semantics. Geometry uses approximate point-grid visibility, and pixel deltas do not recognize images or real product behavior. Temporal sampling costs extra computation and does not implement physical HDR or per-object velocity blur.
+
+See the [Studio guide](studio/README.md), [project contract](studio/CONTRACT.md), [BrewReel study](references/brewreel-distillation.md) and [OneTake study](references/onetake-architecture.md). A coding agent authors JSON; no native online LLM, TTS, ASR or B-roll supply/cache is integrated. Technical validation never implies artistic acceptance, complete realtime playback, listening or automatic publishing. Hashes prove integrity, not trust. Remotion has its own license terms.
 
 [Install and use](USAGE.md) · [Skill entrypoint](SKILL.md) · [中文](README.md) · [Verification status](references/status.md)
+
+## Five historical v4 alpha 1 films
+
+The five [encoded examples](demos/super/README.md) retain their original bytes, source inputs and scoped acceptance records: median landscape, median portrait, product portrait, an audio-clock fixture and a local-media square fixture. The [portable inventory](references/v4-example-status.json) binds them to source commit `29135480806d061f1af65734b17dcecad3a31f4a`. Historical verification recomputes the production engine hash from that Git commit and fails when the commit is unavailable. These are historical results, not demonstrations of alpha 2 continuity or the current engine.
+
+The original inventory records sampled review and muted normal-speed browser playback. The audio fixture's first playback dropped frames and its independent replay did not; both records remain. Audio was measured but not listened to. Mock/draft fixtures remain preview, and no real spoken-narration experience is claimed.
 
 ## Five preserved v3 original films
 
@@ -112,12 +153,10 @@ Controls are excluded by default. Selection is lexical routing, not quality scor
 - [Quality gates](references/quality-gates.md): technical, meaning/style and perceptual review
 - [Video JSON](references/research-cases.json) / [Project JSON](references/research-projects.json): portable research without private paths
 
-Canvas/SVG + FFmpeg is the current production route. The separate browser adapter is experimental and has no verified output in this environment. A successful Blender CPU probe is not a general full-film implementation. Neither is a default production guarantee.
+Remotion + FFmpeg is the default controlled-production route. Authored Canvas/SVG + FFmpeg remains supported for bespoke films. The separate legacy browser adapter is experimental, and a successful Blender CPU probe is not a general full-film implementation.
 
 ## License
 
 Original code and documentation retain the [MIT License](LICENSE), existing copyright and [third-party notices](references/source-notices.md). Reference movies, source frames, music, fonts and third-party source snapshots are not distributed in the research corpus. A repository code license does not automatically grant media rights. Dependencies remain subject to their own licenses.
 
-This is the v3.0.0-rc.1 prerelease candidate. See the [changelog](CHANGELOG.md).
-
-Five original v4 encoded examples (74 seconds / 2,220 frames), source projects, sampled visual coverage and normal-speed muted browser playback are in [the demo gallery](demos/super/README.md) and [portable verification inventory](references/v4-example-status.json). First audio-fixture playback dropped 28 frames; an independent replay dropped 0. Both observations are retained. Audio was measured but not listened to; mock/draft fixtures remain preview.
+This is v4.0.0-alpha.2, dated 2026-10-12. OneTake's fixed research commit uses a noncommercial license. No OneTake source or assets were imported; this project's MIT license does not grant rights to reuse upstream materials. See the [source notices](references/source-notices.md) and [changelog](CHANGELOG.md).

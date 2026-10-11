@@ -3,6 +3,7 @@
   "version": "4.0.0-alpha.1",
   "date": "2026-10-12",
   "upstreamCommit": "1bf00debaf81462c1d6a8365e8822764ba5fb910",
+  "sourceCommit": "29135480806d061f1af65734b17dcecad3a31f4a",
   "engine": "7171a2d581ca0d358261f6a12a342b38e3aee9048599b6d6d5a521928c3454a3",
   "environment": {
     "node": "22.22.2",

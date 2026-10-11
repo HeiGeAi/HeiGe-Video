@@ -1,6 +1,6 @@
 export type Ratio = '16:9' | '9:16' | '1:1';
 export type ThemeName = 'ledger' | 'nocturne';
-export type ShotType = 'hook' | 'statement' | 'steps' | 'compare' | 'bars' | 'transform' | 'media' | 'end';
+export type ShotType = 'hook' | 'statement' | 'steps' | 'compare' | 'bars' | 'transform' | 'media' | 'end' | 'beat';
 
 export type Claim = {text: string; factId: string; quote: string};
 export type Datum = {id: string; label: string; value: number};
@@ -33,6 +33,38 @@ export type Shot = {
 };
 
 export type TimelineShot = Shot & {from: number; frames: number; start: number; end: number};
+export type ContinuityKind = 'surface' | 'text' | 'dot' | 'line' | 'ui';
+export type ContinuityColor = 'paper' | 'ink' | 'muted' | 'accent' | 'line' | 'secondary';
+export type ObjectKeyframe = {
+  at: number;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  opacity: number;
+  rotation: number;
+  radius: number;
+};
+export type CameraKeyframe = {at: number; x: number; y: number; zoom: number; rotation: number};
+export type ContinuousObject = {
+  id: string;
+  semanticIdentity: string;
+  kind: ContinuityKind;
+  text?: string;
+  rows?: string[];
+  color?: ContinuityColor;
+  claims?: Claim[];
+  keyframes: ObjectKeyframe[];
+};
+export type ContinuityBoundary = {fromShot: string; toShot: string; carrier: string; cause: string; outcome: string};
+export type ContinuitySound = {id: string; at: number; objectId: string; type: 'tick' | 'whoosh' | 'impact'; volume: number};
+export type Continuity = {
+  objects: ContinuousObject[];
+  camera: CameraKeyframe[];
+  boundaries: ContinuityBoundary[];
+  soundEvents?: ContinuitySound[];
+  blur?: {samples: 1 | 3; shutterAngle: 180};
+};
 export type Project = {
   schemaVersion: 'heige-video/4';
   title: string;
@@ -49,6 +81,7 @@ export type Project = {
   shots: Shot[];
   audio?: {assetId: string; kind: 'recording' | 'synthetic' | 'mock'; subtitles?: string};
   music?: {assetId: string; volume?: number};
+  continuity?: Continuity;
 };
 
 export type CompiledPlan = {
@@ -70,4 +103,5 @@ export type FilmProps = {
   captions: CaptionCue[];
   fontFamily: string;
   inspect?: boolean;
+  renderSampling?: {samples: 1 | 3; shutterAngle: 180};
 };
