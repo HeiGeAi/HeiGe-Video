@@ -1,11 +1,38 @@
 ---
 name: heige-video
-description: Design and render original code-driven motion films with distinct editorial typography, cinematic product, ink, whiteboard, or data-storytelling treatments. Use when a video needs meaningful object action, authored composition, deterministic rendering and actual-pixel review; not for a static slide deck or automatic model-quality parity claims.
+description: Turn a brief, final recording, captions and local assets into original motion films. Use the controlled Remotion production route for explainers, product videos, brand stories and lessons, with factual citations, recording-driven timing, portrait layout and decoded quality checks. Use authored Canvas for bespoke ink, whiteboard and cinematic actions.
 ---
 
-# HeiGe Video · v3 candidate
+# HeiGe Video · v4 alpha
 
-把题材做成可见的变化：先设计值得拍的物体和决定性动作，再用镜头、材质、文字和声音让它成立。渲染成功只是开始。安装、示例与命令见 [USAGE.md](USAGE.md)；真实能力与验收范围见 [status.md](references/status.md)。
+把题材做成可见的变化：先设计值得拍的物体和决定性动作，再用镜头、材质、文字和声音让它成立。默认用受控 Remotion 生产线制作结构化讲解、产品、品牌和课程视频。安装、示例与命令见 [Studio 指南](studio/README.md)；旧版能力见 [status.md](references/status.md)。
+
+## 先选择生产路线
+
+| 目标 | 路线 | 输入与输出 |
+| :--- | :--- | :--- |
+| 讲解、产品流程、品牌、录音课程、多画幅 | v4 controlled Remotion | 版本化 JSON、最终录音／SRT、登记素材 → MP4、抽帧、布局与完整解码报告 |
+| 独特主体、笔墨、复杂白板、作者式镜头 | v3 authored Canvas | treatment、持久对象与可信源码 → MP4、decoded action/cut strips |
+
+已有获批作品沿用原路线。不要把需要精细定制的复杂动作硬塞进受控镜头。也不要让简单讲解每次重写渲染引擎。两条路线都先证明关键变化，再交付整片。
+
+## 受控生产工作流
+
+1. 锁定目的、受众、事实来源、品牌、画幅与结尾。只把会改变制作方案的缺失信息交给用户；其他采用可逆默认。模式选择 `explainer`（讲解）、`promo`（产品／品牌）、`lesson`（课程）或 `talk`（口播）
+2. 建证据表。逐条保留原文与来源。把主张绑定到同一条原文，数字、主体、单位同时匹配。用 `--brief` 把原始材料带入校验。教学模拟数据显式使用 `demoData: true`，不把生成素材当成纪实证据
+3. 有录音时先定稿录音与 SRT，以真实音频时长设连续 `start`／`end`。时长服从最终录音，不能拉伸录音迁就镜头。SRT 保留原始 cue，只去展示句读。没有真实录音时可以用 `kind: mock` 验机制，但成片始终是 preview
+4. 选择具体主题：`ledger` 适合精确数据与讲解，`nocturne` 适合产品与品牌。选用八类受控镜头：`hook`、`statement`、`steps`、`compare`、`bars`、`transform`、`media`、`end`。每镜承担一个清楚的认知任务；保留对象 ID，使动作前后对应。各镜头字段只能来自 [CONTRACT.md](studio/CONTRACT.md)
+5. 为 `16:9`、`9:16`、`1:1` 选合适结构。竖版减少并列信息，正文留出字幕区。图片、视频、录音与音乐先登记本地路径和权利。禁止在镜头源码中临时请求远程素材
+6. 写项目 JSON。此路线只调整内容参数与合法镜头组合，通常不用修改 `studio/src`。先 validate，再用新的目录 build。执行器、字体、资产或媒体检测失败必须阻断，不准把失败降为成功
+7. 看实际编码输出的 overview、动作条带和首尾帧。修布局、动作与信息层级后重新渲染。verify 核对源码、输入、依赖、字体、浏览器与全部产物哈希。分别记录技术通过、抽帧审阅、完整播放、听音，不自动批准发布
+
+```sh
+node studio/make.mjs validate examples/studio/median.json
+node studio/make.mjs build examples/studio/median.json --out /tmp/heige-median-new
+node studio/make.mjs verify examples/studio/median.json --out /tmp/heige-median-new
+```
+
+本地引擎无需模型 API key。创作 JSON 由当前 coding agent 完成，尚未内置自动 LLM 调用、TTS、ASR、在线素材供应器或课程批处理。不要把人工／agent 编排描述成已实现的全自动服务。方法蒸馏与原创实现见 [BrewReel 分析](references/brewreel-distillation.md)。
 
 ## 先确定一件值得看的事
 
@@ -44,6 +71,6 @@ python3 scripts/select_references.py --style ink --query 'brush identity consequ
 
 ## 能力和结论边界
 
-默认使用已验证的 Canvas/SVG + FFmpeg。浏览器适配器是独立实验路线；Blender CPU 探针不等于已完成三维全片管线。避免一次引入多个框架。当前实现与研究建议的差别见 [升级机制](references/upgrade-mechanisms.md)。
+v4 增加了 Remotion + FFmpeg 的受控生产线。旧 `runtime/adapters/browser_source.mjs` 仍是另一条实验路线，不能混同。Canvas/SVG 保留给作者式作品；Blender CPU 探针不等于已完成三维全片管线。当前实现与研究建议的差别见 [v4 架构](references/super-video-architecture.md) 与 [v3 升级机制](references/upgrade-mechanisms.md)。
 
 主观评级不能包装成测量分数。没有真实授权模型调用、同条件样本与盲审，就不宣称低成本优势、模型复现或 Opus 水平。需要比较时使用 [benchmark protocol](references/benchmark.md)。第三方电影、字体、音乐、人物和品牌权利独立于仓库代码许可；保留 [许可与来源](references/source-notices.md)。

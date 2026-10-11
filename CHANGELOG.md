@@ -1,5 +1,33 @@
 # Changelog
 
+## v4.0.0-alpha.1 · 2026-10-12
+
+### Added
+
+- Original controlled Remotion production route: strict `heige-video/4` JSON, eight scene types, four authoring modes, two themes and three independent aspect-ratio layouts.
+- Final-recording clock and original SRT timing, local voice/music mux with ducking, registered local media and labelled generated/screenshot assets.
+- Exact claim/quote attribution, numeric row identity and unit checks, visible teaching-data disclosure, preview-only draft/mock status.
+- Local font cmap validation and committed-DOM inspection before screenshots; complete encoded frame/audio checks, overview sheets and causal-action strips.
+- Input/engine/environment/artifact fingerprints, immutable output directories, conservative serial rendering and fatal executor failures.
+- Source-level BrewReel architecture/quality distillation, adversarial tests and structured agent authoring workflow.
+
+### Fixed
+
+- Full-width numeric subtitle punctuation and adjacent signed quantities retain their values through parser and renderer cleanup.
+- Media elements use block layout to avoid replaced-element baseline overflow; output initialization and cleanup always release the serial render lock.
+- Legacy Canvas workers fall back safely when group signals are denied, preserving the original error and reaping the owned worker.
+
+### Preserved
+
+- Authored Canvas/SVG production, original v2/v3 films, source hashes and 100 + 100 research corpus.
+- MIT for original work; Remotion and system dependencies retain their independent license terms.
+
+### Limits
+
+- Alpha, local pipeline. A coding agent writes the storyboard JSON; native online LLM, TTS, ASR, image/video providers and batch-course scheduling are not integrated.
+- Sampled geometric/visual review is distinct from every-frame artistic review, full realtime playback and actual listening.
+- No trained model weights, paid-model comparison, cost advantage, upstream demo equivalence or automatic publishing certification.
+
 ## v3.0.0-rc.1 — 2026-10-06
 
 Pre-release candidate; verification scope is documented rather than treated as stable-production or aesthetic parity certification.

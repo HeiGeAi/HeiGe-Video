@@ -1,4 +1,6 @@
-# HeiGe-Video v3.0.0-rc.1 · install and use
+# HeiGe-Video · install and use
+
+v4's default structured-production route uses Remotion. Follow the [Studio installation and rendering guide](studio/README.md) and [versioned project contract](studio/CONTRACT.md). The sections below retain the authored Canvas/SVG route for existing films and bespoke actions.
 
 This is a portable Skill folder, original scene code and a deterministic renderer. It does not need a model SDK or API key to render existing source. A coding agent needs file access, authorized code execution and actual-image review to create and judge new films.
 
@@ -21,7 +23,7 @@ sudo apt-get install -y --no-install-recommends python3-venv ffmpeg fontconfig f
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install Pillow==12.3.0 fonttools==4.61.1
-npm install --no-save --package-lock=false @napi-rs/canvas@0.1.100
+npm ci
 python runtime/render_video.py doctor
 ```
 

@@ -1,5 +1,13 @@
 # Source notices
 
+## v4 production route
+
+The BrewReel study uses [Finderchangchang/brewreel](https://github.com/Finderchangchang/brewreel/tree/1bf00debaf81462c1d6a8365e8822764ba5fb910), fixed at commit `1bf00debaf81462c1d6a8365e8822764ba5fb910` (v0.15.0, Apache-2.0). Architecture and workflow mechanisms informed an original implementation. BrewReel scene source, assets, characters, films, music and fonts are not redistributed, nor is this a model-weight distillation.
+
+Remotion packages are separate third-party dependencies, pinned in package-lock.json. Read the [actual Remotion license](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md). Its free-use scope includes individuals, organizations of up to three employees, nonprofits and evaluation; larger for-profit organizations need the applicable company license. The project's MIT license does not override those conditions. No license key is embedded.
+
+The two original theme adaptations use HeiGe-Design's helvetic-ledger and nocturne-teal specifications. Local Noto CJK fonts are not bundled; their [SIL Open Font License](https://github.com/notofonts/noto-cjk/blob/main/LICENSE) remains applicable. Browser, FFmpeg, Python and npm dependencies retain their own terms. New demo audio is original deterministic procedural synthesis; a beep clock is marked mock and does not impersonate speech.
+
 The authored project code and documentation use the root [LICENSE](../LICENSE), retaining the existing copyright notice for heige-motion-kit contributors. Package-relative runtime adaptation, validators, prompt export and example QA are original project work. HeiGe Video is the public package maintained by HeiGeAi; the existing project attribution is preserved.
 
 The LemoLab and Jake method references were examined as research. Their supplied license notices are retained for provenance:

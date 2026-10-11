@@ -1,12 +1,50 @@
-# HeiGe-Video v3.0.0-rc.1
+# HeiGe-Video v4.0.0-alpha.1
 
-**让代码拍出一件真正发生的事。**
+**让材料、录音与分镜，成为真正可验证的成片。**
 
-从视觉承诺、完整物体和结束构图出发，先证明最关键的动作，再制作整片。适合动态排版、产品概念片、水墨叙事、白板推演和数据故事。
+从视觉承诺、完整物体和结束构图出发，先证明最关键的动作，再制作整片。v4 将 BrewReel 的受控生产思想融入原创 Remotion 引擎：事实有依据，录音定时长，镜头有边界，横竖版重新构图，编码后的像素与音轨必须实际检查。
 
-[安装与使用](USAGE.md) · [Skill 入口](SKILL.md) · [English](README_EN.md) · [当前验证状态](references/status.md)
+[v4 安装与使用](studio/README.md) · [Skill 入口](SKILL.md) · [English](README_EN.md) · [深度蒸馏](references/brewreel-distillation.md) · [系统架构](references/super-video-architecture.md) · [本轮升级报告](references/v4-upgrade-report.md)
 
-## 五支全新样片
+## v4 受控生产线
+
+| 能力 | 当前实现 |
+| :--- | :--- |
+| 内容与视觉解耦 | 四种创作模式、八类镜头、两套主题，严格版本化 JSON 契约 |
+| 时间轴 | 最终录音作为时钟，原始 SRT cue，不拉伸人声；mock／draft 保持 preview |
+| 数据与证据 | 引用逐字归属、主体与数值单位关联，教学数据持续标记 |
+| 素材 | 本地图片／视频／录音／音乐登记，安全路径检查与权利声明登记，生成素材与截图明确标注 |
+| 多画幅 | 16:9、9:16、1:1 的独立布局，字体覆盖与真实浏览器几何检查 |
+| 成片 QA | 全部编码帧解码、尺寸／帧数／时长、空帧、旁白与总音轨检测、抽帧与动作条带 |
+| 可复核交付 | 输入、字幕、素材、源码、依赖、字体、浏览器与产物哈希，修改后旧验证失效 |
+
+创作由 coding agent 读取 Skill 后生成项目 JSON。本地渲染不需要模型 API key。当前没有自动 LLM／TTS／ASR／在线素材调用。技术检测不代替审美、完整播放与听音；v4 是 alpha。
+
+```sh
+npm ci
+python3 -m venv .venv
+.venv/bin/python -m pip install -r studio/requirements.txt
+# 安装本地 FFmpeg、Noto Sans CJK SC 字体与 Chromium，具体见 Studio 指南
+npx remotion browser ensure
+node studio/make.mjs doctor
+node studio/make.mjs build examples/studio/median.json --out /tmp/heige-median-new
+```
+
+## 五条 v4 实际成片
+
+| 样片 | 规格 | 验证重点 |
+| :--- | :--- | :--- |
+| [中位数横版](demos/super/median.mp4) | 20 秒，16:9 | 零基线柱图、同一对象可见排序、数值与中间项保持 |
+| [中位数竖版](demos/super/median-portrait.mp4) | 20 秒，9:16 | 重新构图，比较内容按上下分组 |
+| [产品竖版](demos/super/product.mp4) | 18 秒，9:16 | 暗色光束、步骤推进与结尾回收 |
+| [声音时码夹具](demos/super/audio-clock.mp4) | 8 秒，16:9 | 原始字幕时码、混音及全角数字符号，mock 保持 preview |
+| [本地媒体方版](demos/super/media-square.mp4) | 8 秒，1:1 | 实际本地图片／视频与素材说明，draft 保持 preview |
+
+[实际截帧、源码与验收范围](demos/super/README.md) · [可移植哈希清单](references/v4-example-status.json)。声音均为原创程序合成或静音，未做真人口播体验验证。
+
+保留 Canvas 创作底座与已有获批作品。受控镜头适合稳定生产，作者式 Canvas 适合精细的水墨、白板和电影动作。下面的 v3 作品继续作为原始基线。
+
+## 五支 v3 原创样片
 
 ### 《夜航》
 
@@ -101,10 +139,10 @@ python3 scripts/select_references.py --controls only --limit 3
 - [Quality gates](references/quality-gates.md)：技术、风格、实际感知三层验收
 - [100 视频 JSON](references/research-cases.json) / [100 项目 JSON](references/research-projects.json)：可移植、无私人路径的研究台账
 
-当前生产路线是 Canvas/SVG + FFmpeg。浏览器适配器单独实验，尚无本环境验证输出；Blender CPU 小探针成功不代表通用三维电影管线已完成。两者不应被误用为默认能力。
+v4 使用 Remotion + FFmpeg。旧 Canvas/SVG + FFmpeg 路线保留；旧浏览器适配器单独实验，不能混同 v4。Blender CPU 小探针成功不代表通用三维电影管线已完成。
 
 ## 许可
 
 原创项目代码和文档沿用 [MIT License](LICENSE)，保留已有版权及 [第三方 notices](references/source-notices.md)。研究包不分发第三方影片、截帧、音乐、字体或源码快照。公开仓库许可不自动覆盖参考画面与素材。所有系统依赖另行遵守自身许可。
 
-当前为 v3.0.0-rc.1 预发布候选版。详见 [更新日志](CHANGELOG.md)。
+当前为 v4.0.0-alpha.1。Remotion 使用独立许可，商业团队使用前阅读 [第三方 notices](references/source-notices.md)。详见 [更新日志](CHANGELOG.md)。

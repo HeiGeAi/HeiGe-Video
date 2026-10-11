@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "heige-video/4",
+  "title": "HeiGe Video 工作流",
+  "mode": "promo",
+  "ratio": "9:16",
+  "theme": "nocturne",
+  "fps": 30,
+  "brand": "HEIGE VIDEO",
+  "shots": [
+    {"id": "opening", "type": "hook", "duration": 3, "title": "让内容\n变成可见的变化", "body": "把创作方法写进生产流程"},
+    {"id": "workflow", "type": "steps", "duration": 6, "title": "从想法到成片", "items": ["锁定事实与素材", "填入结构化分镜", "组件执行画面动作", "看真实成片再修正"]},
+    {"id": "routes", "type": "compare", "duration": 5, "title": "按内容选路线", "left": {"label": "受控生产", "items": ["填写 JSON", "复用内容组件"]}, "right": {"label": "自由导演", "items": ["原创代码镜头", "表现独特动作"]}},
+    {"id": "finish", "type": "end", "duration": 4, "title": "有画面\n也有制作证据", "body": "HeiGe Video  生产路线预发布"}
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "heige-video/4",
+  "title": "Audio clock fixture",
+  "mode": "lesson",
+  "ratio": "16:9",
+  "theme": "ledger",
+  "assets": [
+    {
+      "id": "clock",
+      "path": "clock-mock.wav",
+      "kind": "audio",
+      "source": "original",
+      "rights": "Original sine tone. Explicitly mock narration, not a human recording."
+    }
+  ],
+  "audio": {
+    "assetId": "clock",
+    "kind": "mock",
+    "subtitles": "clock.srt"
+  },
+  "shots": [
+    {
+      "id": "first",
+      "type": "statement",
+      "title": "声音就是时间轴",
+      "start": 0,
+      "end": 4,
+      "body": "原始声音不被拉伸"
+    },
+    {
+      "id": "second",
+      "type": "end",
+      "title": "占位音只能预览",
+      "start": 4,
+      "end": 8,
+      "body": "技术通过保留预览身份"
+    }
+  ]
+}

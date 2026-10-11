@@ -1,12 +1,23 @@
-# HeiGe-Video v3.0.0-rc.1
+# HeiGe-Video v4.0.0-alpha.1
 
-**Make something meaningful happen on screen.**
+**Turn a brief, final recording and storyboard into verifiable films.**
 
-Design the visual promise, complete objects and final composition first. Prove the defining action in a short real render, then build the film. For editorial typography, cinematic product concepts, ink stories, whiteboard explanations and data narratives.
+Design the visual promise, complete objects and final composition first. v4 adds an original controlled Remotion production route informed by a source-level study of BrewReel, while retaining the authored Canvas route for bespoke motion films.
+
+## Controlled production in v4
+
+- Four authoring modes, eight bounded scene types, two independent themes and three aspect-ratio layouts
+- A strict versioned project contract, exact factual quote attribution and labelled synthetic teaching data
+- Final-recording timing without voice stretching, original SRT cue times and preview-only mock/draft output
+- Registered local image, video, voice and music assets; no implicit online generation or asset downloads
+- Real browser text geometry, font glyph coverage, complete encoded-frame decoding and independent source-narration plus final-mix measurements
+- Hashes of input, assets, captions, brief, engine, dependencies, font, browser and every output artifact
+
+See the [Studio guide](studio/README.md), [project contract](studio/CONTRACT.md), [distillation study](references/brewreel-distillation.md) and [architecture](references/super-video-architecture.md). A coding agent authors JSON; no native LLM/TTS/ASR provider is integrated. Technical validation never implies artistic acceptance, complete realtime playback, listening or automatic publishing. Remotion has its own license terms.
 
 [Install and use](USAGE.md) · [Skill entrypoint](SKILL.md) · [中文](README.md) · [Verification status](references/status.md)
 
-## Five new original films
+## Five preserved v3 original films
 
 ### Night Signal
 
@@ -108,3 +119,5 @@ Canvas/SVG + FFmpeg is the current production route. The separate browser adapte
 Original code and documentation retain the [MIT License](LICENSE), existing copyright and [third-party notices](references/source-notices.md). Reference movies, source frames, music, fonts and third-party source snapshots are not distributed in the research corpus. A repository code license does not automatically grant media rights. Dependencies remain subject to their own licenses.
 
 This is the v3.0.0-rc.1 prerelease candidate. See the [changelog](CHANGELOG.md).
+
+Five original v4 encoded examples (74 seconds / 2,220 frames), source projects, sampled visual coverage and normal-speed muted browser playback are in [the demo gallery](demos/super/README.md) and [portable verification inventory](references/v4-example-status.json). First audio-fixture playback dropped 28 frames; an independent replay dropped 0. Both observations are retained. Audio was measured but not listened to; mock/draft fixtures remain preview.
