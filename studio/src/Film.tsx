@@ -76,7 +76,7 @@ export const HeigeFilm: React.FC<FilmProps> = ({plan, assetUrls, captions, fontF
     }
   }, [inspect, fontReady, pendingHandle, rawFrame, frame, samples, time, plan.fps, plan.project.continuity, plan.width, plan.height, subtitle]);
   return <AbsoluteFill ref={rootRef} className="heige-film" data-heige-engine="controlled-remotion-v4" data-heige-global-frame={frame} style={themeStyle(plan.project.theme, fontFamily)}>
-    {plan.project.continuity ? <ContinuousStage plan={plan} time={sampleTime} fontFamily={fontFamily} /> : plan.timeline.map((shot, index) => <Sequence key={shot.id} from={shot.from} durationInFrames={shot.frames} layout="none">
+    {plan.project.continuity ? <ContinuousStage plan={plan} time={sampleTime} fontFamily={fontFamily} assetUrls={assetUrls} /> : plan.timeline.map((shot, index) => <Sequence key={shot.id} from={shot.from} durationInFrames={shot.frames} layout="none">
       <Scene plan={plan} assetUrls={assetUrls} shot={shot} index={index} />
     </Sequence>)}
     {subtitle ? <Block id="timed-subtitle" className="heige-caption-wrap" style={{left: layout.pad, right: layout.pad, bottom: 22, minHeight: layout.bottom - 38, padding: '14px 0'}}>

@@ -273,7 +273,7 @@ export function compileProject(project, {baseDir, briefText, audioDuration} = {}
   stringAt(project.title, 'project.title', issues, {max: 80});
   if (!['promo', 'explainer', 'lesson', 'talk'].includes(project.mode)) addError(issues, 'project.mode', '未知生产模式');
   if (!ownValue(RATIOS, project.ratio)) addError(issues, 'project.ratio', '画幅必须是 16:9、9:16 或 1:1');
-  if (!['ledger', 'nocturne'].includes(project.theme)) addError(issues, 'project.theme', '未知主题');
+  if (!['ledger', 'nocturne', 'forge'].includes(project.theme)) addError(issues, 'project.theme', '未知主题');
   if (project.fps !== undefined && ![24, 30].includes(project.fps)) addError(issues, 'project.fps', '帧率必须是 24 或 30');
   if (project.seed !== undefined && !Number.isSafeInteger(project.seed)) addError(issues, 'project.seed', '随机种子必须是安全整数');
   for (const key of ['draft', 'demoData']) if (project[key] !== undefined && typeof project[key] !== 'boolean') addError(issues, `project.${key}`, '必须是布尔值');

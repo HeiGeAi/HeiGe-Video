@@ -4,15 +4,20 @@ import type {Ratio, ThemeName} from './types';
 // Original adaptations of HeiGe-Design's helvetic-ledger and nocturne-teal.
 // Only the local, audited face is loaded. Weight variants are browser synthesis.
 export const THEMES = {
+  forge: {
+    canvas: '#0c0d0e', surface: '#17191b', ink: '#f5f6f3', muted: '#9a9d9f',
+    hairline: '#313437', subtle: '#17191b', primary: '#c8ff00',
+    onPrimary: '#0c0d0e', glow: '#c8ff00', heat: '#ff5a1f', weight: 900, radius: 0, xl: 84,
+  },
   ledger: {
     canvas: '#f5f5f3', surface: '#ffffff', ink: '#141414', muted: '#616160',
     hairline: '#dcdcd9', subtle: '#efeeeb', primary: '#d81f1a',
-    onPrimary: '#ffffff', glow: '#d81f1a', weight: 800, radius: 0, xl: 48,
+    onPrimary: '#ffffff', glow: '#d81f1a', heat: '#d81f1a', weight: 800, radius: 0, xl: 48,
   },
   nocturne: {
     canvas: '#08090d', surface: '#0f1319', ink: '#e9edf3', muted: '#8a94a4',
     hairline: '#20262f', subtle: '#0f1319', primary: '#2dd4bf',
-    onPrimary: '#031815', glow: '#5ff0dc', weight: 600, radius: 10, xl: 40,
+    onPrimary: '#031815', glow: '#5ff0dc', heat: '#2dd4bf', weight: 600, radius: 10, xl: 40,
   },
 } as const;
 export type Theme = (typeof THEMES)[ThemeName];

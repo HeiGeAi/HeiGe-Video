@@ -1,12 +1,22 @@
-# HeiGe-Video v4.0.0-alpha.2
+# HeiGe-Video v4.0.0-alpha.3
 
-**Let the same object carry the film from opening to outcome.**
+**Make an idea move. Let one subject carry the pictures, rhythm and outcome.**
 
-Design the visual promise, complete objects and final composition first. v4 alpha 2 adds a native continuous world to our original Remotion route: persistent objects, an authored camera, visible handoffs between beats and object-bound sound events share one clock. BrewReel informed the controlled-production workflow; OneTake informed the method study. Our code and templates are original, and the authored Canvas route remains available for bespoke films.
+The default entry is a 15-second Forge film: iron black, acid green, hard typography, original images, fast object handoffs and a complete 128 BPM score. Persistent objects, the camera, music and event effects share one clock, with independently authored layouts for three ratios. This original editable starting point still needs content-specific direction and actual visual and listening review.
 
-## Create a project
+| Forge entry | Ratio | Original project |
+| :--- | :--- | :--- |
+| [Landscape MP4](demos/forge/horizontal.mp4) | 16:9 | [forge-launch.json](examples/studio/forge-launch.json) |
+| [Portrait MP4](demos/forge/portrait.mp4) | 9:16 | [forge-portrait.json](examples/studio/forge-portrait.json) |
+| [Square MP4](demos/forge/square.mp4) | 1:1 | [forge-square.json](examples/studio/forge-square.json) |
 
-After installing the environment, use one runner to create, validate, build and verify. `init` copies an original ratio-specific template into a self-contained JSON project with no external assets and refuses to overwrite an existing file. Edit its content, composition and actions for the real brief.
+The [Forge inventory](references/v4-forge-status.json) binds the actual inputs, engine and MP4s. The [delivery record](references/v4-forge-report.md) states checks and repairs. Technical validation, sampled visual review, complete playback, human listening and user aesthetic acceptance are separate records; this page does not substitute for them.
+
+[Install and use](USAGE.md) · [Continuity guide](studio/CONTINUITY.md) · [Skill entrypoint](SKILL.md) · [中文](README.md) · [BrewReel study](references/brewreel-distillation.md) · [OneTake study](references/onetake-architecture.md)
+
+## Create your own project
+
+After installing the environment, use one runner to create, validate, build and verify. `init` creates a 15-second Forge JSON project and copies three original local PNGs. For example, `./my-film/project.json` uses `./my-film/project-assets/`. It refuses to overwrite either an existing JSON or asset directory. Keep the relative asset folder with the project when moving it.
 
 ```sh
 npm ci
@@ -15,46 +25,51 @@ python3 -m venv .venv
 # Install local FFmpeg, Noto Sans CJK SC and Chromium as described in the Studio guide.
 npx remotion browser ensure
 node studio/make.mjs doctor
-node studio/make.mjs init /tmp/heige-launch-new.json --ratio 16:9
-node studio/make.mjs validate /tmp/heige-launch-new.json
-node studio/make.mjs build /tmp/heige-launch-new.json --out /tmp/heige-launch-new
-node studio/make.mjs verify /tmp/heige-launch-new.json --out /tmp/heige-launch-new
+node studio/make.mjs init ./my-film/project.json --ratio 16:9
+node studio/make.mjs validate ./my-film/project.json
+node studio/make.mjs build ./my-film/project.json --out ./outputs/my-film-v1
+node studio/make.mjs verify ./my-film/project.json --out ./outputs/my-film-v1
 ```
 
-Original compositions: [landscape](examples/studio/continuous-launch.json), [portrait](examples/studio/continuous-portrait.json) and [square](examples/studio/continuous-square.json). Read the [continuity guide](studio/CONTINUITY.md) for the shared object, camera and event clock, with independent composition for each ratio.
+`--ratio 9:16` and `--ratio 1:1` create independent geometric layouts. Edit the supported contract fields; normal authoring does not require changing the renderer. Native `image` objects bind to registered PNG/JPEG/WebP assets and retain image identity through the global camera and shape trajectories.
 
-## Three native continuous-world films
+## Picture, motion and music in alpha.3
 
-| Film | Ratio | Original project |
-| :--- | :--- | :--- |
-| [Landscape MP4](demos/continuous/horizontal.mp4) | 16:9 | [continuous-launch.json](examples/studio/continuous-launch.json) |
-| [Portrait MP4](demos/continuous/portrait.mp4) | 9:16 | [continuous-portrait.json](examples/studio/continuous-portrait.json) |
-| [Square MP4](demos/continuous/square.mp4) | 1:1 | [continuous-square.json](examples/studio/continuous-square.json) |
+| Mechanism | Actual implementation and bounds |
+| :--- | :--- |
+| Forge styling | `forge` joins `ledger` and `nocturne`; controlled type size/weight/line height, strokes, hard shadows and film-perforation/stripe/waveform patterns |
+| Fast motion | Fixed `linear`, `ease-out-cubic`, `ease-in-out-cubic`, `ease-out-expo` and `back-out` curves; pure time evaluation, with easing controlling the keyframe's outgoing interval |
+| Local images | `image.assetId` must bind to a registered image; original image identity survives controlled cover cropping; the template uses three original PNGs |
+| Complete score | `forge-breakbeat`: 128 BPM, 4/4, eight bars and 15 seconds; original drums, syncopated bass, chord stabs, lead hook and lift generate a real stereo WAV |
+| Shared cues | Strike, drive, charge, format rearrangement and seal share the second clock; video beat quantization stays within half a frame, without pretending every music beat is an integer frame |
+| Mixing | Score gain is applied once; only narration ducks the bed, event effects mix at fixed gain, and the final mix is limited and measured |
 
-The [continuous gallery](demos/continuous/README.md) records actual encoded-image and playback scope. The [current inventory](references/v4-continuity-status.json) binds inputs, the current engine, MP4 hashes and declared checks. Technical, structural, sampled visual, complete playback and listening states remain separate. Inventory verification does not rerender or listen, and historical results do not establish acceptance of a new engine.
+`continuity.musicScore: {style: "forge-breakbeat", bpm: 128, volume: 0.8}` currently requires exactly 15 seconds and excludes external `project.music`. Other durations can use registered local music. Final narration still determines its film's clock. The complete arrangement, peak and RMS do not establish listening quality. Read the [original score note](references/music-score.md) for source and review limits.
 
 ## Controlled production in v4
 
-- Four authoring modes (`promo`, `explainer`, `lesson`, `talk`), two themes and three aspect-ratio layouts
-- Native continuous objects with persistent IDs, semantic identity declarations, full keyframe trajectories and a global camera; adjacent `beat` segments have explicit carrier/cause/outcome handoffs
-- Object-bound original `tick`, `whoosh` and `impact` sounds with authored timestamps
-- Optional three actual temporal samples at a 180-degree global shutter, averaged in linear-light sRGB before encoding; one sample disables it
-- Eight preserved ordinary scene types: `hook`, `statement`, `steps`, `compare`, `bars`, `transform`, `media`, `end`
-- A strict versioned project contract, exact factual quote attribution and labelled synthetic teaching data; numeric continuous object text and UI rows require that object's own valid claims
-- Final-recording timing without voice stretching, original SRT cue times and preview-only mock/draft output
-- Registered local image, video, voice and music assets; no implicit online generation or asset downloads
-- Real browser text geometry, font glyph coverage, complete encoded-frame decoding and independent source-narration plus final-mix measurements; continuous worlds also collect actual DOM observations per frame and bind encoded pixel deltas to the final MP4
-- Hashes of input, assets, captions, brief, engine, dependencies, font, browser and every output artifact
+| Capability | Current implementation |
+| :--- | :--- |
+| Authoring | Shared `init`, `validate`, `build`, `verify`; `promo`, `explainer`, `lesson`, `talk`; three themes and three ratios |
+| Continuous world | Persistent IDs, full trajectories, global camera and explicit adjacent-beat handoffs; no ordinary scenes mixed into a continuous world |
+| Temporal blur | Optional three actual temporal samples at a 180-degree global shutter, averaged in linear-light sRGB before encoding; one sample disables it |
+| Ordinary scenes | `hook`, `statement`, `steps`, `compare`, `bars`, `transform`, `media`, `end` remain available |
+| Voice and facts | Final-recording timing, original SRT cues, preview-only mock/draft, literal claim attribution and own-object numerical evidence; labelled teaching data |
+| Media and layout | Registered local assets, safe paths, declared rights, independent layouts, glyph coverage and actual browser geometry |
+| Encoded QA | Complete video decoding and separate narration/final-mix measurements; per-frame continuous DOM geometry, approximate visibility and final-MP4-bound pixel changes |
+| Integrity | Input, caption, asset, engine, dependency, font, browser and artifact hashes; changed sources invalidate earlier verification |
 
-Continuous worlds are limited to 60 seconds and 2 to 20 beats; each quantized beat lasts 0.25 to 20 seconds. Ordinary scenes cannot be mixed into a continuous project. Cause/outcome are author declarations, not machine-proven semantics. Geometry uses approximate point-grid visibility, and pixel deltas do not recognize images or real product behavior. Temporal sampling costs extra computation and does not implement physical HDR or per-object velocity blur.
+Continuous worlds remain bounded to 60 seconds and 2 to 20 beats, each 0.25 to 20 seconds after frame quantization. Cause/outcome are author declarations. Point-grid visibility and pixel differences cannot prove narrative semantics, real product behavior, perceptual identity or artistic quality. Three temporal samples add computation; they are not physical HDR or per-object velocity blur. Facts and text inside image pixels still need human review.
 
-See the [Studio guide](studio/README.md), [project contract](studio/CONTRACT.md), [BrewReel study](references/brewreel-distillation.md) and [OneTake study](references/onetake-architecture.md). A coding agent authors JSON; no native online LLM, TTS, ASR or B-roll supply/cache is integrated. Technical validation never implies artistic acceptance, complete realtime playback, listening or automatic publishing. Hashes prove integrity, not trust. Remotion has its own license terms.
+A coding agent reads the Skill and authors JSON. Local rendering needs no model API key. Native online LLM, TTS, ASR and B-roll supply/cache remain unintegrated. BrewReel and OneTake informed method research; no upstream source or assets were imported. Alpha software and hash integrity are not a trust certificate, aesthetic approval, playback review or listening review. See the [Studio guide](studio/README.md), [contract](studio/CONTRACT.md) and [source notices](references/source-notices.md).
 
-[Install and use](USAGE.md) · [Skill entrypoint](SKILL.md) · [中文](README.md) · [Verification status](references/status.md)
+## Historical alpha.2 continuous films
+
+The [landscape](demos/continuous/horizontal.mp4), [portrait](demos/continuous/portrait.mp4) and [square](demos/continuous/square.mp4) films remain historical continuity examples. The user rejected their pacing and aesthetics and identified the missing complete BGM. Their historical `sampled-pass` only states the documented sampling scope; it is not user approval or evidence for Forge aesthetics. The [gallery](demos/continuous/README.md), [alpha.2 inventory](references/v4-continuity-status.json) and [historical delivery record](references/v4-continuity-report.md) retain that version's evidence.
 
 ## Five historical v4 alpha 1 films
 
-The five [encoded examples](demos/super/README.md) retain their original bytes, source inputs and scoped acceptance records: median landscape, median portrait, product portrait, an audio-clock fixture and a local-media square fixture. The [portable inventory](references/v4-example-status.json) binds them to source commit `29135480806d061f1af65734b17dcecad3a31f4a`. Historical verification recomputes the production engine hash from that Git commit and fails when the commit is unavailable. These are historical results, not demonstrations of alpha 2 continuity or the current engine.
+The five [encoded examples](demos/super/README.md) retain their original bytes, source inputs and scoped acceptance records: median landscape, median portrait, product portrait, an audio-clock fixture and a local-media square fixture. The [portable inventory](references/v4-example-status.json) binds them to source commit `29135480806d061f1af65734b17dcecad3a31f4a`. Historical verification recomputes the production engine hash from that Git commit and fails when the commit is unavailable. These historical results do not establish acceptance of the alpha.3 engine or Forge films.
 
 The original inventory records sampled review and muted normal-speed browser playback. The audio fixture's first playback dropped frames and its independent replay did not; both records remain. Audio was measured but not listened to. Mock/draft fixtures remain preview, and no real spoken-narration experience is claimed.
 
@@ -159,4 +174,4 @@ Remotion + FFmpeg is the default controlled-production route. Authored Canvas/SV
 
 Original code and documentation retain the [MIT License](LICENSE), existing copyright and [third-party notices](references/source-notices.md). Reference movies, source frames, music, fonts and third-party source snapshots are not distributed in the research corpus. A repository code license does not automatically grant media rights. Dependencies remain subject to their own licenses.
 
-This is v4.0.0-alpha.2, dated 2026-10-12. OneTake's fixed research commit uses a noncommercial license. No OneTake source or assets were imported; this project's MIT license does not grant rights to reuse upstream materials. See the [source notices](references/source-notices.md) and [changelog](CHANGELOG.md).
+This is v4.0.0-alpha.3, dated 2026-10-12. OneTake's fixed research commit uses a noncommercial license. No OneTake source or assets were imported; this project's MIT license does not grant rights to reuse upstream materials. See the [source notices](references/source-notices.md) and [changelog](CHANGELOG.md).

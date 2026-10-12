@@ -3,10 +3,28 @@
 // projection scale, so portrait/square cameras deliberately see a narrower view.
 const OBJECT_FIELDS = ['x', 'y', 'w', 'h', 'opacity', 'rotation', 'radius'];
 const CAMERA_FIELDS = ['x', 'y', 'zoom', 'rotation'];
+const SPATIAL_FIELDS = new Set(['x', 'y', 'rotation']);
+const SEGMENT_EASINGS = new Set(['linear', 'ease-out-cubic', 'ease-in-out-cubic', 'ease-out-expo', 'back-out']);
 const finite = (value, label) => {
   if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${label} must be finite`);
   return value;
 };
+
+// Original fixed-parameter progress curves. Cubic timing follows the existing
+// runtime's stateless polynomial helpers. Normalized exponential decay reaches
+// both endpoints continuously; the back polynomial has a fixed ~10% overshoot.
+export function easeSegment(progress, easing = 'linear') {
+  finite(progress, 'segment progress');
+  if (!SEGMENT_EASINGS.has(easing)) throw new TypeError(`Unknown segment easing: ${String(easing)}`);
+  const p = Math.max(0, Math.min(1, progress));
+  if (p === 0 || p === 1) return p;
+  if (easing === 'linear') return p;
+  if (easing === 'ease-out-cubic') return 1 - (1 - p) ** 3;
+  if (easing === 'ease-in-out-cubic') return p < .5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2;
+  if (easing === 'ease-out-expo') return -Math.expm1(-10 * Math.LN2 * p) / (1 - 2 ** -10);
+  const back = 1.70158, q = p - 1;
+  return 1 + (back + 1) * q ** 3 + back * q ** 2;
+}
 
 function sampleTrack(track, time, fields, name) {
   if (!Array.isArray(track) || track.length < 2) throw new TypeError(`${name} needs at least two complete keyframes`);
@@ -16,13 +34,22 @@ function sampleTrack(track, time, fields, name) {
     finite(key.at, `${name}[${i}].at`);
     if (i && key.at <= track[i - 1].at) throw new RangeError(`${name} keyframe times must strictly increase`);
     for (const field of fields) finite(key[field], `${name}[${i}].${field}`);
+    if (key.easing !== undefined && !SEGMENT_EASINGS.has(key.easing)) throw new TypeError(`${name}[${i}] has an unknown segment easing`);
   }
   const clampedTime = Math.max(track[0].at, Math.min(track.at(-1).at, time));
   let index = 0;
   while (index < track.length - 2 && clampedTime > track[index + 1].at) index++;
   const left = track[index], right = track[index + 1];
   const progress = (clampedTime - left.at) / (right.at - left.at);
-  return Object.fromEntries(fields.map(field => [field, left[field] + (right[field] - left[field]) * progress]));
+  // Return the authored endpoint rather than a cancellation-prone lerp result.
+  if (progress === 0 || progress === 1) return Object.fromEntries(fields.map(field => [field, (progress === 0 ? left : right)[field]]));
+  const eased = easeSegment(progress, left.easing), bounded = Math.max(0, Math.min(1, eased));
+  // Back timing may overshoot only spatial coordinates and rotation. Sizes,
+  // opacity, corner radius and camera zoom stay between their legal endpoints.
+  return Object.fromEntries(fields.map(field => {
+    const p = SPATIAL_FIELDS.has(field) ? eased : bounded;
+    return [field, p === 0 ? left[field] : p === 1 ? right[field] : left[field] + (right[field] - left[field]) * p];
+  }));
 }
 
 export function cameraMatrix(camera, width, height) {
@@ -67,7 +94,11 @@ export function sampleContinuity(continuity, time, width, height) {
     ids.add(object.id);
     const state = sampleTrack(object.keyframes, time, OBJECT_FIELDS, `object ${object.id}`);
     if (state.w <= 0 || state.h <= 0 || state.opacity < 0 || state.opacity > 1 || state.radius < 0) throw new RangeError(`Object ${object.id} has invalid geometry or opacity`);
-    return {id: object.id, semanticIdentity: object.semanticIdentity, kind: object.kind, text: object.text, rows: object.rows, color: object.color, ...state, projectedRect: projectedObjectRect(state, matrix)};
+    return {id: object.id, semanticIdentity: object.semanticIdentity, kind: object.kind, text: object.text, rows: object.rows, color: object.color,
+      ...(object.typography === undefined ? {} : {typography: object.typography}),
+      ...(object.appearance === undefined ? {} : {appearance: object.appearance}),
+      ...(object.assetId === undefined ? {} : {assetId: object.assetId}),
+      ...state, projectedRect: projectedObjectRect(state, matrix)};
   });
   return {time, camera: {...camera, matrix}, objects};
 }

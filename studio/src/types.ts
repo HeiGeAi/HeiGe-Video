@@ -1,5 +1,5 @@
 export type Ratio = '16:9' | '9:16' | '1:1';
-export type ThemeName = 'ledger' | 'nocturne';
+export type ThemeName = 'ledger' | 'nocturne' | 'forge';
 export type ShotType = 'hook' | 'statement' | 'steps' | 'compare' | 'bars' | 'transform' | 'media' | 'end' | 'beat';
 
 export type Claim = {text: string; factId: string; quote: string};
@@ -33,8 +33,9 @@ export type Shot = {
 };
 
 export type TimelineShot = Shot & {from: number; frames: number; start: number; end: number};
-export type ContinuityKind = 'surface' | 'text' | 'dot' | 'line' | 'ui';
-export type ContinuityColor = 'paper' | 'ink' | 'muted' | 'accent' | 'line' | 'secondary';
+export type ContinuityKind = 'surface' | 'text' | 'dot' | 'line' | 'ui' | 'image';
+export type ContinuityColor = 'paper' | 'ink' | 'muted' | 'accent' | 'line' | 'secondary' | 'on-accent' | 'canvas' | 'heat';
+export type SegmentEasing = 'linear' | 'ease-out-cubic' | 'ease-in-out-cubic' | 'ease-out-expo' | 'back-out';
 export type ObjectKeyframe = {
   at: number;
   x: number;
@@ -44,16 +45,20 @@ export type ObjectKeyframe = {
   opacity: number;
   rotation: number;
   radius: number;
+  easing?: SegmentEasing;
 };
-export type CameraKeyframe = {at: number; x: number; y: number; zoom: number; rotation: number};
+export type CameraKeyframe = {at: number; x: number; y: number; zoom: number; rotation: number; easing?: SegmentEasing};
 export type ContinuousObject = {
   id: string;
   semanticIdentity: string;
   kind: ContinuityKind;
   text?: string;
   rows?: string[];
+  assetId?: string;
   color?: ContinuityColor;
   claims?: Claim[];
+  typography?: {size?: number; weight?: 400|500|600|700|800|900; tracking?: number; align?: 'left'|'center'|'right'; lineHeight?: number};
+  appearance?: {fill?: ContinuityColor|'transparent'; stroke?: ContinuityColor; strokeWidth?: number; shadow?: 'none'|'stamp'; pattern?: 'none'|'film-perforation'|'stripe'|'waveform'};
   keyframes: ObjectKeyframe[];
 };
 export type ContinuityBoundary = {fromShot: string; toShot: string; carrier: string; cause: string; outcome: string};
@@ -64,6 +69,7 @@ export type Continuity = {
   boundaries: ContinuityBoundary[];
   soundEvents?: ContinuitySound[];
   blur?: {samples: 1 | 3; shutterAngle: 180};
+  musicScore?: {style: 'forge-breakbeat'; bpm: 128; volume: number};
 };
 export type Project = {
   schemaVersion: 'heige-video/4';

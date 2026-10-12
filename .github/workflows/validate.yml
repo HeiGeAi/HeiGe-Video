@@ -12,7 +12,7 @@ jobs:
   test:
     # Pin the OS image so native-library package names stay reproducible.
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       PYTHONDONTWRITEBYTECODE: '1'
       VIDEO_RUNTIME_CACHE: /tmp/heige-video-ci-cache
@@ -54,6 +54,8 @@ jobs:
           node studio/make.mjs verify examples/studio/audio-clock-mixed.json --out /tmp/heige-v4-audio
           node studio/make.mjs build examples/studio/continuous-ci.json --out /tmp/heige-v4-continuous
           node studio/make.mjs verify examples/studio/continuous-ci.json --out /tmp/heige-v4-continuous
+          node studio/make.mjs build examples/studio/forge-ci.json --out /tmp/heige-v4-forge
+          node studio/make.mjs verify examples/studio/forge-ci.json --out /tmp/heige-v4-forge
       - name: Preserve controlled render evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -63,6 +65,7 @@ jobs:
             /tmp/heige-v4-media
             /tmp/heige-v4-audio
             /tmp/heige-v4-continuous
+            /tmp/heige-v4-forge
       - name: Verify local capabilities
         run: python runtime/render_video.py doctor
       - name: Validate package and example manifests

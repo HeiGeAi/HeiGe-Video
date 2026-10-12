@@ -98,7 +98,7 @@ def check(args):
                 holds.append({'start':start/plan['fps'],'end':index/plan['fps']})
             start = None
     audio_streams = [s for s in probe['streams'] if s['codec_type']=='audio']
-    expected_audio = bool(plan['project'].get('audio') or plan['project'].get('music') or plan['project'].get('continuity', {}).get('soundEvents'))
+    expected_audio = bool(plan['project'].get('audio') or plan['project'].get('music') or plan['project'].get('continuity', {}).get('soundEvents') or plan['project'].get('continuity', {}).get('musicScore'))
     if bool(audio_streams) != expected_audio:
         errors.append('Expected audio track presence mismatch')
     audio_result = {'present':bool(audio_streams),'listening':'not-tested'}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "heige-forge-artwork/1",
+  "date": "2026-10-12",
+  "generator": "examples/studio/forge-assets/build-artwork.cjs",
+  "generatorSha256": "a1f898632a1be0f293e110dde405db29aa148c2995f218d0b411b062535d88ed",
+  "runtime": {
+    "node": "v22.22.2",
+    "canvas": "0.1.100",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "inputs": "Only the three original source modules; no historical demo bytes or external media",
+  "reproductionScope": "PNG byte equivalence is checked in the recorded native Canvas environment; other runtime environments may differ",
+  "assets": [
+    {
+      "id": "forge-editorial",
+      "file": "examples/studio/forge-assets/editorial.png",
+      "ratio": "16:9",
+      "subject": "Twelve original ink rhythm bars and a red circular marker",
+      "source": "examples/swiss-editorial/film.cjs",
+      "sourceSha256": "49395040d88af4b33338b158ccf06d82504d4b3e689102fe2490fa4107eea9e4",
+      "sourceTime": 28,
+      "sourceDimensions": {
+        "width": 3840,
+        "height": 2160
+      },
+      "crop": {
+        "x": 528,
+        "y": 915,
+        "width": 1200,
+        "height": 675
+      },
+      "dimensions": {
+        "width": 1280,
+        "height": 720
+      },
+      "renderMethod": "Original source render via @napi-rs/canvas; temporarily suppress prototype fillText/strokeText in try/finally; drawImage crop and isotropic scale only",
+      "geometryChanged": false,
+      "textDrawSuppressed": true,
+      "suppressedCalls": {
+        "fillText": 93,
+        "strokeText": 0
+      },
+      "prototypeRestored": true,
+      "pngSha256": "463c83e65b6107576d70f6204c6a5b8c59c94461a84c71fdf577df7ede2ed70b",
+      "pngBytes": 43041,
+      "license": "MIT",
+      "rights": "HeiGe-Video original procedural demo artwork"
+    },
+    {
+      "id": "forge-optics",
+      "file": "examples/studio/forge-assets/optics.png",
+      "ratio": "9:16",
+      "subject": "Original schematic glass prism and its incoming and outgoing rays",
+      "source": "examples/cinematic-product/film.cjs",
+      "sourceSha256": "4f723a08c5db4eae33c7b546e5bee66eabf22c70a3f35ee1f160ede3417d2c95",
+      "sourceTime": 28,
+      "sourceDimensions": {
+        "width": 3200,
+        "height": 1800
+      },
+      "crop": {
+        "x": 1000,
+        "y": 12,
+        "width": 864,
+        "height": 1536
+      },
+      "dimensions": {
+        "width": 720,
+        "height": 1280
+      },
+      "renderMethod": "Original source render via @napi-rs/canvas; temporarily suppress prototype fillText/strokeText in try/finally; drawImage crop and isotropic scale only",
+      "geometryChanged": false,
+      "textDrawSuppressed": true,
+      "suppressedCalls": {
+        "fillText": 11,
+        "strokeText": 0
+      },
+      "prototypeRestored": true,
+      "pngSha256": "078738945fe8fbf4d4d3cb097ba382150d2c20609db4d9da600b84b5fdb1f601",
+      "pngBytes": 221431,
+      "license": "MIT",
+      "rights": "HeiGe-Video original procedural demo artwork"
+    },
+    {
+      "id": "forge-ink",
+      "file": "examples/studio/forge-assets/ink.png",
+      "ratio": "1:1",
+      "subject": "Original ink boat, rower and complete oar against the river",
+      "source": "examples/ink-narrative/film.cjs",
+      "sourceSha256": "976dc3a69da8c2acf73fac4468a6e5347237be00c3406d3bd298b851a02b4d19",
+      "sourceTime": 8.7,
+      "sourceDimensions": {
+        "width": 3840,
+        "height": 2160
+      },
+      "crop": {
+        "x": 960,
+        "y": 220,
+        "width": 1800,
+        "height": 1800
+      },
+      "dimensions": {
+        "width": 1080,
+        "height": 1080
+      },
+      "renderMethod": "Original source render via @napi-rs/canvas; temporarily suppress prototype fillText/strokeText in try/finally; drawImage crop and isotropic scale only",
+      "geometryChanged": false,
+      "textDrawSuppressed": true,
+      "suppressedCalls": {
+        "fillText": 0,
+        "strokeText": 0
+      },
+      "prototypeRestored": true,
+      "pngSha256": "6588e2408379f86333500b54456bbedd4baae3ccf8d16e343127498eeb03484b",
+      "pngBytes": 1185358,
+      "license": "MIT",
+      "rights": "HeiGe-Video original procedural demo artwork"
+    }
+  ]
+}

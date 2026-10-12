@@ -1,6 +1,6 @@
-# HeiGe-Video v4.0.0-alpha.2 · install and use
+# HeiGe-Video v4.0.0-alpha.3 · install and use
 
-Updated 2026-10-12. The default controlled-production route uses Remotion. It supports a native continuous world for persistent objects and camera handoffs, as well as eight ordinary scene types. Follow the [Studio installation guide](studio/README.md), [versioned project contract](studio/CONTRACT.md) and [continuity guide](studio/CONTINUITY.md). Authored Canvas/SVG remains available for existing films and bespoke actions.
+Updated 2026-10-12. The default controlled-production route uses Remotion. Default initialization creates a 15-second Forge world with original local images, fast easing and a complete 128 BPM score. Native persistent objects and camera handoffs coexist with eight preserved ordinary scene types. Follow the [Studio installation guide](studio/README.md), [versioned project contract](studio/CONTRACT.md) and [continuity guide](studio/CONTINUITY.md). Authored Canvas/SVG remains available for existing films and bespoke actions.
 
 This is a portable Skill folder, original scene code and a deterministic renderer. It does not need a model SDK or API key to render existing source. A coding agent needs file access, authorized code execution and actual-image review to create and judge new films.
 
@@ -13,7 +13,7 @@ cd HeiGe-Video
 
 For an existing checkout, commit or back up local changes before updating with `git pull --ff-only`. Keep custom films outside the shipped example paths.
 
-## Start a native continuous project
+## Start a Forge project
 
 Install local FFmpeg, the Noto Sans CJK SC font and a compatible Chromium browser using the Studio guide. The runner checks the actual environment; missing dependencies are errors rather than an excuse to produce an unverified export.
 
@@ -23,13 +23,13 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r studio/requirements.txt
 npx remotion browser ensure
 node studio/make.mjs doctor
-node studio/make.mjs init /tmp/heige-continuous-new.json --ratio 16:9
-node studio/make.mjs validate /tmp/heige-continuous-new.json
-node studio/make.mjs build /tmp/heige-continuous-new.json --out /tmp/heige-continuous-new
-node studio/make.mjs verify /tmp/heige-continuous-new.json --out /tmp/heige-continuous-new
+node studio/make.mjs init /tmp/heige-forge-new.json --ratio 16:9
+node studio/make.mjs validate /tmp/heige-forge-new.json
+node studio/make.mjs build /tmp/heige-forge-new.json --out /tmp/heige-forge-new
+node studio/make.mjs verify /tmp/heige-forge-new.json --out /tmp/heige-forge-new
 ```
 
-`init <new-project.json>` defaults to `16:9` and also accepts `--ratio 9:16` or `--ratio 1:1`. It copies an original self-contained template without assets and refuses to overwrite an existing JSON file. The ratio flag is only for `init`; independently compose a new layout when changing an authored project's ratio. Templates: [landscape](examples/studio/continuous-launch.json), [portrait](examples/studio/continuous-portrait.json), [square](examples/studio/continuous-square.json).
+`init <new-project.json>` defaults to `16:9` and also accepts `--ratio 9:16` or `--ratio 1:1`. It creates an original 15-second template and copies three original PNG assets into a sibling `<project-stem>-assets` directory. For `my-film/project.json`, that directory is `my-film/project-assets`. It refuses an existing JSON or asset directory, including a symlink. Keep both when moving the project. The ratio flag is only for `init`; independently compose a new layout when changing an authored project's ratio. Templates: [landscape](examples/studio/forge-launch.json), [portrait](examples/studio/forge-portrait.json), [square](examples/studio/forge-square.json).
 
 All four commands use `studio/make.mjs`. `validate` checks the contract; an audio project without a measured duration retains a warning until `build` probes its real recording and recompiles. `build` requires a fresh output directory, validates local assets and font coverage, renders, measures the actual browser and encoded media, then records hashes. `verify` checks the same input, engine, dependencies, font, browser and artifacts against that build. It does not rerender or perform an aesthetic review. A rejected build retains its failure record; retry into a new directory after fixing the cause.
 
@@ -45,29 +45,49 @@ Rendering is local and does not require a model API key. A coding agent reads th
 
 ## Author continuity rather than a sequence of cards
 
-The creative modes are `promo`, `explainer`, `lesson` and `talk`; themes are `ledger` and `nocturne`. The `continuity` object defines persistent `objects`, a global `camera`, adjacent `boundaries`, optional `soundEvents` and optional `blur`. Every timeline entry is a `beat`; mixing ordinary scene components into the same continuous world is rejected.
+The creative modes are `promo`, `explainer`, `lesson` and `talk`; themes are `forge`, `ledger` and `nocturne`. The `continuity` object defines persistent `objects`, a global `camera`, adjacent `boundaries`, optional `soundEvents`, `blur` and `musicScore`. Every timeline entry is a `beat`; mixing ordinary scene components into the same continuous world is rejected.
 
 - Give each object a unique stable `id` and nonempty `semanticIdentity`. Full keyframes specify its complete geometry from zero to the final quantized frame duration. Keyframe time strictly increases; duplicate-time states and non-finite coordinates fail validation.
 - Describe each adjacent beat handoff exactly once, in timeline order. Its carrier must be an existing persistent object; cause and outcome must be explicit. Camera movement and geometric continuity do not establish narrative meaning or prove real product behavior.
 - Numeric visible text and UI rows require the same object's own valid `claims`. A claim's literal quote belongs to its referenced fact and, when supplied, the brief. Claims from another object or beat cannot be borrowed. Mark teaching quantities with `demoData: true`.
-- Bind original `tick`, `whoosh` or `impact` events to an object and the same film clock. These are synthesized event sounds, not speech synthesis or automatic composition. Final voice recordings still determine duration; original SRT cue times remain intact.
+- Bind original `tick`, `whoosh` or `impact` events to an object and the same film clock. They are event effects, separate from the complete musical score. Final voice recordings still determine duration; original SRT cue times remain intact.
+- Native `image` objects use `assetId` referencing a registered local `kind: image` asset. Other kinds reject `assetId`. PNG/JPEG/WebP are supported; URL paths, traversal, symlinks, SVG and GIF are rejected. Image pixels are not automatically fact-checked.
+- Optional fixed `easing` controls the outgoing keyframe segment: `linear`, `ease-out-cubic`, `ease-in-out-cubic`, `ease-out-expo`, `back-out`. Controlled `typography` and `appearance` configure text, fills, strokes, hard shadows and patterns. `typography.lineHeight` is a finite multiplier from 1.15 to 1.7, defaulting to 1.55. Unknown fields, tokens and invalid ranges fail validation.
 - Use `blur: {"samples": 3, "shutterAngle": 180}` for three actual temporal captures and linear-light averaging before encoding. Use one sample to disable blur. This is global temporal integration, not CSS blur, HDR or a per-object velocity buffer; it increases capture and compositing work.
 
 The current bounded contract allows up to 60 seconds and 2 to 20 beats, each 0.25 to 20 seconds after frame quantization. See the continuity guide for field types, object/UI support and exact limits rather than adding guessed semantic fields.
 
 Inspect the actual encoded overview, action strips, opening and final frames. Continuous builds also produce per-frame DOM observations, approximate paint visibility, boundary measurements and final-video-bound pixel-change checks. Read their recorded scope: point-grid visibility can miss sub-grid occlusion, and pixel differences do not understand images. Cause/outcome and perceptual identity still require independent visual review. Technical `validated`, draft/mock `preview`, sampled review, full playback and actual listening remain separate states. Hashes establish integrity, not trust.
 
-Continuous films: [landscape MP4](demos/continuous/horizontal.mp4), [portrait MP4](demos/continuous/portrait.mp4) and [square MP4](demos/continuous/square.mp4). Their [gallery](demos/continuous/README.md) states actual encoded-image, playback and listening scope. The [current inventory](references/v4-continuity-status.json) binds inputs, engine and video hashes to declared checks. Do not inherit old acceptance when changing the engine, font, input, assets or composition.
+## Complete music and cue alignment
 
-```sh
-python3 scripts/validate_continuous_release.py
+The default score configuration is:
+
+```json
+{"musicScore": {"style": "forge-breakbeat", "bpm": 128, "volume": 0.8}}
 ```
 
-This portable check verifies the current engine, input/media hashes and declared release fields. It does not rerender, decode, play, listen or certify aesthetics. Read the recorded scope of each underlying check rather than treating a matching hash as a trust certificate.
+Place it inside `continuity`. This original eight-bar, 4/4 score requires exactly 15 seconds at 24 or 30 fps and cannot coexist with external `project.music`. It synthesizes drums, syncopated bass, chord stabs, lead hook and lift into a real stereo WAV. Other durations can use registered local music. It does not retime narration or invent a variable-duration arrangement.
+
+| Section | Music-clock time | Purpose |
+| :--- | :--- | :--- |
+| Strike | 0 to 1.875 s | First-beat entrance |
+| Drive | 1.875 to 5.625 s | Assembly and syncopation |
+| Charge | 5.625 to 7.5 s | Build into the main action |
+| Forge | 7.5 to 13.125 s | Full groove and format rearrangement |
+| Seal | 13.125 to 15 s | Brand press and decay; final hit at 14.0625 s |
+
+Video cues round to the nearest frame, within half a frame of the musical clock. Not every beat is an integer video frame. Score volume is applied once in its WAV. Only narration sidechains the music; event effects join at fixed gain before final limiting. Builds emit `music.wav` and `music-score.json` with actual PCM measurements, cues, events and hashes. Measurements are not listening approval. See the [original score note](references/music-score.md).
+
+Forge films: [landscape](demos/forge/horizontal.mp4), [portrait](demos/forge/portrait.mp4), [square](demos/forge/square.mp4). Use the [Forge inventory](references/v4-forge-status.json) and [delivery record](references/v4-forge-report.md) for actual input/engine/MP4 bindings and recorded acceptance scope. Do not inherit earlier acceptance after changing the engine, font, input, assets or composition.
+
+## Historical alpha.2 continuous films
+
+The [continuous gallery](demos/continuous/README.md), [alpha.2 inventory](references/v4-continuity-status.json) and [historical report](references/v4-continuity-report.md) retain the earlier three films. The user rejected their pacing and aesthetics and identified the lack of a complete BGM. Historical `sampled-pass` states only that recorded review scope; it is neither user approval nor a Forge acceptance record. Hash checks inspect declared evidence and integrity, not a new render, playback, listening or artistic judgment.
 
 ## Verify historical v4 alpha 1 examples
 
-The five [historical examples](demos/super/README.md) preserve their bytes, inputs and original review scope. Their [inventory](references/v4-example-status.json) names source commit `29135480806d061f1af65734b17dcecad3a31f4a`. The validator recomputes the engine fingerprint from production blobs in that fixed Git commit, then checks the declared historical input and MP4 hashes. It does not substitute the current engine or recertify alpha 2.
+The five [historical examples](demos/super/README.md) preserve their bytes, inputs and original review scope. Their [inventory](references/v4-example-status.json) names source commit `29135480806d061f1af65734b17dcecad3a31f4a`. The validator recomputes the engine fingerprint from production blobs in that fixed Git commit, then checks the declared historical input and MP4 hashes. It does not substitute the current engine or recertify alpha.3.
 
 ```sh
 python3 scripts/validate_super_release.py

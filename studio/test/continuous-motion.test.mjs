@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {cameraMatrix, projectedObjectRect, sampleContinuity, transformPoint} from '../lib/continuous-motion.mjs';
+import {cameraMatrix, easeSegment, projectedObjectRect, sampleContinuity, transformPoint} from '../lib/continuous-motion.mjs';
+import runtimeMotion from '../../runtime/motion.cjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -22,6 +23,141 @@ test('actual sampler linearly interpolates object and the single camera', () => 
   assert.equal(sampled.camera.x, 720);
   assert.equal(sampled.camera.zoom, 1);
   assert.deepEqual(sampled.camera.matrix, [1, -0, 0, 1, -80, 0]);
+});
+
+const easingNames = ['linear', 'ease-out-cubic', 'ease-in-out-cubic', 'ease-out-expo', 'back-out'];
+const near = (actual, expected, tolerance = 1e-10) => assert.ok(Math.abs(actual - expected) <= tolerance, `${actual} differs from ${expected}`);
+
+for (const easing of easingNames) {
+  test(`${easing} has exact endpoints and clamps only the time domain`, () => {
+    for (const p of [-100, -1e-9, 0]) assert.equal(easeSegment(p, easing), 0);
+    for (const p of [1, 1 + 1e-9, 100]) assert.equal(easeSegment(p, easing), 1);
+    for (let i = 0; i <= 1000; i++) assert.ok(Number.isFinite(easeSegment(i / 1000, easing)));
+    if (easing !== 'back-out') {
+      let previous = 0;
+      for (let i = 0; i <= 1000; i++) {const value = easeSegment(i / 1000, easing); assert.ok(value >= previous && value <= 1); previous = value;}
+    }
+  });
+}
+
+test('fixed curve midpoints produce actual object and camera poses, not a renamed linear interpolation', () => {
+  const midpoints = new Map([
+    ['linear', .5], ['ease-out-cubic', .875], ['ease-in-out-cubic', .5],
+    ['ease-out-expo', 32 / 33], ['back-out', 1.0876975],
+  ]);
+  for (const [easing, expected] of midpoints) {
+    near(easeSegment(.5, easing), expected);
+    const input = world(); input.objects[0].keyframes[0].easing = easing; input.camera[0].easing = easing;
+    const pose = sampleContinuity(input, 1, 1280, 720);
+    near(pose.objects[0].x, 200 + 200 * expected); near(pose.camera.x, 640 + 160 * expected);
+  }
+});
+
+test('cubic curves agree with the original runtime mathematics at fractional source seconds', () => {
+  for (let i = 0; i <= 100; i++) {
+    const p = i / 100;
+    near(easeSegment(p, 'linear'), runtimeMotion.linear(p));
+    near(easeSegment(p, 'ease-out-cubic'), runtimeMotion.easeOutCubic(p));
+    near(easeSegment(p, 'ease-in-out-cubic'), runtimeMotion.easeInOutCubic(p));
+  }
+});
+
+test('independent finite differences verify fixed curve derivatives including both segment ends', () => {
+  const k = 10 * Math.LN2, denominator = 1 - 2 ** -10, back = 1.70158;
+  const derivatives = new Map([
+    ['linear', () => 1], ['ease-out-cubic', p => 3 * (1 - p) ** 2],
+    ['ease-in-out-cubic', p => p < .5 ? 12 * p ** 2 : 12 * (1 - p) ** 2],
+    ['ease-out-expo', p => k * Math.exp(-k * p) / denominator],
+    ['back-out', p => 3 * (back + 1) * (p - 1) ** 2 + 2 * back * (p - 1)],
+  ]);
+  const h = 1e-6;
+  for (const [easing, derivative] of derivatives) {
+    near((easeSegment(h, easing) - easeSegment(0, easing)) / h, derivative(0), 5e-5);
+    near((easeSegment(1, easing) - easeSegment(1 - h, easing)) / h, derivative(1), 5e-5);
+    for (const p of [.1, .5, .9]) near((easeSegment(p + h, easing) - easeSegment(p - h, easing)) / (2 * h), derivative(p), 5e-5);
+  }
+  // Normalization removes the conventional exponent's last-frame hard jump.
+  assert.ok(1 - easeSegment(1 - 1e-8, 'ease-out-expo') < 1e-9);
+});
+
+test('each left key owns its outgoing easing while a differently eased next segment meets exactly', () => {
+  const input = world();
+  input.objects[0].keyframes[0].easing = 'ease-out-cubic';
+  input.objects[0].keyframes[1].easing = 'ease-in-out-cubic';
+  input.camera[0].easing = 'ease-out-expo'; input.camera[1].easing = 'linear';
+  near(sampleContinuity(input, 1, 1280, 720).objects[0].x, 375);
+  near(sampleContinuity(input, 2.5, 1280, 720).objects[0].w, 247.5);
+  assert.equal(sampleContinuity(input, 2, 1280, 720).objects[0].x, 400);
+  assert.equal(sampleContinuity(input, 2, 1280, 720).objects[0].w, 240);
+  near(sampleContinuity(input, 3, 1280, 720).camera.zoom, 1.25);
+  for (const time of [2 - 1e-8, 2 + 1e-8]) {
+    near(sampleContinuity(input, time, 1280, 720).objects[0].x, 400, 1e-6);
+    near(sampleContinuity(input, time, 1280, 720).objects[0].w, 240, 1e-6);
+  }
+});
+
+test('back-out overshoots only position and rotation while every scalar geometry channel remains legal', () => {
+  const input = world(), object = input.objects[0];
+  object.keyframes = [objectKey(0, {radius: 16, easing: 'back-out'}), objectKey(2, {x: 400, y: 280, rotation: 30, w: 1e-15, h: .02, opacity: 0, radius: 0})];
+  input.camera = [cameraKey(0, {easing: 'back-out'}), cameraKey(2, {x: 800, y: 460, zoom: 1e-15, rotation: 20})];
+  const peakTime = 2 * (1 - 2 * 1.70158 / (3 * (1.70158 + 1)));
+  const peak = sampleContinuity(input, peakTime, 1280, 720);
+  assert.ok(peak.objects[0].x > 400 && peak.objects[0].y > 280 && peak.objects[0].rotation > 30);
+  assert.ok(peak.camera.x > 800 && peak.camera.y > 460 && peak.camera.rotation > 20);
+  assert.ok(easeSegment(peakTime / 2, 'back-out') > 1.099 && easeSegment(peakTime / 2, 'back-out') < 1.101);
+  assert.equal(peak.objects[0].w, 1e-15); assert.equal(peak.objects[0].h, .02);
+  assert.equal(peak.objects[0].opacity, 0); assert.equal(peak.objects[0].radius, 0); assert.equal(peak.camera.zoom, 1e-15);
+  for (let frame = 0; frame <= 720; frame++) {
+    const state = sampleContinuity(input, frame / 360, 1280, 720);
+    assert.ok(state.objects[0].w > 0 && state.objects[0].h > 0 && state.camera.zoom > 0);
+    assert.ok(state.objects[0].opacity >= 0 && state.objects[0].opacity <= 1 && state.objects[0].radius >= 0);
+  }
+  assert.equal(sampleContinuity(input, 2, 1280, 720).objects[0].x, 400);
+  assert.equal(sampleContinuity(input, 2, 1280, 720).objects[0].rotation, 30);
+});
+
+test('omitted easing retains the legacy linear samples for every field and the full authored clock', () => {
+  const omitted = world(), explicit = world();
+  explicit.objects[0].keyframes.forEach(key => {key.easing = 'linear';}); explicit.camera.forEach(key => {key.easing = 'linear';});
+  for (let frame = -2; frame <= 122; frame++) assert.deepEqual(sampleContinuity(omitted, frame / 30, 1280, 720), sampleContinuity(explicit, frame / 30, 1280, 720));
+});
+
+test('all eased segments remain deterministic across random seeks and fractional shutter samples', () => {
+  const random = runtimeMotion.seededRandom(20261012);
+  for (const easing of easingNames) {
+    const input = world(); input.objects[0].keyframes.forEach(key => {key.easing = easing;}); input.camera.forEach(key => {key.easing = easing;});
+    const original = structuredClone(input), times = Array.from({length: 200}, () => random() * 6 - 1);
+    times.push(0, 2, 4, 1 / 180, 2 - 1 / 180, 2 + 1 / 180);
+    const first = times.map(time => sampleContinuity(input, time, 720, 1280));
+    for (let i = times.length - 1; i >= 0; i--) assert.deepEqual(sampleContinuity(input, times[i], 720, 1280), first[i]);
+    assert.deepEqual(input, original);
+  }
+});
+
+test('nonfinite progress and unsupported easing names fail closed, including inactive future keys', () => {
+  for (const progress of [NaN, Infinity, -Infinity, '0.5', null]) assert.throws(() => easeSegment(progress), /finite/);
+  for (const easing of [null, 1, '', 'toString', 'ease-out-cubic ', {}, 'spring']) {
+    assert.throws(() => easeSegment(.5, easing), /Unknown segment easing/);
+    for (const target of ['object', 'camera']) {
+      const input = world(), keys = target === 'object' ? input.objects[0].keyframes : input.camera;
+      keys.at(-1).easing = easing;
+      assert.throws(() => sampleContinuity(input, 0, 1280, 720), /unknown segment easing/);
+    }
+  }
+});
+
+test('controlled static typography and appearance survive sampling without changing legacy output keys', () => {
+  const plain = sampleContinuity(world(), 1, 1280, 720).objects[0];
+  assert.equal(Object.hasOwn(plain, 'typography'), false); assert.equal(Object.hasOwn(plain, 'appearance'), false);
+  const input = world();
+  input.objects[0].typography = {size: 96, weight: 800, tracking: -2, align: 'center'};
+  input.objects[0].appearance = {fill: 'transparent', stroke: 'accent', strokeWidth: 3, shadow: 'stamp', pattern: 'film-perforation'};
+  const original = structuredClone(input);
+  for (const time of [0, 1.75, 4, 2.25, 0]) {
+    const object = sampleContinuity(input, time, 1280, 720).objects[0];
+    assert.deepEqual(object.typography, input.objects[0].typography); assert.deepEqual(object.appearance, input.objects[0].appearance);
+  }
+  assert.deepEqual(input, original);
 });
 
 test('one persistent ID and unchanged actual copy survive every frame and beat boundary', () => {

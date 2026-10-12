@@ -8,8 +8,11 @@ import {spawnSync} from 'node:child_process';
 import ts from 'typescript';
 import React from 'react';
 import * as jsxRuntime from 'react/jsx-runtime';
+import * as Remotion from 'remotion';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {createContinuousProject} from '../lib/continuous-template.mjs';
+import {createForgeProject} from '../lib/forge-template.mjs';
+import {composeMusicScore} from '../lib/music-score.mjs';
 import {compileProject} from '../lib/project.mjs';
 import {sampleContinuity} from '../lib/continuous-motion.mjs';
 import {evaluateContinuity, CONTINUITY_PROBE_SOURCE} from '../lib/continuity-oracle.mjs';
@@ -24,7 +27,7 @@ const temporary = callback => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'heige-continuous-cli-'));
   try {return callback(dir);} finally {fs.rmSync(dir, {recursive: true, force: true});}
 };
-const runCLI = args => spawnSync(process.execPath, [CLI, ...args], {encoding: 'utf8', timeout: 30000, maxBuffer: 4 * 1024 * 1024});
+const runCLI = (args, env = {}) => spawnSync(process.execPath, [CLI, ...args], {env: {...process.env, ...env}, encoding: 'utf8', timeout: 30000, maxBuffer: 4 * 1024 * 1024});
 const write = (file, value) => fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n');
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const actualFunction = name => {
@@ -35,21 +38,147 @@ const actualFunction = name => {
 };
 
 for (const ratio of ['16:9', '9:16', '1:1']) {
-  test(`actual CLI init and validate accept the native ${ratio} project without rendering`, () => temporary(dir => {
+  test(`actual CLI init creates and validates the original 15-second forge ${ratio} preset`, () => temporary(dir => {
     const file = path.join(dir, 'project.json');
     const initialized = runCLI(['init', file, '--ratio', ratio]);
     assert.equal(initialized.status, 0, initialized.stderr);
     const data = read(file), result = JSON.parse(initialized.stdout);
     assert.equal(result.engine, 'native-continuous-world'); assert.equal(data.ratio, ratio);
+    assert.equal(data.theme, 'forge'); assert.equal(data.fps, 30);
+    assert.deepEqual(data.continuity.musicScore, {style: 'forge-breakbeat', bpm: 128, volume: .8});
     assert.equal(data.continuity.blur.samples, 3); assert.ok(data.shots.every(shot => shot.type === 'beat'));
+    assert.ok(data.continuity.objects.some(object => object.typography?.size >= 60));
+    assert.ok(data.continuity.objects.some(object => object.appearance?.pattern === 'film-perforation'));
+    assert.ok(data.continuity.camera.some(key => key.easing === 'ease-in-out-cubic'));
+    const bundled = createForgeProject(ratio);
+    assert.equal(data.assets.length, 3);
+    for (const asset of data.assets) {
+      const original = bundled.assets.find(item => item.id === asset.id);
+      assert.ok(original, 'Every copied image must preserve its original asset identity');
+      assert.equal(asset.kind, 'image'); assert.equal(asset.source, 'original');
+      assert.match(asset.path, /^project-assets\/[^/]+\.png$/u);
+      assert.equal(fileHash(path.join(dir, asset.path)), fileHash(path.join(ROOT, 'examples/studio', original.path)));
+    }
+    assert.ok(data.continuity.objects.filter(object => object.assetId).length >= 3);
+    const plan = compileProject(data, {baseDir: dir}); assert.deepEqual(plan.issues.errors, []);
+    const score = composeMusicScore(plan);
+    assert.equal(score.duration, 15); assert.equal(score.timeline.bpm, 128); assert.equal(score.timeline.bars, 8);
+    assert.equal(score.rate, 48000); assert.equal(score.channels, 2); assert.ok(score.events.length > 200);
+    assert.equal(data.audio, undefined, 'The original score must not masquerade as mock narration');
+    assert.equal(data.draft, undefined);
     const validated = runCLI(['validate', file]);
     assert.equal(validated.status, 0, validated.stderr);
-    assert.equal(JSON.parse(validated.stdout).frames, 480);
+    const accepted = JSON.parse(validated.stdout);
+    assert.equal(accepted.status, 'pass'); assert.equal(accepted.duration, 15);
+    assert.equal(accepted.frames, 450); assert.equal(accepted.previewOnly, false);
+    assert.deepEqual(fs.readdirSync(dir).sort(), ['project-assets', 'project.json'], 'Init copies original images without synthesizing or rendering media');
+    const assetBytes = new Map(data.assets.map(asset => [asset.path, fs.readFileSync(path.join(dir, asset.path))]));
     const bytes = fs.readFileSync(file);
     const overwrite = runCLI(['init', file, '--ratio', ratio]);
     assert.equal(overwrite.status, 1); assert.match(overwrite.stderr, /EEXIST/); assert.deepEqual(fs.readFileSync(file), bytes);
+    for (const [assetPath, bytes] of assetBytes) assert.deepEqual(fs.readFileSync(path.join(dir, assetPath)), bytes);
   }));
 }
+
+test('default CLI authoring uses forge and needs no render browser, interpreter or font setup', () => temporary(dir => {
+  const file = path.join(dir, 'default.json');
+  const unavailable = path.join(dir, 'deliberately-unavailable');
+  const result = runCLI(['init', file], {HEIGE_PYTHON: unavailable, HEIGE_BROWSER_PATH: unavailable, HEIGE_FONT_PATH: unavailable});
+  assert.equal(result.status, 0, result.stderr);
+  const data = read(file), plan = compileProject(data, {baseDir: dir});
+  assert.equal(data.ratio, '16:9'); assert.equal(data.theme, 'forge'); assert.equal(plan.durationInFrames, 450);
+  assert.equal(data.continuity.musicScore.style, 'forge-breakbeat');
+  assert.deepEqual(fs.readdirSync(dir).sort(), ['default-assets', 'default.json']);
+}));
+
+test('init rejects a preexisting JSON before creating its dedicated asset directory', () => temporary(dir => {
+  const file = path.join(dir, 'existing.json'), original = Buffer.from('Existing user project data');
+  fs.writeFileSync(file, original);
+  const result = runCLI(['init', file]);
+  assert.equal(result.status, 1); assert.match(result.stderr, /EEXIST/);
+  assert.deepEqual(fs.readFileSync(file), original);
+  assert.equal(fs.existsSync(path.join(dir, 'existing-assets')), false);
+}));
+
+test('init rejects a preexisting dedicated asset directory and preserves all its data', () => temporary(dir => {
+  const file = path.join(dir, 'existing.json'), assets = path.join(dir, 'existing-assets');
+  fs.mkdirSync(assets);
+  for (const populated of [false, true]) {
+    if (populated) fs.writeFileSync(path.join(assets, 'user-data.png'), 'Keep this original user data');
+    const before = fs.readdirSync(assets);
+    const result = runCLI(['init', file]);
+    assert.equal(result.status, 1); assert.match(result.stderr, /EEXIST/);
+    assert.equal(fs.existsSync(file), false); assert.deepEqual(fs.readdirSync(assets), before);
+    if (populated) assert.equal(fs.readFileSync(path.join(assets, 'user-data.png'), 'utf8'), 'Keep this original user data');
+  }
+}));
+
+test('init treats dangling symlinks and files at the reserved asset path as existing user data', () => temporary(dir => {
+  const file = path.join(dir, 'reserved.json'), assets = path.join(dir, 'reserved-assets');
+  fs.writeFileSync(assets, 'Preserve this reserved name');
+  let result = runCLI(['init', file]);
+  assert.equal(result.status, 1); assert.match(result.stderr, /EEXIST/);
+  assert.equal(fs.readFileSync(assets, 'utf8'), 'Preserve this reserved name'); assert.equal(fs.existsSync(file), false);
+  fs.unlinkSync(assets); fs.symlinkSync('unavailable-user-directory', assets);
+  result = runCLI(['init', file]);
+  assert.equal(result.status, 1); assert.match(result.stderr, /EEXIST/);
+  assert.equal(fs.readlinkSync(assets), 'unavailable-user-directory'); assert.equal(fs.existsSync(file), false);
+}));
+
+test('failed init rolls back owned files and new parents while preserving foreign data and replacements', () => temporary(dir => {
+  const script = `
+    import fs from 'node:fs'; import path from 'node:path'; import {pathToFileURL} from 'node:url';
+    const [,modulePath,destination,mode]=process.argv.slice(1);
+    const assetDirectory=path.join(path.dirname(destination),path.parse(destination).name+'-assets');
+    const originalOpen=fs.openSync,originalWrite=fs.writeFileSync;
+    let jsonFd;
+    fs.openSync=(file,flags,...rest)=>{
+      const fd=originalOpen(file,flags,...rest);
+      if(file===destination && flags==='wx')jsonFd=fd;
+      return fd;
+    };
+    fs.writeFileSync=(file,...rest)=>{
+      if(file===jsonFd){
+        if(mode==='foreign') originalWrite(path.join(assetDirectory,'foreign.dat'),'Preserve independently created data',{flag:'wx'});
+        if(mode==='replacement'){fs.unlinkSync(destination);originalWrite(destination,'Preserve the replacement project',{flag:'wx'});}
+        throw new Error('Injected final init JSON write failure');
+      }
+      return originalWrite(file,...rest);
+    };
+    const {main}=await import(pathToFileURL(modulePath).href);
+    try{await main(['init',destination]);}catch(error){console.error(error.message);process.exitCode=1;}
+  `;
+  for (const mode of ['ordinary', 'foreign', 'replacement']) {
+    const workspace = path.join(dir, mode); fs.mkdirSync(workspace);
+    const file = path.join(workspace, ...(mode === 'ordinary' ? ['new-parent', 'deeper'] : []), 'failed.json');
+    const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, 'init-rollback-harness', CLI, file, mode], {encoding: 'utf8', timeout: 30000, maxBuffer: 4 * 1024 * 1024});
+    assert.equal(result.error, undefined); assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /Injected final init JSON write failure/);
+    if (mode === 'ordinary') assert.deepEqual(fs.readdirSync(workspace), []);
+    if (mode === 'foreign') {
+      assert.equal(fs.existsSync(file), false);
+      const assets = path.join(workspace, 'failed-assets');
+      assert.deepEqual(fs.readdirSync(assets), ['foreign.dat']);
+      assert.equal(fs.readFileSync(path.join(assets, 'foreign.dat'), 'utf8'), 'Preserve independently created data');
+    }
+    if (mode === 'replacement') {
+      assert.deepEqual(fs.readdirSync(workspace), ['failed.json']);
+      assert.equal(fs.readFileSync(file, 'utf8'), 'Preserve the replacement project');
+    }
+  }
+}));
+
+test('legacy continuous API remains a distinct linear 16-second authored input accepted by the actual CLI', () => temporary(dir => {
+  for (const ratio of ['16:9', '9:16', '1:1']) {
+    const authored = createContinuousProject(ratio), file = path.join(dir, ratio.replace(':', '-') + '.json');
+    assert.equal(authored.theme, 'nocturne'); assert.equal(authored.continuity.musicScore, undefined);
+    assert.ok(authored.continuity.objects.every(object => object.keyframes.every(key => key.easing === undefined)));
+    write(file, authored);
+    const result = runCLI(['validate', file]); assert.equal(result.status, 0, result.stderr);
+    const accepted = JSON.parse(result.stdout); assert.equal(accepted.duration, 16); assert.equal(accepted.frames, 480);
+    assert.equal(accepted.previewOnly, false);
+  }
+}));
 
 test('CLI ratio belongs only to init and invalid init never leaves a project', () => temporary(dir => {
   const invalid = path.join(dir, 'invalid.json');
@@ -226,6 +355,113 @@ test('actual continuous DOM probe retains independent text collisions on an unsa
   } finally {await browser.close({silent: true});}
 });
 
+test('actual native images load and retain a positive viewport at 64-pixel and smaller authored sizes', {timeout: 120000}, async t => {
+  const {openBrowser, ensureBrowser, selectComposition, renderStill} = await import('@remotion/renderer');
+  const {bundle} = await import('@remotion/bundler');
+  const chrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  let executable = process.env.HEIGE_BROWSER_PATH || (fs.existsSync(chrome) ? chrome : null);
+  if (!executable) {
+    try {executable = (await ensureBrowser({onBrowserDownload: () => {throw new Error('No implicit browser download in regressions');}})).path;}
+    catch {t.skip('An installed Chrome or Remotion browser is required'); return;}
+  }
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'heige-native-image-'));
+  let browser;
+  try {
+    const publicDir = path.join(dir, 'public'); fs.mkdirSync(publicDir);
+    const original = createForgeProject('16:9').assets.find(asset => asset.kind === 'image');
+    assert.ok(original, 'The browser regression must use an actual registered local PNG');
+    const image = path.join(publicDir, 'registered.png');
+    fs.copyFileSync(path.join(ROOT, 'examples/studio', original.path), image);
+    assert.equal(fileHash(image), fileHash(path.join(ROOT, 'examples/studio', original.path)));
+    const project = createContinuousProject('16:9', {samples: 1});
+    project.assets = [{...original, path: 'registered.png'}];
+    const sizes = [{id: 'height-64', x: 64, w: 320, h: 64}, {id: 'small-16', x: 450, w: 16, h: 16}, {id: 'minimum-1', x: 550, w: 1, h: 1}, {id: 'normal-100', x: 640, w: 260, h: 100}];
+    const duration = project.shots.reduce((total, shot) => total + shot.duration, 0);
+    project.continuity.objects = sizes.map(({id, x, w, h}) => ({id, semanticIdentity: `Registered image ${id}`, kind: 'image', assetId: original.id, keyframes: [0, duration].map(at => ({at, x, y: 100, w, h, opacity: 1, rotation: 0, radius: 0}))}));
+    project.continuity.camera = [0, duration].map(at => ({at, x: 640, y: 360, zoom: 1, rotation: 0}));
+    project.continuity.boundaries.forEach(boundary => {boundary.carrier = sizes[0].id;});
+    project.continuity.soundEvents = [];
+    const plan = compileProject(project, {baseDir: publicDir}); assert.deepEqual(plan.issues.errors, []);
+    const entryPoint = path.join(dir, 'image-proof.tsx');
+    fs.writeFileSync(entryPoint, `
+      import React, {useLayoutEffect} from 'react';
+      import {Composition, registerRoot, staticFile, delayRender, continueRender, cancelRender} from 'remotion';
+      import {ContinuousStage} from ${JSON.stringify(path.join(ROOT, 'studio/src/ContinuousStage.tsx'))};
+      import {themeStyle} from ${JSON.stringify(path.join(ROOT, 'studio/src/theme.ts'))};
+      import ${JSON.stringify(path.join(ROOT, 'studio/src/styles.css'))};
+      const plan = ${JSON.stringify(plan)};
+      function Proof() {
+        useLayoutEffect(() => {
+          const handle = delayRender('Inspect the actual loaded native image viewports');
+          (async () => {
+            const images = Array.from(document.querySelectorAll('[data-heige-object-kind="image"] img'));
+            await Promise.all(images.map(async image => {
+              if (!image.complete || image.naturalWidth === 0) await new Promise((resolve, reject) => {
+                image.addEventListener('load', resolve, {once: true});
+                image.addEventListener('error', () => reject(new Error('Registered PNG failed to load')), {once: true});
+              });
+              await image.decode();
+            }));
+            const bounds = node => {const box = node.getBoundingClientRect(); return {x: box.x, y: box.y, width: box.width, height: box.height};};
+            const intersection = (a, b) => ({x: Math.max(a.x, b.x), y: Math.max(a.y, b.y), width: Math.max(0, Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x)), height: Math.max(0, Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y))});
+            const records = images.map(image => {
+              const viewport = image.parentElement, object = image.closest('[data-heige-object-id]');
+              const current = {object: bounds(object), viewport: bounds(viewport), image: bounds(image)};
+              current.clipIntersection = intersection(current.viewport, current.image);
+              const saved = viewport.getAttribute('style');
+              // Recreate the old fixed-header crop in the same actual DOM.
+              // This counterexample changes no Img implementation or PNG bytes.
+              Object.assign(viewport.style, {top: '64px', left: '8px', right: '8px', bottom: '8px'});
+              const historical = {viewport: bounds(viewport), image: bounds(image)};
+              historical.clipIntersection = intersection(historical.viewport, historical.image);
+              viewport.setAttribute('style', saved || '');
+              return {id: object.dataset.heigeObjectId, naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight, complete: image.complete, currentSrc: image.currentSrc, current, historical};
+            });
+            console.log('HEIGE_IMAGE_PROOF:' + JSON.stringify({frame: 0, records}));
+            continueRender(handle);
+          })().catch(cancelRender);
+        }, []);
+        return <div className="heige-film" style={{...themeStyle(plan.project.theme, 'sans-serif'), position: 'relative', width: plan.width, height: plan.height}}><ContinuousStage plan={plan} time={0} fontFamily="sans-serif" assetUrls={{[${JSON.stringify(original.id)}]: new URL(staticFile('registered.png'), window.location.href).href}} /></div>;
+      }
+      registerRoot(() => <Composition id="NativeImageProof" component={Proof} width={plan.width} height={plan.height} fps={plan.fps} durationInFrames={plan.durationInFrames} />);
+    `, {flag: 'wx'});
+    const serveUrl = await bundle({entryPoint, rootDir: ROOT, outDir: path.join(dir, 'bundle'), publicDir, enableCaching: false, webpackOverride: config => ({...config, resolve: {...config.resolve, modules: [path.join(ROOT, 'node_modules'), ...(config.resolve?.modules || [])]}})});
+    browser = await openBrowser('chrome', {browserExecutable: executable, logLevel: 'error'});
+    const composition = await selectComposition({serveUrl, id: 'NativeImageProof', inputProps: {}, puppeteerInstance: browser, logLevel: 'error'});
+    const reports = [], errors = [];
+    await renderStill({serveUrl, composition, inputProps: {}, frame: 0, puppeteerInstance: browser, logLevel: 'error', imageFormat: 'png', output: path.join(dir, 'proof.png'), onBrowserLog: log => {
+      if (log.text.startsWith('HEIGE_IMAGE_PROOF:')) reports.push(JSON.parse(log.text.slice('HEIGE_IMAGE_PROOF:'.length)));
+      if (log.type === 'error') errors.push(log.text);
+    }});
+    assert.deepEqual(errors, []); assert.ok(reports.length, 'The real browser must finish loading and inspect the production Img nodes');
+    for (const report of reports) {
+      assert.equal(report.frame, 0); assert.equal(report.records.length, sizes.length);
+      for (const size of sizes) {
+        const record = report.records.find(item => item.id === size.id); assert.ok(record);
+        assert.equal(record.complete, true); assert.ok(record.naturalWidth > 0); assert.ok(record.naturalHeight > 0);
+        const source = new URL(record.currentSrc); assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(source.hostname));
+        assert.match(source.pathname, /registered\.png$/u);
+        assert.ok(record.current.viewport.width > 0 && record.current.viewport.height > 0, `${size.id} has a collapsed internal image viewport`);
+        assert.ok(record.current.image.width > 0 && record.current.image.height > 0, `${size.id} has a zero-area loaded Img`);
+        const viewport = record.current.viewport, actualImage = record.current.image;
+        const paintedWidth = Math.min(viewport.x + viewport.width, actualImage.x + actualImage.width) - Math.max(viewport.x, actualImage.x);
+        const paintedHeight = Math.min(viewport.y + viewport.height, actualImage.y + actualImage.height) - Math.max(viewport.y, actualImage.y);
+        assert.ok(paintedWidth > 0 && paintedHeight > 0, `${size.id} loaded Img leaves the actual clipping viewport and paints no visible area`);
+        assert.equal(record.current.clipIntersection.width, paintedWidth); assert.equal(record.current.clipIntersection.height, paintedHeight);
+        assert.ok(actualImage.x >= viewport.x - .01 && actualImage.y >= viewport.y - .01);
+        assert.ok(actualImage.x + actualImage.width <= viewport.x + viewport.width + .01);
+        assert.ok(actualImage.y + actualImage.height <= viewport.y + viewport.height + .01, `${size.id} inline baseline moves the image beyond its clipping viewport`);
+        assert.ok(record.current.viewport.x >= record.current.object.x && record.current.viewport.y >= record.current.object.y);
+        assert.ok(record.current.viewport.x + record.current.viewport.width <= record.current.object.x + record.current.object.width + .01);
+        assert.ok(record.current.viewport.y + record.current.viewport.height <= record.current.object.y + record.current.object.height + .01);
+        if (size.h <= 64) assert.equal(record.historical.viewport.height, 0, `${size.id} must reproduce the old fixed-header disappearance`);
+        else assert.deepEqual(record.current.viewport, record.historical.viewport, 'The usual 100-high image must keep its existing crop geometry');
+      }
+    }
+    t.diagnostic(JSON.stringify({sourceSha256: fileHash(image), ...reports.at(-1)}));
+  } finally {if (browser) await browser.close({silent: true}); fs.rmSync(dir, {recursive: true, force: true});}
+});
+
 test('actual portrait ending uses the production font and keeps complete lines inside the final panel', async t => {
   const {openBrowser, ensureBrowser} = await import('@remotion/renderer');
   const chrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -238,7 +474,10 @@ test('actual portrait ending uses the production font and keeps complete lines i
   let browser;
   try {
     const run = (command, args) => {
-      const result = spawnSync(command, args, {encoding: 'utf8', timeout: 30000, maxBuffer: 8 * 1024 * 1024});
+      // Production make.run allows 120 seconds for the same audited fonttools
+      // conversion. A shorter test-only deadline fails during concurrent renders.
+      const result = spawnSync(command, args, {encoding: 'utf8', timeout: 120000, maxBuffer: 8 * 1024 * 1024});
+      assert.equal(result.error, undefined, `${command} error=${result.error?.message || 'none'} status=${result.status} signal=${result.signal}`);
       assert.equal(result.status, 0, result.stderr); return result.stdout.trim();
     };
     // Use the actual production face selector and conversion/glyph audit. This
@@ -261,7 +500,10 @@ test('actual portrait ending uses the production font and keeps complete lines i
       const requireLocal = spec => {
         if (spec === 'react') return React;
         if (spec === 'react/jsx-runtime') return jsxRuntime;
+        if (spec === 'remotion') return Remotion;
         if (spec === '../lib/continuous-motion.mjs') return {sampleContinuity};
+        if (spec === './scenes') return productionModule('scenes.tsx');
+        if (spec === './motion') return productionModule('motion.ts');
         if (spec === './theme') return productionModule('theme.ts');
         if (spec === './primitives') return productionModule('primitives.tsx');
         if (spec === './inspect') return productionModule('inspect.ts');

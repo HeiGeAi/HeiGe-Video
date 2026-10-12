@@ -1,5 +1,29 @@
 # Changelog
 
+## v4.0.0-alpha.3 · 2026-10-12
+
+| Change | Actual implementation |
+| :--- | :--- |
+| Default creation | `init` creates a 15-second, 30 fps Forge project with independent landscape, portrait or square geometry; copies three original local PNGs into `<project-stem>-assets`; refuses existing JSON or asset directories |
+| Forge visual language | Iron black, acid green, hard edges and controlled typography/appearance; `ledger` and `nocturne` remain available |
+| Persistent images | Native `image` objects bind to registered local image assets and retain identity through world/camera changes; other kinds reject `assetId` |
+| Motion | Fixed pure-time easing curves including cubic, normalized exponential and bounded back-out; controlled text size/weight/tracking and line-height multiplier (1.15 to 1.7, default 1.55), strokes, hard shadows and patterns |
+| Original complete score | Real 128 BPM, 4/4, eight-bar, 15-second stereo PCM arrangement with drums, syncopated bass, chord stabs, lead hook and lift; no third-party samples or model API |
+| Cue and mix | Shared music/action/event clock, nearest-video-frame cues; score gain applied once, narration-only music ducking, fixed-gain effects and final limiting |
+| Recorded integrity | Music WAV and arrangement report with actual cues, events, PCM measurements and hashes, checked against the current arrangement; music-only final media is treated as expected audio |
+
+### Scope and preserved history
+
+- Alpha. The built-in score is restricted to exactly 15 seconds at 24 or 30 fps and excludes external `project.music`; other durations can use registered local music. Generic continuous worlds retain the 60-second, 2-to-20-beat bounds and recording-driven clock.
+- Native images support PNG/JPEG/WebP, with controlled cropping and Forge monochrome treatment. Image-pixel facts and text require separate review. Paths remain local and reject traversal, symlinks and URLs; SVG/GIF are not accepted.
+- Forge entry points are [landscape](demos/forge/horizontal.mp4), [portrait](demos/forge/portrait.mp4) and [square](demos/forge/square.mp4). The [inventory](references/v4-forge-status.json) and [delivery record](references/v4-forge-report.md) state actual media, hashes and check scope; no final test count or listening approval is asserted here.
+- Alpha.2 continuous films remain historical bytes and evidence. The user rejected their pacing and aesthetics and identified the missing complete BGM. Historical `sampled-pass` is not user acceptance or a Forge aesthetic verdict.
+- Alpha.1 fixed-commit evidence, the eight ordinary scene components, four modes, authored Canvas/SVG v2/v3 films, original SRT timing, strict factual claims and preview-only draft/mock status remain available.
+- Cause/outcome are author declarations, visibility is approximate, and pixel deltas do not establish semantics or quality. Actual visual review, full playback, human listening and user aesthetic acceptance stay distinct. Hash integrity is not a trust certificate.
+- Original code, assets and score remain subject to their recorded licenses. OneTake source/assets were not imported. No online LLM/TTS/ASR, paid generation, B-roll supply/cache or blind model-cost comparison is claimed.
+
+See the [continuous guide](studio/CONTINUITY.md), [music note](references/music-score.md) and [source notices](references/source-notices.md).
+
 ## v4.0.0-alpha.2 · 2026-10-12
 
 ### Added
@@ -24,7 +48,7 @@
 
 - Alpha. Continuous worlds are bounded to 60 seconds and 2 to 20 beats; each quantized beat lasts 0.25 to 20 seconds.
 - Cause/outcome are authored declarations. DOM identity, approximate visibility and pixel deltas cannot prove narrative semantics, true product behavior, image meaning or artistic quality.
-- Independent continuous films are linked as [landscape](demos/continuous/horizontal.mp4), [portrait](demos/continuous/portrait.mp4) and [square](demos/continuous/square.mp4). Their [gallery](demos/continuous/README.md) and [current inventory](references/v4-continuity-status.json) record actual acceptance scope; this entry does not substitute historical results or invent a render/test count.
+- Independent continuous films are linked as [landscape](demos/continuous/horizontal.mp4), [portrait](demos/continuous/portrait.mp4) and [square](demos/continuous/square.mp4). Their [gallery](demos/continuous/README.md) and [historical inventory](references/v4-continuity-status.json) record the alpha.2 scope. The user subsequently rejected the pacing and aesthetics; those technical/sampled records are not user aesthetic approval or evidence for alpha.3.
 - Hash verification establishes integrity, not a trust certificate. Full playback, sampled visual review and actual listening remain separate; real narration quality still requires a human listener.
 - No native online LLM, TTS, ASR, paid generation, B-roll supply/cache, automatic UI reconstruction or publishing certification. No upstream-parity, blind model comparison or cost-superiority claim.
 

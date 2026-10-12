@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Verify current hashes and declared continuous-release checks, not aesthetics.
+"""Verify current and historical continuous hashes and declared checks.
 
 This portable inventory does not rerender, decode, play or listen. A declaration
 is not a trusted measurement certificate, even when its media hashes agree.
 Only this project's local Node modules are used; no upstream code is executed.
 """
 import datetime
+import argparse
+import array
 import hashlib
 import json
 import math
@@ -13,12 +15,17 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import wave
+
+from validate_super_release import git, historical_engine
 
 
 ROOT = Path(__file__).resolve().parents[1]
 RATIOS = {'16:9': (1280, 720), '9:16': (720, 1280), '1:1': (1080, 1080)}
 SHA256 = re.compile(r'[0-9a-f]{64}')
 ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,63}')
+CURRENT_INVENTORY = 'references/v4-forge-status.json'
+HISTORICAL_INVENTORY = 'references/v4-continuity-status.json'
 
 
 def reject(message):
@@ -124,25 +131,88 @@ def current_engine(root):
 
 def compiled_plan(root, project_file):
     module = local('studio/lib/project.mjs', root)
+    project = read_json(project_file)
+    music = project.get('continuity', {}).get('musicScore') if isinstance(project.get('continuity'), dict) else None
+    score_script = 'const score=null;'
+    if music is not None:
+        score_module = local('studio/lib/music-score.mjs', root)
+        score_script = ('const {composeMusicScore}=await import(' + json.dumps(score_module.as_uri())
+                        + ');const score=plan.issues.errors.length ? null : composeMusicScore(plan);')
     script = ('import fs from "node:fs";import path from "node:path";'
               'import {compileProject} from ' + json.dumps(module.as_uri()) + ';'
               'const file=process.argv[1];const p=JSON.parse(fs.readFileSync(file,"utf8").replace(/^\\uFEFF/u,""));'
               'const plan=compileProject(p,{baseDir:path.dirname(file)});'
+              + score_script +
               'console.log(JSON.stringify({errors:plan.issues.errors,width:plan.width,height:plan.height,'
-              'fps:plan.fps,duration:plan.duration,frames:plan.durationInFrames,previewOnly:plan.previewOnly}));')
+              'fps:plan.fps,duration:plan.duration,frames:plan.durationInFrames,previewOnly:plan.previewOnly,'
+              'musicScore:score ? {style:score.config.style,bpm:score.timeline.bpm,bars:score.timeline.bars,'
+              'events:score.events.length,duration:score.duration,volume:score.config.volume,rate:score.rate,channels:score.channels} : null}));')
     plan = node_json(script, [project_file], root)
     if not isinstance(plan, dict) or plan.get('errors') != []:
         reject('Project contract failed: ' + json.dumps(plan, ensure_ascii=False))
     return plan
 
 
-def validate(root=ROOT):
+def validate_music_score(item, project, plan, root, at):
+    authored = project['continuity'].get('musicScore')
+    if authored is None:
+        if 'musicScore' in item:
+            reject(at + ' declares musicScore without an authored score')
+        return
+    score = fields(item.get('musicScore'), ['style', 'bpm', 'bars', 'events', 'wav',
+                   'wavSha256', 'peak', 'rms', 'duration', 'rate', 'channels', 'volume'], at + '.musicScore')
+    composed = plan.get('musicScore')
+    if not isinstance(composed, dict):
+        reject(at + ' authored music score was not composed')
+    for key in ['bpm', 'bars', 'events', 'rate', 'channels']:
+        integer(score[key], at + '.musicScore.' + key, 1)
+    number(score['duration'], at + '.musicScore.duration', maximum=60, positive=True)
+    number(score['volume'], at + '.musicScore.volume', maximum=1, positive=True)
+    for key in ['style', 'bpm', 'bars', 'events', 'duration', 'volume', 'rate', 'channels']:
+        if score[key] != composed[key]:
+            reject(at + ' musicScore ' + key + ' differs from the authored score clock or configuration')
+    if score['duration'] != plan['duration'] or not math.isclose(score['duration'], score['bars'] * 4 * 60 / score['bpm'], abs_tol=1e-7, rel_tol=0):
+        reject(at + ' musicScore bar clock differs from the final film')
+    hash_at(score['wavSha256'], at + '.musicScore.wavSha256')
+    wav_file = local(score['wav'], root)
+    if digest(wav_file) != score['wavSha256']:
+        reject(at + ' original music WAV bytes changed')
+    try:
+        with wave.open(str(wav_file), 'rb') as pcm:
+            if pcm.getcomptype() != 'NONE' or pcm.getsampwidth() != 2:
+                reject(at + ' original music must be uncompressed 16-bit PCM')
+            if pcm.getframerate() != score['rate'] or pcm.getnchannels() != score['channels']:
+                reject(at + ' original music PCM header differs from the score')
+            frames = pcm.getnframes()
+            raw = pcm.readframes(frames)
+    except (wave.Error, EOFError) as error:
+        reject(at + ' cannot read original music PCM: ' + str(error))
+    if len(raw) != frames * score['channels'] * 2 or frames != round(score['duration'] * score['rate']):
+        reject(at + ' original music PCM frame clock is incomplete')
+    samples = array.array('h', raw)
+    if sys.byteorder != 'little':
+        samples.byteswap()
+    if not samples:
+        reject(at + ' original music PCM is empty')
+    peak = max(abs(sample) for sample in samples) / 32767
+    rms = math.sqrt(sum((sample / 32767) ** 2 for sample in samples) / len(samples))
+    number(score['peak'], at + '.musicScore.peak', maximum=1, positive=True)
+    number(score['rms'], at + '.musicScore.rms', maximum=score['peak'], positive=True)
+    if not math.isclose(peak, score['peak'], abs_tol=1e-7, rel_tol=0) or not math.isclose(rms, score['rms'], abs_tol=1e-7, rel_tol=0):
+        reject(at + ' original music PCM peak/RMS differs from its declaration')
+
+
+def validate(root=ROOT, inventory_path=CURRENT_INVENTORY):
     root = root.resolve()
-    inventory = read_json(local('references/v4-continuity-status.json', root))
+    inventory = read_json(local(inventory_path, root))
     fields(inventory, ['schemaVersion', 'version', 'date', 'engine', 'examples'], 'inventory',
-           ['environment', 'tests', 'notes', 'upstreamCommit'])
-    if inventory['schemaVersion'] != 'heige-continuous-release/1' or inventory['version'] != '4.0.0-alpha.2':
+           ['environment', 'tests', 'notes', 'upstreamCommit', 'sourceCommit', 'userFeedback'])
+    if inventory['schemaVersion'] != 'heige-continuous-release/1' or inventory['version'] not in ['4.0.0-alpha.2', '4.0.0-alpha.3']:
         reject('Unsupported continuous release schema/version')
+    if inventory_path == CURRENT_INVENTORY and (inventory['version'] != '4.0.0-alpha.3' or 'sourceCommit' in inventory):
+        reject('Current forge inventory must use alpha.3 and the current production engine')
+    if 'userFeedback' in inventory:
+        text(inventory['userFeedback'], 'inventory.userFeedback')
     try:
         if not isinstance(inventory['date'], str):
             reject('Release date must be ISO text')
@@ -150,13 +220,23 @@ def validate(root=ROOT):
             reject('Release date must use YYYY-MM-DD')
     except ValueError:
         reject('Release date must be a valid ISO date')
-    package = read_json(local('package.json', root))
+    source_commit = inventory.get('sourceCommit')
+    if 'sourceCommit' in inventory:
+        engine = historical_engine(root, source_commit)
+        try:
+            package = json.loads(git(root, 'show', source_commit + ':package.json').decode('utf-8-sig'),
+                                 object_pairs_hook=_unique_pairs,
+                                 parse_constant=lambda constant: reject('Non-finite historical package constant: ' + constant))
+        except (UnicodeError, json.JSONDecodeError) as error:
+            reject('Cannot read historical package version: ' + str(error))
+    else:
+        package = read_json(local('package.json', root))
+        engine = current_engine(root)
     if not isinstance(package, dict) or package.get('version') != inventory['version']:
         reject('Package version differs from continuous release version')
     hash_at(inventory['engine'], 'inventory.engine')
-    engine = current_engine(root)
     if inventory['engine'] != engine:
-        reject('Continuous release engine differs from current production source')
+        reject('Continuous release engine differs from ' + ('its historical sourceCommit' if source_commit else 'current production source'))
     examples = inventory['examples']
     if not isinstance(examples, list) or len(examples) != 3:
         reject('Expected three independent continuous examples')
@@ -166,7 +246,7 @@ def validate(root=ROOT):
                 'blur', 'audio', 'layout', 'playback', 'visualReview', 'audioListening']
     for index, item in enumerate(examples):
         at = 'examples[' + str(index) + ']'
-        fields(item, required, at)
+        fields(item, required, at, ['musicScore'])
         if not isinstance(item['id'], str) or not ID.fullmatch(item['id']) or item['id'] in seen_ids:
             reject(at + '.id must be valid and unique')
         seen_ids.add(item['id'])
@@ -191,11 +271,14 @@ def validate(root=ROOT):
         continuity = project.get('continuity')
         if not isinstance(continuity, dict) or not isinstance(continuity.get('blur'), dict):
             reject(at + ' must declare a native continuous world and blur')
+        if inventory_path == CURRENT_INVENTORY and continuity.get('musicScore') is None:
+            reject(at + ' current forge release must declare original musicScore')
         if continuity['blur'].get('samples') != 3 or continuity['blur'].get('shutterAngle') != 180:
             reject(at + ' project must request three-sample 180-degree shutter')
         plan = compiled_plan(root, project_file)
         if plan['previewOnly'] is not False:
             reject(at + ' preview cannot be a production release')
+        validate_music_score(item, project, plan, root, at)
         for key in ['width', 'height', 'fps', 'frames', 'decodedFrames']:
             integer(item[key], at + '.' + key, 1)
         if (item['width'], item['height']) != RATIOS[ratio] or item['fps'] not in (24, 30):
@@ -275,18 +358,34 @@ def validate(root=ROOT):
                 reject(at + '.' + key + ' has an unsupported or failed review state')
     if seen_ratios != set(RATIOS):
         reject('Continuous examples must cover all three ratios')
-    if current_engine(root) != engine:
-        reject('Current engine changed during inventory verification')
+    observed_engine = historical_engine(root, source_commit) if source_commit else current_engine(root)
+    if observed_engine != engine:
+        reject('Production engine changed during inventory verification')
     return {'schemaVersion': 'heige-continuous-verification/1', 'status': 'pass',
             'continuous_examples_hash_checked': len(examples), 'engine': engine,
+            'sourceMode': 'historical' if source_commit else 'current',
+            **({'sourceCommit': source_commit} if source_commit else {}),
             'frames': sum(item['frames'] for item in examples),
             'seconds': sum(item['duration'] for item in examples),
-            'scope': 'Current engine/input/media hashes and declared checks verified. No rerender, redecoding, playback, listening or aesthetic/trust certification performed by this validator.'}
+            'scope': ('Historical Git source' if source_commit else 'Current engine') + '/input/media hashes and declared checks verified. Original music PCM, when present, is checked for header, sample clock, peak and RMS. No rerender, video redecoding, playback, listening or aesthetic/trust certification performed by this validator.'}
 
 
-def main():
+def validate_inventories(root=ROOT):
+    current = validate(root, CURRENT_INVENTORY)
+    historical = read_json(local(HISTORICAL_INVENTORY, root))
+    if 'sourceCommit' not in historical:
+        reject('Historical continuous inventory needs sourceCommit')
+    old = validate(root, HISTORICAL_INVENTORY)
+    return {'schemaVersion': 'heige-continuous-verification/1', 'status': 'pass',
+            'current': current, 'historical': old}
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--inventory', help='Strictly verify one repository-relative inventory path')
+    args = parser.parse_args(argv)
     try:
-        print(json.dumps(validate(), indent=2))
+        print(json.dumps(validate(inventory_path=args.inventory) if args.inventory else validate_inventories(), indent=2))
         return 0
     except (ValueError, OSError) as error:
         print(json.dumps({'status': 'fail', 'error': str(error)}, ensure_ascii=False), file=sys.stderr)

@@ -69,6 +69,7 @@
     "typecheck": "passed"
   },
   "notes": [
+    "Historical alpha 2 source and media are preserved. The owner rejected their pacing, style and audio on 2026-10-12; prior sampled structural review is not creative acceptance.",
     "Original implementation and media. Upstream code/assets were not copied.",
     "Three independent builds: 48 seconds, 1440 encoded frames, 4320 actual temporal captures.",
     "Complete low-resolution encoded-pixel decoding and actual DOM coverage are structural evidence, not image semantics or aesthetic certification.",
@@ -259,5 +260,7 @@
         "scope": "Automated full PCM checks passed. No human listening was performed; full Chrome playback was muted."
       }
     }
-  ]
+  ],
+  "sourceCommit": "e97b1978a743ae83bf9c91016c85e577a023f894",
+  "userFeedback": "Creative delivery rejected by the owner: slow motion, weak style and no full BGM. Retained as historical structural demos, not current creative recommendations."
 }

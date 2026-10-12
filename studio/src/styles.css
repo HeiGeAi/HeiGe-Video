@@ -10,6 +10,7 @@
 .heige-grid-rule { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--heige-hairline); }
 .heige-grid-ledger { opacity: .37; }
 .heige-grid-nocturne { opacity: .21; }
+.heige-grid-forge { opacity: .30; }
 .heige-baseline { position: absolute; height: 1px; left: 0; right: 0; background: var(--heige-hairline); }
 .heige-light-shaft { position: absolute; width: 95%; height: 180%; transform: translate(-50%, -60%) rotate(-31deg); background: radial-gradient(ellipse at 50% 40%, rgba(45,212,191,.17) 0, rgba(45,212,191,.06) 25%, transparent 64%); pointer-events: none; z-index: -1; }
 .heige-rail { flex: 0 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; border-bottom: 1px solid var(--heige-hairline); padding-bottom: 16px; margin-bottom: 24px; color: var(--heige-muted); line-height: 1.25; }

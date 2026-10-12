@@ -4,8 +4,10 @@ Fixture MP4 bytes are deliberately not playable. Passing these tests validates
 the inventory checker, not rendering, decoding, browser playback or listening.
 """
 import copy
+import array
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import shutil
@@ -13,8 +15,17 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import wave
 
-from validate_continuous_release import current_engine, validate
+from validate_continuous_release import (CURRENT_INVENTORY, HISTORICAL_INVENTORY,
+                                         compiled_plan, current_engine,
+                                         validate as validate_inventory,
+                                         validate_inventories)
+
+
+def validate(root):
+    # The original 31 cases deliberately keep their single alpha.2 inventory.
+    return validate_inventory(root, inventory_path=HISTORICAL_INVENTORY)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -63,6 +74,7 @@ class ContinuousReleaseTests(unittest.TestCase):
             self.write('studio/lib/' + source.name, source.read_bytes())
         self.write('studio/src/original.tsx', 'export const original = true;')
         self.write('scripts/validate_continuous_release.py', (ROOT / 'scripts/validate_continuous_release.py').read_bytes())
+        self.write('scripts/validate_super_release.py', (ROOT / 'scripts/validate_super_release.py').read_bytes())
         self.engine = current_engine(self.root)
         self.git('add', '-A')
         self.git('commit', '-q', '-m', 'Original current-engine fixture')
@@ -134,6 +146,173 @@ class ContinuousReleaseTests(unittest.TestCase):
             validate(self.root)
         self.inventory = saved
         self.save()
+
+    def make_forge_inventory(self):
+        # Keep the original alpha.2 inputs and hash-only media untouched. The
+        # source commit is real Git; only the declared video data is synthetic.
+        self.inventory['sourceCommit'] = self.source_commit
+        self.save()
+        self.write('package.json', json.dumps({'version': '4.0.0-alpha.3'}))
+        pattern = array.array('h', [round(16384 * math.sin(index * math.pi / 32))
+                                    for index in range(64) for _channel in range(2)])
+        samples = pattern * (720000 // 64)
+        if sys.byteorder != 'little':
+            samples.byteswap()
+        wav_path = 'demos/forge/music.wav'
+        wav_file = self.root / wav_path
+        wav_file.parent.mkdir(parents=True, exist_ok=True)
+        with wave.open(str(wav_file), 'wb') as pcm:
+            pcm.setnchannels(2)
+            pcm.setsampwidth(2)
+            pcm.setframerate(48000)
+            pcm.writeframes(samples.tobytes())
+        peak = max(abs(sample) for sample in pattern) / 32767
+        rms = math.sqrt(sum((sample / 32767) ** 2 for sample in pattern) / len(pattern))
+        forge = copy.deepcopy(self.inventory)
+        forge.pop('sourceCommit')
+        forge.update(version='4.0.0-alpha.3', engine=current_engine(self.root),
+                     userFeedback='Previous alpha.2 creative result was rejected; this synthetic fixture makes no aesthetic or listening claim')
+        for index, item in enumerate(forge['examples']):
+            project = project_fixture(['16:9', '9:16', '1:1'][index])
+            project.pop('audio')
+            project['assets'] = []
+            project['theme'] = 'forge'
+            for shot in project['shots']:
+                shot.pop('start')
+                shot.pop('end')
+                shot['duration'] = 7.5
+            for obj in project['continuity']['objects']:
+                obj['keyframes'][-1]['at'] = 15
+            project['continuity']['camera'][-1]['at'] = 15
+            project['continuity']['musicScore'] = {'style': 'forge-breakbeat', 'bpm': 128, 'volume': .8}
+            project_path = 'examples/forge-' + str(index) + '/project.json'
+            self.write(project_path, json.dumps(project, ensure_ascii=False))
+            video_path = 'demos/forge-' + str(index) + '.mp4'
+            self.write(video_path, b'forge inventory hash fixture, not actual encoded media ' + str(index).encode())
+            item.update(id='forge-' + str(index), project=project_path, video=video_path,
+                        mp4Sha256=digest(self.root / video_path), duration=15, frames=450, decodedFrames=450)
+            item['input'] = {'project': digest(self.root / project_path), 'assets': {}, 'subtitles': None, 'brief': None}
+            item['continuity']['coverage'].update(expectedFrames=450, measuredFrames=450, validFrames=450)
+            item['blur'].update(captures=1350, encodedFrames=450)
+            item['audio']['duration'] = 15.0106666667
+            item['playback']['mp4Sha256'] = item['mp4Sha256']
+            item['musicScore'] = {**compiled_plan(self.root, self.root / project_path)['musicScore'],
+                                  'wav': wav_path, 'wavSha256': digest(wav_file), 'peak': peak, 'rms': rms}
+        self.write(CURRENT_INVENTORY, json.dumps(forge))
+        return forge
+
+    def test_historical_engine_and_package_are_bound_to_git_not_changed_current_source(self):
+        self.inventory['sourceCommit'] = self.source_commit
+        self.save()
+        self.write('package.json', json.dumps({'version': '4.0.0-alpha.3'}))
+        self.write('studio/src/original.tsx', 'export const original = "new alpha.3 source";')
+        self.assertNotEqual(current_engine(self.root), self.engine)
+        report = validate(self.root)
+        self.assertEqual(report['engine'], self.engine)
+        self.assertEqual(report['sourceCommit'], self.source_commit)
+        self.assertEqual(report['sourceMode'], 'historical')
+        self.assertIn('Historical Git source', report['scope'])
+        self.reject_edit(lambda inventory: inventory.update(engine=current_engine(self.root)), 'historical sourceCommit')
+
+    def test_missing_historical_commit_invalid_sha_or_required_source_is_rejected(self):
+        for commit in [None, '', 'HEAD', '0' * 40]:
+            with self.subTest(commit=commit):
+                self.reject_edit(lambda inventory: inventory.update(sourceCommit=commit), 'sourceCommit|Historical source commit')
+        self.git('rm', '--cached', 'studio/requirements.txt')
+        self.git('commit', '-q', '-m', 'Required historical source missing')
+        bad_commit = self.git('rev-parse', 'HEAD')
+        self.reject_edit(lambda inventory: inventory.update(sourceCommit=bad_commit), 'Historical production file is missing')
+
+    def test_historical_version_cannot_claim_the_current_package_version(self):
+        self.inventory['sourceCommit'] = self.source_commit
+        self.save()
+        self.write('package.json', json.dumps({'version': '4.0.0-alpha.3'}))
+        self.reject_edit(lambda inventory: inventory.update(version='4.0.0-alpha.3'), 'Package version differs')
+
+    def test_default_requires_new_current_inventory_instead_of_falling_back_to_old_media(self):
+        with self.assertRaisesRegex(ValueError, 'Missing.*v4-forge-status'):
+            validate_inventories(self.root)
+        self.assertEqual(validate(self.root)['status'], 'pass')
+
+    def test_current_forge_and_historical_alpha2_pass_independently_with_shared_real_pcm(self):
+        forge = self.make_forge_inventory()
+        report = validate_inventories(self.root)
+        self.assertEqual(report['current']['sourceMode'], 'current')
+        self.assertEqual(report['current']['frames'], 1350)
+        self.assertEqual(report['historical']['sourceMode'], 'historical')
+        self.assertEqual(report['historical']['frames'], 360)
+        self.assertEqual(len({item['musicScore']['wav'] for item in forge['examples']}), 1)
+        command = [sys.executable, str(self.root / 'scripts/validate_continuous_release.py')]
+        completed = subprocess.run(command, capture_output=True, text=True, check=True)
+        self.assertEqual(json.loads(completed.stdout)['status'], 'pass')
+
+    def test_current_forge_cannot_inherit_wrong_engine_or_use_historical_bypass(self):
+        forge = self.make_forge_inventory()
+        for change in [lambda value: value.update(engine=self.engine),
+                       lambda value: value.update(sourceCommit=self.source_commit)]:
+            with self.subTest(change=change):
+                changed = copy.deepcopy(forge)
+                change(changed)
+                self.write(CURRENT_INVENTORY, json.dumps(changed))
+                with self.assertRaisesRegex(ValueError, 'current production|current production engine'):
+                    validate_inventory(self.root)
+        self.write(CURRENT_INVENTORY, json.dumps(forge))
+        self.inventory.pop('sourceCommit')
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Historical continuous inventory needs sourceCommit'):
+            validate_inventories(self.root)
+
+    def test_music_summary_clock_configuration_and_measurements_cannot_be_fabricated(self):
+        forge = self.make_forge_inventory()
+        for key, value in [('duration', 14.9), ('bpm', 120), ('bars', 7), ('events', 1),
+                           ('volume', .7), ('rate', 44100), ('channels', 1),
+                           ('peak', .4), ('rms', .2), ('events', True)]:
+            with self.subTest(key=key):
+                changed = copy.deepcopy(forge)
+                changed['examples'][0]['musicScore'][key] = value
+                self.write(CURRENT_INVENTORY, json.dumps(changed))
+                with self.assertRaisesRegex(ValueError, 'musicScore|original music PCM'):
+                    validate_inventory(self.root)
+        changed = copy.deepcopy(forge)
+        changed['examples'][0].pop('musicScore')
+        self.write(CURRENT_INVENTORY, json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, 'musicScore'):
+            validate_inventory(self.root)
+
+    def test_music_wave_hash_and_actual_pcm_header_clock_are_required(self):
+        forge = self.make_forge_inventory()
+        score = forge['examples'][0]['musicScore']
+        wav_file = self.root / score['wav']
+        original = wav_file.read_bytes()
+        wav_file.write_bytes(original + b'changed')
+        with self.assertRaisesRegex(ValueError, 'music WAV bytes changed'):
+            validate_inventory(self.root)
+        wav_file.write_bytes(original)
+        # Bind each modified WAV's actual bytes so header checks, rather than
+        # merely the SHA check, must reject a wrongly timed PCM track.
+        for mutation in ['rate', 'channels', 'truncated']:
+            with self.subTest(mutation=mutation):
+                changed = bytearray(original)
+                if mutation == 'rate':
+                    changed[24:28] = (44100).to_bytes(4, 'little')
+                elif mutation == 'channels':
+                    changed[22:24] = (1).to_bytes(2, 'little')
+                else:
+                    changed = changed[:-4]
+                wav_file.write_bytes(changed)
+                modified = copy.deepcopy(forge)
+                for item in modified['examples']:
+                    item['musicScore']['wavSha256'] = digest(wav_file)
+                self.write(CURRENT_INVENTORY, json.dumps(modified))
+                with self.assertRaisesRegex(ValueError, 'PCM header|PCM frame clock'):
+                    validate_inventory(self.root)
+        wav_file.write_bytes(original)
+
+    def test_music_metadata_cannot_be_attached_to_a_project_without_a_score(self):
+        self.item()['musicScore'] = {'style': 'forge-breakbeat'}
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'without an authored score'):
+            validate(self.root)
 
     def test_current_git_source_and_three_ratio_declarations_pass_with_explicit_scope(self):
         self.assertEqual(len(self.source_commit), 40)
@@ -353,7 +532,7 @@ class ContinuousReleaseTests(unittest.TestCase):
             validate(self.root)
 
     def test_cli_returns_json_pass_or_failure_without_stack_trace(self):
-        command = [sys.executable, str(self.root / 'scripts/validate_continuous_release.py')]
+        command = [sys.executable, str(self.root / 'scripts/validate_continuous_release.py'), '--inventory', HISTORICAL_INVENTORY]
         passed = subprocess.run(command, capture_output=True, text=True, check=True)
         self.assertEqual(json.loads(passed.stdout)['status'], 'pass')
         self.inventory['engine'] = '0' * 64

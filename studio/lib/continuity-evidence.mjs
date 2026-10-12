@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {evaluateContinuity} from './continuity-oracle.mjs';
 import {fileHash} from './integrity.mjs';
+import {composeMusicScore} from './music-score.mjs';
 
 // Call after the normal inventory and environment checks. Reports are data,
 // never executable code and never substitutes for missing measured frames.
@@ -37,5 +38,12 @@ export function verifyContinuousEvidence(plan, out, manifest) {
     plan.project.continuity.soundEvents.forEach((event,index) => {
       if (Object.entries(event).some(([key,value]) => sound.events[index][key] !== value) || sound.events[index].sample !== Math.round(event.at * 48000)) throw new Error('Event-audio timing or source changed');
     });
+  }
+  if (plan.project.continuity.musicScore) {
+    const music=read('music-score.json'),planned=composeMusicScore(plan),wav=path.join(out,'music.wav');
+    if (music.schemaVersion!=='heige-original-music/1' || music.sha256!==fileHash(wav) || music.style!==planned.config.style || music.bpm!==planned.config.bpm || music.volume!==planned.config.volume || music.duration!==plan.duration || music.rate!==48000 || music.channels!==2 || music.samples!==plan.duration*48000 || music.finite!==true || !Number.isFinite(music.peak) || music.peak<=0 || music.peak>1 || !Number.isFinite(music.rms) || music.rms<=0 || music.rms>music.peak) throw new Error('Original music PCM or clock evidence is missing or changed');
+    if (JSON.stringify(music)!==JSON.stringify(manifest.musicScore) || JSON.stringify(music.timeline)!==JSON.stringify(planned.timeline) || JSON.stringify(music.events)!==JSON.stringify(planned.events)) throw new Error('Original music arrangement differs from the authored film');
+    const bytes=fs.readFileSync(wav);
+    if (bytes.length!==44+music.samples*4 || bytes.toString('ascii',0,4)!=='RIFF' || bytes.toString('ascii',8,16)!=='WAVEfmt ' || bytes.readUInt16LE(20)!==1 || bytes.readUInt16LE(22)!==2 || bytes.readUInt32LE(24)!==48000 || bytes.readUInt16LE(34)!==16 || bytes.toString('ascii',36,40)!=='data' || bytes.readUInt32LE(40)!==music.samples*4) throw new Error('Original music WAV format or sample count changed');
   }
 }

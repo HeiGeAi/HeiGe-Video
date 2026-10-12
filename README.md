@@ -1,14 +1,22 @@
-# HeiGe-Video v4.0.0-alpha.2
+# HeiGe-Video v4.0.0-alpha.3
 
-**让同一个对象，从开场一路带出结果。**
+**让想法动起来。用同一个主体，带出画面、节奏与结果。**
 
-从视觉承诺、完整物体和结束构图出发，先证明最关键的动作，再制作整片。v4 alpha 2 在原创 Remotion 引擎中加入原生连续世界：对象保留身份，相机揭示关系，动作跨越 beat 边界，事件声音与画面共用时钟。BrewReel 的受控生产思想继续约束事实、录音、素材与交付，OneTake 的连续创作方法只作为研究参考，代码与示例由本项目原创实现。
+默认入口是 15 秒 Forge 熔炉短片：铁黑与酸绿、硬边字体、原创图像、快速承接动作和 128 BPM 完整配乐。持久对象、相机、音乐与事件音效共用时钟，三种画幅各自构图。它是可编辑的原创起点，真正的作品仍须围绕题材重新设计，并看实际成片、听实际声音。
+
+| Forge 作品入口 | 画幅 | 原创项目 |
+| :--- | :--- | :--- |
+| [横版 MP4](demos/forge/horizontal.mp4) | 16:9 | [forge-launch.json](examples/studio/forge-launch.json) |
+| [竖版 MP4](demos/forge/portrait.mp4) | 9:16 | [forge-portrait.json](examples/studio/forge-portrait.json) |
+| [方版 MP4](demos/forge/square.mp4) | 1:1 | [forge-square.json](examples/studio/forge-square.json) |
+
+具体视频、输入与引擎绑定见 [Forge 清单](references/v4-forge-status.json)，实际检查范围和修复见 [交付记录](references/v4-forge-report.md)。技术检查、抽帧审阅、完整播放、人工听音与用户审美认可分别记录，本文不替代这些记录。
 
 [安装与使用](USAGE.md) · [连续世界指南](studio/CONTINUITY.md) · [Skill 入口](SKILL.md) · [English](README_EN.md) · [BrewReel 研究](references/brewreel-distillation.md) · [OneTake 研究](references/onetake-architecture.md)
 
-## 从一个项目开始
+## 从自己的项目开始
 
-安装环境后，用同一个执行器创建、校验、构建和复核。`init` 按画幅复制原创模板，生成不依赖外部素材的独立项目 JSON，并拒绝覆盖已有文件。模板是可编辑起点，创作时需要重新设计内容与动作。
+安装环境后，用同一个执行器创建、校验、构建和复核。`init` 默认生成 15 秒 Forge 项目，按画幅复制原创 JSON 和三张本地 PNG。比如 `./my-film/project.json` 对应 `./my-film/project-assets/`，不依赖仓库外的素材位置。已有 JSON 或素材目录会被拒绝覆盖；搬动项目时要一起保留相对素材目录。
 
 ```sh
 npm ci
@@ -17,47 +25,52 @@ python3 -m venv .venv
 # 安装本地 FFmpeg、Noto Sans CJK SC 字体与 Chromium，具体见 Studio 指南
 npx remotion browser ensure
 node studio/make.mjs doctor
-node studio/make.mjs init /tmp/heige-launch-new.json --ratio 16:9
-node studio/make.mjs validate /tmp/heige-launch-new.json
-node studio/make.mjs build /tmp/heige-launch-new.json --out /tmp/heige-launch-new
-node studio/make.mjs verify /tmp/heige-launch-new.json --out /tmp/heige-launch-new
+node studio/make.mjs init ./my-film/project.json --ratio 16:9
+node studio/make.mjs validate ./my-film/project.json
+node studio/make.mjs build ./my-film/project.json --out ./outputs/my-film-v1
+node studio/make.mjs verify ./my-film/project.json --out ./outputs/my-film-v1
 ```
 
-三种原创构图：[横版](examples/studio/continuous-launch.json) · [竖版](examples/studio/continuous-portrait.json) · [方版](examples/studio/continuous-square.json)。持续对象、相机和事件声音由同一项目契约驱动，各画幅分别构图。
+`--ratio 9:16` 和 `--ratio 1:1` 创建各自的几何布局。创建后调整合法契约字段，通常不用修改渲染器。原生 `image` 绑定登记的本地 PNG／JPEG／WebP；对象的身份、图像与相机投影保持在同一连续世界中。
 
-## 三条原生连续世界样片
+## alpha.3 的声音与动作
 
-| 成片 | 画幅 | 原创项目 |
-| :--- | :--- | :--- |
-| [横版 MP4](demos/continuous/horizontal.mp4) | 16:9 | [continuous-launch.json](examples/studio/continuous-launch.json) |
-| [竖版 MP4](demos/continuous/portrait.mp4) | 9:16 | [continuous-portrait.json](examples/studio/continuous-portrait.json) |
-| [方版 MP4](demos/continuous/square.mp4) | 1:1 | [continuous-square.json](examples/studio/continuous-square.json) |
+| 机制 | 实际实现与范围 |
+| :--- | :--- |
+| Forge 视觉 | `forge` 主题、受控字体尺寸、字重与行高、描边、硬阴影、胶片孔／条纹／波形图案；`ledger` 与 `nocturne` 保留 |
+| 快速运动 | 固定 `linear`、`ease-out-cubic`、`ease-in-out-cubic`、`ease-out-expo`、`back-out` 曲线；同一时刻纯函数求值，关键帧控制后续区间 |
+| 本地图像 | `image.assetId` 只引用登记的图像素材，保留原图身份并进行受控裁切；Forge 示例使用三张原创 PNG |
+| 完整配乐 | `forge-breakbeat` 为 128 BPM、4/4、8 小节、15 秒；原创鼓组、切分低音、和弦、主 hook 与推进音实际生成立体声 WAV |
+| 音画 cue | 点火、装配、蓄力、画幅编排、压印五段共用秒时钟；视频拍点量化误差不超过半帧，不宣称每个音乐拍点正好是整数帧 |
+| 混音 | 配乐音量在生成时应用一次；只有旁白触发音乐 ducking，事件音效按固定增益加入，最终限幅与独立测量 |
 
-实际编码、抽帧与播放范围见 [连续样片目录](demos/continuous/README.md)，输入、当前引擎、视频哈希与声明检查见 [本版清单](references/v4-continuity-status.json)，真实测试与失败修复见 [交付记录](references/v4-continuity-report.md)。技术、连续结构、抽帧、完整播放与听音分别记录；清单校验不等于重新渲染或听过声音，也不引用历史样片的数据证明新引擎。
+配乐配置是 `continuity.musicScore: {style: "forge-breakbeat", bpm: 128, volume: 0.8}`，当前只接受 15 秒，不能与外部 `project.music` 同时使用。其他时长可使用登记的本地音乐，真实旁白仍以最终录音为时钟。音效和配乐是不同层；完整编排、峰值与 RMS 不能证明好听。[配乐来源与机制](references/music-score.md)记录原创方法和听审边界。
 
 ## v4 受控生产线
 
 | 能力 | 当前实现 |
 | :--- | :--- |
-| 创作入口 | `init`、`validate`、`build`、`verify` 共用执行器；`promo`、`explainer`、`lesson`、`talk` 四种模式，`ledger`／`nocturne` 两套主题，三种画幅 |
-| 连续世界 | 持久对象 ID、语义身份声明、完整关键帧与全局相机；所有时间段使用 `beat`，不能混入普通镜头 |
-| 承接与声音 | 相邻 beat 恰有一条对象承接，声明 cause／outcome；原创 `tick`、`whoosh`、`impact` 绑定对象与事件时码 |
+| 创作入口 | `init`、`validate`、`build`、`verify` 共用执行器；`promo`、`explainer`、`lesson`、`talk` 四种模式，三套主题与三种画幅 |
+| 连续世界 | 持久对象 ID、完整关键帧、全局相机和逐边界承接；所有时间段使用 `beat`，不能混入普通镜头 |
 | 时间积分模糊 | 可选 3 次真实时间采样，180° 全局快门，在线性光空间平均后编码；单采样可关闭 |
-| 普通镜头生产 | 保留 `hook`、`statement`、`steps`、`compare`、`bars`、`transform`、`media`、`end` 八类镜头 |
-| 时间轴 | 最终录音作为时钟，原始 SRT cue，不拉伸人声；mock／draft 保持 preview |
-| 数据与证据 | 引用逐字归属、主体与数值单位关联；连续对象的数值文字与界面行使用本对象自己的 claims；教学数据持续标记 |
-| 素材 | 本地图片／视频／录音／音乐登记，安全路径检查与权利声明登记，生成素材与截图明确标注 |
-| 多画幅 | 16:9、9:16、1:1 的独立布局，字体覆盖与真实浏览器几何检查 |
+| 普通镜头 | 保留 `hook`、`statement`、`steps`、`compare`、`bars`、`transform`、`media`、`end` 八类镜头 |
+| 录音与字幕 | 最终录音作为时钟，保留原始 SRT cue，不拉伸人声；mock／draft 保持 preview |
+| 数据与证据 | 引用逐字归属、主体与数值单位关联；连续对象的数值文字与 UI 行使用本对象自己的 claims；教学数据持续标记 |
+| 素材与布局 | 本地图片／视频／录音／音乐登记，安全路径与权利声明；独立横竖方布局、字体覆盖和真实浏览器几何 |
 | 成片 QA | 全部编码帧解码、尺寸／帧数／时长、空帧、旁白与总音轨检测；连续世界另取每帧实际 DOM 几何、可见性与最终 MP4 像素变化 |
-| 可复核交付 | 输入、字幕、素材、源码、依赖、字体、浏览器与产物哈希，修改后旧验证失效 |
+| 可复核交付 | 输入、字幕、素材、源码、依赖、字体、浏览器与产物哈希；修改后旧验证失效 |
 
-连续世界本版限 60 秒、2 至 20 个 beat，每段量化后为 0.25 至 20 秒。`cause`／`outcome` 是作者声明，结构检测不能证明叙事因果、真实产品行为或观众能否认出对象。几何可见性采用点阵近似，像素变化也没有图像语义；仍须看实际成片。时间多采样增加计算成本，不等于物理 HDR、逐对象速度模糊或自动改善审美。
+连续世界限 60 秒、2 至 20 个 beat，每段量化后为 0.25 至 20 秒。`cause`／`outcome` 是作者声明，结构检测不能证明叙事因果、真实产品行为或观众能否认出对象。几何可见性使用点阵近似，像素变化没有图像语义。三次时间采样增加计算成本，不等于物理 HDR、逐对象速度模糊或自动改善审美。图像内部的文字和事实仍需人工核对。
 
-创作由 coding agent 读取 Skill 后生成项目 JSON。本地渲染不需要模型 API key。当前没有自动 LLM／TTS／ASR／在线素材调用或 B-roll 供应缓存。技术检测不代替审美、完整播放与听音；v4 是 alpha，哈希证明完整性，不是信任证书。
+创作由 coding agent 读取 Skill 后生成项目 JSON。本地渲染不需要模型 API key。当前没有自动 LLM／TTS／ASR／在线素材调用或 B-roll 供应缓存。BrewReel 提供受控生产研究方法，OneTake 提供连续创作研究方法，源码与资产均未导入。本版是 alpha，哈希证明完整性，不是信任证书；技术检测不代替审美、播放与听音。
+
+## alpha.2 连续世界历史
+
+[横版](demos/continuous/horizontal.mp4)、[竖版](demos/continuous/portrait.mp4)、[方版](demos/continuous/square.mp4)保留为原生连续性实现的历史样片。用户明确否决这一版的节奏与审美，并指出缺少完整 BGM。历史抽帧状态 `sampled-pass` 只代表当次所记范围，不能改写为用户认可，也不能用于证明 alpha.3 Forge 的审美。历史输入与检查范围见 [连续目录](demos/continuous/README.md)、[alpha.2 清单](references/v4-continuity-status.json)和[历史交付记录](references/v4-continuity-report.md)。
 
 ## 五条 v4 alpha 1 历史成片
 
-这五条影片保留原始媒体、输入与验收范围，绑定历史提交 `29135480806d061f1af65734b17dcecad3a31f4a`。历史校验从该 Git 提交重算生产源码哈希，所需提交缺失即失败；它们不能代表 alpha 2 连续世界引擎已通过验收。
+这五条影片保留原始媒体、输入与验收范围，绑定历史提交 `29135480806d061f1af65734b17dcecad3a31f4a`。历史校验从该 Git 提交重算生产源码哈希，所需提交缺失即失败；它们不能代表 alpha.3 引擎或本轮 Forge 成片已通过验收。
 
 | 样片 | 规格 | 验证重点 |
 | :--- | :--- | :--- |
@@ -172,4 +185,4 @@ v4 使用 Remotion + FFmpeg。旧 Canvas/SVG + FFmpeg 路线保留；旧浏览�
 
 原创项目代码和文档沿用 [MIT License](LICENSE)，保留已有版权及 [第三方 notices](references/source-notices.md)。研究包不分发第三方影片、截帧、音乐、字体或源码快照。公开仓库许可不自动覆盖参考画面与素材。所有系统依赖另行遵守自身许可。
 
-当前为 v4.0.0-alpha.2（2026-10-12）。Remotion 使用独立许可。OneTake 固定研究提交采用非商业许可，本项目未导入其源码或资产；原创实现的 MIT 不授予上游材料复用权。商业团队使用前阅读 [第三方 notices](references/source-notices.md)。详见 [更新日志](CHANGELOG.md)。
+当前为 v4.0.0-alpha.3（2026-10-12）。Remotion 使用独立许可。OneTake 固定研究提交采用非商业许可，本项目未导入其源码或资产；原创实现的 MIT 不授予上游材料复用权。商业团队使用前阅读 [第三方 notices](references/source-notices.md)。详见 [更新日志](CHANGELOG.md)。

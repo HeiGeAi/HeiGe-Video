@@ -10,7 +10,9 @@ import {readProject, compileProject, parseSrt, collectText} from './lib/project.
 import {collectContinuityText} from './lib/continuity-contract.mjs';
 import {evaluateContinuity} from './lib/continuity-oracle.mjs';
 import {synthesizeEventAudio} from './lib/event-audio.mjs';
+import {synthesizeMusicScore} from './lib/music-score.mjs';
 import {createContinuousProject} from './lib/continuous-template.mjs';
+import {createForgeProject} from './lib/forge-template.mjs';
 import {verifyContinuousEvidence} from './lib/continuity-evidence.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -128,9 +130,9 @@ function artifactsAt(out) {
   }
   walk(out);return entries;
 }
-function mux(plan,staged,video,out,effects) {
+function mux(plan,staged,video,out,effects,score) {
   const narration=plan.project.audio ? staged[plan.project.audio.assetId] : null;
-  const music=plan.project.music ? staged[plan.project.music.assetId] : null;
+  const music=score || (plan.project.music ? staged[plan.project.music.assetId] : null);
   if(!narration && !music && !effects) {fs.renameSync(video,path.join(out,'video.mp4'));return;}
   const args=['-v','error','-i',video];
   const indexes={};let next=1;
@@ -141,11 +143,16 @@ function mux(plan,staged,video,out,effects) {
   const filters=[];
   if(narration) filters.push(`[${indexes.voice}:a]aresample=48000,apad,atrim=duration=${duration}[voice]`);
   if(effects) filters.push(`[${indexes.events}:a]aresample=48000,atrim=duration=${duration}[events]`);
-  if(music) filters.push(`[${indexes.bed}:a]aresample=48000,volume=${plan.project.music.volume ?? .15},atrim=duration=${duration}[bed]`);
-  const foreground=[...(narration ? ['[voice]'] : []),...(effects ? ['[events]'] : [])];
-  if(foreground.length) filters.push(`${foreground.join('')}${foreground.length>1 ? `amix=inputs=${foreground.length}:normalize=0` : 'anull'}[foreground]`);
-  if(foreground.length && music) filters.push('[foreground]asplit=2[main][side]','[bed][side]sidechaincompress=threshold=0.025:ratio=8:attack=20:release=250[duck]','[main][duck]amix=inputs=2:normalize=0[mix]');
-  else filters.push(`[${foreground.length ? 'foreground' : 'bed'}]anull[mix]`);
+  if(music) filters.push(`[${indexes.bed}:a]aresample=48000,volume=${score ? 1 : plan.project.music.volume ?? .15},atrim=duration=${duration}[bed]`);
+  // Only narration ducks the musical bed. Object SFX sit above the groove;
+  // they must not drain its energy at every action.
+  const layers=[];
+  if(narration && music) {
+    filters.push('[voice]asplit=2[main][side]','[bed][side]sidechaincompress=threshold=0.025:ratio=8:attack=20:release=180[duck]');
+    layers.push('[main]','[duck]');
+  } else {if(narration) layers.push('[voice]');if(music) layers.push('[bed]');}
+  if(effects) layers.push('[events]');
+  filters.push(`${layers.join('')}${layers.length>1 ? `amix=inputs=${layers.length}:normalize=0` : 'anull'}[mix]`);
   filters.push('[mix]alimiter=limit=0.95:level=0:latency=1[audio]');
   args.push('-filter_complex',filters.join(';'),'-map','0:v','-map','[audio]','-c:v','copy','-c:a','aac','-b:a','192k','-t',String(duration),'-movflags','+faststart',path.join(out,'video.mp4'));
   run(ffmpeg,args);fs.unlinkSync(video);
@@ -258,7 +265,10 @@ async function build(options) {
     const soundPath=path.join(out,'events.wav');
     const sound=synthesizeEventAudio(plan,soundPath);
     if(sound) {writeJson(path.join(out,'sound-events.json'),sound);manifest.eventAudio=sound;}
-    mux(plan,staged,path.join(out,'silent.mp4'),out,sound ? soundPath : null);
+    const musicPath=path.join(out,'music.wav');
+    const music=synthesizeMusicScore(plan,musicPath);
+    if(music) {writeJson(path.join(out,'music-score.json'),music);manifest.musicScore=music;}
+    mux(plan,staged,path.join(out,'silent.mp4'),out,sound ? soundPath : null,music ? musicPath : null);
     writeJson(path.join(out,'plan.json'),plan);
     writeJson(path.join(out,'asset-map.json'),Object.fromEntries(Object.entries(assetUrls).filter(([id])=>id!=='__font').map(([id,url])=>[id,`assets${url}`])));
     fs.copyFileSync(file,path.join(out,'project.json'));
@@ -313,13 +323,66 @@ export async function main(argv=process.argv.slice(2)) {
   const options=argsFrom(argv);
   if(options.command==='init') {
     if(!options.file || options.out || options.brief || options.browser) throw new Error('Usage: node studio/make.mjs init <new-project.json> [--ratio 16:9|9:16|1:1]');
-    const project=createContinuousProject(options.ratio ?? '16:9');
-    const plan=compileProject(project);
+    const destination=path.resolve(options.file),parent=path.dirname(destination);
+    const assetName=`${path.parse(destination).name}-assets`,assetDirectory=path.join(parent,assetName);
+    const existing=file=>{try{return fs.lstatSync(file);}catch(error){if(error.code==='ENOENT')return null;throw error;}};
+    for(const file of [destination,assetDirectory]) if(existing(file)) throw Object.assign(new Error(`EEXIST: init destination already exists: ${file}`),{code:'EEXIST'});
+    const project=createForgeProject(options.ratio ?? '16:9');
+    const bundledBase=path.join(root,'examples','studio');
+    const plan=compileProject(project,{baseDir:bundledBase});
     if(plan.issues.errors.length) throw new Error(JSON.stringify(plan.issues.errors));
-    const destination=path.resolve(options.file);
-    fs.mkdirSync(path.dirname(destination),{recursive:true});
-    fs.writeFileSync(destination,JSON.stringify(project,null,2)+'\n',{flag:'wx'});
-    console.log(JSON.stringify({status:'created',project:destination,ratio:project.ratio,engine:'native-continuous-world',next:'validate, build, then verify'}));return;
+    const names=new Set();
+    const snapshots=(project.assets ?? []).map(asset=>{
+      const name=path.basename(asset.path);
+      if(names.has(name)) throw new Error(`Bundled init assets share a filename: ${name}`);
+      names.add(name);
+      const bytes=fs.readFileSync(path.join(bundledBase,asset.path));
+      asset.path=`${assetName}/${name}`;
+      return {file:path.join(assetDirectory,name),bytes};
+    });
+    const createdFiles=[],createdDirectories=[];
+    const remember=(file,stat)=>({file,dev:stat.dev,ino:stat.ino});
+    const owned=entry=>{const stat=existing(entry.file);return stat?.dev===entry.dev && stat?.ino===entry.ino;};
+    const ensureParent=directory=>{
+      if(existing(directory)) {
+        if(!fs.statSync(directory).isDirectory()) throw new Error(`ENOTDIR: init parent is not a directory: ${directory}`);
+        return;
+      }
+      ensureParent(path.dirname(directory));
+      try{fs.mkdirSync(directory);}catch(error){if(error.code==='EEXIST' && fs.statSync(directory).isDirectory())return;throw error;}
+      createdDirectories.push(remember(directory,fs.lstatSync(directory)));
+    };
+    let jsonFd=null;
+    try {
+      ensureParent(parent);
+      jsonFd=fs.openSync(destination,'wx');
+      createdFiles.push(remember(destination,fs.fstatSync(jsonFd)));
+      fs.mkdirSync(assetDirectory);
+      createdDirectories.push(remember(assetDirectory,fs.lstatSync(assetDirectory)));
+      for(const snapshot of snapshots) {
+        const fd=fs.openSync(snapshot.file,'wx');
+        try{createdFiles.push(remember(snapshot.file,fs.fstatSync(fd)));fs.writeFileSync(fd,snapshot.bytes);}
+        finally{fs.closeSync(fd);}
+      }
+      const relocated=compileProject(project,{baseDir:parent});
+      if(relocated.issues.errors.length) throw new Error(JSON.stringify(relocated.issues.errors));
+      fs.writeFileSync(jsonFd,JSON.stringify(project,null,2)+'\n');
+      fs.closeSync(jsonFd);jsonFd=null;
+    } catch(error) {
+      const cleanupErrors=[];
+      if(jsonFd!==null) {try{fs.closeSync(jsonFd);}catch(closeError){cleanupErrors.push(closeError);}}
+      // An exclusive reservation owns only its original inode. Never recursively
+      // remove a directory which may now contain somebody else's new data.
+      for(const entry of createdFiles.reverse()) {
+        try{if(owned(entry))fs.unlinkSync(entry.file);}catch(cleanupError){if(cleanupError.code!=='ENOENT')cleanupErrors.push(cleanupError);}
+      }
+      for(const entry of createdDirectories.reverse()) {
+        try{if(owned(entry))fs.rmdirSync(entry.file);}catch(cleanupError){if(!['ENOENT','ENOTEMPTY','EEXIST'].includes(cleanupError.code))cleanupErrors.push(cleanupError);}
+      }
+      if(cleanupErrors.length) throw new AggregateError([error,...cleanupErrors],`${error.message}; init rollback incomplete: ${cleanupErrors.map(item=>item.message).join('; ')}`);
+      throw error;
+    }
+    console.log(JSON.stringify({status:'created',project:destination,assets:assetDirectory,ratio:project.ratio,engine:'native-continuous-world',next:'validate, build, then verify'}));return;
   }
   if(options.ratio) throw new Error('--ratio is only accepted by init; edit the authored project for independent composition');
   if(options.command==='doctor') {

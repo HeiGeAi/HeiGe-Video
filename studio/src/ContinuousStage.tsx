@@ -1,4 +1,6 @@
 import React from 'react';
+import {Img} from 'remotion';
+import {assertLocalAssetUrl} from './scenes';
 import {sampleContinuity} from '../lib/continuous-motion.mjs';
 import type {ObjectState} from '../lib/continuous-motion.mjs';
 import {Grid, Text} from './primitives';
@@ -6,7 +8,7 @@ import {THEMES, layoutFor} from './theme';
 import type {CompiledPlan, ContinuityColor} from './types';
 import {inspectLayout} from './inspect';
 
-type StageProps = {plan: CompiledPlan; time: number; fontFamily: string};
+type StageProps = {plan: CompiledPlan; time: number; fontFamily: string; assetUrls?: Record<string,string>};
 type ProbeContext = {frame: number; fps: number; time: number; width: number; height: number};
 
 function inViewport(object: ObjectState, width: number, height: number) {
@@ -16,43 +18,55 @@ function inViewport(object: ObjectState, width: number, height: number) {
 
 function Content({object, readingVisible, ink}: {object: ObjectState; readingVisible: boolean; ink: string}) {
   const textStyle: React.CSSProperties = {
-    color: ink, margin: 0, lineHeight: 1.55, paddingTop: 4, paddingBottom: 8,
+    color: ink, margin: 0, lineHeight: object.typography?.lineHeight ?? 1.55, paddingTop: 4,
+    paddingBottom: (object.typography?.lineHeight ?? 1.55) < 1.3 ? 16 : 8,
     whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', flexShrink: 0,
+    textAlign: object.typography?.align || 'left', letterSpacing: object.typography?.tracking || 0,
   };
   // Labels leave the reading layer while a card is partially out of view. The
   // object node itself remains mounted and is measured by the world inspector.
   const marker = (text: string, id: string) => ({'data-heige-text': readingVisible ? text : undefined, 'data-heige-text-id': id});
   return <div data-heige-object-content style={{visibility: readingVisible ? 'visible' : 'hidden', display: 'flex', flexDirection: 'column', gap: 8, width: '100%', minHeight: 0}}>
-    {object.text ? <div {...marker(object.text, `${object.id}:text`)} style={{...textStyle, fontSize: object.kind === 'text' ? 48 : 32, fontWeight: object.kind === 'text' || object.kind === 'ui' ? 700 : 500}}>{object.text}</div> : null}
-    {object.rows?.map((row, index) => <div key={`${object.id}:row:${index}`} {...marker(row, `${object.id}:row:${index}`)} style={{...textStyle, fontSize: 28, fontWeight: 400}}>{row}</div>)}
+    {object.text ? <div {...marker(object.text, `${object.id}:text`)} style={{...textStyle, fontSize: object.typography?.size ?? (object.kind === 'text' ? 48 : 32), fontWeight: object.typography?.weight ?? (object.kind === 'text' || object.kind === 'ui' ? 700 : 500)}}>{object.text}</div> : null}
+    {object.rows?.map((row, index) => <div key={`${object.id}:row:${index}`} {...marker(row, `${object.id}:row:${index}`)} style={{...textStyle, fontSize: object.typography?.size ?? 28, fontWeight: object.typography?.weight ?? 400}}>{row}</div>)}
   </div>;
 }
 
-export const ContinuousStage: React.FC<StageProps> = ({plan, time, fontFamily}) => {
+export const ContinuousStage: React.FC<StageProps> = ({plan, time, fontFamily, assetUrls = {}}) => {
   if (!plan.project.continuity) throw new Error('ContinuousStage needs a compiled continuity world');
   const state = sampleContinuity(plan.project.continuity, time, plan.width, plan.height);
   const theme = THEMES[plan.project.theme];
   const layout = layoutFor(plan.project.ratio);
-  const colors: Record<ContinuityColor, string> = {paper: theme.surface, ink: theme.ink, muted: theme.muted, accent: theme.primary, line: theme.hairline, secondary: theme.subtle};
+  const colors: Record<ContinuityColor, string> = {paper: theme.surface, ink: theme.ink, muted: theme.muted, accent: theme.primary, line: theme.hairline, secondary: theme.subtle, 'on-accent': theme.onPrimary, canvas: theme.canvas, heat: theme.heat};
   const sourceIds = [...new Set(plan.project.continuity.objects.flatMap(object => object.claims?.map(claim => claim.factId) || []))];
   const keyObject = state.objects.find(object => object.color === 'accent') || state.objects[0];
-  return <div data-heige-continuous-viewport style={{position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: `"${fontFamily.replace(/["\\]/g, '')}", sans-serif`, background: theme.canvas}}>
+  return <div data-heige-continuous-viewport style={{position: 'absolute', inset: 0, overflow: 'hidden', isolation: 'isolate', fontFamily: `"${fontFamily.replace(/["\\]/g, '')}", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif`, background: theme.canvas}}>
     <Grid plan={plan} />
     <div data-heige-continuous-camera style={{position: 'absolute', left: 0, top: 0, width: 1280, height: 720, transformOrigin: '0 0', transform: `matrix(${state.camera.matrix.join(',')})`}}>
       {plan.project.theme === 'nocturne' && keyObject ? <div aria-hidden="true" style={{position: 'absolute', left: keyObject.x + keyObject.w / 2 - 170, top: keyObject.y - 250, width: 340, height: 700, transform: 'rotate(-22deg)', transformOrigin: '50% 0', background: `radial-gradient(ellipse at 50% 40%, ${theme.glow}30, transparent 68%)`, pointerEvents: 'none'}} /> : null}
       {state.objects.map(object => {
         const color = colors[object.color || 'ink'];
         const panel = object.kind === 'surface' || object.kind === 'ui';
+        const appearance = object.appearance;
+        const fill = appearance?.fill === 'transparent' ? 'transparent' : appearance?.fill ? colors[appearance.fill] : panel ? theme.surface : object.kind === 'dot' || object.kind === 'line' ? color : 'transparent';
+        const stroke = appearance?.stroke ? `${appearance.strokeWidth ?? 2}px solid ${colors[appearance.stroke]}` : panel ? `1px solid ${theme.hairline}` : 'none';
+        const imageEdge = Math.min(8,object.w/4,object.h/4);
+        const imageTop = Math.min(64,object.h*.64);
         return <div key={object.id} data-heige-object-id={object.id} data-heige-semantic-identity={object.semanticIdentity} data-heige-object-kind={object.kind} style={{
           position: 'absolute', left: object.x, top: object.y, width: object.w, height: object.h,
           opacity: object.opacity, transform: `rotate(${object.rotation}deg)`, transformOrigin: '50% 50%',
           boxSizing: 'border-box', borderRadius: object.kind === 'dot' ? '50%' : object.radius,
-          background: panel ? theme.surface : object.kind === 'dot' || object.kind === 'line' ? color : 'transparent',
-          border: panel ? `1px solid ${theme.hairline}` : 'none',
-          borderTop: panel && object.color === 'accent' ? `3px solid ${theme.primary}` : undefined,
+          background: fill,
+          border: stroke,
+          ...(!appearance && panel && object.color === 'accent' ? {borderTop: `3px solid ${theme.primary}`} : {}),
+          boxShadow: appearance?.shadow === 'stamp' ? `6px 6px 0 ${theme.primary}` : undefined,
           padding: panel ? 24 : 0, overflow: 'visible',
         }}>
-          <Content object={object} readingVisible={inViewport(object, plan.width, plan.height)} ink={object.color === 'accent' ? theme.primary : theme.ink} />
+          {object.kind === 'image' ? <div style={{position:'absolute',top:imageTop,left:imageEdge,right:imageEdge,bottom:imageEdge,overflow:'hidden'}}><Img src={assertLocalAssetUrl(assetUrls[object.assetId || ''])} style={{display:'block',width:'100%',height:'100%',objectFit:'cover',filter:plan.project.theme==='forge' ? 'grayscale(1)' : undefined}} /></div> : null}
+          {appearance?.pattern === 'film-perforation' ? [12, -12].map((offset,index) => <div key={index} aria-hidden="true" style={{position:'absolute',left:8,right:8,height:8,...(offset>0 ? {top:offset}:{bottom:-offset}),background:`repeating-linear-gradient(90deg, ${theme.canvas} 0 14px, transparent 14px 34px)`,pointerEvents:'none'}} />) : null}
+          {appearance?.pattern === 'stripe' ? <div aria-hidden="true" style={{position:'absolute',inset:0,background:`repeating-linear-gradient(135deg, transparent 0 7px, ${theme.canvas} 7px 10px)`,opacity:.28,pointerEvents:'none'}} /> : null}
+          {appearance?.pattern === 'waveform' ? <div aria-hidden="true" style={{position:'absolute',inset:'52% 10% 12%',display:'flex',alignItems:'center',gap:3,pointerEvents:'none'}}>{Array.from({length:18},(_,i)=><div key={i} style={{flex:1,height:`${24+72*Math.abs(Math.sin(i*2.17))}%`,background:theme.primary,transform:`scaleY(${.7+.3*Math.sin(time*128/60*Math.PI*2+i*.27)})`,transformOrigin:'center'}} />)}</div> : null}
+          <Content object={object} readingVisible={inViewport(object, plan.width, plan.height)} ink={color} />
         </div>;
       })}
     </div>
