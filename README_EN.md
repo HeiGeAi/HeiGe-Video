@@ -1,14 +1,19 @@
 # HeiGe-Video v4.0.0-alpha.3
 
-Four new original **1080×1920, 9:16** portrait films: Berry Cone, Coffee Wake, Happy Camera and Pocket Rocket. Each is 16 seconds at 30 fps, with separately authored object actions and an original score.
-
-[![Actual encoded portrait posters](demos/portrait-cases/cover.png)](demos/portrait-cases/README.md)
-
-[Portrait film gallery](demos/portrait-cases/README.md) · [Editable source and reproduction](portrait-cases/README.md) · [Recorded verification scopes](references/portrait-cases-status.json)
-
 **Make an idea move. Let one subject carry the pictures, rhythm and outcome.**
 
-Start with six colorful original films: cotton pink, mint and lemon soda; cream, cobalt and red/yellow paper-flight stickers; and a light mineral-pigment bloom. Each theme has separately composed landscape and portrait films, 16 seconds each, with its own subject, motion and original score.
+Create editable animations in code, from object actions, storyboards and music to rendering and encoded-media checks. The current showcase has **10 colorful original films: 3 landscape films at 16:9 and 7 portrait films at 9:16**. All run for 16 seconds at 30 fps with original music.
+
+| Landscape 16:9: Citrus pop | New portrait 9:16: Berry Cone |
+| :--- | :--- |
+| [![Actual Citrus landscape animation](demos/bright-showcase/citrus-horizontal.gif)](demos/bright-showcase/citrus-horizontal.mp4) | [![Actual Berry portrait animation](demos/portrait-cases/berry-portrait.gif)](demos/portrait-cases/berry-portrait.mp4) |
+| [Play landscape MP4 with sound (1280×720)](demos/bright-showcase/citrus-horizontal.mp4) | [Play portrait MP4 with sound (1080×1920)](demos/portrait-cases/berry-portrait.mp4) |
+
+GIFs are silent 10 fps previews extracted from the final films. Click to open the 30 fps MP4 with sound. [All cases](demos/README.md) · [Paired landscape and portrait gallery](demos/bright-showcase/README.md) · [Four new portrait films](demos/portrait-cases/README.md)
+
+## Three themes in both orientations
+
+Citrus pop, Let ideas fly and Mineral bloom each have separately composed landscape and portrait versions. Landscapes are **1280×720**; portraits are **720×1280**. Subjects, text and motion paths are arranged for each aspect ratio.
 
 [![Six actual encoded showcase posters](demos/bright-showcase/cover.png)](demos/bright-showcase/README.md)
 
@@ -20,7 +25,22 @@ Start with six colorful original films: cotton pink, mint and lemon soda; cream,
 
 [Animated gallery](demos/bright-showcase/README.md) · [Edit and rerender](showcase/README.md) · [Actual inventory](references/bright-showcase-status.json)
 
-The editable Remotion showcase uses original SVGs, bundled local fonts and three original scores. Its runner renders, decodes, measures actual DOM text bounds and records source/artifact hashes. The existing strict JSON production route remains available through `studio/make.mjs`; `init` still creates Forge. These free-form films are not presented as new entries in the old JSON theme enum.
+## Four new portrait cases
+
+**1080×1920, 9:16**, with separately authored object actions and an original score for each film. Products and scenes are original concept demonstrations.
+
+[![Actual encoded portrait posters](demos/portrait-cases/cover.png)](demos/portrait-cases/README.md)
+
+| Film | MP4 with sound | Object actions | Score |
+| :--- | :--- | :--- | :--- |
+| Berry Cone | [MP4](demos/portrait-cases/berry-portrait.mp4) | Strawberry mixing, stacked scoops, chocolate pour and landing | Swing marimba |
+| Coffee Wake | [MP4](demos/portrait-cases/coffee-portrait.mp4) | Locking, espresso extraction, latte art and steam | Jazz electric piano and brushes |
+| Happy Camera | [MP4](demos/portrait-cases/camera-portrait.mp4) | Focus, shutter, continuous physical photo ejection and development | Syncopated funk |
+| Pocket Rocket | [MP4](demos/portrait-cases/rocket-portrait.mp4) | Assembly, ignition, curved launch and orbit | Space arpeggio |
+
+[Portrait film gallery](demos/portrait-cases/README.md) · [Editable source and reproduction](portrait-cases/README.md) · [Recorded verification scopes](references/portrait-cases-status.json)
+
+The ten editable Remotion films use original SVGs, bundled local fonts and seven original scores. `showcase/render.mjs` and `portrait-cases/render.mjs` render, decode, measure actual DOM text bounds and record source/artifact hashes. The existing strict JSON production route remains available through `studio/make.mjs`; `init` still creates Forge. Free-form films use separate entry points and do not add entries to the old JSON theme enum.
 
 The earlier [Forge films](demos/forge/README.md) remain another visual direction. The front page now features the bright showcase. Technical checks, sampled visual review, automated playback and human listening are distinct scopes.
 

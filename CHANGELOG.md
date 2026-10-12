@@ -7,6 +7,7 @@
 - Real 4-second action proofs, bundled OFL font subsets, actual every-frame text bounds, full media decode, encoded GIF/poster extraction and complete source/artifact bindings.
 - [Gallery](demos/portrait-cases/README.md), [reproduction guide](portrait-cases/README.md) and [inventory](references/portrait-cases-status.json) record the actual verification scopes. No aesthetic approval or human listening is implied by technical results.
 - Existing bright-showcase source and its six media files retain their original bytes and verification inventory.
+- Chinese and English introductions and the demo index now feature both orientations: three landscape and seven portrait films, with actual GIF previews, MP4 links and explicit native resolutions.
 
 ## Bright showcase · 2026-10-12
 

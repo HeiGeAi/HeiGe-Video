@@ -2,7 +2,32 @@
 
 **让想法动起来。用同一个主体，带出画面、节奏与结果。**
 
-新增四条 **1080×1920、9:16** 竖版案例，每条 16 秒、30 fps，分别设计动作与原创配乐。
+用代码制作可编辑的动画短片，从主体动作、分镜和配乐到渲染与成片检查。当前展示 **10 条明亮原创案例：3 条 16:9 横版、7 条 9:16 竖版**，全部为 16 秒、30 fps，带原创配乐。
+
+| 横版 16:9：柠檬汽水 | 新竖版 9:16：莓好一口 |
+| :--- | :--- |
+| [![柠檬汽水横版实际动图](demos/bright-showcase/citrus-horizontal.gif)](demos/bright-showcase/citrus-horizontal.mp4) | [![莓好一口竖版实际动图](demos/portrait-cases/berry-portrait.gif)](demos/portrait-cases/berry-portrait.mp4) |
+| [播放带配乐的横版 MP4（1280×720）](demos/bright-showcase/citrus-horizontal.mp4) | [播放带配乐的竖版 MP4（1080×1920）](demos/portrait-cases/berry-portrait.mp4) |
+
+动图来自实际成片，为 10 fps 静音预览；点击打开 30 fps、带声音的 MP4。[全部案例](demos/README.md) · [横竖成对的动态画廊](demos/bright-showcase/README.md) · [新四条竖版动态画廊](demos/portrait-cases/README.md)
+
+## 三组横竖双版本
+
+柠檬汽水、让点子飞、花开有声各有独立横版与竖版构图。横版 **1280×720**，竖版 **720×1280**，按各自画幅安排主体、文字与运动轨迹。
+
+[![六条明亮样片实际编码封面](demos/bright-showcase/cover.png)](demos/bright-showcase/README.md)
+
+| 题材 | 横版 16:9 | 竖版 9:16 | 视觉与动作 |
+| --- | --- | --- | --- |
+| 柠檬汽水 | [MP4](demos/bright-showcase/citrus-horizontal.mp4) | [MP4](demos/bright-showcase/citrus-portrait.mp4) | 弹跳糖，挤汁、喷泡与弹性落地 |
+| 让点子飞 | [MP4](demos/bright-showcase/paper-horizontal.mp4) | [MP4](demos/bright-showcase/paper-portrait.mp4) | 贴纸俱乐部，折纸、飞行与创意落章 |
+| 花开有声 | [MP4](demos/bright-showcase/mineral-horizontal.mp4) | [MP4](demos/bright-showcase/mineral-portrait.mp4) | 明亮矿彩，萌芽、莲瓣与纹样汇聚 |
+
+[打开六条动态预览](demos/bright-showcase/README.md) · [编辑与重新渲染](showcase/README.md) · [实际验收清单](references/bright-showcase-status.json)
+
+## 四条新竖版案例
+
+**1080×1920、9:16**，每条有独立主体动作和原创配乐。所有产品与场景均为原创概念演示。
 
 [![四条竖版案例实际编码封面](demos/portrait-cases/cover.png)](demos/portrait-cases/README.md)
 
@@ -15,19 +40,7 @@
 
 [竖版动态画廊](demos/portrait-cases/README.md) · [可编辑源码](portrait-cases/README.md) · [成片检查清单](references/portrait-cases-status.json)
 
-此前三组明亮样片继续保留：柠檬汽水的棉粉、薄荷与柠檬黄；纸飞机的奶油白、钴蓝与红黄贴纸；花开有声的矿彩纸面。每组有横版和竖版，共六条 16 秒原创动画，分别设计主体、构图、动作和配乐。
-
-[![六条明亮样片实际编码封面](demos/bright-showcase/cover.png)](demos/bright-showcase/README.md)
-
-| 题材 | 横版 16:9 | 竖版 9:16 | 视觉与动作 |
-| --- | --- | --- | --- |
-| 柠檬汽水 | [MP4](demos/bright-showcase/citrus-horizontal.mp4) | [MP4](demos/bright-showcase/citrus-portrait.mp4) | 弹跳糖，挤汁、喷泡与弹性落地 |
-| 让点子飞 | [MP4](demos/bright-showcase/paper-horizontal.mp4) | [MP4](demos/bright-showcase/paper-portrait.mp4) | 贴纸俱乐部，折纸、飞行与创意落章 |
-| 花开有声 | [MP4](demos/bright-showcase/mineral-horizontal.mp4) | [MP4](demos/bright-showcase/mineral-portrait.mp4) | 明亮矿彩，萌芽、莲瓣与纹样汇聚 |
-
-[打开六条动态预览](demos/bright-showcase/README.md) · [编辑与重新渲染](showcase/README.md) · [实际验收清单](references/bright-showcase-status.json)
-
-这些影片通过本项目的 Remotion 自由创作路线生成，使用原创 SVG、真实本地字体和三支原创配乐。`showcase/render.mjs` 会渲染、解码、记录 DOM 与产物哈希，源码可编辑。原有严格 JSON 路线仍由 `studio/make.mjs` 提供，`init` 目前创建 Forge 模板。新样片没有被冒充为已接入旧主题枚举的模板。
+十条影片通过本项目的 Remotion 自由创作路线生成，使用原创 SVG、本地字体和七支原创配乐。`showcase/render.mjs` 与 `portrait-cases/render.mjs` 分别提供可编辑源码的渲染、解码、实际 DOM 与产物哈希记录。原有严格 JSON 路线由 `studio/make.mjs` 提供，`init` 目前创建 Forge 模板。自由创作案例使用独立入口，未加入旧 JSON 主题枚举。
 
 原先铁黑 Forge 的[三画幅样片](demos/forge/README.md)保留为另一种视觉方向，当前展示入口改为明亮、多变的作品。其输入和引擎见 [Forge 清单](references/v4-forge-status.json)。技术检查、抽帧审阅、自动完整播放与人工听音分别记录。
 
