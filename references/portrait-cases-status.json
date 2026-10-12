@@ -1,0 +1,505 @@
+{
+  "schemaVersion": "heige-portrait-cases/1",
+  "date": "2026-10-12",
+  "build": "final-r2",
+  "status": "technical-and-sampled-visual-pass",
+  "environment": {
+    "node": "24.19.0",
+    "packages": {
+      "remotion": "4.0.526",
+      "@remotion/bundler": "4.0.526",
+      "@remotion/renderer": "4.0.526",
+      "react": "19.2.4"
+    },
+    "browser": {
+      "version": "Google Chrome for Testing 152.0.7977.30",
+      "sha256": "ed7c5c6aff7cc4dd88ee7746c0df97f08a454180b62b7063fc961ba42e10b6a1"
+    },
+    "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+    "python": {
+      "version": "3.12.13",
+      "Pillow": "12.3.0"
+    }
+  },
+  "playbackBrowser": {
+    "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "version": "Google Chrome 155.0.8059.39",
+    "sha256": "717f2904e1d1742bfd5a52a1db4ec4b4874fe861f7958e7b3b78a86bfd2467b8",
+    "headless": true,
+    "remotionVersion": "4.0.526"
+  },
+  "reviewEvidence": [
+    {
+      "file": "creative-berry-coffee-final-r2.json",
+      "sha256": "ab088be206a199d1a145c6df823f1ce7b065272c42df5b02ca97727d925d73ba"
+    },
+    {
+      "file": "creative-camera-rocket-final-r2.json",
+      "sha256": "595087739665a493509f90b8327f39f49a4892c4207aa3707ece00aa9ad25660"
+    },
+    {
+      "file": "audio-final.json",
+      "sha256": "9de01d0473321bccfa1a395adc3945f320d9e270410b6350acf608343df239b3"
+    },
+    {
+      "file": "playback-final-r2.json",
+      "sha256": "f3f19031d9e50086d3a2b8e3967a5bcb7d584bdb37117453bf5b8e6f5f72c8ab"
+    }
+  ],
+  "cover": {
+    "path": "demos/portrait-cases/cover.png",
+    "sha256": "79bf1808c9f9e107d250fe1d7e54da1d0dcbb6ac72bf17f8276e26046df6ec4c",
+    "scope": "Actual R2 decoded poster collage"
+  },
+  "notes": [
+    "Four original 9:16 films, 1080x1920, 16 seconds and 30fps each: 64 seconds and 1920 encoded frames.",
+    "Full 480-frame native decode and production DOM coverage for each film. Complete 20-file source maps and 120 registered artifacts checked.",
+    "Four original scores: 120/96/120/150 BPM, 855 events, 52 action cues. Complete WAV/PCM/events and metadata reproduced with Node24.19.0.",
+    "Independent native 48kHz stereo AAC decode, 768000 samples per channel per film; finite, non-silent, no measured sample overs.",
+    "Fresh final encoded sampled review: Berry19, Coffee31 frames and the recorded Camera/Rocket samples. Rocket exact MP4/artifact identity to R1 is bound to fresh current source inventory. Camera pixels differ and were reviewed afresh.",
+    "Normal-speed muted Chrome playback presented all480frames per film, zero observed drops. Human full watching, listening and user aesthetic approval not performed.",
+    "GIFs are actual 10fps silent reductions; MP4s30fps with audio.",
+    "R1 needs-work footer overlap, earlier proof issues and initial Node22 intermediate float comparison failures retained externally. Failed records not rewritten as passes.",
+    "Original vectors/music, renamed OFL font subsets. No external model or sampled-media provider.",
+    "Inventory validation checks source/media/PCM hashes and declarations; no rerender/play/listen/aesthetic certification."
+  ],
+  "items": [
+    {
+      "id": "berry-portrait",
+      "title": "莓好一口",
+      "system": "boing-candy",
+      "compositionId": "BerryCone",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "portrait-cases/Root.tsx": "44a095c55a637f2e8dc661ad178ab9c58e358de4e774fe7ef9f2c3f59c11b7c6",
+        "portrait-cases/font-provenance.json": "f0ee35cd44dbe47fb8b2565f2c32f56eef59082dc9faa6735b21c9ce25c7ddf2",
+        "portrait-cases/index.tsx": "0b1617adbdcf3e42b3adebf13330f9620df6d144e41bd34ffbab91a6b5b875a8",
+        "portrait-cases/music.mjs": "49ab8012c7e8220afbb27c3bcf7c3d1751d523c79f5520a001c9da22438af27c",
+        "portrait-cases/prepare_fonts.py": "f5b38bb134ccef31e32d46cdc2862514c39ab3d4bdc5037c21df3af1ca5e9d5e",
+        "portrait-cases/public/fonts/CaseDisplay-OFL.txt": "91ef06981e715027e93a66e95fe827db07c4c959dbca164489509febc0dfe400",
+        "portrait-cases/public/fonts/CaseDisplay.woff": "11040ac9b795f115fb22405a7a73df59d9daf8a861f86ab84284d1bd478cb3b7",
+        "portrait-cases/public/fonts/CaseSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "portrait-cases/public/fonts/CaseSans.woff": "9adbd9f834257654f8871bdbacf1a34524a2db9ecc255f617b686cf865d38249",
+        "portrait-cases/render.mjs": "e63895abe414e9b3653e579495ce1e1cef9fb4c5fd6b48ef4c208b64656058f3",
+        "portrait-cases/review.py": "570718a2cc7e22caa6fec34a815cf82183670a399ab0421579f5ecefb07405f2",
+        "portrait-cases/scenes/BerryCone.tsx": "47a4e128771d40924d1b5067ade7085d19020a56e70c04dcc6dde6b22d0fd05b",
+        "portrait-cases/scenes/CoffeeWake.tsx": "65507fc53f62e62fb15f52237d9514925d5ee8e73dc3a19d1aa67016ccd0675e",
+        "portrait-cases/scenes/HappyCamera.tsx": "75fc3c3e95ff8f7de147d88d32bdbdc8fa0e8c39f518f233fed72a5d2b8e5837",
+        "portrait-cases/scenes/PocketRocket.tsx": "efce6f8f6e910da5ebf168d73bf76ea47e88ee6642f4a496f9748b762eb0b83a",
+        "portrait-cases/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/portrait-cases/berry-portrait.mp4",
+        "sha256": "f323e82cde12826906aff732d2288fcf128196a2aea5822b2ddfd09e21f2f026"
+      },
+      "gif": {
+        "path": "demos/portrait-cases/berry-portrait.gif",
+        "sha256": "330c5989a36ee4215fe24c812359ab21b966f666ec6f38726571109904b0e3bd"
+      },
+      "poster": {
+        "path": "demos/portrait-cases/berry-portrait.png",
+        "sha256": "bd96c897e1c138429b92717fb6a76b98730c541668a47caa01024a2681a47e19"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6837919354438782,
+        "rms": 0.10975150500235263,
+        "duration": 16,
+        "channels": 2,
+        "sampleRate": 48000,
+        "samplesPerChannel": 768000
+      },
+      "music": {
+        "wavSha256": "a51de1b92c567c47d3313efe15cbe6cd8deae5039f38bc0614b5a9eaeebf6ba2",
+        "pcmSha256": "7891d64dd3b6e655e556f1753d557c8c5fc77b4735e2cca1212004c1673749d2",
+        "bpm": 120,
+        "bars": 8,
+        "duration": 16,
+        "rate": 48000,
+        "channels": 2,
+        "peak": 0.6400036622211371,
+        "rms": 0.10971592620265735,
+        "path": "demos/portrait-cases/berry-music.wav",
+        "events": 208,
+        "cues": 12
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          37,
+          38,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          248,
+          285,
+          330,
+          375,
+          395,
+          420,
+          450,
+          479
+        ],
+        "scope": "Actual final encoded samples, fresh decoding and current complete source/artifact binding. Rocket exact R1 pixel identity separately recorded. Human full watching/listening not performed."
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "f323e82cde12826906aff732d2288fcf128196a2aea5822b2ddfd09e21f2f026",
+        "playbackRate": 1,
+        "decodedFrames": 480,
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome continuous playback from zero to ended at rate 1; no human watching or listening."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "coffee-portrait",
+      "title": "咖啡醒醒",
+      "system": "coffee-house",
+      "compositionId": "CoffeeWake",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "portrait-cases/Root.tsx": "44a095c55a637f2e8dc661ad178ab9c58e358de4e774fe7ef9f2c3f59c11b7c6",
+        "portrait-cases/font-provenance.json": "f0ee35cd44dbe47fb8b2565f2c32f56eef59082dc9faa6735b21c9ce25c7ddf2",
+        "portrait-cases/index.tsx": "0b1617adbdcf3e42b3adebf13330f9620df6d144e41bd34ffbab91a6b5b875a8",
+        "portrait-cases/music.mjs": "49ab8012c7e8220afbb27c3bcf7c3d1751d523c79f5520a001c9da22438af27c",
+        "portrait-cases/prepare_fonts.py": "f5b38bb134ccef31e32d46cdc2862514c39ab3d4bdc5037c21df3af1ca5e9d5e",
+        "portrait-cases/public/fonts/CaseDisplay-OFL.txt": "91ef06981e715027e93a66e95fe827db07c4c959dbca164489509febc0dfe400",
+        "portrait-cases/public/fonts/CaseDisplay.woff": "11040ac9b795f115fb22405a7a73df59d9daf8a861f86ab84284d1bd478cb3b7",
+        "portrait-cases/public/fonts/CaseSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "portrait-cases/public/fonts/CaseSans.woff": "9adbd9f834257654f8871bdbacf1a34524a2db9ecc255f617b686cf865d38249",
+        "portrait-cases/render.mjs": "e63895abe414e9b3653e579495ce1e1cef9fb4c5fd6b48ef4c208b64656058f3",
+        "portrait-cases/review.py": "570718a2cc7e22caa6fec34a815cf82183670a399ab0421579f5ecefb07405f2",
+        "portrait-cases/scenes/BerryCone.tsx": "47a4e128771d40924d1b5067ade7085d19020a56e70c04dcc6dde6b22d0fd05b",
+        "portrait-cases/scenes/CoffeeWake.tsx": "65507fc53f62e62fb15f52237d9514925d5ee8e73dc3a19d1aa67016ccd0675e",
+        "portrait-cases/scenes/HappyCamera.tsx": "75fc3c3e95ff8f7de147d88d32bdbdc8fa0e8c39f518f233fed72a5d2b8e5837",
+        "portrait-cases/scenes/PocketRocket.tsx": "efce6f8f6e910da5ebf168d73bf76ea47e88ee6642f4a496f9748b762eb0b83a",
+        "portrait-cases/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/portrait-cases/coffee-portrait.mp4",
+        "sha256": "29ca025ccf58600fd484843fe785506c37736631937e3e7d0193c13513fb051c"
+      },
+      "gif": {
+        "path": "demos/portrait-cases/coffee-portrait.gif",
+        "sha256": "643823d25ce34361dd23580e1e89d86cb16023e82dd8eba760721b591dae36aa"
+      },
+      "poster": {
+        "path": "demos/portrait-cases/coffee-portrait.png",
+        "sha256": "c6cace7d0fec2b2fa2140ad886e96d390f92ddb8714b48dfab1d29823a725b62"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6456179618835449,
+        "rms": 0.12728754709828183,
+        "duration": 16,
+        "channels": 2,
+        "sampleRate": 48000,
+        "samplesPerChannel": 768000
+      },
+      "music": {
+        "wavSha256": "08dd07f1a6af8715d15a5b24229a2b7cde6e82046320bb111a170e2fc7b4a20c",
+        "pcmSha256": "0d74fe5d805fc141939a0167b77025f4e014ae9934c477d4bf12b08d2b612d86",
+        "bpm": 96,
+        "bars": 6,
+        "duration": 16,
+        "rate": 48000,
+        "channels": 2,
+        "peak": 0.6400036622211371,
+        "rms": 0.12749645861194497,
+        "path": "demos/portrait-cases/coffee-music.wav",
+        "events": 143,
+        "cues": 11
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          37,
+          38,
+          60,
+          90,
+          96,
+          102,
+          108,
+          114,
+          120,
+          126,
+          132,
+          138,
+          144,
+          150,
+          156,
+          162,
+          165,
+          168,
+          174,
+          175,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ],
+        "scope": "Actual final encoded samples, fresh decoding and current complete source/artifact binding. Rocket exact R1 pixel identity separately recorded. Human full watching/listening not performed."
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "29ca025ccf58600fd484843fe785506c37736631937e3e7d0193c13513fb051c",
+        "playbackRate": 1,
+        "decodedFrames": 480,
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome continuous playback from zero to ended at rate 1; no human watching or listening."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "camera-portrait",
+      "title": "快乐开拍",
+      "system": "sticker-club",
+      "compositionId": "HappyCamera",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "portrait-cases/Root.tsx": "44a095c55a637f2e8dc661ad178ab9c58e358de4e774fe7ef9f2c3f59c11b7c6",
+        "portrait-cases/font-provenance.json": "f0ee35cd44dbe47fb8b2565f2c32f56eef59082dc9faa6735b21c9ce25c7ddf2",
+        "portrait-cases/index.tsx": "0b1617adbdcf3e42b3adebf13330f9620df6d144e41bd34ffbab91a6b5b875a8",
+        "portrait-cases/music.mjs": "49ab8012c7e8220afbb27c3bcf7c3d1751d523c79f5520a001c9da22438af27c",
+        "portrait-cases/prepare_fonts.py": "f5b38bb134ccef31e32d46cdc2862514c39ab3d4bdc5037c21df3af1ca5e9d5e",
+        "portrait-cases/public/fonts/CaseDisplay-OFL.txt": "91ef06981e715027e93a66e95fe827db07c4c959dbca164489509febc0dfe400",
+        "portrait-cases/public/fonts/CaseDisplay.woff": "11040ac9b795f115fb22405a7a73df59d9daf8a861f86ab84284d1bd478cb3b7",
+        "portrait-cases/public/fonts/CaseSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "portrait-cases/public/fonts/CaseSans.woff": "9adbd9f834257654f8871bdbacf1a34524a2db9ecc255f617b686cf865d38249",
+        "portrait-cases/render.mjs": "e63895abe414e9b3653e579495ce1e1cef9fb4c5fd6b48ef4c208b64656058f3",
+        "portrait-cases/review.py": "570718a2cc7e22caa6fec34a815cf82183670a399ab0421579f5ecefb07405f2",
+        "portrait-cases/scenes/BerryCone.tsx": "47a4e128771d40924d1b5067ade7085d19020a56e70c04dcc6dde6b22d0fd05b",
+        "portrait-cases/scenes/CoffeeWake.tsx": "65507fc53f62e62fb15f52237d9514925d5ee8e73dc3a19d1aa67016ccd0675e",
+        "portrait-cases/scenes/HappyCamera.tsx": "75fc3c3e95ff8f7de147d88d32bdbdc8fa0e8c39f518f233fed72a5d2b8e5837",
+        "portrait-cases/scenes/PocketRocket.tsx": "efce6f8f6e910da5ebf168d73bf76ea47e88ee6642f4a496f9748b762eb0b83a",
+        "portrait-cases/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/portrait-cases/camera-portrait.mp4",
+        "sha256": "036901a31d27f9c31a3d6419cdf30540216ba6dbe0630a2957658bd7c9ba5e7e"
+      },
+      "gif": {
+        "path": "demos/portrait-cases/camera-portrait.gif",
+        "sha256": "08d06b3bb701fed9454461e9a453d875c26a157da35ad92394982044cd2bf1fe"
+      },
+      "poster": {
+        "path": "demos/portrait-cases/camera-portrait.png",
+        "sha256": "3b96a33ae8ced80fd6c879fa54a107f3e64f24e46f2887691b152b8e75c5df7b"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6360399127006531,
+        "rms": 0.08296469807222523,
+        "duration": 16,
+        "channels": 2,
+        "sampleRate": 48000,
+        "samplesPerChannel": 768000
+      },
+      "music": {
+        "wavSha256": "554ffb1e2442738e62599cd3188a4b7934f0d0b5ba2ad44d0a7aa57f8e5ff34f",
+        "pcmSha256": "9d2fadf2cd39c20563976d9cea60e8bfd20bd0e1099a144b9c5e7b83d442172f",
+        "bpm": 120,
+        "bars": 8,
+        "duration": 16,
+        "rate": 48000,
+        "channels": 2,
+        "peak": 0.6400036622211371,
+        "rms": 0.08321077183250469,
+        "path": "demos/portrait-cases/camera-music.wav",
+        "events": 220,
+        "cues": 15
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ],
+        "scope": "Actual final encoded samples, fresh decoding and current complete source/artifact binding. Rocket exact R1 pixel identity separately recorded. Human full watching/listening not performed."
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "036901a31d27f9c31a3d6419cdf30540216ba6dbe0630a2957658bd7c9ba5e7e",
+        "playbackRate": 1,
+        "decodedFrames": 480,
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome continuous playback from zero to ended at rate 1; no human watching or listening."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "rocket-portrait",
+      "title": "小宇宙发射",
+      "system": "jelly-pop",
+      "compositionId": "PocketRocket",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "portrait-cases/Root.tsx": "44a095c55a637f2e8dc661ad178ab9c58e358de4e774fe7ef9f2c3f59c11b7c6",
+        "portrait-cases/font-provenance.json": "f0ee35cd44dbe47fb8b2565f2c32f56eef59082dc9faa6735b21c9ce25c7ddf2",
+        "portrait-cases/index.tsx": "0b1617adbdcf3e42b3adebf13330f9620df6d144e41bd34ffbab91a6b5b875a8",
+        "portrait-cases/music.mjs": "49ab8012c7e8220afbb27c3bcf7c3d1751d523c79f5520a001c9da22438af27c",
+        "portrait-cases/prepare_fonts.py": "f5b38bb134ccef31e32d46cdc2862514c39ab3d4bdc5037c21df3af1ca5e9d5e",
+        "portrait-cases/public/fonts/CaseDisplay-OFL.txt": "91ef06981e715027e93a66e95fe827db07c4c959dbca164489509febc0dfe400",
+        "portrait-cases/public/fonts/CaseDisplay.woff": "11040ac9b795f115fb22405a7a73df59d9daf8a861f86ab84284d1bd478cb3b7",
+        "portrait-cases/public/fonts/CaseSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "portrait-cases/public/fonts/CaseSans.woff": "9adbd9f834257654f8871bdbacf1a34524a2db9ecc255f617b686cf865d38249",
+        "portrait-cases/render.mjs": "e63895abe414e9b3653e579495ce1e1cef9fb4c5fd6b48ef4c208b64656058f3",
+        "portrait-cases/review.py": "570718a2cc7e22caa6fec34a815cf82183670a399ab0421579f5ecefb07405f2",
+        "portrait-cases/scenes/BerryCone.tsx": "47a4e128771d40924d1b5067ade7085d19020a56e70c04dcc6dde6b22d0fd05b",
+        "portrait-cases/scenes/CoffeeWake.tsx": "65507fc53f62e62fb15f52237d9514925d5ee8e73dc3a19d1aa67016ccd0675e",
+        "portrait-cases/scenes/HappyCamera.tsx": "75fc3c3e95ff8f7de147d88d32bdbdc8fa0e8c39f518f233fed72a5d2b8e5837",
+        "portrait-cases/scenes/PocketRocket.tsx": "efce6f8f6e910da5ebf168d73bf76ea47e88ee6642f4a496f9748b762eb0b83a",
+        "portrait-cases/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/portrait-cases/rocket-portrait.mp4",
+        "sha256": "30e77f444d3eb50ee99b91b9dd370811238fbd50b9322c98b0f89eeab5fc7818"
+      },
+      "gif": {
+        "path": "demos/portrait-cases/rocket-portrait.gif",
+        "sha256": "21960c70d9848211bef58b878e83ff35932808996befea0d73d3fbd3c1d88a2b"
+      },
+      "poster": {
+        "path": "demos/portrait-cases/rocket-portrait.png",
+        "sha256": "2a1dbfc2da3322e17ce1cd6447859a37957b2a2711e0c48086c6a3289c871ed9"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6410596966743469,
+        "rms": 0.09862751087407601,
+        "duration": 16,
+        "channels": 2,
+        "sampleRate": 48000,
+        "samplesPerChannel": 768000
+      },
+      "music": {
+        "wavSha256": "88a808009ee25ab8d9b6be01db2b75a93c4c8b162b8d0b3f494c285abec1c909",
+        "pcmSha256": "a47368ab5bdb2db3d5fdb108988efbea9d31bb1accefa74e1b9ea42af2c6af1c",
+        "bpm": 150,
+        "bars": 10,
+        "duration": 16,
+        "rate": 48000,
+        "channels": 2,
+        "peak": 0.6400036622211371,
+        "rms": 0.09880608472641289,
+        "path": "demos/portrait-cases/rocket-music.wav",
+        "events": 284,
+        "cues": 14
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ],
+        "scope": "Actual final encoded samples, fresh decoding and current complete source/artifact binding. Rocket exact R1 pixel identity separately recorded. Human full watching/listening not performed."
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "30e77f444d3eb50ee99b91b9dd370811238fbd50b9322c98b0f89eeab5fc7818",
+        "playbackRate": 1,
+        "decodedFrames": 480,
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome continuous playback from zero to ended at rate 1; no human watching or listening."
+      },
+      "audioListening": "not-tested"
+    }
+  ]
+}

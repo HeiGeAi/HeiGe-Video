@@ -1,0 +1,24 @@
+[
+  {
+    "family": "CaseDisplay",
+    "sourceUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/zcoolkuaile/ZCOOLKuaiLe-Regular.ttf",
+    "sourceSha256": "812a6fc1fe54b6d73a419245c32dfeba8aa33104d5be90d1cf6af082007cb71d",
+    "font": "public/fonts/CaseDisplay.woff",
+    "fontSha256": "11040ac9b795f115fb22405a7a73df59d9daf8a861f86ab84284d1bd478cb3b7",
+    "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~一三上下两个中主乐了今从件会位住体你例倒克入具再冲准出创到前力加原去发取变口只叫叶同吐和咔咖响哒啡啦嚓回团圈在备天太头奇奶好始子宇宙实对射小就尾巧带开张弧弯归彩影心快念情愿慢成手扣把拉拍拼探接推撒收放数料新早星显晨暖有望机来杯果柄案概正气流浓浮淋火点照片版牛玩现球甜留的相真眼着短秒竖笑筒粉糖红线绕给缩翼股脆色花草荷莓萃落薄角让贴起超转近这进远送遇醒锁锥镜阳险零顺颗颜飞香鲜鼻",
+    "missing": [],
+    "bodyOnlyCharacters": "",
+    "license": "public/fonts/CaseDisplay-OFL.txt"
+  },
+  {
+    "family": "CaseSans",
+    "sourceUrl": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
+    "sourceSha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+    "font": "public/fonts/CaseSans.woff",
+    "fontSha256": "9adbd9f834257654f8871bdbacf1a34524a2db9ecc255f617b686cf865d38249",
+    "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~一三上下两个中主乐了今从件会位住体你例倒克入具再冲准出创到前力加原去发取变口只叫叶同吐和咔咖响哒啡啦嚓回团圈在备天太头奇奶好始子宇宙实对射小就尾巧带开张弧弯归彩影心快念情愿慢成手扣把拉拍拼探接推撒收放数料新早星显晨暖有望机来杯果柄案概正气流浓浮淋火点照片版牛玩现球甜留的相真眼着短秒竖笑筒粉糖红线绕给缩翼股脆色花草荷莓萃落薄角让贴起超转近这进远送遇醒锁锥镜阳险零顺颗颜飞香鲜鼻",
+    "missing": [],
+    "bodyOnlyCharacters": "",
+    "license": "public/fonts/CaseSans-OFL.txt"
+  }
+]

@@ -1,5 +1,11 @@
 # HeiGe-Video v4.0.0-alpha.3
 
+Four new original **1080×1920, 9:16** portrait films: Berry Cone, Coffee Wake, Happy Camera and Pocket Rocket. Each is 16 seconds at 30 fps, with separately authored object actions and an original score.
+
+[![Actual encoded portrait posters](demos/portrait-cases/cover.png)](demos/portrait-cases/README.md)
+
+[Portrait film gallery](demos/portrait-cases/README.md) · [Editable source and reproduction](portrait-cases/README.md) · [Recorded verification scopes](references/portrait-cases-status.json)
+
 **Make an idea move. Let one subject carry the pictures, rhythm and outcome.**
 
 Start with six colorful original films: cotton pink, mint and lemon soda; cream, cobalt and red/yellow paper-flight stickers; and a light mineral-pigment bloom. Each theme has separately composed landscape and portrait films, 16 seconds each, with its own subject, motion and original score.

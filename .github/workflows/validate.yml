@@ -43,6 +43,7 @@ jobs:
         run: |
           npm run typecheck
           npx tsc --noEmit -p showcase/tsconfig.json
+          npx tsc --noEmit -p portrait-cases/tsconfig.json
           npm test
           node studio/make.mjs doctor
       - name: Render and verify real controlled media and audio fixtures
@@ -58,6 +59,7 @@ jobs:
           node studio/make.mjs build examples/studio/forge-ci.json --out /tmp/heige-v4-forge
           node studio/make.mjs verify examples/studio/forge-ci.json --out /tmp/heige-v4-forge
           node showcase/render.mjs build --only CitrusHorizontal --out /tmp/heige-showcase
+          node portrait-cases/render.mjs build --only BerryCone --out /tmp/heige-portrait-cases
       - name: Preserve controlled render evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -69,6 +71,7 @@ jobs:
             /tmp/heige-v4-continuous
             /tmp/heige-v4-forge
             /tmp/heige-showcase
+            /tmp/heige-portrait-cases
       - name: Verify local capabilities
         run: python runtime/render_video.py doctor
       - name: Validate package and example manifests
@@ -77,6 +80,7 @@ jobs:
           python scripts/validate_super_release.py
           python scripts/validate_continuous_release.py
           python scripts/validate_showcase.py
+          python scripts/validate_portrait_cases.py
           python scripts/validate_package.py --manifest examples/dataviz/shot-manifest.json
           python scripts/validate_package.py --manifest examples/cinematic-product/shot-manifest.json
           python scripts/validate_package.py --manifest examples/dataviz-forward/film.json

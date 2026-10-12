@@ -1,5 +1,13 @@
 # Changelog
 
+## Four portrait cases · 2026-10-12
+
+- Four original 16-second 1080×1920 films in an isolated editable Remotion workspace: Berry Cone, Coffee Wake, Happy Camera and Pocket Rocket.
+- Four distinct original PCM scores with 120/96/120/150 BPM arrangements and object-action cues.
+- Real 4-second action proofs, bundled OFL font subsets, actual every-frame text bounds, full media decode, encoded GIF/poster extraction and complete source/artifact bindings.
+- [Gallery](demos/portrait-cases/README.md), [reproduction guide](portrait-cases/README.md) and [inventory](references/portrait-cases-status.json) record the actual verification scopes. No aesthetic approval or human listening is implied by technical results.
+- Existing bright-showcase source and its six media files retain their original bytes and verification inventory.
+
 ## Bright showcase · 2026-10-12
 
 - Three original, colorful directions with separately composed landscape and portrait films, 16 seconds at 30 fps.

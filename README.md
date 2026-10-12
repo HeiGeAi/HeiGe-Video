@@ -2,7 +2,20 @@
 
 **让想法动起来。用同一个主体，带出画面、节奏与结果。**
 
-现在先看三组明亮样片：柠檬汽水的棉粉、薄荷与柠檬黄；纸飞机的奶油白、钴蓝与红黄贴纸；花开有声的矿彩纸面。每组有横版和竖版，共六条 16 秒原创动画，分别设计主体、构图、动作和配乐。
+新增四条 **1080×1920、9:16** 竖版案例，每条 16 秒、30 fps，分别设计动作与原创配乐。
+
+[![四条竖版案例实际编码封面](demos/portrait-cases/cover.png)](demos/portrait-cases/README.md)
+
+| 案例 | 带声音的成片 | 主体动作 | 配乐 |
+| :--- | :--- | :--- | :--- |
+| 莓好一口 | [MP4](demos/portrait-cases/berry-portrait.mp4) | 草莓落入、叠球、淋酱与弹性落定 | 摇摆马林巴 |
+| 咖啡醒醒 | [MP4](demos/portrait-cases/coffee-portrait.mp4) | 锁入、萃取、奶纹与蒸汽 | 爵士电钢与刷鼓 |
+| 快乐开拍 | [MP4](demos/portrait-cases/camera-portrait.mp4) | 对焦、快门、实体吐片与显影 | 切分 funk |
+| 小宇宙发射 | [MP4](demos/portrait-cases/rocket-portrait.mp4) | 装配、点火、发射与环绕 | 太空琶音 |
+
+[竖版动态画廊](demos/portrait-cases/README.md) · [可编辑源码](portrait-cases/README.md) · [成片检查清单](references/portrait-cases-status.json)
+
+此前三组明亮样片继续保留：柠檬汽水的棉粉、薄荷与柠檬黄；纸飞机的奶油白、钴蓝与红黄贴纸；花开有声的矿彩纸面。每组有横版和竖版，共六条 16 秒原创动画，分别设计主体、构图、动作和配乐。
 
 [![六条明亮样片实际编码封面](demos/bright-showcase/cover.png)](demos/bright-showcase/README.md)
 
