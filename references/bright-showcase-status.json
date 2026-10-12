@@ -1,0 +1,654 @@
+{
+  "schemaVersion": "heige-showcase/1",
+  "date": "2026-10-12",
+  "build": "final-r2",
+  "status": "technical-and-sampled-visual-pass",
+  "environment": {
+    "node": "22.22.2",
+    "packages": {
+      "remotion": "4.0.526",
+      "@remotion/bundler": "4.0.526",
+      "@remotion/renderer": "4.0.526",
+      "react": "19.2.4"
+    },
+    "browser": {
+      "version": "Google Chrome for Testing 152.0.7977.30",
+      "sha256": "ed7c5c6aff7cc4dd88ee7746c0df97f08a454180b62b7063fc961ba42e10b6a1"
+    },
+    "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+    "python": {
+      "version": "3.12.13",
+      "Pillow": "12.3.0"
+    }
+  },
+  "playbackBrowser": {
+    "version": "Google Chrome 155.0.8059.39",
+    "sha256": "717f2904e1d1742bfd5a52a1db4ec4b4874fe861f7958e7b3b78a86bfd2467b8",
+    "headless": true,
+    "remotionVersion": "4.0.526"
+  },
+  "reviewEvidence": [
+    {
+      "sha256": "14e46c800052e484bd76ce8e891e6b7a12b4981a0928a04f0c09202ac19c83aa",
+      "scope": "R2 citrus and paper independent sampled visual review, preserving R1 history."
+    },
+    {
+      "sha256": "c28dafd6721bb1b148ec7d95e9c3435422484357aad0685bb52e884bec2420f4",
+      "scope": "Fresh R2 mineral independent sampled visual review."
+    }
+  ],
+  "cover": {
+    "path": "demos/bright-showcase/cover.png",
+    "sha256": "1ab951282e1c294fb3456e13bf6718eda3298a431024a6e3556c4fa22eb0dd55",
+    "scope": "Layout of actual decoded posters, with no separate scene artwork."
+  },
+  "notes": [
+    "Six original editable Remotion films, with separate landscape/portrait layouts: 96 seconds and 2880 encoded frames. Each uses a single actual frame capture, not the old Forge three-exposure route.",
+    "All 2880 frames independently decoded by the build checker, and 2880 actual production DOM text-bound samples measured. Each final manifest binds the same complete current 21-file source inventory.",
+    "Every final film has sampled visual review of 15 encoded full-resolution frames and a sheet. Paper uses verified byte-identical rebinding to prior reviewed pixels; Citrus and Mineral R2 have fresh independent review.",
+    "Chrome normal-speed automated muted playback reached ended, presenting all 480 frames per film with zero observed dropped frames. Paper binds the same R1 MP4 bytes.",
+    "Human full watching and audio listening not performed. Technical, sampled visual and playback results are separate from subjective music and user aesthetic approval.",
+    "GIF previews are 10fps silent reductions from final MP4s. The actual videos are 30fps with full original scores.",
+    "Citrus is an original concept advertisement; mineral art is an original plant/motif animation, not a historical mural reconstruction.",
+    "Original scene vectors and original procedural music; locally bundled OFL font subsets preserve source/notice records. No external model or sample provider.",
+    "Earlier failed readability/pace/scale/label samples and review reports retained outside public repository. They are not current acceptance evidence.",
+    "Portable inventory validation compares source/media/PCM hashes and declarations; it does not rerender, rewatch or certify aesthetics."
+  ],
+  "items": [
+    {
+      "id": "citrus-horizontal",
+      "title": "柠檬汽水",
+      "system": "boing-candy",
+      "compositionId": "CitrusHorizontal",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "showcase/Root.tsx": "828970895302f85ffa0604a130fe6e49005a4e3ec6fc43643d97b8799a8a56be",
+        "showcase/font-provenance.json": "b4ba93d3f81a5648abd9a2760df11821632db582bebea6906583fb45b59ea1de",
+        "showcase/index.tsx": "3c2d35bca264a737f2c0e8024944c9689453148771e3c0d4cacf4fbc3f84c291",
+        "showcase/music.mjs": "2ee7367d3f013fd9775f2ee615832f17ee3ac00c86c7f7039e107d28dcc9742f",
+        "showcase/prepare_fonts.py": "839d19780bce1c7b24f10316e8d3ef9ed45839087fdb1f220f2d23667e5a86d3",
+        "showcase/public/fonts/CandyDisplay-OFL.txt": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
+        "showcase/public/fonts/CandyDisplay.woff": "33f6d1fe26d81d23537c94ca358f710871d34174fe276ab4a843eeae5217d585",
+        "showcase/public/fonts/SerifDisplay-OFL.txt": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08",
+        "showcase/public/fonts/SerifDisplay.woff": "f855915cfeda5b6e0f9ff1842c69cf1c93a41e54a5274b46d02483c1aaade16d",
+        "showcase/public/fonts/VideoSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "showcase/public/fonts/VideoSans.woff": "e67919f3bae827546bf446729eabd6fe35d4e78ad5071d8b53ea66ae97a3d23d",
+        "showcase/render.mjs": "d2260901a474da63978a95d5d813dad66e84fc4e38f311909d40c7142bcccef3",
+        "showcase/review.py": "ad304d511f7870a5632e56a485162d0b3ef3b0d538cbfdb4fc5af7d625eb63d4",
+        "showcase/scenes/Citrus.tsx": "49bd7353745be559135136be2f98d352f798aba9caf58e853f4ba57da5d71abc",
+        "showcase/scenes/MineralBloom.tsx": "48b439d39ef837ca9c8f1cab29747de67aec15a569a7d6fdc5602fa1606903fc",
+        "showcase/scenes/PaperFlight.tsx": "4113a29c7b5bb59bbfc3edacc8416c6d50d20918499535221d06903948f6b986",
+        "showcase/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/bright-showcase/citrus-horizontal.mp4",
+        "sha256": "c35cba57d3ba80b5a2d2ae7328aa5b3f367fd02a42b240f3df4cee4612356dbf"
+      },
+      "gif": {
+        "path": "demos/bright-showcase/citrus-horizontal.gif",
+        "sha256": "17de2d18cc3c568dcf346f906fd6a3fd473cb8b8d794ed8c94673641b34e44a0"
+      },
+      "poster": {
+        "path": "demos/bright-showcase/citrus-horizontal.png",
+        "sha256": "bfa6c36b5b074abada335c344e2f895b90093a48d7184ee5c2f5ee209ee15d0a"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.813278079032898,
+        "rms": 0.12005308945127811,
+        "duration": 16.0
+      },
+      "music": {
+        "path": "demos/bright-showcase/citrus-music.wav",
+        "wavSha256": "ed9e83d3f9a17ec90e147b1da5ec9d50e2bc12949ce6d0b392dc6249d67c1c0c",
+        "pcmSha256": "2811c754ad767b45c446b39ddd015105d523cb6140525abd0e4d85f9c936f2a4",
+        "bpm": 120,
+        "bars": 8,
+        "events": 221,
+        "rate": 48000,
+        "channels": 2,
+        "duration": 16,
+        "peak": 0.6800134281441694,
+        "rms": 0.12044430489411671
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "Fresh independent review of 15 full-resolution encoded frames and actual encoded sheet. Complete human watching/listening not performed.",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ]
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "c35cba57d3ba80b5a2d2ae7328aa5b3f367fd02a42b240f3df4cee4612356dbf",
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome 155 playback at rate 1, from zero to ended."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "citrus-portrait",
+      "title": "柠檬汽水",
+      "system": "boing-candy",
+      "compositionId": "CitrusPortrait",
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "showcase/Root.tsx": "828970895302f85ffa0604a130fe6e49005a4e3ec6fc43643d97b8799a8a56be",
+        "showcase/font-provenance.json": "b4ba93d3f81a5648abd9a2760df11821632db582bebea6906583fb45b59ea1de",
+        "showcase/index.tsx": "3c2d35bca264a737f2c0e8024944c9689453148771e3c0d4cacf4fbc3f84c291",
+        "showcase/music.mjs": "2ee7367d3f013fd9775f2ee615832f17ee3ac00c86c7f7039e107d28dcc9742f",
+        "showcase/prepare_fonts.py": "839d19780bce1c7b24f10316e8d3ef9ed45839087fdb1f220f2d23667e5a86d3",
+        "showcase/public/fonts/CandyDisplay-OFL.txt": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
+        "showcase/public/fonts/CandyDisplay.woff": "33f6d1fe26d81d23537c94ca358f710871d34174fe276ab4a843eeae5217d585",
+        "showcase/public/fonts/SerifDisplay-OFL.txt": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08",
+        "showcase/public/fonts/SerifDisplay.woff": "f855915cfeda5b6e0f9ff1842c69cf1c93a41e54a5274b46d02483c1aaade16d",
+        "showcase/public/fonts/VideoSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "showcase/public/fonts/VideoSans.woff": "e67919f3bae827546bf446729eabd6fe35d4e78ad5071d8b53ea66ae97a3d23d",
+        "showcase/render.mjs": "d2260901a474da63978a95d5d813dad66e84fc4e38f311909d40c7142bcccef3",
+        "showcase/review.py": "ad304d511f7870a5632e56a485162d0b3ef3b0d538cbfdb4fc5af7d625eb63d4",
+        "showcase/scenes/Citrus.tsx": "49bd7353745be559135136be2f98d352f798aba9caf58e853f4ba57da5d71abc",
+        "showcase/scenes/MineralBloom.tsx": "48b439d39ef837ca9c8f1cab29747de67aec15a569a7d6fdc5602fa1606903fc",
+        "showcase/scenes/PaperFlight.tsx": "4113a29c7b5bb59bbfc3edacc8416c6d50d20918499535221d06903948f6b986",
+        "showcase/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/bright-showcase/citrus-portrait.mp4",
+        "sha256": "bfb00cf0fc80041227999f0eb5fd53a70e9a18640b837356ed86281b9027b3b2"
+      },
+      "gif": {
+        "path": "demos/bright-showcase/citrus-portrait.gif",
+        "sha256": "9aff9fed38c4b40e908774977368f4ddb3845c41fa4a988c7c75b09a7ea0c0c2"
+      },
+      "poster": {
+        "path": "demos/bright-showcase/citrus-portrait.png",
+        "sha256": "92bbb6adb6cc0ae390c72b8baa81654b9244cb75a6158bae65d7c42f940eccd9"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.813278079032898,
+        "rms": 0.12005308945127811,
+        "duration": 16.0
+      },
+      "music": {
+        "path": "demos/bright-showcase/citrus-music.wav",
+        "wavSha256": "ed9e83d3f9a17ec90e147b1da5ec9d50e2bc12949ce6d0b392dc6249d67c1c0c",
+        "pcmSha256": "2811c754ad767b45c446b39ddd015105d523cb6140525abd0e4d85f9c936f2a4",
+        "bpm": 120,
+        "bars": 8,
+        "events": 221,
+        "rate": 48000,
+        "channels": 2,
+        "duration": 16,
+        "peak": 0.6800134281441694,
+        "rms": 0.12044430489411671
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "Fresh independent review of 15 full-resolution encoded frames and actual encoded sheet. Complete human watching/listening not performed.",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ]
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "bfb00cf0fc80041227999f0eb5fd53a70e9a18640b837356ed86281b9027b3b2",
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome 155 playback at rate 1, from zero to ended."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "paper-horizontal",
+      "title": "让点子飞",
+      "system": "sticker-club",
+      "compositionId": "PaperFlightHorizontal",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "showcase/Root.tsx": "828970895302f85ffa0604a130fe6e49005a4e3ec6fc43643d97b8799a8a56be",
+        "showcase/font-provenance.json": "b4ba93d3f81a5648abd9a2760df11821632db582bebea6906583fb45b59ea1de",
+        "showcase/index.tsx": "3c2d35bca264a737f2c0e8024944c9689453148771e3c0d4cacf4fbc3f84c291",
+        "showcase/music.mjs": "2ee7367d3f013fd9775f2ee615832f17ee3ac00c86c7f7039e107d28dcc9742f",
+        "showcase/prepare_fonts.py": "839d19780bce1c7b24f10316e8d3ef9ed45839087fdb1f220f2d23667e5a86d3",
+        "showcase/public/fonts/CandyDisplay-OFL.txt": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
+        "showcase/public/fonts/CandyDisplay.woff": "33f6d1fe26d81d23537c94ca358f710871d34174fe276ab4a843eeae5217d585",
+        "showcase/public/fonts/SerifDisplay-OFL.txt": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08",
+        "showcase/public/fonts/SerifDisplay.woff": "f855915cfeda5b6e0f9ff1842c69cf1c93a41e54a5274b46d02483c1aaade16d",
+        "showcase/public/fonts/VideoSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "showcase/public/fonts/VideoSans.woff": "e67919f3bae827546bf446729eabd6fe35d4e78ad5071d8b53ea66ae97a3d23d",
+        "showcase/render.mjs": "d2260901a474da63978a95d5d813dad66e84fc4e38f311909d40c7142bcccef3",
+        "showcase/review.py": "ad304d511f7870a5632e56a485162d0b3ef3b0d538cbfdb4fc5af7d625eb63d4",
+        "showcase/scenes/Citrus.tsx": "49bd7353745be559135136be2f98d352f798aba9caf58e853f4ba57da5d71abc",
+        "showcase/scenes/MineralBloom.tsx": "48b439d39ef837ca9c8f1cab29747de67aec15a569a7d6fdc5602fa1606903fc",
+        "showcase/scenes/PaperFlight.tsx": "4113a29c7b5bb59bbfc3edacc8416c6d50d20918499535221d06903948f6b986",
+        "showcase/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/bright-showcase/paper-horizontal.mp4",
+        "sha256": "473e966e6a7d72964b850839316c989db883b228ed5bde3c3ab4312c469f27de"
+      },
+      "gif": {
+        "path": "demos/bright-showcase/paper-horizontal.gif",
+        "sha256": "423d7e4802a57f7137194b45338502db3bf4efdaead5647ca9e9d0ceb93f4994"
+      },
+      "poster": {
+        "path": "demos/bright-showcase/paper-horizontal.png",
+        "sha256": "9815fd0920deaa8a2deddee78f3627171fb793b02037d0a112b63ed71a66e4e0"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6489579081535339,
+        "rms": 0.1005335287857524,
+        "duration": 16.0
+      },
+      "music": {
+        "path": "demos/bright-showcase/paper-music.wav",
+        "wavSha256": "8068e557c4153835a96a8d8620d2a7fdf509887ae4552a73bb2ebeebdea5342e",
+        "pcmSha256": "65741730d2b56972caa29096bf5e830812a81c75fea42c7dac3efea1f9653c3f",
+        "bpm": 120,
+        "bars": 8,
+        "events": 219,
+        "rate": 48000,
+        "channels": 2,
+        "duration": 16,
+        "peak": 0.6800134281441694,
+        "rms": 0.1014116549682845
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "Paper R2 MP4, 15 decoded PNGs and sheet are byte-identical to independently reviewed R1. R2 current source/manifest/artifact hashes checked afresh, preserving prior sampled visual scope. Complete human watching/listening not performed.",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ]
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "473e966e6a7d72964b850839316c989db883b228ed5bde3c3ab4312c469f27de",
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome 155 playback at rate 1, from zero to ended. Bound to byte-identical R1 playback for this Paper R2 MP4."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "paper-portrait",
+      "title": "让点子飞",
+      "system": "sticker-club",
+      "compositionId": "PaperFlightPortrait",
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "showcase/Root.tsx": "828970895302f85ffa0604a130fe6e49005a4e3ec6fc43643d97b8799a8a56be",
+        "showcase/font-provenance.json": "b4ba93d3f81a5648abd9a2760df11821632db582bebea6906583fb45b59ea1de",
+        "showcase/index.tsx": "3c2d35bca264a737f2c0e8024944c9689453148771e3c0d4cacf4fbc3f84c291",
+        "showcase/music.mjs": "2ee7367d3f013fd9775f2ee615832f17ee3ac00c86c7f7039e107d28dcc9742f",
+        "showcase/prepare_fonts.py": "839d19780bce1c7b24f10316e8d3ef9ed45839087fdb1f220f2d23667e5a86d3",
+        "showcase/public/fonts/CandyDisplay-OFL.txt": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
+        "showcase/public/fonts/CandyDisplay.woff": "33f6d1fe26d81d23537c94ca358f710871d34174fe276ab4a843eeae5217d585",
+        "showcase/public/fonts/SerifDisplay-OFL.txt": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08",
+        "showcase/public/fonts/SerifDisplay.woff": "f855915cfeda5b6e0f9ff1842c69cf1c93a41e54a5274b46d02483c1aaade16d",
+        "showcase/public/fonts/VideoSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "showcase/public/fonts/VideoSans.woff": "e67919f3bae827546bf446729eabd6fe35d4e78ad5071d8b53ea66ae97a3d23d",
+        "showcase/render.mjs": "d2260901a474da63978a95d5d813dad66e84fc4e38f311909d40c7142bcccef3",
+        "showcase/review.py": "ad304d511f7870a5632e56a485162d0b3ef3b0d538cbfdb4fc5af7d625eb63d4",
+        "showcase/scenes/Citrus.tsx": "49bd7353745be559135136be2f98d352f798aba9caf58e853f4ba57da5d71abc",
+        "showcase/scenes/MineralBloom.tsx": "48b439d39ef837ca9c8f1cab29747de67aec15a569a7d6fdc5602fa1606903fc",
+        "showcase/scenes/PaperFlight.tsx": "4113a29c7b5bb59bbfc3edacc8416c6d50d20918499535221d06903948f6b986",
+        "showcase/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/bright-showcase/paper-portrait.mp4",
+        "sha256": "a846f4c34a81c902929f2aed0f202815103985e92054ffedd3ccf39fdb949a4d"
+      },
+      "gif": {
+        "path": "demos/bright-showcase/paper-portrait.gif",
+        "sha256": "a793d542ab5e0625d0046499ec18e13fae3f5095b331e14986b695c625b13f19"
+      },
+      "poster": {
+        "path": "demos/bright-showcase/paper-portrait.png",
+        "sha256": "3fcc7f5a443ce0011b15b2f0aa49c77a134b8219be21fc35c2aabd595adf3bc3"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6489579081535339,
+        "rms": 0.1005335287857524,
+        "duration": 16.0
+      },
+      "music": {
+        "path": "demos/bright-showcase/paper-music.wav",
+        "wavSha256": "8068e557c4153835a96a8d8620d2a7fdf509887ae4552a73bb2ebeebdea5342e",
+        "pcmSha256": "65741730d2b56972caa29096bf5e830812a81c75fea42c7dac3efea1f9653c3f",
+        "bpm": 120,
+        "bars": 8,
+        "events": 219,
+        "rate": 48000,
+        "channels": 2,
+        "duration": 16,
+        "peak": 0.6800134281441694,
+        "rms": 0.1014116549682845
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "Paper R2 MP4, 15 decoded PNGs and sheet are byte-identical to independently reviewed R1. R2 current source/manifest/artifact hashes checked afresh, preserving prior sampled visual scope. Complete human watching/listening not performed.",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ]
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "a846f4c34a81c902929f2aed0f202815103985e92054ffedd3ccf39fdb949a4d",
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome 155 playback at rate 1, from zero to ended. Bound to byte-identical R1 playback for this Paper R2 MP4."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "mineral-horizontal",
+      "title": "花开有声",
+      "system": "dunhuang-mineral",
+      "compositionId": "MineralBloomHorizontal",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "showcase/Root.tsx": "828970895302f85ffa0604a130fe6e49005a4e3ec6fc43643d97b8799a8a56be",
+        "showcase/font-provenance.json": "b4ba93d3f81a5648abd9a2760df11821632db582bebea6906583fb45b59ea1de",
+        "showcase/index.tsx": "3c2d35bca264a737f2c0e8024944c9689453148771e3c0d4cacf4fbc3f84c291",
+        "showcase/music.mjs": "2ee7367d3f013fd9775f2ee615832f17ee3ac00c86c7f7039e107d28dcc9742f",
+        "showcase/prepare_fonts.py": "839d19780bce1c7b24f10316e8d3ef9ed45839087fdb1f220f2d23667e5a86d3",
+        "showcase/public/fonts/CandyDisplay-OFL.txt": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
+        "showcase/public/fonts/CandyDisplay.woff": "33f6d1fe26d81d23537c94ca358f710871d34174fe276ab4a843eeae5217d585",
+        "showcase/public/fonts/SerifDisplay-OFL.txt": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08",
+        "showcase/public/fonts/SerifDisplay.woff": "f855915cfeda5b6e0f9ff1842c69cf1c93a41e54a5274b46d02483c1aaade16d",
+        "showcase/public/fonts/VideoSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "showcase/public/fonts/VideoSans.woff": "e67919f3bae827546bf446729eabd6fe35d4e78ad5071d8b53ea66ae97a3d23d",
+        "showcase/render.mjs": "d2260901a474da63978a95d5d813dad66e84fc4e38f311909d40c7142bcccef3",
+        "showcase/review.py": "ad304d511f7870a5632e56a485162d0b3ef3b0d538cbfdb4fc5af7d625eb63d4",
+        "showcase/scenes/Citrus.tsx": "49bd7353745be559135136be2f98d352f798aba9caf58e853f4ba57da5d71abc",
+        "showcase/scenes/MineralBloom.tsx": "48b439d39ef837ca9c8f1cab29747de67aec15a569a7d6fdc5602fa1606903fc",
+        "showcase/scenes/PaperFlight.tsx": "4113a29c7b5bb59bbfc3edacc8416c6d50d20918499535221d06903948f6b986",
+        "showcase/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/bright-showcase/mineral-horizontal.mp4",
+        "sha256": "e6dac757ac1ff9a694b4a96d22a2a17cdb5f0e5b55b513c90423d165d80bee7d"
+      },
+      "gif": {
+        "path": "demos/bright-showcase/mineral-horizontal.gif",
+        "sha256": "2a963fc8c04389bba78d4da7e534e8501683ba99590c520d308b97ff3476f44d"
+      },
+      "poster": {
+        "path": "demos/bright-showcase/mineral-horizontal.png",
+        "sha256": "f9389facd11947949f848b398c59ec6773e48de68e4eb6e858dea97f530518c9"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6735028028488159,
+        "rms": 0.1708867200837637,
+        "duration": 16.0
+      },
+      "music": {
+        "path": "demos/bright-showcase/mineral-music.wav",
+        "wavSha256": "6280c96a2182e1cfd1a82f6c394c7590e6841ce390d3ca31919edaceacf08014",
+        "pcmSha256": "c141f75f42a5c72f77d4625c18e01e9384514f97cbe5397e0966e982bd994f3f",
+        "bpm": 120,
+        "bars": 8,
+        "events": 203,
+        "rate": 48000,
+        "channels": 2,
+        "duration": 16,
+        "peak": 0.6800134281441694,
+        "rms": 0.17119234892858495
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "Fresh independent review of 15 full-resolution encoded frames and actual encoded sheet. All 15 sampled frames independently decoded and matched actual MP4 RGB. Complete human watching/listening not performed.",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ]
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "e6dac757ac1ff9a694b4a96d22a2a17cdb5f0e5b55b513c90423d165d80bee7d",
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome 155 playback at rate 1, from zero to ended."
+      },
+      "audioListening": "not-tested"
+    },
+    {
+      "id": "mineral-portrait",
+      "title": "花开有声",
+      "system": "dunhuang-mineral",
+      "compositionId": "MineralBloomPortrait",
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "layoutFrames": 480,
+      "layoutErrors": 0,
+      "technical": "pass",
+      "source": {
+        "package-lock.json": "7fcfd8762774393c292e3345bc3eb7d563f7c64f3ebd4e464761737978cbef76",
+        "package.json": "5efa3b90388b01f9ab51bef0499f5bf5440c1a3c4a380814e4257c76f7cd48d5",
+        "showcase/Root.tsx": "828970895302f85ffa0604a130fe6e49005a4e3ec6fc43643d97b8799a8a56be",
+        "showcase/font-provenance.json": "b4ba93d3f81a5648abd9a2760df11821632db582bebea6906583fb45b59ea1de",
+        "showcase/index.tsx": "3c2d35bca264a737f2c0e8024944c9689453148771e3c0d4cacf4fbc3f84c291",
+        "showcase/music.mjs": "2ee7367d3f013fd9775f2ee615832f17ee3ac00c86c7f7039e107d28dcc9742f",
+        "showcase/prepare_fonts.py": "839d19780bce1c7b24f10316e8d3ef9ed45839087fdb1f220f2d23667e5a86d3",
+        "showcase/public/fonts/CandyDisplay-OFL.txt": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
+        "showcase/public/fonts/CandyDisplay.woff": "33f6d1fe26d81d23537c94ca358f710871d34174fe276ab4a843eeae5217d585",
+        "showcase/public/fonts/SerifDisplay-OFL.txt": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08",
+        "showcase/public/fonts/SerifDisplay.woff": "f855915cfeda5b6e0f9ff1842c69cf1c93a41e54a5274b46d02483c1aaade16d",
+        "showcase/public/fonts/VideoSans-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "showcase/public/fonts/VideoSans.woff": "e67919f3bae827546bf446729eabd6fe35d4e78ad5071d8b53ea66ae97a3d23d",
+        "showcase/render.mjs": "d2260901a474da63978a95d5d813dad66e84fc4e38f311909d40c7142bcccef3",
+        "showcase/review.py": "ad304d511f7870a5632e56a485162d0b3ef3b0d538cbfdb4fc5af7d625eb63d4",
+        "showcase/scenes/Citrus.tsx": "49bd7353745be559135136be2f98d352f798aba9caf58e853f4ba57da5d71abc",
+        "showcase/scenes/MineralBloom.tsx": "48b439d39ef837ca9c8f1cab29747de67aec15a569a7d6fdc5602fa1606903fc",
+        "showcase/scenes/PaperFlight.tsx": "4113a29c7b5bb59bbfc3edacc8416c6d50d20918499535221d06903948f6b986",
+        "showcase/tsconfig.json": "d68261f2242dab37fbf09519d5cdfabc2660ee64c5001ff51760cd124b75b5df",
+        "studio/check_media.py": "16574792412b72cabc8352e69b23ff94e0eff6894df57be72efc6dd872733d06",
+        "tsconfig.json": "8d3973833cc896e231e0aaca4a279eaaa2b62405b17a0e69230bc891fd458aa0"
+      },
+      "video": {
+        "path": "demos/bright-showcase/mineral-portrait.mp4",
+        "sha256": "f8ff1f452a2840f1b4fb41a14a7b84baa65cdcdd0d853e55ac46f7bd4a18d6c9"
+      },
+      "gif": {
+        "path": "demos/bright-showcase/mineral-portrait.gif",
+        "sha256": "01896bb99d915a08d54cc0177d187a81ff171632b1abea1aedb3f740b9fe7e9d"
+      },
+      "poster": {
+        "path": "demos/bright-showcase/mineral-portrait.png",
+        "sha256": "06c43900dfcfc0d2a12b6b271a347a25a8aef9c7967c00d5217c5b1bb242e1b0"
+      },
+      "actualAudio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.6735028028488159,
+        "rms": 0.1708867200837637,
+        "duration": 16.0
+      },
+      "music": {
+        "path": "demos/bright-showcase/mineral-music.wav",
+        "wavSha256": "6280c96a2182e1cfd1a82f6c394c7590e6841ce390d3ca31919edaceacf08014",
+        "pcmSha256": "c141f75f42a5c72f77d4625c18e01e9384514f97cbe5397e0966e982bd994f3f",
+        "bpm": 120,
+        "bars": 8,
+        "events": 203,
+        "rate": 48000,
+        "channels": 2,
+        "duration": 16,
+        "peak": 0.6800134281441694,
+        "rms": 0.17119234892858495
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "Fresh independent review of 15 full-resolution encoded frames and actual encoded sheet. All 15 sampled frames independently decoded and matched actual MP4 RGB. Complete human watching/listening not performed.",
+        "sampledFrames": [
+          0,
+          15,
+          30,
+          60,
+          90,
+          120,
+          165,
+          210,
+          240,
+          285,
+          330,
+          375,
+          420,
+          450,
+          479
+        ]
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "f8ff1f452a2840f1b4fb41a14a7b84baa65cdcdd0d853e55ac46f7bd4a18d6c9",
+        "presentedFrames": 480,
+        "droppedFrames": 0,
+        "scope": "Muted automated Chrome 155 playback at rate 1, from zero to ended."
+      },
+      "audioListening": "not-tested"
+    }
+  ]
+}

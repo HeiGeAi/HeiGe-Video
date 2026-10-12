@@ -2,15 +2,21 @@
 
 **让想法动起来。用同一个主体，带出画面、节奏与结果。**
 
-默认入口是 15 秒 Forge 熔炉短片：铁黑与酸绿、硬边字体、原创图像、快速承接动作和 128 BPM 完整配乐。持久对象、相机、音乐与事件音效共用时钟，三种画幅各自构图。它是可编辑的原创起点，真正的作品仍须围绕题材重新设计，并看实际成片、听实际声音。
+现在先看三组明亮样片：柠檬汽水的棉粉、薄荷与柠檬黄；纸飞机的奶油白、钴蓝与红黄贴纸；花开有声的矿彩纸面。每组有横版和竖版，共六条 16 秒原创动画，分别设计主体、构图、动作和配乐。
 
-| Forge 作品入口 | 画幅 | 原创项目 |
-| :--- | :--- | :--- |
-| [横版 MP4](demos/forge/horizontal.mp4) | 16:9 | [forge-launch.json](examples/studio/forge-launch.json) |
-| [竖版 MP4](demos/forge/portrait.mp4) | 9:16 | [forge-portrait.json](examples/studio/forge-portrait.json) |
-| [方版 MP4](demos/forge/square.mp4) | 1:1 | [forge-square.json](examples/studio/forge-square.json) |
+[![六条明亮样片实际编码封面](demos/bright-showcase/cover.png)](demos/bright-showcase/README.md)
 
-具体视频、输入与引擎绑定见 [Forge 清单](references/v4-forge-status.json)，实际检查范围和修复见 [交付记录](references/v4-forge-report.md)。技术检查、抽帧审阅、完整播放、人工听音与用户审美认可分别记录，本文不替代这些记录。
+| 题材 | 横版 16:9 | 竖版 9:16 | 视觉与动作 |
+| --- | --- | --- | --- |
+| 柠檬汽水 | [MP4](demos/bright-showcase/citrus-horizontal.mp4) | [MP4](demos/bright-showcase/citrus-portrait.mp4) | 弹跳糖，挤汁、喷泡与弹性落地 |
+| 让点子飞 | [MP4](demos/bright-showcase/paper-horizontal.mp4) | [MP4](demos/bright-showcase/paper-portrait.mp4) | 贴纸俱乐部，折纸、飞行与创意落章 |
+| 花开有声 | [MP4](demos/bright-showcase/mineral-horizontal.mp4) | [MP4](demos/bright-showcase/mineral-portrait.mp4) | 明亮矿彩，萌芽、莲瓣与纹样汇聚 |
+
+[打开六条动态预览](demos/bright-showcase/README.md) · [编辑与重新渲染](showcase/README.md) · [实际验收清单](references/bright-showcase-status.json)
+
+这些影片通过本项目的 Remotion 自由创作路线生成，使用原创 SVG、真实本地字体和三支原创配乐。`showcase/render.mjs` 会渲染、解码、记录 DOM 与产物哈希，源码可编辑。原有严格 JSON 路线仍由 `studio/make.mjs` 提供，`init` 目前创建 Forge 模板。新样片没有被冒充为已接入旧主题枚举的模板。
+
+原先铁黑 Forge 的[三画幅样片](demos/forge/README.md)保留为另一种视觉方向，当前展示入口改为明亮、多变的作品。其输入和引擎见 [Forge 清单](references/v4-forge-status.json)。技术检查、抽帧审阅、自动完整播放与人工听音分别记录。
 
 [安装与使用](USAGE.md) · [连续世界指南](studio/CONTINUITY.md) · [Skill 入口](SKILL.md) · [English](README_EN.md) · [BrewReel 研究](references/brewreel-distillation.md) · [OneTake 研究](references/onetake-architecture.md)
 

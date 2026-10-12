@@ -1,0 +1,35 @@
+[
+  {
+    "family": "CandyDisplay",
+    "sourceUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/zcoolkuaile/ZCOOLKuaiLe-Regular.ttf",
+    "sourceSha256": "812a6fc1fe54b6d73a419245c32dfeba8aa33104d5be90d1cf6af082007cb71d",
+    "font": "public/fonts/CandyDisplay.woff",
+    "fontSha256": "33f6d1fe26d81d23537c94ca358f710871d34174fe276ab4a843eeae5217d585",
+    "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~·。一下乐也于今住创到力劲印原向告嘭地天头子属己带广开张快念想我把拍挤接方更有来柠概檬气水汽法泡活滴点甜留白的纸罐自让记蹦这远酸飞！，",
+    "missing": [],
+    "bodyOnlyCharacters": "",
+    "license": "public/fonts/CandyDisplay-OFL.txt"
+  },
+  {
+    "family": "SerifDisplay",
+    "sourceUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/mashanzheng/MaShanZheng-Regular.ttf",
+    "sourceSha256": "6d2546bb189c732a8ca29af9e22457b152387d158aa459e4ac2ce1e51788b7fb",
+    "font": "public/fonts/SerifDisplay.woff",
+    "fontSha256": "f855915cfeda5b6e0f9ff1842c69cf1c93a41e54a5274b46d02483c1aaade16d",
+    "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~。一万创动原唤声天子己开彩想慢成把春有机来样汇法点生画的矿种粒纹自花让象醒长，",
+    "missing": [],
+    "bodyOnlyCharacters": "·",
+    "license": "public/fonts/SerifDisplay-OFL.txt"
+  },
+  {
+    "family": "VideoSans",
+    "sourceUrl": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
+    "sourceSha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+    "font": "public/fonts/VideoSans.woff",
+    "fontSha256": "e67919f3bae827546bf446729eabd6fe35d4e78ad5071d8b53ea66ae97a3d23d",
+    "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~·。一万下乐也于今住创到力动劲印原向告唤嘭地声天头子属己带广开张彩快念想慢成我把拍挤接方春更有机来柠样概檬气水汇汽法泡活滴点甜生画留白的矿种粒纸纹罐自花让记象蹦这远酸醒长飞！，",
+    "missing": [],
+    "bodyOnlyCharacters": "",
+    "license": "public/fonts/VideoSans-OFL.txt"
+  }
+]

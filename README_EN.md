@@ -2,15 +2,21 @@
 
 **Make an idea move. Let one subject carry the pictures, rhythm and outcome.**
 
-The default entry is a 15-second Forge film: iron black, acid green, hard typography, original images, fast object handoffs and a complete 128 BPM score. Persistent objects, the camera, music and event effects share one clock, with independently authored layouts for three ratios. This original editable starting point still needs content-specific direction and actual visual and listening review.
+Start with six colorful original films: cotton pink, mint and lemon soda; cream, cobalt and red/yellow paper-flight stickers; and a light mineral-pigment bloom. Each theme has separately composed landscape and portrait films, 16 seconds each, with its own subject, motion and original score.
 
-| Forge entry | Ratio | Original project |
-| :--- | :--- | :--- |
-| [Landscape MP4](demos/forge/horizontal.mp4) | 16:9 | [forge-launch.json](examples/studio/forge-launch.json) |
-| [Portrait MP4](demos/forge/portrait.mp4) | 9:16 | [forge-portrait.json](examples/studio/forge-portrait.json) |
-| [Square MP4](demos/forge/square.mp4) | 1:1 | [forge-square.json](examples/studio/forge-square.json) |
+[![Six actual encoded showcase posters](demos/bright-showcase/cover.png)](demos/bright-showcase/README.md)
 
-The [Forge inventory](references/v4-forge-status.json) binds the actual inputs, engine and MP4s. The [delivery record](references/v4-forge-report.md) states checks and repairs. Technical validation, sampled visual review, complete playback, human listening and user aesthetic acceptance are separate records; this page does not substitute for them.
+| Theme | Landscape 16:9 | Portrait 9:16 | Direction |
+| --- | --- | --- | --- |
+| Citrus pop | [MP4](demos/bright-showcase/citrus-horizontal.mp4) | [MP4](demos/bright-showcase/citrus-portrait.mp4) | Candy bounce, squeeze, fizz and landing |
+| Let ideas fly | [MP4](demos/bright-showcase/paper-horizontal.mp4) | [MP4](demos/bright-showcase/paper-portrait.mp4) | Paper folds, die-cut stickers and a flight path |
+| Mineral bloom | [MP4](demos/bright-showcase/mineral-horizontal.mp4) | [MP4](demos/bright-showcase/mineral-portrait.mp4) | Light paper, growing petals and a mineral motif |
+
+[Animated gallery](demos/bright-showcase/README.md) · [Edit and rerender](showcase/README.md) · [Actual inventory](references/bright-showcase-status.json)
+
+The editable Remotion showcase uses original SVGs, bundled local fonts and three original scores. Its runner renders, decodes, measures actual DOM text bounds and records source/artifact hashes. The existing strict JSON production route remains available through `studio/make.mjs`; `init` still creates Forge. These free-form films are not presented as new entries in the old JSON theme enum.
+
+The earlier [Forge films](demos/forge/README.md) remain another visual direction. The front page now features the bright showcase. Technical checks, sampled visual review, automated playback and human listening are distinct scopes.
 
 [Install and use](USAGE.md) · [Continuity guide](studio/CONTINUITY.md) · [Skill entrypoint](SKILL.md) · [中文](README.md) · [BrewReel study](references/brewreel-distillation.md) · [OneTake study](references/onetake-architecture.md)
 

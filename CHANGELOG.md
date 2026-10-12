@@ -1,5 +1,13 @@
 # Changelog
 
+## Bright showcase · 2026-10-12
+
+- Three original, colorful directions with separately composed landscape and portrait films, 16 seconds at 30 fps.
+- Candy soda, die-cut paper flight and a light mineral bloom use original vector art, bundled OFL font subsets and distinct eight-bar original scores.
+- Separate editable Remotion showcase entry, full-frame DOM bounds, full video/audio decoding, current-source and artifact hashes, actual encoded GIFs and posters.
+- [Six-film gallery](demos/bright-showcase/README.md) and [reproduction guide](showcase/README.md). Actual review/playback scopes are recorded in the [inventory](references/bright-showcase-status.json).
+- The existing strict Studio engine and its historical media retain their original bytes; the new showcase does not add themes to that JSON enum.
+
 ## v4.0.0-alpha.3 · 2026-10-12
 
 | Change | Actual implementation |
