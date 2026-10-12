@@ -7,9 +7,9 @@
 | 横版 16:9：柠檬汽水 | 新竖版 9:16：莓好一口 |
 | :--- | :--- |
 | [![柠檬汽水横版实际动图](demos/bright-showcase/citrus-horizontal.gif)](demos/bright-showcase/citrus-horizontal.mp4) | [![莓好一口竖版实际动图](demos/portrait-cases/berry-portrait.gif)](demos/portrait-cases/berry-portrait.mp4) |
-| [播放带配乐的横版 MP4（1280×720）](demos/bright-showcase/citrus-horizontal.mp4) | [播放带配乐的竖版 MP4（1080×1920）](demos/portrait-cases/berry-portrait.mp4) |
+| [带配乐的横版 MP4（1280×720）](demos/bright-showcase/citrus-horizontal.mp4) | [带配乐的竖版 MP4（1080×1920）](demos/portrait-cases/berry-portrait.mp4) |
 
-动图来自实际成片，为 10 fps 静音预览；点击打开 30 fps、带声音的 MP4。[全部案例](demos/README.md) · [横竖成对的动态画廊](demos/bright-showcase/README.md) · [新四条竖版动态画廊](demos/portrait-cases/README.md)
+动图来自实际成片，为 10 fps 静音预览。GitHub 对较大的 MP4 不提供文件页预览；打开 MP4 链接后，点击「View raw」下载 30 fps、带声音的完整成片。[全部案例](demos/README.md) · [横竖成对的动态画廊](demos/bright-showcase/README.md) · [新四条竖版动态画廊](demos/portrait-cases/README.md)
 
 ## 三组横竖双版本
 

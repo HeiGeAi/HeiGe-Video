@@ -7,9 +7,9 @@ Create editable animations in code, from object actions, storyboards and music t
 | Landscape 16:9: Citrus pop | New portrait 9:16: Berry Cone |
 | :--- | :--- |
 | [![Actual Citrus landscape animation](demos/bright-showcase/citrus-horizontal.gif)](demos/bright-showcase/citrus-horizontal.mp4) | [![Actual Berry portrait animation](demos/portrait-cases/berry-portrait.gif)](demos/portrait-cases/berry-portrait.mp4) |
-| [Play landscape MP4 with sound (1280×720)](demos/bright-showcase/citrus-horizontal.mp4) | [Play portrait MP4 with sound (1080×1920)](demos/portrait-cases/berry-portrait.mp4) |
+| [Landscape MP4 with sound (1280×720)](demos/bright-showcase/citrus-horizontal.mp4) | [Portrait MP4 with sound (1080×1920)](demos/portrait-cases/berry-portrait.mp4) |
 
-GIFs are silent 10 fps previews extracted from the final films. Click to open the 30 fps MP4 with sound. [All cases](demos/README.md) · [Paired landscape and portrait gallery](demos/bright-showcase/README.md) · [Four new portrait films](demos/portrait-cases/README.md)
+GIFs are silent 10 fps previews extracted from the final films. GitHub does not preview larger MP4s on file pages; open an MP4 link and choose **View raw** to download the complete 30 fps film with sound. [All cases](demos/README.md) · [Paired landscape and portrait gallery](demos/bright-showcase/README.md) · [Four new portrait films](demos/portrait-cases/README.md)
 
 ## Three themes in both orientations
 
