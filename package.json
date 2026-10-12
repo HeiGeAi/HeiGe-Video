@@ -1,0 +1,26 @@
+{
+  "name": "heige-video",
+  "version": "4.0.0-alpha.3",
+  "private": true,
+  "description": "Original deterministic films and controlled Remotion production",
+  "scripts": {
+    "studio": "remotion studio studio/src/index.tsx",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test studio/test/*.test.mjs",
+    "doctor": "node studio/make.mjs doctor"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "0.1.100",
+    "@remotion/bundler": "4.0.526",
+    "@remotion/cli": "4.0.526",
+    "@remotion/renderer": "4.0.526",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "remotion": "4.0.526"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}

@@ -147,6 +147,38 @@ class CanvasV3Tests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'closed'):
                 source.frame(.5)
 
+    def test_group_signal_permission_denied_falls_back_and_reaps_worker(self):
+        # Real worker ignores TERM; deny only killpg to exercise individual
+        # PID escalation, bounded waiting and actual OS reaping.
+        code = "process.on('SIGTERM', () => {}); setInterval(() => {}, 1000); " + RENDER
+        with self.source(code) as source:
+            process = source.process
+            self.assertEqual(source.frame(.5)[0], bytes([255, 0, 0, 255]) * 400)
+            with mock.patch.object(rv.os, 'killpg', side_effect=PermissionError('group denied')):
+                with mock.patch.object(process, 'kill', wraps=process.kill) as direct_kill:
+                    source.close()
+                    direct_kill.assert_called_once()
+            self.assertIsNotNone(process.poll())
+            self.assertIsNone(source.process)
+            self.assertTrue(process.stdin.closed)
+            self.assertTrue(process.stdout.closed)
+            self.assertTrue(source._stderr.closed)
+
+    def test_startup_failure_group_signal_denied_preserves_original_error(self):
+        with mock.patch.object(rv.os, 'killpg', side_effect=PermissionError('group denied')):
+            self.assert_failed_source('exports.DURATION = 0; ' + RENDER, 'duration')
+
+    def test_direct_signal_permission_denied_keeps_alive_worker_visible(self):
+        with self.source('setInterval(() => {}, 1000); ' + RENDER) as source:
+            process = source.process
+            with mock.patch.object(rv.os, 'killpg', side_effect=PermissionError('group denied')):
+                with mock.patch.object(process, 'terminate', side_effect=PermissionError('worker denied')):
+                    with self.assertRaisesRegex(PermissionError, 'worker denied'):
+                        source.close()
+            self.assertIs(source.process, process)
+            self.assertIsNone(process.poll())
+            # Restored signalling lets the context manager reap this real child.
+
     def test_ready_state_at_and_logging_preserve_protocol(self):
         code = """
 exports.DURATION = 2;

@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "heige-continuous-release/1",
+  "version": "4.0.0-alpha.2",
+  "date": "2026-10-12",
+  "engine": "64def42198acd329541f06686cf51694ed581d5367e46d35b7a219db36825bee",
+  "upstreamCommit": "2f5fbd363a0aec22055fbf62489380065737c91d",
+  "environment": {
+    "render": {
+      "node": "22.22.2",
+      "packages": {
+        "remotion": "4.0.526",
+        "@remotion/bundler": "4.0.526",
+        "@remotion/renderer": "4.0.526",
+        "react": "19.2.4",
+        "react-dom": "19.2.4"
+      },
+      "remotionNative": {
+        "compositor": {
+          "sha256": "a76377f4cc0777a5c282dfbde3c649ae7050e7645accc76e34532a2b0cc8b2e1"
+        },
+        "ffmpeg": {
+          "sha256": "899fceb537d0e7609433aa644830cfc8ddcef4b97077c5e2150b43505928c5e9",
+          "version": "ffmpeg version n7.1 Copyright (c) 2000-2024 the FFmpeg developers"
+        },
+        "ffprobe": {
+          "sha256": "3ad991fd4ca0556195e88686b57af91e0518a9ac8abfb3d0d10b85a6fa168527",
+          "version": "ffprobe version n7.1 Copyright (c) 2007-2024 the FFmpeg developers"
+        },
+        "packageHash": "09f8f3e23b30e020411f3d98a6a147efb4f800b533ada56cff3de8c3a06751d6"
+      },
+      "python": {
+        "python": "3.12.13",
+        "Pillow": "12.3.0",
+        "fonttools": "4.61.1"
+      },
+      "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+      "ffprobe": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+      "font": {
+        "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+        "index": 0,
+        "weightScope": "one face with browser synthetic bold"
+      },
+      "browser": {
+        "sha256": "ed7c5c6aff7cc4dd88ee7746c0df97f08a454180b62b7063fc961ba42e10b6a1",
+        "version": "Google Chrome for Testing 152.0.7977.30"
+      }
+    },
+    "playback": {
+      "version": "Google Chrome 155.0.8059.39",
+      "sha256": "717f2904e1d1742bfd5a52a1db4ec4b4874fe861f7958e7b3b78a86bfd2467b8",
+      "headless": true,
+      "remotionVersion": "4.0.526"
+    }
+  },
+  "tests": {
+    "controlled": {
+      "passed": 248,
+      "failed": 0,
+      "skipped": 0
+    },
+    "legacy": {
+      "passed": 44,
+      "failed": 0
+    },
+    "scripts": {
+      "passed": 70,
+      "failed": 0
+    },
+    "typecheck": "passed"
+  },
+  "notes": [
+    "Historical alpha 2 source and media are preserved. The owner rejected their pacing, style and audio on 2026-10-12; prior sampled structural review is not creative acceptance.",
+    "Original implementation and media. Upstream code/assets were not copied.",
+    "Three independent builds: 48 seconds, 1440 encoded frames, 4320 actual temporal captures.",
+    "Complete low-resolution encoded-pixel decoding and actual DOM coverage are structural evidence, not image semantics or aesthetic certification.",
+    "Each visual review covers encoded contact sheets, boundary strips and 18 full-resolution frames. Landscape byte-identical media binds the reviewed v2 pixels to the new v3 engine manifest; it is not presented as unseen new imagery.",
+    "Automated system Chrome 155 playback reached ended at normal speed and remained muted; all three reported zero dropped frames. No full human viewing or listening performed.",
+    "A 3-to-9-second working-panel hold is intentional in these mechanism demos. This does not certify promotional pacing for other films.",
+    "Raw temporal PNGs were temporary and deleted after build. Source and composite hash records remain; independent recomposition of the deleted files is not claimed.",
+    "Failed and superseded build logs and the rejected portrait layout are retained outside the public repository."
+  ],
+  "examples": [
+    {
+      "id": "horizontal",
+      "project": "examples/studio/continuous-launch.json",
+      "input": {
+        "project": "477cdbeff5f27554cf122698f45d1d70c18ff76413e6610e7451dcb74dbb09d6",
+        "assets": {},
+        "subtitles": null,
+        "brief": null
+      },
+      "video": "demos/continuous/horizontal.mp4",
+      "mp4Sha256": "61ce76274e5bfc378e0cb42b36937fcda891311c6e683db993218ee22909db87",
+      "status": "validated",
+      "technical": "pass",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "continuity": {
+        "status": "structural-pass",
+        "coverage": {
+          "expectedFrames": 480,
+          "measuredFrames": 480,
+          "validFrames": 480,
+          "complete": true,
+          "missingFrames": [],
+          "invalidFrames": [],
+          "duplicateFrames": []
+        }
+      },
+      "blur": {
+        "samples": 3,
+        "captures": 1440,
+        "encodedFrames": 480
+      },
+      "audio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.22707059979438782,
+        "rms": 0.008919087944461253,
+        "duration": 16.0
+      },
+      "layout": {
+        "errors": 0
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "61ce76274e5bfc378e0cb42b36937fcda891311c6e683db993218ee22909db87",
+        "droppedFrames": 0
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "本版本完整 MP4 与已实际视审的 horizontal-v2 逐字节同 SHA。重新核新 engine、input、manifest 文件和 artifact inventory，并独立重新解码全部 480 帧灰度及 18 张满分辨率帧，逐张 PNG 哈希与已审证据相同；25 格 contact sheet 与 48 格边界条带也同哈希。因此绑定相同编码像素的先前抽样视审，未声称观看一条不同内容的新片，未完整人工播放或听音。"
+      },
+      "audioListening": {
+        "status": "not-tested",
+        "scope": "Automated full PCM checks passed. No human listening was performed; full Chrome playback was muted."
+      }
+    },
+    {
+      "id": "portrait",
+      "project": "examples/studio/continuous-portrait.json",
+      "input": {
+        "project": "e3f260c43b0e8a9c79b07550541eb3a613999e45deb37e89579bd88ca838c20a",
+        "assets": {},
+        "subtitles": null,
+        "brief": null
+      },
+      "video": "demos/continuous/portrait.mp4",
+      "mp4Sha256": "70e082d4f885b4786122ee3599a0e30036f435b5bfb21db4f7f946eed4fe5489",
+      "status": "validated",
+      "technical": "pass",
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "continuity": {
+        "status": "structural-pass",
+        "coverage": {
+          "expectedFrames": 480,
+          "measuredFrames": 480,
+          "validFrames": 480,
+          "complete": true,
+          "missingFrames": [],
+          "invalidFrames": [],
+          "duplicateFrames": []
+        }
+      },
+      "blur": {
+        "samples": 3,
+        "captures": 1440,
+        "encodedFrames": 480
+      },
+      "audio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.23268695175647736,
+        "rms": 0.00891734475937608,
+        "duration": 16.0
+      },
+      "layout": {
+        "errors": 0
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "70e082d4f885b4786122ee3599a0e30036f435b5bfb21db4f7f946eed4fe5489",
+        "droppedFrames": 0
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "实际本版本 MP4 抽样视审。新解码并观看 25 格 contact sheet、三个边界共 48 格条带及 18 张 720x1280 满分辨率帧。覆盖首末、三次形变、稳定阅读及修复后的明确双行收尾。未完整人工播放，未听音。"
+      },
+      "audioListening": {
+        "status": "not-tested",
+        "scope": "Automated full PCM checks passed. No human listening was performed; full Chrome playback was muted."
+      }
+    },
+    {
+      "id": "square",
+      "project": "examples/studio/continuous-square.json",
+      "input": {
+        "project": "ac6b24417aa66a0f88b6da1d796b92550828badedbe11fc41acce40093aabcb8",
+        "assets": {},
+        "subtitles": null,
+        "brief": null
+      },
+      "video": "demos/continuous/square.mp4",
+      "mp4Sha256": "4fa38aa1e58ddf96d82425e27e202ed40d740bec841a7312ac3b62dab7a3bed2",
+      "status": "validated",
+      "technical": "pass",
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "duration": 16,
+      "frames": 480,
+      "decodedFrames": 480,
+      "continuity": {
+        "status": "structural-pass",
+        "coverage": {
+          "expectedFrames": 480,
+          "measuredFrames": 480,
+          "validFrames": 480,
+          "complete": true,
+          "missingFrames": [],
+          "invalidFrames": [],
+          "duplicateFrames": []
+        }
+      },
+      "blur": {
+        "samples": 3,
+        "captures": 1440,
+        "encodedFrames": 480
+      },
+      "audio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.2338518649339676,
+        "rms": 0.008929085105567882,
+        "duration": 16.0
+      },
+      "layout": {
+        "errors": 0
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "4fa38aa1e58ddf96d82425e27e202ed40d740bec841a7312ac3b62dab7a3bed2",
+        "droppedFrames": 0
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "实际本版本 MP4 抽样视审。新解码并观看 25 格 contact sheet、三个边界共 48 格动作条带及 18 张 1080x1080 满分辨率帧。覆盖首末、三个变形窗口、工作阅读段和完整收尾。未完整人工播放，未听音。"
+      },
+      "audioListening": {
+        "status": "not-tested",
+        "scope": "Automated full PCM checks passed. No human listening was performed; full Chrome playback was muted."
+      }
+    }
+  ],
+  "sourceCommit": "e97b1978a743ae83bf9c91016c85e577a023f894",
+  "userFeedback": "Creative delivery rejected by the owner: slow motion, weak style and no full BGM. Retained as historical structural demos, not current creative recommendations."
+}

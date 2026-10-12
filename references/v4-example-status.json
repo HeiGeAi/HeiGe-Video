@@ -1,0 +1,839 @@
+{
+  "schemaVersion": "heige-v4-release/1",
+  "version": "4.0.0-alpha.1",
+  "date": "2026-10-12",
+  "upstreamCommit": "1bf00debaf81462c1d6a8365e8822764ba5fb910",
+  "sourceCommit": "29135480806d061f1af65734b17dcecad3a31f4a",
+  "engine": "7171a2d581ca0d358261f6a12a342b38e3aee9048599b6d6d5a521928c3454a3",
+  "environment": {
+    "node": "22.22.2",
+    "packages": {
+      "remotion": "4.0.526",
+      "@remotion/bundler": "4.0.526",
+      "@remotion/renderer": "4.0.526",
+      "react": "19.2.4",
+      "react-dom": "19.2.4"
+    },
+    "remotionNative": {
+      "compositor": {
+        "sha256": "a76377f4cc0777a5c282dfbde3c649ae7050e7645accc76e34532a2b0cc8b2e1"
+      },
+      "ffmpeg": {
+        "sha256": "899fceb537d0e7609433aa644830cfc8ddcef4b97077c5e2150b43505928c5e9",
+        "version": "ffmpeg version n7.1 Copyright (c) 2000-2024 the FFmpeg developers"
+      },
+      "ffprobe": {
+        "sha256": "3ad991fd4ca0556195e88686b57af91e0518a9ac8abfb3d0d10b85a6fa168527",
+        "version": "ffprobe version n7.1 Copyright (c) 2007-2024 the FFmpeg developers"
+      },
+      "packageHash": "09f8f3e23b30e020411f3d98a6a147efb4f800b533ada56cff3de8c3a06751d6"
+    },
+    "python": {
+      "python": "3.12.13",
+      "Pillow": "12.3.0",
+      "fonttools": "4.61.1"
+    },
+    "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+    "font": {
+      "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+      "index": 0,
+      "weightScope": "one face with browser synthetic bold"
+    },
+    "browser": {
+      "sha256": "ed7c5c6aff7cc4dd88ee7746c0df97f08a454180b62b7063fc961ba42e10b6a1",
+      "version": "Google Chrome for Testing 152.0.7977.30"
+    }
+  },
+  "playbackBrowser": {
+    "version": "Google Chrome 155.0.8059.39",
+    "sha256": "717f2904e1d1742bfd5a52a1db4ec4b4874fe861f7958e7b3b78a86bfd2467b8",
+    "headless": true,
+    "remotionVersion": "4.0.526"
+  },
+  "playbackCheckerSha256": "1782513e9ed8a3a0e326f792e6c680beafac24aea5473c34ce53cf584506958b",
+  "tests": {
+    "controlled": {
+      "tests": 96,
+      "passed": 96,
+      "skipped": 0
+    },
+    "legacyRuntime": {
+      "tests": 44,
+      "passed": 44
+    },
+    "scripts": {
+      "tests": 27,
+      "passed": 27
+    },
+    "typecheck": "pass",
+    "githubCI": "See pull-request checks separately; this inventory records the local final batch"
+  },
+  "coverage": {
+    "release_builds": 5,
+    "overview_cells": 98,
+    "action_strip_cells": 128,
+    "native_resolution_frames_bound_to_release": 48,
+    "native_resolution_frames_freshly_reviewed_from_release": 42,
+    "native_resolution_frames_bound_by_byte_identical_mp4": 6,
+    "byte_identical_builds": [
+      "release/product"
+    ],
+    "layout_sample_count": 86,
+    "layout_error_count": 0,
+    "counts_include_temporal_overlap": true
+  },
+  "examples": [
+    {
+      "id": "median",
+      "project": "examples/studio/median.json",
+      "video": "demos/super/median.mp4",
+      "poster": "demos/super/median.jpg",
+      "mp4Sha256": "0ef24239f51e97a586850b66d88bd11d151040c64dc1018d8298412429343239",
+      "manifestFileSha256": "1b2f41b4446a543d4829786ca8607f43341d06a28c94449ccdb8b353640142a6",
+      "status": "validated",
+      "technical": "pass",
+      "previewReasons": [],
+      "duration": 20,
+      "frames": 600,
+      "format": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30
+      },
+      "input": {
+        "project": "f17f63192a30bd2af6abfae225326262656e47faa9704bfa6135c02682f937ec",
+        "assets": {
+          "score": "0e70f3731469b0af9a304c3767c4ed9a2d6e7447fd1a09e31f6d3913abc168f0"
+        },
+        "subtitles": null,
+        "brief": null
+      },
+      "decodedFrames": 600,
+      "uniformFrames": [],
+      "layout": {
+        "samples": 22,
+        "errors": 0
+      },
+      "audio": {
+        "present": true,
+        "listening": "not-tested",
+        "finite": true,
+        "peak": 0.04165426641702652,
+        "rms": 0.009270433871597622,
+        "duration": 20.0106875
+      },
+      "sourceAudio": null,
+      "visualReview": {
+        "status": "sampled-pass",
+        "mode": "Fresh actual encoded MP4 sheets, action strips and native-resolution frames; no inherited approval.",
+        "coverage": {
+          "overview_cells": 26,
+          "overview_times": [
+            0,
+            1,
+            2,
+            2.16,
+            3,
+            4,
+            5,
+            5.88,
+            6,
+            7,
+            8,
+            9,
+            10,
+            10.6,
+            11,
+            12,
+            13,
+            14,
+            14.879999999999999,
+            15,
+            16,
+            17,
+            18,
+            18.88,
+            19,
+            19.966666666666665
+          ],
+          "action_strip_cells": 48,
+          "action_strips": [
+            {
+              "shot": "distribution",
+              "artifact": "action-distribution.png",
+              "times": [
+                3,
+                3.2,
+                3.4,
+                3.6,
+                3.8,
+                4,
+                4.2,
+                4.4,
+                4.6,
+                4.8,
+                5,
+                5.2,
+                5.4,
+                5.6,
+                5.8,
+                6
+              ]
+            },
+            {
+              "shot": "sorting",
+              "artifact": "action-sorting.png",
+              "times": [
+                7,
+                7.2,
+                7.4,
+                7.6,
+                7.8,
+                8,
+                8.2,
+                8.4,
+                8.6,
+                8.8,
+                9,
+                9.2,
+                9.4,
+                9.6,
+                9.8,
+                10
+              ]
+            },
+            {
+              "shot": "comparison",
+              "artifact": "action-comparison.png",
+              "times": [
+                12,
+                12.2,
+                12.4,
+                12.6,
+                12.8,
+                13,
+                13.2,
+                13.4,
+                13.6,
+                13.8,
+                14,
+                14.2,
+                14.4,
+                14.6,
+                14.8,
+                15
+              ]
+            }
+          ],
+          "native_resolution_frame_count": 14,
+          "native_resolution_frame_indices": [
+            0,
+            120,
+            180,
+            210,
+            228,
+            240,
+            252,
+            276,
+            288,
+            294,
+            300,
+            330,
+            420,
+            599
+          ],
+          "evidence_source": "this release encoded MP4",
+          "counts_include_temporal_overlap": true
+        },
+        "newNativeFramesReviewed": 14,
+        "observations": [
+          "实际条形图始终对应 A22、B12、C98、D18、E20 元，C98 红色强调，零基线与单位可见，文案已改为一笔极端值。",
+          "排序依次将 B、D、E 移至侧轨再插入，抽样中身份和金额不交换、不丢失；移动阶段不显示 rank，最终 01 B12、02 D18、03 E20、04 A22、05 C98。",
+          "E20 在原始位置、侧轨与最终中间位置保持红色强调。横版 compare 左平均数34元，右中位数20元，方法与标题一致。",
+          "首末帧文字完整，示例数据声明可见；末段长停留属于阅读窗口。"
+        ],
+        "humanFullPlayback": "not performed"
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "0ef24239f51e97a586850b66d88bd11d151040c64dc1018d8298412429343239",
+        "ended": true,
+        "duration": 20,
+        "wallSeconds": 20.06059999999404,
+        "decodedFrames": 600,
+        "presentedFrames": 600,
+        "droppedFrames": 0,
+        "muted": true,
+        "rate": 1,
+        "errors": [],
+        "scope": "muted automated normal-speed continuous browser playback"
+      },
+      "listening": "not performed"
+    },
+    {
+      "id": "median-portrait",
+      "project": "examples/studio/median-portrait.json",
+      "video": "demos/super/median-portrait.mp4",
+      "poster": "demos/super/median-portrait.jpg",
+      "mp4Sha256": "f3ba0af7bec4c1944f302896a33cf771d34b562e1bde5b4bffc3c53aa3035b03",
+      "manifestFileSha256": "b009ad795798fd94680c9b9a4987b37cef6bb5c3182177ac52c74e4717317c3b",
+      "status": "validated",
+      "technical": "pass",
+      "previewReasons": [],
+      "duration": 20,
+      "frames": 600,
+      "format": {
+        "width": 720,
+        "height": 1280,
+        "fps": 30
+      },
+      "input": {
+        "project": "0c0bbda7d8c73824854d1ae93d12c564915d86451e0db717918d4c511d341005",
+        "assets": {
+          "score": "0e70f3731469b0af9a304c3767c4ed9a2d6e7447fd1a09e31f6d3913abc168f0"
+        },
+        "subtitles": null,
+        "brief": null
+      },
+      "decodedFrames": 600,
+      "uniformFrames": [],
+      "layout": {
+        "samples": 22,
+        "errors": 0
+      },
+      "audio": {
+        "present": true,
+        "listening": "not-tested",
+        "finite": true,
+        "peak": 0.04165426641702652,
+        "rms": 0.009270433871597622,
+        "duration": 20.0106875
+      },
+      "sourceAudio": null,
+      "visualReview": {
+        "status": "sampled-pass",
+        "mode": "Fresh actual encoded MP4 sheets, action strips and native-resolution frames; no inherited approval.",
+        "coverage": {
+          "overview_cells": 26,
+          "overview_times": [
+            0,
+            1,
+            2,
+            2.16,
+            3,
+            4,
+            5,
+            5.88,
+            6,
+            7,
+            8,
+            9,
+            10,
+            10.6,
+            11,
+            12,
+            13,
+            14,
+            14.879999999999999,
+            15,
+            16,
+            17,
+            18,
+            18.88,
+            19,
+            19.966666666666665
+          ],
+          "action_strip_cells": 48,
+          "action_strips": [
+            {
+              "shot": "distribution",
+              "artifact": "action-distribution.png",
+              "times": [
+                3,
+                3.2,
+                3.4,
+                3.6,
+                3.8,
+                4,
+                4.2,
+                4.4,
+                4.6,
+                4.8,
+                5,
+                5.2,
+                5.4,
+                5.6,
+                5.8,
+                6
+              ]
+            },
+            {
+              "shot": "sorting",
+              "artifact": "action-sorting.png",
+              "times": [
+                7,
+                7.2,
+                7.4,
+                7.6,
+                7.8,
+                8,
+                8.2,
+                8.4,
+                8.6,
+                8.8,
+                9,
+                9.2,
+                9.4,
+                9.6,
+                9.8,
+                10
+              ]
+            },
+            {
+              "shot": "comparison",
+              "artifact": "action-comparison.png",
+              "times": [
+                12,
+                12.2,
+                12.4,
+                12.6,
+                12.8,
+                13,
+                13.2,
+                13.4,
+                13.6,
+                13.8,
+                14,
+                14.2,
+                14.4,
+                14.6,
+                14.8,
+                15
+              ]
+            }
+          ],
+          "native_resolution_frame_count": 9,
+          "native_resolution_frame_indices": [
+            0,
+            180,
+            228,
+            252,
+            288,
+            300,
+            330,
+            420,
+            599
+          ],
+          "evidence_source": "this release encoded MP4",
+          "counts_include_temporal_overlap": true
+        },
+        "newNativeFramesReviewed": 9,
+        "observations": [
+          "竖版条形图五个对象及金额清晰，C98强调整体读数，单位与零基线可见。",
+          "竖版排序侧轨没有挤出容器或与主列卡片交叠，移动期无重复 rank，最终独立01至05按B、D、E、A、C显示；E20最终处于中间并保持强调。",
+          "compare 改为两个上下组，各自有标题：上平均数及34元，下中位数及20元，内容归属明确。",
+          "首帧问题与末帧结论完整，示例数据声明保留，CJK字形无缺字截断。"
+        ],
+        "humanFullPlayback": "not performed"
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "f3ba0af7bec4c1944f302896a33cf771d34b562e1bde5b4bffc3c53aa3035b03",
+        "ended": true,
+        "duration": 20,
+        "wallSeconds": 20.05779999999702,
+        "decodedFrames": 600,
+        "presentedFrames": 600,
+        "droppedFrames": 0,
+        "muted": true,
+        "rate": 1,
+        "errors": [],
+        "scope": "muted automated normal-speed continuous browser playback"
+      },
+      "listening": "not performed"
+    },
+    {
+      "id": "product",
+      "project": "examples/studio/product.json",
+      "video": "demos/super/product.mp4",
+      "poster": "demos/super/product.jpg",
+      "mp4Sha256": "72783a7ee93bff19b580303557d1fa586d2bf980d2ecb29b3c2f3c6dbd74b090",
+      "manifestFileSha256": "7f54721bb60bd4edbce9ef755b4c448f03ac60dcd94a169aa80e97a8cbcdebc8",
+      "status": "validated",
+      "technical": "pass",
+      "previewReasons": [],
+      "duration": 18,
+      "frames": 540,
+      "format": {
+        "width": 720,
+        "height": 1280,
+        "fps": 30
+      },
+      "input": {
+        "project": "c801a3e99379f30f22408e294b5b784ced64589f1242dc95861b2ba9af1568e3",
+        "assets": {},
+        "subtitles": null,
+        "brief": null
+      },
+      "decodedFrames": 540,
+      "uniformFrames": [],
+      "layout": {
+        "samples": 18,
+        "errors": 0
+      },
+      "audio": {
+        "present": false,
+        "listening": "not-tested"
+      },
+      "sourceAudio": null,
+      "visualReview": {
+        "status": "sampled-pass",
+        "mode": "Previously reviewed encoded pixels bound to this byte-identical final MP4 after fresh engine/input/manifest/inventory/video verification; no claim of a second fresh viewing.",
+        "coverage": {
+          "overview_cells": 23,
+          "overview_times": [
+            0,
+            1,
+            2,
+            2.16,
+            3,
+            4,
+            5,
+            6,
+            7,
+            7.32,
+            8,
+            9,
+            10,
+            11,
+            12,
+            12.6,
+            13,
+            14,
+            15,
+            16,
+            16.88,
+            17,
+            17.966666666666665
+          ],
+          "action_strip_cells": 32,
+          "action_strips": [
+            {
+              "shot": "workflow",
+              "artifact": "action-workflow.png",
+              "times": [
+                3,
+                3.2,
+                3.4,
+                3.6,
+                3.8,
+                4,
+                4.2,
+                4.4,
+                4.6,
+                4.8,
+                5,
+                5.2,
+                5.4,
+                5.6,
+                5.8,
+                6
+              ]
+            },
+            {
+              "shot": "routes",
+              "artifact": "action-routes.png",
+              "times": [
+                9,
+                9.2,
+                9.4,
+                9.6,
+                9.8,
+                10,
+                10.2,
+                10.4,
+                10.6,
+                10.8,
+                11,
+                11.2,
+                11.4,
+                11.6,
+                11.8,
+                12
+              ]
+            }
+          ],
+          "native_resolution_frame_count": 6,
+          "native_resolution_frame_indices": [
+            0,
+            150,
+            238,
+            330,
+            420,
+            539
+          ],
+          "evidence_source": "reference encoded MP4 with identical SHA256",
+          "counts_include_temporal_overlap": true
+        },
+        "newNativeFramesReviewed": 0,
+        "observations": [
+          "首帧主标题可见，文字无截断或缺字。暗色光束作为背景，未挤出或覆盖排版。",
+          "四步流程文字完整，路径与焦点按步骤推进。",
+          "竖版 compare 每个上下内容组有独立标题，受控生产与自由导演归属清楚。",
+          "末帧标题与生产路线预发布说明完整；长停留属于文字阅读窗口。"
+        ],
+        "humanFullPlayback": "not performed"
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "72783a7ee93bff19b580303557d1fa586d2bf980d2ecb29b3c2f3c6dbd74b090",
+        "ended": true,
+        "duration": 18,
+        "wallSeconds": 18.02,
+        "decodedFrames": 540,
+        "presentedFrames": 540,
+        "droppedFrames": 0,
+        "muted": true,
+        "rate": 1,
+        "errors": [],
+        "scope": "muted automated normal-speed continuous browser playback"
+      },
+      "listening": "not applicable"
+    },
+    {
+      "id": "audio-clock",
+      "project": "examples/studio/audio-clock-mixed.json",
+      "video": "demos/super/audio-clock.mp4",
+      "poster": "demos/super/audio-clock.jpg",
+      "mp4Sha256": "dcaf4bec2728255bfd2319fa9bc761cced595073cedba8c3f16f2f49ec1586ef",
+      "manifestFileSha256": "199f76d4b6f62c126b29269a03b9f1fcbc0d15465b8828b59a1229b12fbd1e83",
+      "status": "preview",
+      "technical": "pass",
+      "previewReasons": [
+        "mock audio"
+      ],
+      "duration": 8,
+      "frames": 240,
+      "format": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30
+      },
+      "input": {
+        "project": "05a094348611ad08a7d8df8afc89048b20b204298372204843402b76e8502b83",
+        "assets": {
+          "clock": "4d5e667b0eb7c52dbc25dcd524b302c584508ef423864aabced1911eac8df397",
+          "score": "0e70f3731469b0af9a304c3767c4ed9a2d6e7447fd1a09e31f6d3913abc168f0"
+        },
+        "subtitles": "c0f00557cc9dd84479811d5b2607b194c9a1561f7d7fad50802663be9ed74e77",
+        "brief": null
+      },
+      "decodedFrames": 240,
+      "uniformFrames": [],
+      "layout": {
+        "samples": 10,
+        "errors": 0
+      },
+      "audio": {
+        "present": true,
+        "listening": "not-tested",
+        "finite": true,
+        "peak": 0.10906551778316498,
+        "rms": 0.021680580124281295,
+        "duration": 8.0
+      },
+      "sourceAudio": {
+        "samples": 128000,
+        "sampleRate": 16000,
+        "duration": 8,
+        "rms": 0.021477440091904686,
+        "peak": 0.09918980300426483,
+        "scope": "source recording independently decoded; listening not tested"
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "mode": "fresh actual encoded MP4 frames; no inherited approval",
+        "coverage": {
+          "overview_cells": 11,
+          "overview_times": [
+            0,
+            1,
+            2,
+            2.88,
+            3,
+            4,
+            5,
+            6,
+            6.88,
+            7,
+            7.966666666666667
+          ],
+          "action_strip_cells": 0,
+          "action_strips": [],
+          "native_resolution_frame_count": 12,
+          "native_resolution_frame_indices": [
+            0,
+            2,
+            3,
+            30,
+            110,
+            111,
+            122,
+            123,
+            150,
+            230,
+            231,
+            239
+          ],
+          "evidence_source": "this release encoded MP4",
+          "counts_include_temporal_overlap": true
+        },
+        "newNativeFramesReviewed": 12,
+        "observations": [
+          "新字幕实际编码保留全角百分比１２．５％、中文紧接的负２．５度及比例３：２，小数点、百分号、负号、冒号没有丢失。",
+          "cue1 第3帧（0.100秒）出现，第111帧（3.700秒）消失；cue2 第123帧（4.100秒）出现，第231帧（7.700秒）消失。",
+          "首末帧、主体与底栏均无缺字、裁切或文字碰撞。mock 保持 preview，不证明人声的音素同步或听感。"
+        ],
+        "humanFullPlayback": "not performed"
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "dcaf4bec2728255bfd2319fa9bc761cced595073cedba8c3f16f2f49ec1586ef",
+        "ended": true,
+        "duration": 8,
+        "wallSeconds": 8.24470000000298,
+        "decodedFrames": 240,
+        "presentedFrames": 208,
+        "droppedFrames": 28,
+        "muted": true,
+        "rate": 1,
+        "errors": [],
+        "scope": "muted automated normal-speed continuous browser playback"
+      },
+      "listening": "not performed",
+      "playbackRepeat": {
+        "status": "passed",
+        "mp4Sha256": "dcaf4bec2728255bfd2319fa9bc761cced595073cedba8c3f16f2f49ec1586ef",
+        "wallSeconds": 8.27190000000596,
+        "decodedFrames": 240,
+        "presentedFrames": 240,
+        "droppedFrames": 0,
+        "scope": "same encoding replayed separately; first-run drops retained, cause not proven"
+      }
+    },
+    {
+      "id": "media-square",
+      "project": "examples/studio/media-square.json",
+      "video": "demos/super/media-square.mp4",
+      "poster": "demos/super/media-square.jpg",
+      "mp4Sha256": "c53518ce41ce8378bdc585e44db212bfdd3a84108b515c3d452054ec024f63bc",
+      "manifestFileSha256": "0710b21faa61e90cb26b72077c86154d3a398262651fb54d46d80607492b8e00",
+      "status": "preview",
+      "technical": "pass",
+      "previewReasons": [
+        "draft requested"
+      ],
+      "duration": 8,
+      "frames": 240,
+      "format": {
+        "width": 1080,
+        "height": 1080,
+        "fps": 30
+      },
+      "input": {
+        "project": "04ed0bc87ec1afc436288e2175337e971610099415f8e3c59ad04fe7ffc4e3c0",
+        "assets": {
+          "diagram": "73315df155023327b9a0bad2672fafc5ea212ac93dd7983c51c61d9e0cd5869d",
+          "motion": "a99bdef99f27f28f1649b393606246045beaa865b1d80fe089cbff30c871b2a0"
+        },
+        "subtitles": null,
+        "brief": null
+      },
+      "decodedFrames": 240,
+      "uniformFrames": [],
+      "layout": {
+        "samples": 14,
+        "errors": 0
+      },
+      "audio": {
+        "present": false,
+        "listening": "not-tested"
+      },
+      "sourceAudio": null,
+      "visualReview": {
+        "status": "sampled-pass",
+        "mode": "fresh actual encoded MP4 frames; no inherited approval",
+        "coverage": {
+          "overview_cells": 12,
+          "overview_times": [
+            0,
+            1,
+            2,
+            2.16,
+            3,
+            4,
+            5,
+            5.16,
+            6,
+            7,
+            7.4399999999999995,
+            7.966666666666667
+          ],
+          "action_strip_cells": 0,
+          "action_strips": [],
+          "native_resolution_frame_count": 7,
+          "native_resolution_frame_indices": [
+            0,
+            30,
+            90,
+            120,
+            165,
+            180,
+            239
+          ],
+          "evidence_source": "this release encoded MP4",
+          "counts_include_temporal_overlap": true
+        },
+        "newNativeFramesReviewed": 7,
+        "observations": [
+          "首帧已有原创图及素材说明，标题按入场动作随后出现；标题、媒体容器、底部来源说明没有碰撞。",
+          "原图片与本地视频镜头的五个节点及三条横线完整，video 0秒、1秒、2.5秒有可见缩放变化，未出现资源占位或缺帧空画面。",
+          "末帧保留证据与方形机制测试说明完整；草稿保持 preview。"
+        ],
+        "humanFullPlayback": "not performed"
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "c53518ce41ce8378bdc585e44db212bfdd3a84108b515c3d452054ec024f63bc",
+        "ended": true,
+        "duration": 8,
+        "wallSeconds": 8.018099999994039,
+        "decodedFrames": 240,
+        "presentedFrames": 240,
+        "droppedFrames": 0,
+        "muted": true,
+        "rate": 1,
+        "errors": [],
+        "scope": "muted automated normal-speed continuous browser playback"
+      },
+      "listening": "not applicable"
+    }
+  ],
+  "observedFailuresAndRepairs": [
+    "Missing optional Remotion native compositor rejected a real render; doctor now checks platform binaries before output.",
+    "Noto CJK metric overflow and ancestor clipping were rejected; line height and space for translated content were corrected.",
+    "Image/video inline baseline caused media-frame block overflow; both replaced elements now use display:block.",
+    "Full-width decimal, percentage, ratio and adjacent negative signs were lost by punctuation cleanup; parser and actual renderer regression cases now preserve meaning.",
+    "Output initialization EACCES could leave the acquired lock; two actual chmod-denied OS builds now confirm cleanup. A separate cleanup-error injection confirms lock release.",
+    "One font preparation timed out at 120 seconds while another local render was busy; retry passed. Root cause was not established.",
+    "Playback helper Range self-check rejected its first shared-fd implementation; independent response descriptors fixed it, and the rejected report was retained."
+  ],
+  "limits": [
+    "Technical and sampled visual validation do not certify every frame aesthetically or establish actual listening.",
+    "Mock audio and draft media fixtures remain preview. No human narration, ASR alignment, paid generation or model blind comparison was tested.",
+    "First normal-speed audio-clock playback dropped 28 frames; a separate replay of the same MP4 dropped 0. Both are retained; smoothness across machines is not certified.",
+    "Hashes check consistency, not authorship or an external trusted signature.",
+    "Local macOS render and Chrome playback are verified. Linux is separately exercised by the CI workflow; Windows is not verified."
+  ]
+}

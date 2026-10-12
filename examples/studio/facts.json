@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "heige-video/4",
+  "title": "逐行引用格式测试",
+  "mode": "explainer",
+  "ratio": "16:9",
+  "theme": "ledger",
+  "draft": true,
+  "facts": [{"id": "format-example", "text": "甲有2次记录。乙有8次记录。", "source": "facts-brief.md（教学格式样例）"}],
+  "shots": [{
+    "id": "evidence", "type": "bars", "title": "引用跟着对象走", "body": "仅用于证据格式测试", "duration": 4,
+    "unit": "次", "data": [{"id": "a", "label": "甲", "value": 2}, {"id": "b", "label": "乙", "value": 8}],
+    "claims": [
+      {"text": "甲有2次记录", "factId": "format-example", "quote": "甲有2次记录。乙有8次记录。"},
+      {"text": "乙有8次记录", "factId": "format-example", "quote": "甲有2次记录。乙有8次记录。"}
+    ]
+  }]
+}

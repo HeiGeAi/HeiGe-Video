@@ -1,0 +1,319 @@
+{
+  "schemaVersion": "heige-continuous-release/1",
+  "version": "4.0.0-alpha.3",
+  "date": "2026-10-12",
+  "engine": "b0c907708249282c737bc834465bd616c185df8fd074bfd9f703109b7ab518c1",
+  "environment": {
+    "render": {
+      "node": "22.22.2",
+      "packages": {
+        "remotion": "4.0.526",
+        "@remotion/bundler": "4.0.526",
+        "@remotion/renderer": "4.0.526",
+        "react": "19.2.4",
+        "react-dom": "19.2.4"
+      },
+      "remotionNative": {
+        "compositor": {
+          "sha256": "a76377f4cc0777a5c282dfbde3c649ae7050e7645accc76e34532a2b0cc8b2e1"
+        },
+        "ffmpeg": {
+          "sha256": "899fceb537d0e7609433aa644830cfc8ddcef4b97077c5e2150b43505928c5e9",
+          "version": "ffmpeg version n7.1 Copyright (c) 2000-2024 the FFmpeg developers"
+        },
+        "ffprobe": {
+          "sha256": "3ad991fd4ca0556195e88686b57af91e0518a9ac8abfb3d0d10b85a6fa168527",
+          "version": "ffprobe version n7.1 Copyright (c) 2007-2024 the FFmpeg developers"
+        },
+        "packageHash": "09f8f3e23b30e020411f3d98a6a147efb4f800b533ada56cff3de8c3a06751d6"
+      },
+      "python": {
+        "python": "3.12.13",
+        "Pillow": "12.3.0",
+        "fonttools": "4.61.1"
+      },
+      "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+      "ffprobe": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+      "font": {
+        "sha256": "2267c4a0312d267dff8c0d1609948f7d949a3da8be3e126f5e2690cb9cc883b4",
+        "index": 0,
+        "weightScope": "one face with browser synthetic bold"
+      },
+      "browser": {
+        "sha256": "ed7c5c6aff7cc4dd88ee7746c0df97f08a454180b62b7063fc961ba42e10b6a1",
+        "version": "Google Chrome for Testing 152.0.7977.30"
+      }
+    },
+    "playback": {
+      "version": "Google Chrome 155.0.8059.39",
+      "sha256": "717f2904e1d1742bfd5a52a1db4ec4b4874fe861f7958e7b3b78a86bfd2467b8",
+      "headless": true,
+      "remotionVersion": "4.0.526"
+    }
+  },
+  "tests": {
+    "controlled": {
+      "passed": 300,
+      "failed": 0,
+      "skipped": 0
+    },
+    "scripts": {
+      "passed": 79,
+      "failed": 0
+    },
+    "legacy": {
+      "passed": 44,
+      "failed": 0
+    },
+    "typecheck": "passed"
+  },
+  "notes": [
+    "Original Forge visual system, locally authored native images, eight-bar original music and frame-driven motion. Upstream source code or artwork was not copied.",
+    "Three independent 15-second, 30-fps builds: 45 seconds, 1350 encoded frames and 4050 actual temporal captures. Every build uses the current production engine fingerprint.",
+    "The portable inventory verifies bytes and declarations. Actual full-frame decoding, PCM, DOM, shutter and sampled visual records were produced separately; this inventory is not an aesthetic certificate.",
+    "Independent fresh full-resolution visual samples: horizontal 10, portrait 12, square 20. Horizontal and portrait byte-identical binding preserves previously reviewed 20 frames and 89 encoded contact cells; square has a fresh 89-cell encoded sheet review.",
+    "Chrome 155 muted automated playback reached ended at rate 1 for each 450-frame MP4, with zero dropped or corrupted frames and no browser errors. No complete human normal-speed viewing or listening was performed.",
+    "No non-brand low-change interval of at least 0.5 seconds at the measured low-resolution threshold. Final brand holds for about 1.53 seconds. This pixel metric does not certify semantics, all movement or taste.",
+    "Three-exposure motion has discrete ghosts in fast sections. It is not photographic continuous shutter blur.",
+    "The score preset is currently fixed at 128 BPM, eight 4/4 bars and 15 seconds. Other durations use existing external local music assets.",
+    "Raw temporary temporal PNGs were deleted after composition. Hash records remain; independent recomposition of deleted PNGs is not claimed.",
+    "Historical alpha 2 media and creative rejection, failed previews, source-freeze render rejection and test failures are retained. Current results do not replace old failed states.",
+    "Independent creative-review.json SHA256: 91b9f67e59330587c922acb288cc05cf2af2f094e007b417204373e7f35e867b"
+  ],
+  "examples": [
+    {
+      "id": "horizontal",
+      "project": "examples/studio/forge-launch.json",
+      "input": {
+        "project": "c901a8861866ee0c609ddb8e36249049c49f90d4c60c4d9b1a91cf576f995dfe",
+        "assets": {
+          "forge-editorial": "463c83e65b6107576d70f6204c6a5b8c59c94461a84c71fdf577df7ede2ed70b",
+          "forge-optics": "078738945fe8fbf4d4d3cb097ba382150d2c20609db4d9da600b84b5fdb1f601",
+          "forge-ink": "6588e2408379f86333500b54456bbedd4baae3ccf8d16e343127498eeb03484b"
+        },
+        "subtitles": null,
+        "brief": null
+      },
+      "video": "demos/forge/horizontal.mp4",
+      "mp4Sha256": "223d308b73ba719a81ef40e19a51d2c7b5fa4601da4020bb7bd0f4dc5b315c2d",
+      "status": "validated",
+      "technical": "pass",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration": 15,
+      "frames": 450,
+      "decodedFrames": 450,
+      "continuity": {
+        "status": "structural-pass",
+        "coverage": {
+          "expectedFrames": 450,
+          "measuredFrames": 450,
+          "validFrames": 450,
+          "complete": true,
+          "missingFrames": [],
+          "invalidFrames": [],
+          "duplicateFrames": []
+        }
+      },
+      "blur": {
+        "samples": 3,
+        "captures": 1350,
+        "encodedFrames": 450
+      },
+      "audio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.811472475528717,
+        "rms": 0.15507122131074916,
+        "duration": 15.0186875
+      },
+      "layout": {
+        "errors": 0
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "223d308b73ba719a81ef40e19a51d2c7b5fa4601da4020bb7bd0f4dc5b315c2d",
+        "droppedFrames": 0
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "R3 fresh10张1280×720帧，并以samevideoSHA将历史89格encoded、20张fullres的实际像素审阅绑定到完全相同编码字节。 All 450 encoded low-resolution frames and 450 production DOM midpoints were independently checked. Full human normal-speed viewing and listening were not performed."
+      },
+      "audioListening": {
+        "status": "not-tested",
+        "scope": "All decoded channels and actual PCM score checked. Browser playback remained muted; no human listening was performed."
+      },
+      "musicScore": {
+        "style": "forge-breakbeat",
+        "bpm": 128,
+        "bars": 8,
+        "events": 307,
+        "wav": "demos/forge/forge-breakbeat.wav",
+        "wavSha256": "b6b2d48c1a675f9824af2db6cd6ef39b9243fb84eaa34fe4a386493406d1f743",
+        "peak": 0.7040009765923032,
+        "rms": 0.15649964526197221,
+        "duration": 15,
+        "rate": 48000,
+        "channels": 2,
+        "volume": 0.8
+      }
+    },
+    {
+      "id": "portrait",
+      "project": "examples/studio/forge-portrait.json",
+      "input": {
+        "project": "a009cbc52f77ab0a25737c51e1487194fa39e6a4f48d6ba10a0a95c59989e0a9",
+        "assets": {
+          "forge-editorial": "463c83e65b6107576d70f6204c6a5b8c59c94461a84c71fdf577df7ede2ed70b",
+          "forge-optics": "078738945fe8fbf4d4d3cb097ba382150d2c20609db4d9da600b84b5fdb1f601",
+          "forge-ink": "6588e2408379f86333500b54456bbedd4baae3ccf8d16e343127498eeb03484b"
+        },
+        "subtitles": null,
+        "brief": null
+      },
+      "video": "demos/forge/portrait.mp4",
+      "mp4Sha256": "c1e6dbfb12ca402184ea287f24af65bf3b17938102efa157b3ff62b590ce9d85",
+      "status": "validated",
+      "technical": "pass",
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "duration": 15,
+      "frames": 450,
+      "decodedFrames": 450,
+      "continuity": {
+        "status": "structural-pass",
+        "coverage": {
+          "expectedFrames": 450,
+          "measuredFrames": 450,
+          "validFrames": 450,
+          "complete": true,
+          "missingFrames": [],
+          "invalidFrames": [],
+          "duplicateFrames": []
+        }
+      },
+      "blur": {
+        "samples": 3,
+        "captures": 1350,
+        "encodedFrames": 450
+      },
+      "audio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.8107112646102905,
+        "rms": 0.15518608094869743,
+        "duration": 15.0186875
+      },
+      "layout": {
+        "errors": 0
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "c1e6dbfb12ca402184ea287f24af65bf3b17938102efa157b3ff62b590ce9d85",
+        "droppedFrames": 0
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "R3 fresh12张720×1280帧，并以samevideoSHA将已看R2的89格encoded和20张fullres视觉证据绑定到完全相同编码字节。 All 450 encoded low-resolution frames and 450 production DOM midpoints were independently checked. Full human normal-speed viewing and listening were not performed."
+      },
+      "audioListening": {
+        "status": "not-tested",
+        "scope": "All decoded channels and actual PCM score checked. Browser playback remained muted; no human listening was performed."
+      },
+      "musicScore": {
+        "style": "forge-breakbeat",
+        "bpm": 128,
+        "bars": 8,
+        "events": 307,
+        "wav": "demos/forge/forge-breakbeat.wav",
+        "wavSha256": "b6b2d48c1a675f9824af2db6cd6ef39b9243fb84eaa34fe4a386493406d1f743",
+        "peak": 0.7040009765923032,
+        "rms": 0.15649964526197221,
+        "duration": 15,
+        "rate": 48000,
+        "channels": 2,
+        "volume": 0.8
+      }
+    },
+    {
+      "id": "square",
+      "project": "examples/studio/forge-square.json",
+      "input": {
+        "project": "e4fe32f593e7ac4984164a2cb3964b6cd8cc86d00bff56c2149080b3de43f176",
+        "assets": {
+          "forge-editorial": "463c83e65b6107576d70f6204c6a5b8c59c94461a84c71fdf577df7ede2ed70b",
+          "forge-optics": "078738945fe8fbf4d4d3cb097ba382150d2c20609db4d9da600b84b5fdb1f601",
+          "forge-ink": "6588e2408379f86333500b54456bbedd4baae3ccf8d16e343127498eeb03484b"
+        },
+        "subtitles": null,
+        "brief": null
+      },
+      "video": "demos/forge/square.mp4",
+      "mp4Sha256": "ced0ec0cec6411304ebadb9a98a5d1bff4c460a45f14c5b08bb316670d070438",
+      "status": "validated",
+      "technical": "pass",
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "duration": 15,
+      "frames": 450,
+      "decodedFrames": 450,
+      "continuity": {
+        "status": "structural-pass",
+        "coverage": {
+          "expectedFrames": 450,
+          "measuredFrames": 450,
+          "validFrames": 450,
+          "complete": true,
+          "missingFrames": [],
+          "invalidFrames": [],
+          "duplicateFrames": []
+        }
+      },
+      "blur": {
+        "samples": 3,
+        "captures": 1350,
+        "encodedFrames": 450
+      },
+      "audio": {
+        "present": true,
+        "finite": true,
+        "peak": 0.8117369413375854,
+        "rms": 0.1551020866325909,
+        "duration": 15.0186875
+      },
+      "layout": {
+        "errors": 0
+      },
+      "playback": {
+        "status": "passed",
+        "mp4Sha256": "ced0ec0cec6411304ebadb9a98a5d1bff4c460a45f14c5b08bb316670d070438",
+        "droppedFrames": 0
+      },
+      "visualReview": {
+        "status": "sampled-pass",
+        "scope": "R3 fresh20张1080×1080帧、89格actualencoded sheet/carry，覆盖开场、4边界、三画幅main/echo、拍点反馈、短echo图片和品牌落印。 All 450 encoded low-resolution frames and 450 production DOM midpoints were independently checked. Full human normal-speed viewing and listening were not performed."
+      },
+      "audioListening": {
+        "status": "not-tested",
+        "scope": "All decoded channels and actual PCM score checked. Browser playback remained muted; no human listening was performed."
+      },
+      "musicScore": {
+        "style": "forge-breakbeat",
+        "bpm": 128,
+        "bars": 8,
+        "events": 307,
+        "wav": "demos/forge/forge-breakbeat.wav",
+        "wavSha256": "b6b2d48c1a675f9824af2db6cd6ef39b9243fb84eaa34fe4a386493406d1f743",
+        "peak": 0.7040009765923032,
+        "rms": 0.15649964526197221,
+        "duration": 15,
+        "rate": 48000,
+        "channels": 2,
+        "volume": 0.8
+      }
+    }
+  ]
+}

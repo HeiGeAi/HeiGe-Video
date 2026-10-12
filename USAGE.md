@@ -1,4 +1,6 @@
-# HeiGe-Video v3.0.0-rc.1 · install and use
+# HeiGe-Video v4.0.0-alpha.3 · install and use
+
+Updated 2026-10-12. The default controlled-production route uses Remotion. Default initialization creates a 15-second Forge world with original local images, fast easing and a complete 128 BPM score. Native persistent objects and camera handoffs coexist with eight preserved ordinary scene types. Follow the [Studio installation guide](studio/README.md), [versioned project contract](studio/CONTRACT.md) and [continuity guide](studio/CONTINUITY.md). Authored Canvas/SVG remains available for existing films and bespoke actions.
 
 This is a portable Skill folder, original scene code and a deterministic renderer. It does not need a model SDK or API key to render existing source. A coding agent needs file access, authorized code execution and actual-image review to create and judge new films.
 
@@ -11,6 +13,88 @@ cd HeiGe-Video
 
 For an existing checkout, commit or back up local changes before updating with `git pull --ff-only`. Keep custom films outside the shipped example paths.
 
+## Start a Forge project
+
+Install local FFmpeg, the Noto Sans CJK SC font and a compatible Chromium browser using the Studio guide. The runner checks the actual environment; missing dependencies are errors rather than an excuse to produce an unverified export.
+
+```sh
+npm ci
+python3 -m venv .venv
+.venv/bin/python -m pip install -r studio/requirements.txt
+npx remotion browser ensure
+node studio/make.mjs doctor
+node studio/make.mjs init /tmp/heige-forge-new.json --ratio 16:9
+node studio/make.mjs validate /tmp/heige-forge-new.json
+node studio/make.mjs build /tmp/heige-forge-new.json --out /tmp/heige-forge-new
+node studio/make.mjs verify /tmp/heige-forge-new.json --out /tmp/heige-forge-new
+```
+
+`init <new-project.json>` defaults to `16:9` and also accepts `--ratio 9:16` or `--ratio 1:1`. It creates an original 15-second template and copies three original PNG assets into a sibling `<project-stem>-assets` directory. For `my-film/project.json`, that directory is `my-film/project-assets`. It refuses an existing JSON or asset directory, including a symlink. Keep both when moving the project. The ratio flag is only for `init`; independently compose a new layout when changing an authored project's ratio. Templates: [landscape](examples/studio/forge-launch.json), [portrait](examples/studio/forge-portrait.json), [square](examples/studio/forge-square.json).
+
+All four commands use `studio/make.mjs`. `validate` checks the contract; an audio project without a measured duration retains a warning until `build` probes its real recording and recompiles. `build` requires a fresh output directory, validates local assets and font coverage, renders, measures the actual browser and encoded media, then records hashes. `verify` checks the same input, engine, dependencies, font, browser and artifacts against that build. It does not rerender or perform an aesthetic review. A rejected build retains its failure record; retry into a new directory after fixing the cause.
+
+With source material, supply the same brief to every applicable command:
+
+```sh
+node studio/make.mjs validate my-film/project.json --brief my-film/brief.md
+node studio/make.mjs build my-film/project.json --brief my-film/brief.md --out /tmp/heige-brief-film-new
+node studio/make.mjs verify my-film/project.json --brief my-film/brief.md --out /tmp/heige-brief-film-new
+```
+
+Rendering is local and does not require a model API key. A coding agent reads the Skill and authors the project JSON. No native online LLM, TTS, ASR, paid generation or B-roll supply/cache is integrated.
+
+## Author continuity rather than a sequence of cards
+
+The creative modes are `promo`, `explainer`, `lesson` and `talk`; themes are `forge`, `ledger` and `nocturne`. The `continuity` object defines persistent `objects`, a global `camera`, adjacent `boundaries`, optional `soundEvents`, `blur` and `musicScore`. Every timeline entry is a `beat`; mixing ordinary scene components into the same continuous world is rejected.
+
+- Give each object a unique stable `id` and nonempty `semanticIdentity`. Full keyframes specify its complete geometry from zero to the final quantized frame duration. Keyframe time strictly increases; duplicate-time states and non-finite coordinates fail validation.
+- Describe each adjacent beat handoff exactly once, in timeline order. Its carrier must be an existing persistent object; cause and outcome must be explicit. Camera movement and geometric continuity do not establish narrative meaning or prove real product behavior.
+- Numeric visible text and UI rows require the same object's own valid `claims`. A claim's literal quote belongs to its referenced fact and, when supplied, the brief. Claims from another object or beat cannot be borrowed. Mark teaching quantities with `demoData: true`.
+- Bind original `tick`, `whoosh` or `impact` events to an object and the same film clock. They are event effects, separate from the complete musical score. Final voice recordings still determine duration; original SRT cue times remain intact.
+- Native `image` objects use `assetId` referencing a registered local `kind: image` asset. Other kinds reject `assetId`. PNG/JPEG/WebP are supported; URL paths, traversal, symlinks, SVG and GIF are rejected. Image pixels are not automatically fact-checked.
+- Optional fixed `easing` controls the outgoing keyframe segment: `linear`, `ease-out-cubic`, `ease-in-out-cubic`, `ease-out-expo`, `back-out`. Controlled `typography` and `appearance` configure text, fills, strokes, hard shadows and patterns. `typography.lineHeight` is a finite multiplier from 1.15 to 1.7, defaulting to 1.55. Unknown fields, tokens and invalid ranges fail validation.
+- Use `blur: {"samples": 3, "shutterAngle": 180}` for three actual temporal captures and linear-light averaging before encoding. Use one sample to disable blur. This is global temporal integration, not CSS blur, HDR or a per-object velocity buffer; it increases capture and compositing work.
+
+The current bounded contract allows up to 60 seconds and 2 to 20 beats, each 0.25 to 20 seconds after frame quantization. See the continuity guide for field types, object/UI support and exact limits rather than adding guessed semantic fields.
+
+Inspect the actual encoded overview, action strips, opening and final frames. Continuous builds also produce per-frame DOM observations, approximate paint visibility, boundary measurements and final-video-bound pixel-change checks. Read their recorded scope: point-grid visibility can miss sub-grid occlusion, and pixel differences do not understand images. Cause/outcome and perceptual identity still require independent visual review. Technical `validated`, draft/mock `preview`, sampled review, full playback and actual listening remain separate states. Hashes establish integrity, not trust.
+
+## Complete music and cue alignment
+
+The default score configuration is:
+
+```json
+{"musicScore": {"style": "forge-breakbeat", "bpm": 128, "volume": 0.8}}
+```
+
+Place it inside `continuity`. This original eight-bar, 4/4 score requires exactly 15 seconds at 24 or 30 fps and cannot coexist with external `project.music`. It synthesizes drums, syncopated bass, chord stabs, lead hook and lift into a real stereo WAV. Other durations can use registered local music. It does not retime narration or invent a variable-duration arrangement.
+
+| Section | Music-clock time | Purpose |
+| :--- | :--- | :--- |
+| Strike | 0 to 1.875 s | First-beat entrance |
+| Drive | 1.875 to 5.625 s | Assembly and syncopation |
+| Charge | 5.625 to 7.5 s | Build into the main action |
+| Forge | 7.5 to 13.125 s | Full groove and format rearrangement |
+| Seal | 13.125 to 15 s | Brand press and decay; final hit at 14.0625 s |
+
+Video cues round to the nearest frame, within half a frame of the musical clock. Not every beat is an integer video frame. Score volume is applied once in its WAV. Only narration sidechains the music; event effects join at fixed gain before final limiting. Builds emit `music.wav` and `music-score.json` with actual PCM measurements, cues, events and hashes. Measurements are not listening approval. See the [original score note](references/music-score.md).
+
+Forge films: [landscape](demos/forge/horizontal.mp4), [portrait](demos/forge/portrait.mp4), [square](demos/forge/square.mp4). Use the [Forge inventory](references/v4-forge-status.json) and [delivery record](references/v4-forge-report.md) for actual input/engine/MP4 bindings and recorded acceptance scope. Do not inherit earlier acceptance after changing the engine, font, input, assets or composition.
+
+## Historical alpha.2 continuous films
+
+The [continuous gallery](demos/continuous/README.md), [alpha.2 inventory](references/v4-continuity-status.json) and [historical report](references/v4-continuity-report.md) retain the earlier three films. The user rejected their pacing and aesthetics and identified the lack of a complete BGM. Historical `sampled-pass` states only that recorded review scope; it is neither user approval nor a Forge acceptance record. Hash checks inspect declared evidence and integrity, not a new render, playback, listening or artistic judgment.
+
+## Verify historical v4 alpha 1 examples
+
+The five [historical examples](demos/super/README.md) preserve their bytes, inputs and original review scope. Their [inventory](references/v4-example-status.json) names source commit `29135480806d061f1af65734b17dcecad3a31f4a`. The validator recomputes the engine fingerprint from production blobs in that fixed Git commit, then checks the declared historical input and MP4 hashes. It does not substitute the current engine or recertify alpha.3.
+
+```sh
+python3 scripts/validate_super_release.py
+```
+
+Use a checkout with the referenced Git commit available. Missing history is a failure, not a skipped hash check. Mock/draft historical fixtures retain preview status; their audio measurements do not establish listening or real spoken-narration quality.
+
 ## Install dependencies (Ubuntu 24.04)
 
 The CI configuration uses Python 3.12 and Node.js 24. With Python, Node and npm available:
@@ -21,7 +105,7 @@ sudo apt-get install -y --no-install-recommends python3-venv ffmpeg fontconfig f
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install Pillow==12.3.0 fonttools==4.61.1
-npm install --no-save --package-lock=false @napi-rs/canvas@0.1.100
+npm ci
 python runtime/render_video.py doctor
 ```
 
@@ -94,4 +178,4 @@ python3 runtime/render_video.py frame --style tech --time 21.8 --width 1280 --he
 
 [100 works](references/research-cases.md) and [100 projects](references/research-projects.md) are source-linked mechanism studies, not assets or dependencies. The selector defaults to excluding 17 controls. Use `--controls only` intentionally when studying failure cases. Corpus count validation does not establish visual quality, source truth or model superiority.
 
-The current route is Canvas/SVG + FFmpeg. The browser adapter is experimental and has no verified output in this environment; a Blender CPU probe is not a complete default film pipeline. No model-cost or Opus-parity result is claimed. [License and provenance](references/source-notices.md).
+Remotion + FFmpeg is the default controlled-production route; authored Canvas/SVG + FFmpeg remains supported. The legacy browser adapter is separate and experimental; a Blender CPU probe is not a complete default film pipeline. No model-cost or Opus-parity result is claimed. The [OneTake study](references/onetake-architecture.md) is fixed to a noncommercial upstream commit, with methods reimplemented originally and no source/assets imported. [License and provenance](references/source-notices.md).

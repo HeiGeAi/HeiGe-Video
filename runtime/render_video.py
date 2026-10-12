@@ -240,18 +240,33 @@ class CanvasSource:
         if process is not None:
             if process.stdin and not process.stdin.closed:
                 process.stdin.close()
-            # Terminate the isolated process group, including stuck descendants.
+            def signal_group_or_worker(sig):
+                try:
+                    os.killpg(process.pid, sig)
+                except ProcessLookupError:
+                    pass
+                except PermissionError:
+                    # Some macOS execution environments deny group signalling,
+                    # including groups whose worker has already exited. Popen
+                    # checks/reaps the child before signalling its individual
+                    # PID, avoiding a reused-PID signal. Never suppress a denied
+                    # direct signal while the worker is still alive.
+                    if process.poll() is None:
+                        if sig == signal.SIGTERM:
+                            process.terminate()
+                        else:
+                            process.kill()
+            # Signal the isolated group when permitted. The permission fallback
+            # targets and reaps only our worker, not its arbitrary descendants.
             # Never rely on EOF alone: authored modules can keep timers alive.
-            try: os.killpg(process.pid, signal.SIGTERM)
-            except ProcessLookupError: pass
+            signal_group_or_worker(signal.SIGTERM)
             try: process.wait(timeout=1)
             except subprocess.TimeoutExpired:
-                try: os.killpg(process.pid, signal.SIGKILL)
-                except ProcessLookupError: pass
+                signal_group_or_worker(signal.SIGKILL)
                 process.wait(timeout=1)
-            # The main worker may have exited before a descendant ignored TERM.
-            try: os.killpg(process.pid, signal.SIGKILL)
-            except ProcessLookupError: pass
+            # When permitted, the final group signal also reaches descendants
+            # that ignored TERM after the main worker exited.
+            signal_group_or_worker(signal.SIGKILL)
             if process.stdout and not process.stdout.closed:
                 process.stdout.close()
             self.process = None

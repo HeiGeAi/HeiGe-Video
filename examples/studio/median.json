@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "heige-video/4",
+  "title": "把平均数拆开看",
+  "mode": "explainer",
+  "ratio": "16:9",
+  "theme": "ledger",
+  "fps": 30,
+  "seed": 47,
+  "demoData": true,
+  "brand": "HEIGE VIDEO LAB",
+  "assets": [
+    {
+      "id": "score",
+      "path": "score.wav",
+      "kind": "audio",
+      "source": "original",
+      "rights": "Original mathematical synthesis by HeiGe-Video. MIT."
+    }
+  ],
+  "music": {
+    "assetId": "score",
+    "volume": 0.3
+  },
+  "shots": [
+    {
+      "id": "question",
+      "type": "hook",
+      "duration": 3,
+      "title": "一个数字\n能代表所有人吗",
+      "body": "先把每一笔订单放回桌上"
+    },
+    {
+      "id": "distribution",
+      "type": "bars",
+      "duration": 4,
+      "title": "同一批订单",
+      "body": "一笔极端值改变了整体读数",
+      "unit": "元",
+      "data": [
+        {
+          "id": "a",
+          "label": "订单 A",
+          "value": 22
+        },
+        {
+          "id": "b",
+          "label": "订单 B",
+          "value": 12
+        },
+        {
+          "id": "c",
+          "label": "订单 C",
+          "value": 98
+        },
+        {
+          "id": "d",
+          "label": "订单 D",
+          "value": 18
+        },
+        {
+          "id": "e",
+          "label": "订单 E",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "sorting",
+      "type": "transform",
+      "duration": 5,
+      "title": "换个位置\n保留每笔订单",
+      "body": "按金额排序  看清站在中间的那一笔",
+      "operation": "sort",
+      "items": [
+        {
+          "id": "a",
+          "label": "A",
+          "value": 22
+        },
+        {
+          "id": "b",
+          "label": "B",
+          "value": 12
+        },
+        {
+          "id": "c",
+          "label": "C",
+          "value": 98
+        },
+        {
+          "id": "d",
+          "label": "D",
+          "value": 18
+        },
+        {
+          "id": "e",
+          "label": "E",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "comparison",
+      "type": "compare",
+      "duration": 4,
+      "title": "同一批数据\n两种观察方法",
+      "left": {
+        "label": "平均数",
+        "items": [
+          "全部相加后平分",
+          "每笔都影响结果",
+          "本例为 34 元"
+        ]
+      },
+      "right": {
+        "label": "中位数",
+        "items": [
+          "排好后取中间",
+          "看中间的位置",
+          "本例为 20 元"
+        ]
+      }
+    },
+    {
+      "id": "closing",
+      "type": "end",
+      "duration": 4,
+      "title": "先看分布\n再谈代表性",
+      "body": "代码演示变化  成片保留证据"
+    }
+  ]
+}
