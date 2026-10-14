@@ -134,28 +134,33 @@ export function prepareEnvironment(request, originalEnv = process.env, cwd = pro
     need(node, 'Node is missing. Set HEIGE_NODE to an installed Node executable.');
     const version = capture(node, ['-p', 'process.versions.node'], env, 'Node');
     need(Number(version.split('.')[0]) >= 20, 'Node 20 or newer is required; selected ' + version);
+    const media = request.command === 'doctor' || ['build', 'verify', 'showcase', 'portraits', 'runtime'].includes(request.command);
+    const needsPython = request.command !== 'init' && request.command !== 'help';
+    // Bind bare HEIGE_PYTHON against the caller's PATH before adding tool shims.
+    // A media-tool directory may also contain an unrelated system Python.
+    if (needsPython) env.HEIGE_PYTHON = choosePython(env, media ? ['PIL', 'fontTools'] : [], cwd);
     const alias = (name, file) => {
       const target = path.join(bin, name + (process.platform === 'win32' ? '.exe' : ''));
       try {fs.symlinkSync(file, target, 'file');}
-      catch (error) {need(path.basename(file).toLowerCase() === path.basename(target).toLowerCase(), 'Cannot alias ' + name + '; use the standard executable filename or enable symlink creation. ' + error.message);}
-      return path.dirname(file);
+      catch (error) {
+        need(path.basename(file).toLowerCase() === path.basename(target).toLowerCase(), 'Cannot alias ' + name + '; use the standard executable filename or enable symlink creation. ' + error.message);
+        return path.dirname(file);
+      }
+      return null;
     };
-    const additions = [bin, alias('node', node)];
-    const media = request.command === 'doctor' || ['build', 'verify', 'showcase', 'portraits', 'runtime'].includes(request.command);
+    const fallbackDirectories = [alias('node', node)];
     if (media || request.command === 'validate') for (const [name, key] of [['ffmpeg', 'FFMPEG'], ['ffprobe', 'FFPROBE']]) {
       const file = executable(env[key] || name, env, cwd);
       need(file, name + ' is missing. Install it explicitly or set ' + key + ' to its executable.');
-      env[key] = file; additions.push(alias(name, file));
+      env[key] = file; fallbackDirectories.push(alias(name, file));
     }
     if (process.platform === 'darwin') {
-      additions.push(...['/opt/homebrew/bin', '/usr/local/bin'].filter(dir => fs.existsSync(dir)));
       const libraries = ['/opt/homebrew/opt/librsvg/lib', '/opt/homebrew/lib', '/usr/local/opt/librsvg/lib', '/usr/local/lib'].filter(dir => fs.existsSync(dir));
       if (libraries.length) env.DYLD_LIBRARY_PATH = [...libraries, env.DYLD_LIBRARY_PATH].filter(Boolean).join(path.delimiter);
     }
-    env.PATH = [...new Set([...additions, ...(env.PATH ?? '').split(path.delimiter).filter(Boolean)])].join(path.delimiter);
-    const needsPython = request.command !== 'init' && request.command !== 'help';
-    const fullPython = media;
-    if (needsPython) env.HEIGE_PYTHON = choosePython(env, fullPython ? ['PIL', 'fontTools'] : [], cwd);
+    // Only the named private shims take priority. Whole tool directories are a
+    // fallback after the original PATH and cannot shadow other caller tools.
+    env.PATH = [...new Set([bin, ...(env.PATH ?? '').split(path.delimiter).filter(Boolean), ...fallbackDirectories.filter(Boolean)])].join(path.delimiter);
     if (env.HEIGE_BROWSER_PATH && !request.options.browser) {
       const browser = executable(env.HEIGE_BROWSER_PATH, env, cwd);
       need(browser, 'HEIGE_BROWSER_PATH is not an executable browser'); env.HEIGE_BROWSER_PATH = browser;
