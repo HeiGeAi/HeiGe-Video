@@ -246,7 +246,7 @@ class ContinuousReleaseTests(unittest.TestCase):
         completed = subprocess.run(command, capture_output=True, text=True, check=True)
         self.assertEqual(json.loads(completed.stdout)['status'], 'pass')
 
-    def test_current_forge_cannot_inherit_wrong_engine_or_use_historical_bypass(self):
+    def test_current_forge_cannot_inherit_wrong_engine_or_unrelated_history(self):
         forge = self.make_forge_inventory()
         for change in [lambda value: value.update(engine=self.engine),
                        lambda value: value.update(sourceCommit=self.source_commit)]:
@@ -254,13 +254,32 @@ class ContinuousReleaseTests(unittest.TestCase):
                 changed = copy.deepcopy(forge)
                 change(changed)
                 self.write(CURRENT_INVENTORY, json.dumps(changed))
-                with self.assertRaisesRegex(ValueError, 'current production|current production engine'):
+                with self.assertRaisesRegex(ValueError, 'current production|Package version differs|historical sourceCommit'):
                     validate_inventory(self.root)
         self.write(CURRENT_INVENTORY, json.dumps(forge))
         self.inventory.pop('sourceCommit')
         self.save()
         with self.assertRaisesRegex(ValueError, 'Historical continuous inventory needs sourceCommit'):
             validate_inventories(self.root)
+
+    def test_forge_history_is_bound_to_real_alpha3_git_source_without_rebinding_media(self):
+        forge = self.make_forge_inventory()
+        self.git('add', '-A')
+        self.git('commit', '-q', '-m', 'Actual alpha3 fixture engine and original files')
+        commit = self.git('rev-parse', 'HEAD')
+        forge['sourceCommit'] = commit
+        self.write(CURRENT_INVENTORY, json.dumps(forge))
+        self.write('studio/src/original.tsx', 'export const original = "compatibility fix";')
+        self.assertNotEqual(current_engine(self.root), forge['engine'])
+        report = validate_inventories(self.root)
+        self.assertEqual(report['current']['sourceMode'], 'historical')
+        self.assertEqual(report['current']['sourceCommit'], commit)
+        self.assertEqual(report['current']['engine'], forge['engine'])
+        changed = copy.deepcopy(forge)
+        changed['engine'] = current_engine(self.root)
+        self.write(CURRENT_INVENTORY, json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, 'historical sourceCommit'):
+            validate_inventory(self.root)
 
     def test_music_summary_clock_configuration_and_measurements_cannot_be_fabricated(self):
         forge = self.make_forge_inventory()

@@ -13,6 +13,10 @@ jobs:
     # Pin the OS image so native-library package names stay reproducible.
     runs-on: ubuntu-24.04
     timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
     env:
       PYTHONDONTWRITEBYTECODE: '1'
       VIDEO_RUNTIME_CACHE: /tmp/heige-video-ci-cache
@@ -25,12 +29,12 @@ jobs:
           python-version: '3.12'
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: ${{ matrix.node }}
       - name: Install native rendering dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            ffmpeg fontconfig fonts-noto-cjk fonts-noto-core fonts-dejavu-core librsvg2-2 libcairo2 libglib2.0-0t64
+            ffmpeg fontconfig fonts-noto-cjk fonts-noto-core fonts-dejavu-core librsvg2-2 libcairo2 libglib2.0-0t64 poppler-utils qpdf
       - name: Install pinned Python and Node dependencies
         run: |
           python -m pip install Pillow==12.3.0 fonttools==4.61.1
@@ -45,7 +49,7 @@ jobs:
           npx tsc --noEmit -p showcase/tsconfig.json
           npx tsc --noEmit -p portrait-cases/tsconfig.json
           npm test
-          node studio/make.mjs doctor
+          node scripts/host.mjs doctor
       - name: Render and verify real controlled media and audio fixtures
         env:
           HEIGE_PYTHON: python
@@ -64,7 +68,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: controlled-render-evidence
+          name: controlled-render-evidence-node-${{ matrix.node }}
           path: |
             /tmp/heige-v4-media
             /tmp/heige-v4-audio

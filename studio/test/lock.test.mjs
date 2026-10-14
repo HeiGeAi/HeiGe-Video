@@ -79,3 +79,36 @@ test('an injected temporary-cleanup error still releases the real isolated files
   assert.equal(leftovers.length,1);
   assert.ok(leftovers[0].startsWith('heige-render-'),'The deliberately failed cleanup must not be mistaken for a lock leak');
 });
+
+for(const mutation of ['added-file','replaced-owner']) test(`render lock cleanup preserves a foreign ${mutation}`,(t)=>{
+  const {file,output,temporary}=fixture(t);
+  const script=`
+    import fs from 'node:fs';
+    import path from 'node:path';
+    import {pathToFileURL} from 'node:url';
+    const [,modulePath,projectPath,output,mutation]=process.argv.slice(1);
+    const lock=path.join(process.env.TMPDIR,'heige-video-render.lock');
+    const original=fs.mkdtempSync;
+    fs.mkdtempSync=(...args)=>{
+      const value=original(...args);
+      if(mutation==='added-file') fs.writeFileSync(path.join(lock,'foreign.txt'),'retain foreign data');
+      else {fs.renameSync(path.join(lock,'owner'),path.join(lock,'original-owner'));fs.writeFileSync(path.join(lock,'owner'),'another owner');}
+      return value;
+    };
+    const {main}=await import(pathToFileURL(modulePath).href);
+    try {await main(['build',projectPath,'--out',output]);}
+    catch(error) {console.error(error.message);process.exitCode=1;}
+  `;
+  const result=run(['--input-type=module','-e',script,'lock-ownership-harness',make,file,output,mutation],temporary);
+  assert.equal(result.error,undefined);
+  assert.equal(result.status,1,result.stderr);
+  assert.match(result.stderr,/EACCES|EPERM/);
+  const lock=path.join(temporary,'heige-video-render.lock');
+  if(mutation==='added-file') {
+    assert.equal(fs.readFileSync(path.join(lock,'foreign.txt'),'utf8'),'retain foreign data');
+    assert.equal(fs.existsSync(path.join(lock,'owner')),false);
+  } else {
+    assert.equal(fs.readFileSync(path.join(lock,'owner'),'utf8'),'another owner');
+    assert.ok(fs.existsSync(path.join(lock,'original-owner')));
+  }
+});

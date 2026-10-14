@@ -4,6 +4,8 @@
 
 Create editable animations in code, from object actions, storyboards and music to rendering and encoded-media checks. The current showcase has **10 colorful original films: 3 landscape films at 16:9 and 7 portrait films at 9:16**. All run for 16 seconds at 30 fps with original music.
 
+Start with an article, PDF, DOCX, HTML or local text through the [material-to-story workflow](references/story-workflow.md). The agent prepares sources, a script and an asset plan; **the user must approve both the script and reuse/remake decisions before production**. The [WorkBuddy entry](references/workbuddy-compatibility.md) provides project-local Skill installation, host diagnostics and isolated project dependencies.
+
 | Landscape 16:9: Citrus pop | New portrait 9:16: Berry Cone |
 | :--- | :--- |
 | [![Actual Citrus landscape animation](demos/bright-showcase/citrus-horizontal.gif)](demos/bright-showcase/citrus-horizontal.mp4) | [![Actual Berry portrait animation](demos/portrait-cases/berry-portrait.gif)](demos/portrait-cases/berry-portrait.mp4) |

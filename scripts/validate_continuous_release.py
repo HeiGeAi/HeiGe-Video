@@ -209,8 +209,8 @@ def validate(root=ROOT, inventory_path=CURRENT_INVENTORY):
            ['environment', 'tests', 'notes', 'upstreamCommit', 'sourceCommit', 'userFeedback'])
     if inventory['schemaVersion'] != 'heige-continuous-release/1' or inventory['version'] not in ['4.0.0-alpha.2', '4.0.0-alpha.3']:
         reject('Unsupported continuous release schema/version')
-    if inventory_path == CURRENT_INVENTORY and (inventory['version'] != '4.0.0-alpha.3' or 'sourceCommit' in inventory):
-        reject('Current forge inventory must use alpha.3 and the current production engine')
+    if inventory_path == CURRENT_INVENTORY and inventory['version'] != '4.0.0-alpha.3':
+        reject('Forge inventory must use alpha.3')
     if 'userFeedback' in inventory:
         text(inventory['userFeedback'], 'inventory.userFeedback')
     try:

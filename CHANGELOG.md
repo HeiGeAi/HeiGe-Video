@@ -1,5 +1,13 @@
 # Changelog
 
+## WorkBuddy compatibility and material-to-story · 2026-10-14
+
+- Explicit agent-host entry and project-local WorkBuddy Skill adapter, without modifying the application's bundled runtimes or existing user skills.
+- Local article/PDF/DOCX/HTML/Markdown/text intake, source hashes, page/paragraph references, editable story and asset plans, and content-bound approval gates before assets and rendering.
+- Realpath-safe CLI entry guards, backend readiness diagnostics, explicit font selection, and bounded cancellation of owned processes and locks.
+- Preserve the original Forge films as fixed-source historical evidence after engine compatibility fixes; do not relabel the unchanged media as new-engine renders.
+- Actual host versions, test coverage and unverified GUI/platform scopes are recorded separately in the WorkBuddy compatibility guide.
+
 ## Four portrait cases · 2026-10-12
 
 - Four original 16-second 1080×1920 films in an isolated editable Remotion workspace: Berry Cone, Coffee Wake, Happy Camera and Pocket Rocket.
