@@ -4,6 +4,10 @@
 
 用代码制作可编辑的动画短片，从主体动作、分镜和配乐到渲染与成片检查。当前展示 **10 条明亮原创案例：3 条 16:9 横版、7 条 9:16 竖版**，全部为 16 秒、30 fps，带原创配乐。
 
+也可以从文章、PDF、DOCX、HTML 或文本开始：[资料转故事](references/story-workflow.md)先整理来源、故事脚本与素材方案，**用户确认脚本和素材复用／重做方式后**，才进入制作与渲染。[WorkBuddy 使用入口](references/workbuddy-compatibility.md)提供项目本地 Skill 安装、宿主环境诊断和独立运行环境。
+
+在 macOS 的 WorkBuddy 5.8.2 中，已用一篇文章和两页文本 PDF 实测从资料导入、脚本与素材确认到 24 秒静音横竖版出片的完整流程，具体规格与验证范围见 [WorkBuddy 验收记录](references/workbuddy-compatibility.md#本次验证范围)。
+
 | 横版 16:9：柠檬汽水 | 新竖版 9:16：莓好一口 |
 | :--- | :--- |
 | [![柠檬汽水横版实际动图](demos/bright-showcase/citrus-horizontal.gif)](demos/bright-showcase/citrus-horizontal.mp4) | [![莓好一口竖版实际动图](demos/portrait-cases/berry-portrait.gif)](demos/portrait-cases/berry-portrait.mp4) |

@@ -24,7 +24,13 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 os.environ['XDG_CACHE_HOME'] = os.environ.get('VIDEO_RUNTIME_CACHE', str(HERE / '.cache'))
 Path(os.environ['XDG_CACHE_HOME']).mkdir(parents=True, exist_ok=True)
-from PIL import Image, ImageDraw, ImageFont, ImageStat
+try:
+    from PIL import Image, ImageDraw, ImageFont, ImageStat
+except ModuleNotFoundError as error:
+    if error.name != 'PIL':
+        raise
+    print('ERROR: Pillow is missing from this Python environment. Run the project setup command, or install studio/requirements.txt with this same Python executable.', file=sys.stderr)
+    raise SystemExit(2)
 from raster import SvgRasterizer, validate_svg
 
 DEFAULT_SOURCE_DIR = HERE.parent / 'examples' / 'prototypes'
@@ -56,14 +62,37 @@ def run(args, **kwargs): return subprocess.run(args, check=True, capture_output=
 
 
 def font_info(family):
-    result = run(['fc-match', family, '--format=%{family}\n%{file}\n%{index}\n']).stdout.splitlines()
-    actual, path, index = result[:3]
-    if family.casefold() not in actual.casefold():
-        raise RuntimeError(f'Requested font {family!r} resolved to {actual!r}; install the requested font or use --font-family')
-    from fontTools.ttLib import TTFont
-    font = TTFont(path, fontNumber=int(index), lazy=True)
-    cmap = set((font.getBestCmap() or {}).keys())
-    font.close()
+    override = os.environ.get('HEIGE_FONT_PATH')
+    if override:
+        path = str(Path(override).expanduser().resolve(strict=True))
+        try: index = int(os.environ.get('HEIGE_FONT_INDEX', '0'))
+        except ValueError: raise RuntimeError('HEIGE_FONT_INDEX must be a non-negative integer') from None
+        if index < 0: raise RuntimeError('HEIGE_FONT_INDEX must be a non-negative integer')
+        actual = None
+    else:
+        result = run(['fc-match', family, '--format=%{family}\n%{file}\n%{index}\n']).stdout.splitlines()
+        if len(result) < 3: raise RuntimeError('fc-match did not return a font face')
+        actual, path, index = result[:3]
+        path = str(Path(path).resolve(strict=True))
+        index = int(index)
+        if family.casefold() not in actual.casefold():
+            raise RuntimeError(f'Requested font {family!r} resolved to {actual!r}; install the requested font or set HEIGE_FONT_PATH to a licensed Chinese font')
+    try:
+        from fontTools.ttLib import TTFont, TTLibError
+    except ModuleNotFoundError as error:
+        if error.name != 'fontTools': raise
+        raise RuntimeError('fontTools is missing from this Python environment. Install studio/requirements.txt with this same Python executable.') from None
+    try:
+        with open(path, 'rb') as selected:
+            font = TTFont(selected, fontNumber=index, lazy=True)
+            try:
+                cmap = set((font.getBestCmap() or {}).keys())
+                if override:
+                    actual = font['name'].getDebugName(16) or font['name'].getDebugName(1)
+                    if not actual: raise RuntimeError('The selected font face has no usable family name')
+            finally: font.close()
+    except (OSError, ValueError, IndexError, TTLibError) as error:
+        raise RuntimeError(f'Cannot load selected font face {index}: {error}') from None
     return {'requested_family': family, 'resolved_family': actual, 'path': path, 'face_index': int(index), 'sha256': sha(Path(path).read_bytes()), 'embedded_in_mp4': False, 'provenance_scope': 'selected regular face only; resolved bold/italic/fallback faces are not traced'}, cmap
 
 
@@ -186,12 +215,25 @@ class CanvasSource:
             self.close()
             raise
 
-    def _error(self, message):
+    def _error(self, message, *, ended=False):
+        process = self.process
+        code = process.poll()
+        if code is None and ended:
+            # EOF can precede process reaping by a few milliseconds. Wait only
+            # on the error path, with a bound; a worker that merely closed its
+            # stdout must remain visibly running rather than look successful.
+            try: code = process.wait(timeout=.25)
+            except subprocess.TimeoutExpired: pass
+        signal_name = 'none'
+        if code is not None and code < 0:
+            try: signal_name = signal.Signals(-code).name
+            except ValueError: signal_name = str(-code)
+        state = f'worker_pid={process.pid}, worker_returncode={code if code is not None else "running"}, worker_signal={signal_name}'
         self._stderr.flush()
         self._stderr.seek(0, 2)
         self._stderr.seek(max(0, self._stderr.tell() - 8192))
         detail = self._stderr.read().decode('utf-8', errors='replace').strip()
-        return RuntimeError(message + (f'; worker stderr: {detail}' if detail else ''))
+        return RuntimeError(message + f'; {state}' + (f'; worker stderr: {detail}' if detail else ''))
 
     def _read_exact(self, size, deadline, operation):
         while len(self._buffer) < size:
@@ -203,7 +245,7 @@ class CanvasSource:
                 raise self._error(f'Canvas {operation} timed out')
             chunk = os.read(self.process.stdout.fileno(), min(262144, max(size - len(self._buffer), 4096)))
             if not chunk:
-                raise self._error(f'Canvas worker ended during {operation} ({len(self._buffer)} of {size} bytes)')
+                raise self._error(f'Canvas worker ended during {operation} ({len(self._buffer)} of {size} bytes)', ended=True)
             self._buffer.extend(chunk)
         result = bytes(self._buffer[:size])
         del self._buffer[:size]
@@ -351,8 +393,11 @@ def new_output(path):
 def dependency_versions():
     import ctypes
     import ctypes.util
-    from importlib.metadata import version
-    versions = {'python': sys.version.split()[0], 'Pillow': version('Pillow'), 'fontTools': version('fonttools')}
+    from importlib.metadata import version, PackageNotFoundError
+    versions = {'python': sys.version.split()[0]}
+    for label, package in [('Pillow', 'Pillow'), ('fontTools', 'fonttools')]:
+        try: versions[label] = version(package)
+        except PackageNotFoundError: versions[label] = None
     if shutil.which('ffmpeg'):
         versions['ffmpeg'] = run(['ffmpeg','-version']).stdout.splitlines()[0]
     try:
@@ -365,26 +410,39 @@ def dependency_versions():
         versions['raster_version_lookup'] = 'unavailable; doctor checks library availability separately'
     if shutil.which('node'):
         versions['node'] = run(['node','--version']).stdout.strip()
-        canvas = subprocess.run(['node','-e',"console.log(require('@napi-rs/canvas/package.json').version)"],capture_output=True,text=True)
+        canvas = subprocess.run(['node','-e',"console.log(require('@napi-rs/canvas/package.json').version)"],cwd=HERE.parent,capture_output=True,text=True,timeout=15)
         versions['@napi-rs/canvas'] = canvas.stdout.strip() if canvas.returncode == 0 else None
     return versions
 
 
-def doctor(family='Noto Sans CJK SC'):
+def doctor(family='Noto Sans CJK SC', backend='svg'):
     status = {'dependencies': dependency_versions(), 'tools': {}, 'libraries': {}, 'optional_canvas': False}
     for tool in ['ffmpeg', 'ffprobe', 'fc-match', 'node']:
         status['tools'][tool] = shutil.which(tool)
     from raster import ctypes_library
     for lib in ['rsvg-2','cairo','gobject-2.0','glib-2.0']:
-        try: status['libraries'][lib] = ctypes_library(lib)
-        except RuntimeError: status['libraries'][lib] = None
+        try:
+            resolved = ctypes_library(lib)
+            import ctypes
+            ctypes.CDLL(resolved)
+            status['libraries'][lib] = resolved
+        except (RuntimeError, OSError): status['libraries'][lib] = None
     if shutil.which('node'):
-        result = subprocess.run(['node','-e',"console.log(require('@napi-rs/canvas/package.json').version)"],capture_output=True,text=True)
+        result = subprocess.run(['node','-e',"require('@napi-rs/canvas').createCanvas(1,1); console.log(require('@napi-rs/canvas/package.json').version)"],cwd=HERE.parent,capture_output=True,text=True,timeout=15)
         status['optional_canvas'] = result.stdout.strip() if result.returncode == 0 else False
     if shutil.which('ffmpeg'): status['ffmpeg_version'] = run(['ffmpeg','-version']).stdout.splitlines()[0]
-    status['font'], _ = font_info(family)
-    status['svg_ready'] = all(status['libraries'].values()) and all(status['tools'][x] for x in ['ffmpeg','ffprobe','fc-match'])
+    try:
+        status['font'], _ = font_info(family)
+    except (RuntimeError, OSError, subprocess.CalledProcessError) as error:
+        status['font'] = None
+        status['font_error'] = str(error)
+    media_ready = all(status['tools'][x] for x in ['ffmpeg','ffprobe']) and status['font'] is not None
+    status['svg_ready'] = bool(media_ready and all(status['libraries'].values()))
+    status['canvas_ready'] = bool(media_ready and status['tools']['node'] and status['optional_canvas'])
+    status['backend'] = backend
+    status['status'] = 'pass' if status[backend + '_ready'] else 'not-ready'
     print(json.dumps(status, ensure_ascii=False, indent=2))
+    return status['status'] == 'pass'
 
 
 def contact_sheet(items, out, width=480, columns=4, title='', font=None):
@@ -484,7 +542,15 @@ def render(args, fps, source, audit, font, cmap, out):
         try:
             for i in range(count):
                 t = min(source.duration, args.start + float(i/fps) * time_scale)
-                raw, svg, sample_times = sampled_frame(source, t, fps, args, cuts, time_scale)
+                try:
+                    raw, svg, sample_times = sampled_frame(source, t, fps, args, cuts, time_scale)
+                except Exception as error:
+                    try:
+                        times = json.dumps(shutter_times(t, fps, source.duration, cuts, args.shutter_samples, args.shutter_angle, time_scale))
+                    except Exception:
+                        times = 'unavailable'
+                    raise RuntimeError(f'Render frame failed: frame_index={i} (zero-based), source_time={t!r}, '
+                                       f'sample_times={times}; {error}') from error
                 encoder.stdin.write(raw)
                 image = Image.frombytes('RGBA',(args.width,args.height),raw)
                 small = image.convert('RGB').resize((64,36),Image.Resampling.BOX)
@@ -500,8 +566,15 @@ def render(args, fps, source, audit, font, cmap, out):
             code=encoder.wait(timeout=180)
             if code: raise RuntimeError(f'ffmpeg failed ({code}); inspect {out / "ffmpeg.log"}')
         except BaseException:
-            if encoder.poll() is None: encoder.terminate()
-            encoder.wait(timeout=15)
+            if encoder.poll() is None:
+                encoder.terminate()
+                try: encoder.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    encoder.kill()
+                    encoder.wait(timeout=3)
+            if encoder.stdin and not encoder.stdin.closed:
+                try: encoder.stdin.close()
+                except OSError: pass  # The terminated encoder may have closed its pipe.
             raise
     missing=sorted(c for c in source.chars if not c.isspace() and ord(c) not in cmap)
     if missing: raise RuntimeError('Missing selected-font glyphs: '+''.join(missing))
@@ -544,11 +617,14 @@ def render(args, fps, source, audit, font, cmap, out):
 
 def main():
     args=arguments(); fps=validate_args(args); label=display_label(args)
-    if args.command=='doctor': doctor(args.font_family); return
+    if args.command=='doctor':
+        if not doctor(args.font_family, args.backend): raise SystemExit(2)
+        return
     path=args.source or args.source_dir/f'{args.style}.py'
     if args.command=='audit': print(json.dumps(source_audit(path),ensure_ascii=False,indent=2)); return
     out=new_output(args.out)
     font,cmap=font_info(args.font_family)
+    if os.environ.get('HEIGE_FONT_PATH'): args.font_family = font['resolved_family']
     source,audit=create_source(args,font)
     try:
         if args.command=='frame':
@@ -563,6 +639,11 @@ def main():
     finally: source.close()
 
 if __name__=='__main__':
+    def interrupt_render(_signal, _frame):
+        raise KeyboardInterrupt
+    signal.signal(signal.SIGTERM, interrupt_render)
     try: main()
-    except (ValueError,RuntimeError,FileNotFoundError,FileExistsError,subprocess.CalledProcessError) as error:
+    except KeyboardInterrupt:
+        print('Render cancelled; owned workers were stopped.', file=sys.stderr); sys.exit(130)
+    except (ValueError,RuntimeError,FileNotFoundError,FileExistsError,subprocess.CalledProcessError,subprocess.TimeoutExpired) as error:
         print(f'ERROR: {error}',file=sys.stderr); sys.exit(2)

@@ -1,6 +1,6 @@
 # HeiGe-Video v4.0.0-alpha.3 · install and use
 
-Updated 2026-10-12. The default controlled-production route uses Remotion. Default initialization creates a 15-second Forge world with original local images, fast easing and a complete 128 BPM score. Native persistent objects and camera handoffs coexist with eight preserved ordinary scene types. Follow the [Studio installation guide](studio/README.md), [versioned project contract](studio/CONTRACT.md) and [continuity guide](studio/CONTINUITY.md). Authored Canvas/SVG remains available for existing films and bespoke actions.
+Updated 2026-10-15. The default controlled-production route uses Remotion. Default initialization creates a 15-second Forge world with original local images, fast easing and a complete 128 BPM score. Native persistent objects and camera handoffs coexist with eight preserved ordinary scene types. Follow the [Studio installation guide](studio/README.md), [versioned project contract](studio/CONTRACT.md) and [continuity guide](studio/CONTINUITY.md). Authored Canvas/SVG remains available for existing films and bespoke actions.
 
 This is a portable Skill folder, original scene code and a deterministic renderer. It does not need a model SDK or API key to render existing source. A coding agent needs file access, authorized code execution and actual-image review to create and judge new films.
 
@@ -13,6 +13,42 @@ cd HeiGe-Video
 
 For an existing checkout, commit or back up local changes before updating with `git pull --ff-only`. Keep custom films outside the shipped example paths.
 
+## WorkBuddy and other agent hosts
+
+Use the [host entry](references/workbuddy-compatibility.md) instead of assuming the agent's Python, working directory and browser cache match your terminal. Run `node scripts/host.mjs doctor` from the repository, or give that script's absolute path from another directory. It selects project-local dependencies and passes a private runtime environment to subprocesses. It does not install anything implicitly or modify WorkBuddy's managed Node/Python environments.
+
+For WorkBuddy, install a small project-local Skill adapter into an existing workspace:
+
+```sh
+node scripts/install_workbuddy.mjs --workspace /absolute/path/to/workspace
+```
+
+The GUI adapter lives at `<workspace>/.workbuddy/skills/heige-video`. It retains a local pointer to the complete repository. It does not copy dependencies or media into WorkBuddy and refuses to replace unknown or edited skills. Reinstall the adapter if the repository moves. Open that workspace in WorkBuddy and check its Skill list. The installer preserves existing application settings and other skills. The bundled CLI has a separate `.codebuddy/skills` project provider; that location does not substitute for the GUI's default `.workbuddy/skills` directory.
+
+WorkBuddy's root-level project file discovery is different from Codex's user Skill directory. Merely cloning this repository or updating a Codex Skill does not install it in WorkBuddy. See the compatibility guide for actual tested versions and the distinction between CLI shell jobs, GUI Skill discovery and human approval interactions.
+
+In WorkBuddy 5.8.2, restricted workspaces disable Bash and project settings. If command tools are missing, check the current workspace's trust state in the product UI. Obtain explicit user agreement to trust that directory before changing it through the UI, then start a new task in the same directory or have the user restart the product. The old task's updated badge does not restore its runtime tools. Follow the compatibility guide's read-only command probe before production; do not edit security configuration or copy login credentials.
+
+## Turn source material into a story
+
+The [story workflow](references/story-workflow.md) accepts local UTF-8 text, Markdown, HTML, DOCX and PDFs with readable text. It preserves source hashes and paragraph/page references. PDF extraction needs either `pypdf` in the selected Python environment or Poppler's `pdftotext` and `pdfinfo`. Scanned, encrypted or partly unreadable PDFs stop for OCR or a readable source; extraction never fabricates missing pages. Unsupported formats should be exported to a supported local format first.
+
+```sh
+node scripts/host.mjs story ingest ./article.md ./report.pdf --project ./my-story
+node scripts/host.mjs story template --project ./my-story
+node scripts/host.mjs story check --project ./my-story
+```
+
+The coding agent writes the story script and asset plan from the extracted material, then presents both to the user. Before asset production or rendering, obtain real user confirmation of **the script** and **reuse, remake or mixed assets**. A template is not an approved script, and the agent must not approve its own work. Script/source/plan changes invalidate the earlier confirmation. The CLI records a host-declared reply; it cannot authenticate a human identity or judge narrative quality.
+
+After approval, check the asset-production gate, create the agreed assets, record their technical receipt and check the rendering gate. For story projects, include the story directory when building, including when the animation project is stored elsewhere:
+
+```sh
+node scripts/host.mjs build ./my-story/animation/project.json --story ./my-story --out ./my-story-render-v1
+```
+
+The host also detects a surrounding `intake.json` and checks its current approval before building. The detailed confirmation arguments and plan schema are in the story workflow guide. No LLM, OCR, TTS or paid asset generation is automatically invoked by these commands.
+
 ## Start a Forge project
 
 Install local FFmpeg, the Noto Sans CJK SC font and a compatible Chromium browser using the Studio guide. The runner checks the actual environment; missing dependencies are errors rather than an excuse to produce an unverified export.
@@ -22,23 +58,23 @@ npm ci
 python3 -m venv .venv
 .venv/bin/python -m pip install -r studio/requirements.txt
 npx remotion browser ensure
-node studio/make.mjs doctor
-node studio/make.mjs init /tmp/heige-forge-new.json --ratio 16:9
-node studio/make.mjs validate /tmp/heige-forge-new.json
-node studio/make.mjs build /tmp/heige-forge-new.json --out /tmp/heige-forge-new
-node studio/make.mjs verify /tmp/heige-forge-new.json --out /tmp/heige-forge-new
+node scripts/host.mjs doctor
+node scripts/host.mjs init /tmp/heige-forge-new.json --ratio 16:9
+node scripts/host.mjs validate /tmp/heige-forge-new.json
+node scripts/host.mjs build /tmp/heige-forge-new.json --out /tmp/heige-forge-new
+node scripts/host.mjs verify /tmp/heige-forge-new.json --out /tmp/heige-forge-new
 ```
 
 `init <new-project.json>` defaults to `16:9` and also accepts `--ratio 9:16` or `--ratio 1:1`. It creates an original 15-second template and copies three original PNG assets into a sibling `<project-stem>-assets` directory. For `my-film/project.json`, that directory is `my-film/project-assets`. It refuses an existing JSON or asset directory, including a symlink. Keep both when moving the project. The ratio flag is only for `init`; independently compose a new layout when changing an authored project's ratio. Templates: [landscape](examples/studio/forge-launch.json), [portrait](examples/studio/forge-portrait.json), [square](examples/studio/forge-square.json).
 
-All four commands use `studio/make.mjs`. `validate` checks the contract; an audio project without a measured duration retains a warning until `build` probes its real recording and recompiles. `build` requires a fresh output directory, validates local assets and font coverage, renders, measures the actual browser and encoded media, then records hashes. `verify` checks the same input, engine, dependencies, font, browser and artifacts against that build. It does not rerender or perform an aesthetic review. A rejected build retains its failure record; retry into a new directory after fixing the cause.
+All four commands use the Studio engine through `scripts/host.mjs`. Direct `studio/make.mjs` remains available for callers providing their own environment. `validate` checks the contract; an audio project without a measured duration retains a warning until `build` probes its real recording and recompiles. `build` requires a fresh output directory, validates local assets and font coverage, renders, measures the actual browser and encoded media, then records hashes. `verify` checks the same input, engine, dependencies, font, browser and artifacts against that build. It does not rerender or perform an aesthetic review. A rejected build retains its failure record; retry into a new directory after fixing the cause.
 
 With source material, supply the same brief to every applicable command:
 
 ```sh
-node studio/make.mjs validate my-film/project.json --brief my-film/brief.md
-node studio/make.mjs build my-film/project.json --brief my-film/brief.md --out /tmp/heige-brief-film-new
-node studio/make.mjs verify my-film/project.json --brief my-film/brief.md --out /tmp/heige-brief-film-new
+node scripts/host.mjs validate my-film/project.json --brief my-film/brief.md
+node scripts/host.mjs build my-film/project.json --brief my-film/brief.md --out /tmp/heige-brief-film-new
+node scripts/host.mjs verify my-film/project.json --brief my-film/brief.md --out /tmp/heige-brief-film-new
 ```
 
 Rendering is local and does not require a model API key. A coding agent reads the Skill and authors the project JSON. No native online LLM, TTS, ASR, paid generation or B-roll supply/cache is integrated.
@@ -97,7 +133,7 @@ Use a checkout with the referenced Git commit available. Missing history is a fa
 
 ## Install dependencies (Ubuntu 24.04)
 
-The CI configuration uses Python 3.12 and Node.js 24. With Python, Node and npm available:
+The CI matrix runs Node.js 22 and 24 with Python 3.12 on Ubuntu 24.04. With Python, Node and npm available:
 
 ```sh
 sudo apt-get update

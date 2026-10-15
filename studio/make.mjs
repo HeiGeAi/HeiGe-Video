@@ -41,7 +41,11 @@ function argsFrom(argv) {
   return {command,file:positional[0],...options};
 }
 function chooseFont() {
-  if(process.env.HEIGE_FONT_PATH) return {path:fs.realpathSync(process.env.HEIGE_FONT_PATH),index:Number(process.env.HEIGE_FONT_INDEX ?? 0)};
+  if(process.env.HEIGE_FONT_PATH) {
+    const index=Number(process.env.HEIGE_FONT_INDEX ?? 0);
+    if(!Number.isSafeInteger(index) || index<0) throw new Error('HEIGE_FONT_INDEX must be a non-negative integer');
+    return {path:fs.realpathSync(process.env.HEIGE_FONT_PATH),index};
+  }
   const lines=run('fc-match',['Noto Sans CJK SC','--format=%{file}\n%{index}\n%{family}\n']).split('\n');
   if(!/Noto Sans (CJK )?SC/i.test(lines[2] ?? '')) throw new Error('No local Noto Sans SC face. Install it or set HEIGE_FONT_PATH to a licensed Chinese font.');
   return {path:fs.realpathSync(lines[0]),index:Number(lines[1])};
@@ -115,9 +119,29 @@ function checkedRead(file,brief) {
 function takeLock() {
   const lock=path.join(os.tmpdir(),'heige-video-render.lock');
   try { fs.mkdirSync(lock); } catch(error) { if(error.code==='EEXIST') throw new Error(`Another render holds ${lock}. Check that process before removing a stale lock.`); throw error; }
-  const token=`${process.pid}:${Date.now()}`;
+  const token=`${process.pid}:${process.env.HEIGE_RENDER_OWNER_TOKEN ?? Date.now()}`;
   fs.writeFileSync(path.join(lock,'owner'),token);
-  return ()=>{if(fs.existsSync(path.join(lock,'owner')) && fs.readFileSync(path.join(lock,'owner'),'utf8')===token) fs.rmSync(lock,{recursive:true});};
+  const directory=fs.lstatSync(lock),owner=fs.lstatSync(path.join(lock,'owner'));
+  const release=()=>{
+    try {
+      const current=fs.lstatSync(lock),file=fs.lstatSync(path.join(lock,'owner'));
+      if(current.isSymbolicLink() || file.isSymbolicLink() || current.dev!==directory.dev || current.ino!==directory.ino || file.dev!==owner.dev || file.ino!==owner.ino || fs.readFileSync(path.join(lock,'owner'),'utf8')!==token) return;
+      fs.unlinkSync(path.join(lock,'owner'));
+      // Only remove our empty directory. Never recursively delete an added file.
+      try {fs.rmdirSync(lock);} catch(error) {if(!['ENOENT','ENOTEMPTY','EEXIST'].includes(error.code)) throw error;}
+    } catch(error) {if(error.code!=='ENOENT') throw error;}
+  };
+  const onSignal=signal=>{
+    try {release();} finally {
+      process.removeListener('SIGINT',onInt);process.removeListener('SIGTERM',onTerm);
+      // The host supervisor owns descendant cancellation; retain conventional
+      // signal termination for direct CLI calls without a supervisor.
+      process.kill(process.pid,signal);
+    }
+  };
+  const onInt=()=>onSignal('SIGINT'),onTerm=()=>onSignal('SIGTERM');
+  process.on('SIGINT',onInt);process.on('SIGTERM',onTerm);
+  return ()=>{process.removeListener('SIGINT',onInt);process.removeListener('SIGTERM',onTerm);release();};
 }
 function artifactsAt(out) {
   const entries={};
@@ -395,4 +419,4 @@ export async function main(argv=process.argv.slice(2)) {
   if(options.command==='verify') await verify(options);
   else await build(options);
 }
-if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) main().catch(error=>{console.error(error.message);process.exitCode=1;});
+if(process.argv[1] && fs.existsSync(process.argv[1]) && fs.realpathSync(process.argv[1])===fs.realpathSync(fileURLToPath(import.meta.url))) main().catch(error=>{console.error(error.message);process.exitCode=1;});

@@ -1,5 +1,21 @@
 # Changelog
 
+## WorkBuddy trust recovery and Canvas blur repair · 2026-10-15
+
+- Verify real Bash recovery in a new WorkBuddy 5.8.2 task after the user explicitly trusted the current directory through the GUI. Existing tasks require a new task or product restart for the trust change to affect runtime tools.
+- Add shared `blurFilter(radius)` formatting for animated Canvas blur. Fixed decimal formatting and `none` at rounded zero avoid the near-zero exponent notation that reproducibly crashed the pinned Canvas 0.1.100 native filter on macOS ARM64; ordinary nonzero blur remains available.
+- Report the actual Canvas worker PID, return code or signal, and retained stderr when its frame stream ends early, preserving the original worker error if the encoder also fails during cleanup.
+- The updated runtime suite passed 56 tests. The original 499-test baseline remains separately dated; matrix repeats are not counted as distinct tests.
+- Complete a real WorkBuddy 5.8.2/macOS workflow from an article and a two-page text PDF through user-approved script and 12-asset plan to two silent 24-second, 30 fps films: 1920×1080 landscape and 1080×1920 portrait. Independent artifact checks passed 148/148; targeted decoded-image review passed after correcting the portrait ending direction. Browser playback reached the end of both final files at normal speed, with 7 landscape and 18 portrait dropped frames recorded. Exact media/source hashes and limits are in the [compatibility guide](references/workbuddy-compatibility.md#本次验证范围); this does not add to the ten-film music showcase or establish all-platform compatibility.
+
+## WorkBuddy compatibility and material-to-story · 2026-10-14
+
+- Explicit agent-host entry and project-local WorkBuddy Skill adapter, without modifying the application's bundled runtimes or existing user skills.
+- Local article/PDF/DOCX/HTML/Markdown/text intake, source hashes, page/paragraph references, editable story and asset plans, and content-bound approval gates before assets and rendering.
+- Realpath-safe CLI entry guards, backend readiness diagnostics, explicit font selection, and bounded cancellation of owned processes and locks.
+- Preserve the original Forge films as fixed-source historical evidence after engine compatibility fixes; do not relabel the unchanged media as new-engine renders.
+- Actual host versions, test coverage and unverified GUI/platform scopes are recorded separately in the WorkBuddy compatibility guide.
+
 ## Four portrait cases · 2026-10-12
 
 - Four original 16-second 1080×1920 films in an isolated editable Remotion workspace: Berry Cone, Coffee Wake, Happy Camera and Pocket Rocket.

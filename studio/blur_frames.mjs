@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath} from 'node:url';
 import {createCanvas, loadImage} from '@napi-rs/canvas';
 
 const toLinear16 = Uint32Array.from({length: 256}, (_, value) => {
@@ -78,7 +78,7 @@ export async function blurFrames({input, output, samples = 3}) {
   return report;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+if (process.argv[1] && fs.existsSync(process.argv[1]) && fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   try {
     const args = process.argv.slice(2), values = {};
     for (let i = 0; i < args.length; i += 2) {

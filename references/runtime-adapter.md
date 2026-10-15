@@ -57,7 +57,8 @@ Python/JS imports are trusted code execution. SVG resource checks and font audit
 `runtime/motion.cjs` is original package code with no animation clock:
 
 - `createCues({id:[start,end]})`, or `{start,end,ease}`; `at(id,t)` returns progress, eased, elapsed, active, started and finished. Spans are `[start,end)`
-- `clamp`, `lerp`, `linear`, `smoothstep`, `easeOutCubic`, `easeInOutCubic`
+- `clamp`, `lerp`, `linear`, `smoothstep`, `easeOutCubic`, `easeInOutCubic`. Easing functions take one normalized progress value. In particular, `smoothstep(t)` is not GLSL's three-argument `smoothstep(edge0, edge1, t)`: use `smoothstep(clamp((t - start) / (end - start), 0, 1))` for a time interval. Passing three arguments silently uses only the first and can freeze an action at a constant position or opacity
+- `blurFilter(radius)` formats a finite, nonnegative pixel radius for `ctx.filter`. Use `ctx.filter = blurFilter(radius)` for animated blur: it rounds to three decimal places and returns `none` when the rounded radius is zero. Direct interpolation of near-zero floating-point values can produce exponent notation, such as `blur(3.26405569239796e-14px)`, which caused a reproducible native SIGSEGV with the pinned Canvas 0.1.100 on macOS ARM64. The helper preserves ordinary blur and avoids that parser input; it does not claim to fix every native filter issue
 - `spring(elapsed,{from,to,frequencyHz,dampingRatio,velocity})`: analytic oscillator. Use only when the style calls for it; Swiss remains monotone
 - `cameraMatrix`, `worldToScreen`, `applyCamera`: camera `x,y` is the world point at viewport center; `rotation` is radians, with `zoom`. Bracket world drawing with caller `save/restore`; screen UI stays outside
 - `seededRandom(seed)` and `noiseAt(seed,key)`: pin local material noise to object/stroke IDs

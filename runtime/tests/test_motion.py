@@ -14,6 +14,15 @@ class MotionTests(unittest.TestCase):
         result = subprocess.run(['node', '-e', script], capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_blur_filter_normalizes_native_parser_edge_cases(self):
+        self.evaluate('''
+assert.equal(m.blurFilter(3.26405569239796e-14), 'none');
+assert.equal(m.blurFilter(0), 'none');
+assert.equal(m.blurFilter(0.09677281394475878), 'blur(0.097px)');
+assert.equal(m.blurFilter(7), 'blur(7.000px)');
+for (const bad of [-1, NaN, Infinity, '7', 1e21]) assert.throws(() => m.blurFilter(bad));
+''')
+
     def test_named_cues_are_half_open_and_random_access(self):
         self.evaluate('''
 const cues = m.createCues({enter:[1,2], settle:{start:2,end:4,ease:m.easeOutCubic}});

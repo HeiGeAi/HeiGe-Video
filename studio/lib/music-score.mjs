@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath} from 'node:url';
 
 // Original eight-bar composition and instrument synthesis. No samples,
 // SoundFont data, external provider, model API or reference melody is loaded.
@@ -228,7 +228,7 @@ export function synthesizeMusicScore(plan, output) {
       listening: 'not-tested', quality: 'Requires actual listening and audiovisual review; finite samples do not establish good music'}};
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+if (process.argv[1] && fs.existsSync(process.argv[1]) && fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const args = process.argv.slice(2), options = {};
   for (let index = 0; index < args.length; index += 2) {
     if (!['--out', '--volume', '--seed'].includes(args[index]) || args[index + 1] === undefined || Object.hasOwn(options, args[index])) throw new Error('Usage: node studio/lib/music-score.mjs --out NEW.wav [--volume .8] [--seed 20261012]');
