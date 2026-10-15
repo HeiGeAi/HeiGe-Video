@@ -215,12 +215,25 @@ class CanvasSource:
             self.close()
             raise
 
-    def _error(self, message):
+    def _error(self, message, *, ended=False):
+        process = self.process
+        code = process.poll()
+        if code is None and ended:
+            # EOF can precede process reaping by a few milliseconds. Wait only
+            # on the error path, with a bound; a worker that merely closed its
+            # stdout must remain visibly running rather than look successful.
+            try: code = process.wait(timeout=.25)
+            except subprocess.TimeoutExpired: pass
+        signal_name = 'none'
+        if code is not None and code < 0:
+            try: signal_name = signal.Signals(-code).name
+            except ValueError: signal_name = str(-code)
+        state = f'worker_pid={process.pid}, worker_returncode={code if code is not None else "running"}, worker_signal={signal_name}'
         self._stderr.flush()
         self._stderr.seek(0, 2)
         self._stderr.seek(max(0, self._stderr.tell() - 8192))
         detail = self._stderr.read().decode('utf-8', errors='replace').strip()
-        return RuntimeError(message + (f'; worker stderr: {detail}' if detail else ''))
+        return RuntimeError(message + f'; {state}' + (f'; worker stderr: {detail}' if detail else ''))
 
     def _read_exact(self, size, deadline, operation):
         while len(self._buffer) < size:
@@ -232,7 +245,7 @@ class CanvasSource:
                 raise self._error(f'Canvas {operation} timed out')
             chunk = os.read(self.process.stdout.fileno(), min(262144, max(size - len(self._buffer), 4096)))
             if not chunk:
-                raise self._error(f'Canvas worker ended during {operation} ({len(self._buffer)} of {size} bytes)')
+                raise self._error(f'Canvas worker ended during {operation} ({len(self._buffer)} of {size} bytes)', ended=True)
             self._buffer.extend(chunk)
         result = bytes(self._buffer[:size])
         del self._buffer[:size]
@@ -529,7 +542,15 @@ def render(args, fps, source, audit, font, cmap, out):
         try:
             for i in range(count):
                 t = min(source.duration, args.start + float(i/fps) * time_scale)
-                raw, svg, sample_times = sampled_frame(source, t, fps, args, cuts, time_scale)
+                try:
+                    raw, svg, sample_times = sampled_frame(source, t, fps, args, cuts, time_scale)
+                except Exception as error:
+                    try:
+                        times = json.dumps(shutter_times(t, fps, source.duration, cuts, args.shutter_samples, args.shutter_angle, time_scale))
+                    except Exception:
+                        times = 'unavailable'
+                    raise RuntimeError(f'Render frame failed: frame_index={i} (zero-based), source_time={t!r}, '
+                                       f'sample_times={times}; {error}') from error
                 encoder.stdin.write(raw)
                 image = Image.frombytes('RGBA',(args.width,args.height),raw)
                 small = image.convert('RGB').resize((64,36),Image.Resampling.BOX)

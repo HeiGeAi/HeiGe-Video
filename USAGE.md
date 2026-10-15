@@ -1,6 +1,6 @@
 # HeiGe-Video v4.0.0-alpha.3 · install and use
 
-Updated 2026-10-14. The default controlled-production route uses Remotion. Default initialization creates a 15-second Forge world with original local images, fast easing and a complete 128 BPM score. Native persistent objects and camera handoffs coexist with eight preserved ordinary scene types. Follow the [Studio installation guide](studio/README.md), [versioned project contract](studio/CONTRACT.md) and [continuity guide](studio/CONTINUITY.md). Authored Canvas/SVG remains available for existing films and bespoke actions.
+Updated 2026-10-15. The default controlled-production route uses Remotion. Default initialization creates a 15-second Forge world with original local images, fast easing and a complete 128 BPM score. Native persistent objects and camera handoffs coexist with eight preserved ordinary scene types. Follow the [Studio installation guide](studio/README.md), [versioned project contract](studio/CONTRACT.md) and [continuity guide](studio/CONTINUITY.md). Authored Canvas/SVG remains available for existing films and bespoke actions.
 
 This is a portable Skill folder, original scene code and a deterministic renderer. It does not need a model SDK or API key to render existing source. A coding agent needs file access, authorized code execution and actual-image review to create and judge new films.
 
@@ -26,6 +26,8 @@ node scripts/install_workbuddy.mjs --workspace /absolute/path/to/workspace
 The GUI adapter lives at `<workspace>/.workbuddy/skills/heige-video`. It retains a local pointer to the complete repository. It does not copy dependencies or media into WorkBuddy and refuses to replace unknown or edited skills. Reinstall the adapter if the repository moves. Open that workspace in WorkBuddy and check its Skill list. The installer preserves existing application settings and other skills. The bundled CLI has a separate `.codebuddy/skills` project provider; that location does not substitute for the GUI's default `.workbuddy/skills` directory.
 
 WorkBuddy's root-level project file discovery is different from Codex's user Skill directory. Merely cloning this repository or updating a Codex Skill does not install it in WorkBuddy. See the compatibility guide for actual tested versions and the distinction between CLI shell jobs, GUI Skill discovery and human approval interactions.
+
+In WorkBuddy 5.8.2, restricted workspaces disable Bash and project settings. If command tools are missing, check the current workspace's trust state in the product UI. Obtain explicit user agreement to trust that directory before changing it through the UI, then start a new task in the same directory or have the user restart the product. The old task's updated badge does not restore its runtime tools. Follow the compatibility guide's read-only command probe before production; do not edit security configuration or copy login credentials.
 
 ## Turn source material into a story
 
@@ -131,7 +133,7 @@ Use a checkout with the referenced Git commit available. Missing history is a fa
 
 ## Install dependencies (Ubuntu 24.04)
 
-The CI configuration uses Python 3.12 and Node.js 24. With Python, Node and npm available:
+The CI matrix runs Node.js 22 and 24 with Python 3.12 on Ubuntu 24.04. With Python, Node and npm available:
 
 ```sh
 sudo apt-get update

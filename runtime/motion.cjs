@@ -11,6 +11,15 @@ function finite(value, name) {
   if (typeof value !== 'number' || !Number.isFinite(value)) throw Error(`${name} must be finite`);
   return value;
 }
+function blurFilter(radius) {
+  // @napi-rs/canvas 0.1.100 can segfault on exponent-form CSS lengths.
+  // Round subpixel noise before crossing the native filter parser boundary.
+  finite(radius, 'blur radius');
+  if (radius < 0) throw Error('blur radius must be nonnegative');
+  const decimal = radius.toFixed(3);
+  if (/[eE]/.test(decimal)) throw Error('blur radius is too large for decimal CSS');
+  return Number(decimal) === 0 ? 'none' : `blur(${decimal}px)`;
+}
 function createCues(definitions) {
   // {cueId: [start,end]} or {cueId: {start,end,ease}}. Interval is [start,end).
   const cues = Object.fromEntries(Object.entries(definitions).map(([id, value]) => {
@@ -92,5 +101,5 @@ function trimPolyline(points, progress) {
   }
   return result;
 }
-module.exports = { clamp, lerp, linear, smoothstep, easeOutCubic, easeInOutCubic,
+module.exports = { clamp, lerp, linear, smoothstep, easeOutCubic, easeInOutCubic, blurFilter,
   createCues, spring, cameraMatrix, worldToScreen, applyCamera, seededRandom, noiseAt, trimPolyline };

@@ -38,6 +38,21 @@ class CanvasV3Tests(unittest.TestCase):
             finally:
                 source.close()
 
+    def test_safe_blur_crosses_near_zero_in_real_native_worker(self):
+        code = f"const {{blurFilter}}=require({json.dumps(str(ROOT / 'motion.cjs'))});" + '''
+exports.DURATION=10;
+exports.render=(ctx,t)=>{
+  const radius=[7,.09677281394475878,3.26405569239796e-14,0,.09677281394481785,7][Math.floor(t)];
+  ctx.save();ctx.filter=blurFilter(radius);
+  const g=ctx.createLinearGradient(0,0,20,20);g.addColorStop(0,'#fff');g.addColorStop(1,'#e8552e');
+  ctx.fillStyle=g;ctx.fillRect(2,2,16,16);ctx.restore();
+};'''
+        with self.source(code) as source:
+            for t in range(6):
+                pixels, _ = source.frame_samples([t, t, t])
+                self.assertEqual(len(pixels), 20 * 20 * 4)
+                self.assertGreater(pixels[(10 * 20 + 10) * 4], 0)
+
     def test_external_commonjs_scene_uses_runtime_local_dependencies_without_node_path(self):
         # Separate runtime installation and scene trees; no global NODE_PATH.
         # Symlinking the installed package avoids a network install in a test.
