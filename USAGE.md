@@ -140,7 +140,7 @@ sudo apt-get update
 sudo apt-get install -y --no-install-recommends python3-venv ffmpeg fontconfig fonts-noto-cjk fonts-noto-core fonts-dejavu-core librsvg2-2 libcairo2 libglib2.0-0t64
 python3 -m venv .venv
 . .venv/bin/activate
-python -m pip install Pillow==12.3.0 fonttools==4.61.1
+python -m pip install -r studio/requirements.txt
 npm ci
 python runtime/render_video.py doctor
 ```
