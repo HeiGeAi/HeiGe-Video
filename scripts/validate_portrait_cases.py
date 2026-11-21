@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import sys
 import wave
+from validate_super_release import historical_source_inventory
+
 ROOT = Path(__file__).resolve().parents[1]
 
 def require(condition, message):
@@ -31,9 +33,16 @@ def local(relative):
 def validate(inventory):
     require(inventory['schemaVersion'] == 'heige-portrait-cases/1', 'Portrait cases verification failed')
     extensions = {'.tsx', '.mjs', '.py', '.json', '.woff', '.woff2', '.txt'}
-    expected_files = {str(p.relative_to(ROOT)) for p in (ROOT / 'portrait-cases').rglob('*') if p.is_file() and p.suffix in extensions}
-    expected_files.update(['package.json', 'package-lock.json', 'tsconfig.json', 'studio/check_media.py'])
-    expected_source = {name: sha(local(name)) for name in sorted(expected_files)}
+    shared_files = ('package.json', 'package-lock.json', 'tsconfig.json', 'studio/check_media.py')
+    source_mode = 'historical' if 'sourceCommit' in inventory else 'current'
+    if source_mode == 'historical':
+        expected_source = historical_source_inventory(
+            ROOT, inventory['sourceCommit'], 'portrait-cases', extensions, shared_files,
+        )
+    else:
+        expected_files = {str(p.relative_to(ROOT)) for p in (ROOT / 'portrait-cases').rglob('*') if p.is_file() and p.suffix in extensions}
+        expected_files.update(shared_files)
+        expected_source = {name: sha(local(name)) for name in sorted(expected_files)}
     items = inventory['items']
     require(len(items) == 4, 'Portrait cases verification failed')
     require({item['id'] for item in items} == {f'{theme}-portrait' for theme in ['berry', 'coffee', 'camera', 'rocket']}, 'Portrait cases verification failed')
@@ -69,7 +78,7 @@ def validate(inventory):
         require(audio['present'] is True and audio['finite'] is True and audio['rms'] > 1e-06, 'Invalid decoded audio declaration')
         require(audio['channels'] == 2 and audio['sampleRate'] == 48000 and audio['samplesPerChannel'] == 768000, 'Incomplete full-channel audio declaration')
         require(audio['duration'] == 16 and 0 < audio['peak'] <= 1, 'Invalid audio duration or measured peak')
-    return {'status': 'pass', 'films': 4, 'encodedFrames': 1920, 'seconds': 64, 'scope': 'Complete current source inventory, published media hashes, original music PCM and declared review/playback scopes. No rerender or aesthetic certification.'}
+    return {'status': 'pass', 'films': 4, 'encodedFrames': 1920, 'seconds': 64, 'sourceMode': source_mode, 'sourceCommit': inventory.get('sourceCommit'), 'scope': 'Complete source inventory, published media hashes, original music PCM and declared review/playback scopes. No rerender or aesthetic certification.'}
 
 def main():
     inventory = json.loads(local('references/portrait-cases-status.json').read_text())

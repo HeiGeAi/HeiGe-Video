@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import sys
 import wave
+from validate_super_release import historical_source_inventory
+
 ROOT = Path(__file__).resolve().parents[1]
 
 def require(condition, message):
@@ -31,9 +33,16 @@ def local(relative):
 def validate(inventory):
     require(inventory['schemaVersion'] == 'heige-showcase/1', 'Showcase verification failed')
     extensions = {'.tsx', '.mjs', '.py', '.json', '.woff', '.woff2', '.txt'}
-    expected_files = {str(p.relative_to(ROOT)) for p in (ROOT / 'showcase').rglob('*') if p.is_file() and p.suffix in extensions}
-    expected_files.update(['package.json', 'package-lock.json', 'tsconfig.json', 'studio/check_media.py'])
-    expected_source = {name: sha(local(name)) for name in sorted(expected_files)}
+    shared_files = ('package.json', 'package-lock.json', 'tsconfig.json', 'studio/check_media.py')
+    source_mode = 'historical' if 'sourceCommit' in inventory else 'current'
+    if source_mode == 'historical':
+        expected_source = historical_source_inventory(
+            ROOT, inventory['sourceCommit'], 'showcase', extensions, shared_files,
+        )
+    else:
+        expected_files = {str(p.relative_to(ROOT)) for p in (ROOT / 'showcase').rglob('*') if p.is_file() and p.suffix in extensions}
+        expected_files.update(shared_files)
+        expected_source = {name: sha(local(name)) for name in sorted(expected_files)}
     items = inventory['items']
     require(len(items) == 6, 'Showcase verification failed')
     require({item['id'] for item in items} == {f'{theme}-{ratio}' for theme in ['citrus', 'paper', 'mineral'] for ratio in ['horizontal', 'portrait']}, 'Showcase verification failed')
@@ -61,7 +70,7 @@ def validate(inventory):
             values.byteswap()
         require(max((abs(x) for x in values)) > 0, 'Showcase verification failed')
         require(item['actualAudio']['present'] and item['actualAudio']['finite'] and (item['actualAudio']['rms'] > 1e-06), 'Showcase verification failed')
-    return {'status': 'pass', 'films': 6, 'encodedFrames': 2880, 'seconds': 96, 'scope': 'Complete current source inventory, published media hashes, original music PCM and declared review/playback scopes. No rerender or aesthetic certification.'}
+    return {'status': 'pass', 'films': 6, 'encodedFrames': 2880, 'seconds': 96, 'sourceMode': source_mode, 'sourceCommit': inventory.get('sourceCommit'), 'scope': 'Complete source inventory, published media hashes, original music PCM and declared review/playback scopes. No rerender or aesthetic certification.'}
 
 def main():
     inventory = json.loads(local('references/bright-showcase-status.json').read_text())

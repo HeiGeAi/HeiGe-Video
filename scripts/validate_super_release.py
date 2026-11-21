@@ -28,13 +28,7 @@ def git(root, *args):
     return result.stdout
 
 
-def historical_engine(root, commit):
-    """Recompute integrity.mjs engineFingerprint from immutable Git blobs.
-
-    Keep its fixed-file list, studio extensions, excluded directories, duplicate
-    entries, UTF-16 filename ordering and compact JSON encoding exactly aligned.
-    This reads source; it never checks out or executes the historical code.
-    """
+def historical_tree(root, commit):
     if not isinstance(commit, str) or not re.fullmatch(r'[0-9a-fA-F]{40}', commit):
         raise ValueError('Release inventory needs a full sourceCommit SHA')
     actual = git(root, 'rev-parse', '--verify', commit + '^{commit}').decode().strip()
@@ -47,6 +41,33 @@ def historical_engine(root, commit):
         metadata, filename = entry.split(b'\t', 1)
         mode, kind, _oid = metadata.decode('ascii').split()
         tree[filename.decode('utf-8')] = (mode, kind)
+    return tree
+
+
+def historical_source_inventory(root, commit, folder, extensions, shared_files):
+    """Hash the complete source inventory from the release commit's regular blobs."""
+    tree = historical_tree(root, commit)
+    files = set(shared_files)
+    files.update(
+        name for name in tree
+        if name.startswith(folder + '/') and Path(name).suffix in extensions
+    )
+    result = {}
+    for name in sorted(files):
+        if tree.get(name) not in (('100644', 'blob'), ('100755', 'blob')):
+            raise ValueError('Historical source file is missing or not regular: ' + name)
+        result[name] = hashlib.sha256(git(root, 'show', commit + ':' + name)).hexdigest()
+    return result
+
+
+def historical_engine(root, commit):
+    """Recompute integrity.mjs engineFingerprint from immutable Git blobs.
+
+    Keep its fixed-file list, studio extensions, excluded directories, duplicate
+    entries, UTF-16 filename ordering and compact JSON encoding exactly aligned.
+    This reads source; it never checks out or executes the historical code.
+    """
+    tree = historical_tree(root, commit)
     files = ['package.json', 'package-lock.json', 'tsconfig.json', 'studio/CONTRACT.md', 'studio/requirements.txt']
     for file in files:
         if tree.get(file) not in (('100644', 'blob'), ('100755', 'blob')):

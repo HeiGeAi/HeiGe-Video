@@ -129,7 +129,7 @@ The five [historical examples](demos/super/README.md) preserve their bytes, inpu
 python3 scripts/validate_super_release.py
 ```
 
-Use a checkout with the referenced Git commit available. Missing history is a failure, not a skipped hash check. Mock/draft historical fixtures retain preview status; their audio measurements do not establish listening or real spoken-narration quality.
+The showcase and portrait validators also check their published films against the Git source commits recorded in their inventories. Use a checkout with the referenced Git commits available. Missing history is a failure, not a skipped hash check. Mock/draft historical fixtures retain preview status; their audio measurements do not establish listening or real spoken-narration quality.
 
 ## Install dependencies (Ubuntu 24.04)
 
@@ -140,7 +140,7 @@ sudo apt-get update
 sudo apt-get install -y --no-install-recommends python3-venv ffmpeg fontconfig fonts-noto-cjk fonts-noto-core fonts-dejavu-core librsvg2-2 libcairo2 libglib2.0-0t64
 python3 -m venv .venv
 . .venv/bin/activate
-python -m pip install Pillow==12.3.0 fonttools==4.61.1
+python -m pip install -r studio/requirements.txt
 npm ci
 python runtime/render_video.py doctor
 ```
